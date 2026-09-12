@@ -13,79 +13,123 @@ content="width=device-width, initial-scale=1.0">
 <!-- PDF LIBRARY -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+<!-- FONT AWESOME -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:-apple-system,BlinkMacSystemFont,
-  "Segoe UI",Roboto,Arial,sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
 }
 
 body{
   background:#000;
   color:#fff;
-  padding:10px 8px 30px;
+
+  padding:12px 10px 35px;
+
+  font-size:15px;
+
+  -webkit-text-size-adjust:100%;
 }
 
 .app{
-  max-width:480px;
+  width:100%;
+  max-width:650px;
   margin:auto;
 }
 
 
-/* ================================
+/* =====================================================
    TOP PANEL
-================================ */
+===================================================== */
 
 .target-panel{
   background:#07142b;
+
   border:2px solid #facc15;
-  border-radius:10px;
+
+  border-radius:12px;
+
   overflow:hidden;
-  margin-bottom:10px;
+
+  margin-bottom:14px;
 }
 
 .banner{
   display:flex;
+
   justify-content:space-between;
+  align-items:center;
+
   background:#0284c7;
-  color:#000;
-  padding:6px 9px;
-  font-size:10px;
+
+  color:#fff;
+
+  padding:9px 12px;
+
+  font-size:13px;
+
   font-weight:900;
 }
 
 .main-target{
   text-align:center;
+
   background:#1e293b;
-  padding:9px;
+
+  padding:14px 8px;
+
   border-bottom:1px solid #facc15;
 }
 
 .main-target .number{
   color:#ffff00;
-  font-size:22px;
+
+  font-size:30px;
+
   font-weight:900;
 }
 
 .main-target .label{
   color:#38bdf8;
-  font-size:8px;
+
+  font-size:12px;
+
   font-weight:900;
+
+  margin-top:3px;
 }
 
 .summary-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
 }
 
 .summary-cell{
   text-align:center;
-  padding:7px 2px;
+
+  padding:11px 4px;
+
   background:#09203f;
+
   border-right:1px solid #facc15;
 }
 
@@ -95,30 +139,44 @@ body{
 
 .summary-cell .title{
   color:#38bdf8;
-  font-size:7px;
+
+  font-size:10px;
+
   font-weight:900;
 }
 
 .summary-cell .value{
   color:#ffff00;
-  font-size:11px;
+
+  font-size:17px;
+
   font-weight:900;
-  margin-top:2px;
+
+  margin-top:4px;
 }
 
 .meta{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   border-top:1px solid #facc15;
+
   border-bottom:1px solid #facc15;
 }
 
 .meta-cell{
   text-align:center;
-  padding:5px 2px;
+
+  padding:9px 4px;
+
   color:#facc15;
-  font-size:8px;
+
+  font-size:11px;
+
   font-weight:900;
+
   border-right:1px solid #facc15;
 }
 
@@ -128,9 +186,13 @@ body{
 
 .latest{
   text-align:center;
-  padding:6px;
+
+  padding:10px;
+
   background:#07142b;
-  font-size:8px;
+
+  font-size:11px;
+
   font-weight:900;
 }
 
@@ -140,170 +202,266 @@ body{
 
 .time-footer{
   text-align:center;
+
   background:#db2777;
-  padding:8px;
-  font-size:10px;
+
+  padding:11px;
+
+  font-size:13px;
+
   font-weight:900;
 }
 
 
-/* ================================
+/* =====================================================
    CARDS
-================================ */
+===================================================== */
 
 .card{
   background:#07142b;
+
   border:1.5px solid #38bdf8;
-  border-radius:9px;
-  padding:10px;
-  margin-bottom:10px;
+
+  border-radius:11px;
+
+  padding:14px;
+
+  margin-bottom:14px;
 }
 
 .card h3{
   color:#38bdf8;
-  font-size:12px;
-  margin-bottom:9px;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  margin-bottom:13px;
 }
 
 
-/* ================================
+/* =====================================================
    FORM
-================================ */
+===================================================== */
 
 .row{
   display:flex;
-  gap:7px;
+
+  gap:10px;
 }
 
 .col{
   flex:1;
+
+  min-width:0;
 }
 
 .group{
-  margin-bottom:7px;
+  margin-bottom:11px;
 }
 
 label{
   display:block;
+
   color:#00ffff;
-  font-size:8px;
+
+  font-size:11px;
+
   font-weight:900;
-  margin-bottom:3px;
+
+  margin-bottom:5px;
 }
 
 input,
 select{
+
   width:100%;
+
+  min-height:44px;
+
   background:#000;
+
   color:#ffff00;
-  border:1px solid #38bdf8;
-  border-radius:5px;
-  padding:8px;
-  font-size:11px;
+
+  border:1.5px solid #38bdf8;
+
+  border-radius:6px;
+
+  padding:9px 10px;
+
+  font-size:15px;
+
   font-weight:800;
+
   outline:none;
 }
 
 input::placeholder{
   color:#64748b;
+
+  font-size:12px;
 }
+
+input:focus,
+select:focus{
+  border-color:#00ffff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(0,255,255,.12);
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 button{
   border:none;
+
   cursor:pointer;
+
   font-weight:900;
+
+  -webkit-tap-highlight-color:transparent;
 }
 
 button:disabled{
-  opacity:0.65;
+  opacity:.65;
+
   cursor:not-allowed;
 }
 
 .primary-btn{
   width:100%;
+
+  min-height:46px;
+
   background:#0284c7;
+
   color:#fff;
-  padding:9px;
-  border-radius:5px;
-  font-size:10px;
+
+  padding:10px;
+
+  border-radius:6px;
+
+  font-size:13px;
 }
 
 .submit-btn{
   width:100%;
+
+  min-height:48px;
+
   background:#10b981;
+
   color:#fff;
-  padding:9px;
-  border-radius:5px;
-  font-size:10px;
+
+  padding:10px;
+
+  border-radius:6px;
+
+  font-size:13px;
 }
 
 .cancel-btn{
   width:100%;
+
+  min-height:42px;
+
   background:#dc2626;
+
   color:#fff;
-  padding:8px;
-  border-radius:5px;
-  font-size:9px;
-  margin-top:5px;
+
+  padding:9px;
+
+  border-radius:6px;
+
+  font-size:12px;
+
+  margin-top:7px;
+
   display:none;
 }
 
 
-/* ================================
+/* =====================================================
    PROGRESS
-================================ */
+===================================================== */
 
 .progress-area{
   display:none;
-  margin-top:7px;
+
+  margin-top:10px;
 }
 
 .progress-text{
   text-align:center;
+
   color:#00ffff;
-  font-size:8px;
+
+  font-size:11px;
+
   font-weight:900;
-  margin-bottom:4px;
+
+  margin-bottom:6px;
 }
 
 .progress-bg{
   width:100%;
-  height:6px;
+
+  height:9px;
+
   background:#1e293b;
+
   border-radius:10px;
+
   overflow:hidden;
 }
 
 .progress-bar{
   width:0%;
+
   height:100%;
+
   background:#10b981;
-  transition:width .2s linear;
+
+  transition:
+    width .2s linear;
 }
 
 
-/* ================================
+/* =====================================================
    TOAST
-================================ */
+===================================================== */
 
 .toast{
   position:fixed;
+
   left:50%;
-  bottom:18px;
-  transform:translateX(-50%) translateY(100px);
+
+  bottom:20px;
+
+  transform:
+    translateX(-50%)
+    translateY(120px);
 
   width:calc(100% - 30px);
-  max-width:430px;
+
+  max-width:500px;
 
   background:#10b981;
+
   color:#fff;
 
-  padding:11px 14px;
-  border-radius:8px;
+  padding:14px 16px;
+
+  border-radius:9px;
 
   text-align:center;
 
-  font-size:10px;
+  font-size:13px;
+
   font-weight:900;
 
   z-index:9999;
@@ -316,7 +474,10 @@ button:disabled{
 }
 
 .toast.show{
-  transform:translateX(-50%) translateY(0);
+  transform:
+    translateX(-50%)
+    translateY(0);
+
   opacity:1;
 }
 
@@ -325,42 +486,65 @@ button:disabled{
 }
 
 
-/* ================================
+/* =====================================================
    TABLE
-================================ */
+===================================================== */
 
 .table-wrap{
   overflow-x:auto;
+
+  -webkit-overflow-scrolling:touch;
+
+  border-radius:5px;
 }
 
 table{
   width:100%;
+
   border-collapse:collapse;
-  min-width:650px;
+
+  min-width:760px;
 }
 
 th{
   background:#ff8c00;
+
   color:#000;
-  padding:5px 3px;
+
+  padding:9px 6px;
+
   border:1px solid #8b0000;
-  font-size:7px;
+
+  font-size:11px;
+
+  font-weight:900;
+
   white-space:nowrap;
 }
 
 td{
   background:#000;
+
   color:#fff;
-  padding:5px 3px;
+
+  padding:9px 6px;
+
   border:1px solid #8b0000;
+
   text-align:center;
-  font-size:7px;
+
+  font-size:11px;
+
+  font-weight:700;
+
   white-space:nowrap;
 }
 
 .hour-cell{
   background:#00ffff !important;
+
   color:#000 !important;
+
   font-weight:900;
 }
 
@@ -373,146 +557,312 @@ td{
 }
 
 
-/* ================================
-   ACTION BUTTONS
-================================ */
+/* =====================================================
+   ACTION ICON BUTTONS
+===================================================== */
 
 .action{
-  border-radius:4px;
-  margin:1px;
-  font-weight:900;
+  width:40px;
+
+  height:38px;
+
+  border:none;
+
+  border-radius:7px;
+
+  margin:2px;
+
+  padding:0;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:
+    transform .12s ease,
+    opacity .12s ease;
 }
+
+.action:active{
+  transform:scale(.92);
+}
+
+.action i{
+  font-size:20px;
+}
+
+
+/* EDIT */
 
 .edit{
   background:#0284c7;
+
   color:#fff;
-  font-size:6px;
-  padding:4px 5px;
 }
+
+
+/* DELETE */
 
 .delete{
   background:#dc2626;
+
   color:#fff;
-  font-size:6px;
-  padding:4px 5px;
 }
 
 
-/* LARGE WHATSAPP ICON */
+/* WHATSAPP */
 
 .whatsapp{
   background:#16a34a;
+
   color:#fff;
-
-  width:30px;
-  height:28px;
-
-  padding:0;
-
-  border-radius:5px;
-
-  font-size:16px;
-
-  line-height:28px;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
 }
 
 
-/* LARGE PDF ICON */
+/* PDF */
 
 .pdf{
-  background:#7c3aed;
+  background:#dc2626;
+
   color:#fff;
-
-  width:30px;
-  height:28px;
-
-  padding:0;
-
-  border-radius:5px;
-
-  font-size:16px;
-
-  line-height:28px;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
 }
 
 
-/* ================================
-   SUMMARY
-================================ */
+/* =====================================================
+   SHIFT SUMMARY
+===================================================== */
 
 .summary-box{
-  margin-top:8px;
+
+  margin-top:12px;
+
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:5px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:8px;
 }
 
 .stat{
+
   background:#000;
-  border:1px solid #38bdf8;
-  border-radius:5px;
-  padding:6px;
+
+  border:1.5px solid #38bdf8;
+
+  border-radius:9px;
+
+  padding:13px 6px;
+
   text-align:center;
+
+  min-height:82px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
 }
 
 .stat-title{
-  color:#38bdf8;
-  font-size:7px;
+
+  color:#00ffff;
+
+  font-size:12px;
+
   font-weight:900;
+
+  letter-spacing:.2px;
 }
 
 .stat-value{
+
   color:#ffff00;
-  font-size:11px;
+
+  font-size:21px;
+
   font-weight:900;
-  margin-top:2px;
+
+  margin-top:5px;
 }
 
 .status{
+
   text-align:center;
-  margin-top:7px;
+
+  margin-top:9px;
+
   background:#111827;
+
   color:#00ffff;
-  padding:7px;
-  border-radius:5px;
-  font-size:8px;
+
+  padding:11px 7px;
+
+  border-radius:7px;
+
+  font-size:12px;
+
   font-weight:900;
 }
 
 
-/* ================================
+/* =====================================================
    REPORT BUTTONS
-================================ */
+===================================================== */
 
 .report-buttons{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-  margin-top:9px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:9px;
+
+  margin-top:11px;
 }
 
 .report-btn{
-  padding:9px;
-  border-radius:5px;
-  font-size:8px;
+
+  min-height:52px;
+
+  padding:9px 6px;
+
+  border-radius:8px;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  cursor:pointer;
+}
+
+.report-btn i{
+  font-size:22px;
 }
 
 .report-wa{
+
   background:#16a34a;
+
   color:#fff;
 }
 
 .report-pdf{
-  background:#7c3aed;
+
+  background:#dc2626;
+
   color:#fff;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:480px){
+
+  body{
+    padding:10px 7px 30px;
+  }
+
+  .app{
+    max-width:100%;
+  }
+
+  .card{
+    padding:12px;
+  }
+
+  .card h3{
+    font-size:16px;
+  }
+
+  label{
+    font-size:10px;
+  }
+
+  input,
+  select{
+    font-size:14px;
+
+    min-height:43px;
+  }
+
+  .summary-cell .title{
+    font-size:9px;
+  }
+
+  .summary-cell .value{
+    font-size:15px;
+  }
+
+  .stat-title{
+    font-size:11px;
+  }
+
+  .stat-value{
+    font-size:19px;
+  }
+
+  .report-btn{
+    font-size:10px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:360px){
+
+  .row{
+    gap:6px;
+  }
+
+  .card{
+    padding:10px;
+  }
+
+  .main-target .number{
+    font-size:26px;
+  }
+
+  .summary-cell .value{
+    font-size:14px;
+  }
+
+  .stat-value{
+    font-size:17px;
+  }
+
+  .action{
+    width:37px;
+
+    height:36px;
+  }
+
+  .action i{
+    font-size:18px;
+  }
+
 }
 
 </style>
@@ -670,7 +1020,8 @@ td{
 <div class="card">
 
   <h3>
-    ⚙️ Master Settings
+    <i class="fa-solid fa-gear"></i>
+    Master Settings
   </h3>
 
 
@@ -736,7 +1087,8 @@ td{
     id="saveSettingsBtn"
     onclick="saveSettings()">
 
-    SAVE SETTINGS 💾
+    SAVE SETTINGS
+    <i class="fa-solid fa-floppy-disk"></i>
 
   </button>
 
@@ -774,7 +1126,10 @@ td{
 <div class="card">
 
   <h3 id="formTitle">
-    📝 Hourly Production Entry
+
+    <i class="fa-solid fa-clipboard-list"></i>
+    Hourly Production Entry
+
   </h3>
 
 
@@ -783,7 +1138,7 @@ td{
     id="editRowIndex">
 
 
-  <!-- DATE -->
+  <!-- PRODUCTION DATE -->
 
   <div class="group">
 
@@ -1080,7 +1435,8 @@ td{
     id="submitBtn"
     onclick="submitEntry()">
 
-    SUBMIT HOURLY DATA ➜
+    SUBMIT HOURLY DATA
+    <i class="fa-solid fa-arrow-right"></i>
 
   </button>
 
@@ -1128,7 +1484,10 @@ td{
 <div class="card">
 
   <h3>
-    📊 Production Log & Metrics
+
+    <i class="fa-solid fa-chart-column"></i>
+    Production Log & Metrics
+
   </h3>
 
 
@@ -1176,6 +1535,7 @@ td{
   <!-- SHIFT SUMMARY -->
 
   <div class="summary-box">
+
 
     <div class="stat">
 
@@ -1260,11 +1620,14 @@ td{
 
   <div class="report-buttons">
 
+
     <button
       class="report-btn report-wa"
       onclick="sendShiftWhatsApp()">
 
-      📱 WHATSAPP SHIFT REPORT
+      <i class="fa-brands fa-whatsapp"></i>
+
+      WHATSAPP SHIFT REPORT
 
     </button>
 
@@ -1273,9 +1636,12 @@ td{
       class="report-btn report-pdf"
       onclick="generateShiftPDF()">
 
-      📄 PDF SHIFT REPORT
+      <i class="fa-solid fa-file-pdf"></i>
+
+      PDF SHIFT REPORT
 
     </button>
+
 
   </div>
 
@@ -1285,7 +1651,9 @@ td{
 </div>
 
 
-<!-- TOAST -->
+<!-- =====================================================
+     TOAST
+===================================================== -->
 
 <div
   class="toast"
@@ -1297,7 +1665,6 @@ td{
 
 
 <script>
-
 
 /* =====================================================
    CONFIG
@@ -1588,7 +1955,7 @@ function jsonp(url){
 
 
 /* =====================================================
-   LOAD
+   LOAD DATA
 ===================================================== */
 
 function loadData(){
@@ -1861,11 +2228,19 @@ function renderTable(rows){
     tbody.innerHTML =
 
       `<tr>
+
         <td
           colspan="10"
-          style="padding:12px;color:#94a3b8;">
+          style="
+            padding:18px;
+            color:#94a3b8;
+            font-size:13px;
+          ">
+
           No production entry for this date/shift.
+
         </td>
+
       </tr>`;
 
 
@@ -2052,28 +2427,41 @@ function renderTable(rows){
 
           <button
             class="action edit"
-            onclick="editRow(${r.rowIndex})">
-            Edit
+            onclick="editRow(${r.rowIndex})"
+            title="Edit">
+
+            <i class="fa-solid fa-pen"></i>
+
           </button>
+
 
           <button
             class="action delete"
-            onclick="deleteRow(${r.rowIndex})">
-            Del
+            onclick="deleteRow(${r.rowIndex})"
+            title="Delete">
+
+            <i class="fa-solid fa-trash-can"></i>
+
           </button>
+
 
           <button
             class="action whatsapp"
             onclick="sendHourWhatsApp(${r.rowIndex})"
             title="Send WhatsApp">
-            📱
+
+            <i class="fa-brands fa-whatsapp"></i>
+
           </button>
+
 
           <button
             class="action pdf"
             onclick="generateHourPDF(${r.rowIndex})"
             title="Generate PDF">
-            📄
+
+            <i class="fa-solid fa-file-pdf"></i>
+
           </button>
 
         </td>
@@ -2181,12 +2569,6 @@ function updateTopPanel(
       "No target setup";
 
 
-    document.getElementById(
-      "targetStatus"
-    ).innerText =
-      "SET TARGET PRODUCTION AND TARGET SIZE";
-
-
     updateRemainingHours(
       rows
     );
@@ -2196,8 +2578,6 @@ function updateTopPanel(
 
   }
 
-
-  /* REQUIRED SHEETS */
 
   const totalRequiredSheets =
 
@@ -2218,8 +2598,6 @@ function updateTopPanel(
     );
 
 
-  /* ACTUAL PRODUCTION */
-
   let totalOutput = 0;
 
 
@@ -2238,8 +2616,6 @@ function updateTopPanel(
     }
   );
 
-
-  /* TARGET SIZE EQUIVALENT SHEETS */
 
   const producedEquivalentSheets =
 
@@ -2277,8 +2653,6 @@ function updateTopPanel(
       2
     );
 
-
-  /* LATEST HOUR */
 
   let latestHour = 0;
 
@@ -2341,8 +2715,6 @@ function updateTopPanel(
         : "SHIFT OVER";
 
 
-  /* TARGET SIZE */
-
   document.getElementById(
     "targetSizeDisplay"
   ).innerText =
@@ -2351,8 +2723,6 @@ function updateTopPanel(
       2
     );
 
-
-  /* SFT */
 
   const sft =
 
@@ -2368,9 +2738,7 @@ function updateTopPanel(
     "sftDisplay"
   ).innerText =
 
-    sft.toFixed(
-      1
-    );
+    sft.toFixed(1);
 
 
   showLatestProduction(
@@ -2382,8 +2750,6 @@ function updateTopPanel(
     rows
   );
 
-
-  /* TARGET ACHIEVEMENT */
 
   const achievement =
 
@@ -2403,7 +2769,7 @@ function updateTopPanel(
       "targetStatus"
     ).innerText =
 
-      "🎯 TARGET ACHIEVED — " +
+      "TARGET ACHIEVED — " +
       achievement.toFixed(1) +
       "%";
 
@@ -2843,7 +3209,7 @@ function saveSettings(){
     true;
 
 
-  btn.innerText =
+  btn.innerHTML =
     "SAVING...";
 
 
@@ -2870,8 +3236,8 @@ function saveSettings(){
         false;
 
 
-      btn.innerText =
-        "SAVE SETTINGS 💾";
+      btn.innerHTML =
+        'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
 
 
       finish();
@@ -3093,10 +3459,10 @@ function submitEntry(){
     true;
 
 
-  btn.innerText =
+  btn.innerHTML =
     rowIndex
-      ? "UPDATING..."
-      : "SUBMITTING...";
+      ? 'UPDATING...'
+      : 'SUBMITTING...';
 
 
   const finish =
@@ -3125,8 +3491,8 @@ function submitEntry(){
         false;
 
 
-      btn.innerText =
-        "SUBMIT HOURLY DATA ➜";
+      btn.innerHTML =
+        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
       finish();
@@ -3392,14 +3758,16 @@ function editRow(
 
   document.getElementById(
     "formTitle"
-  ).innerText =
-    "✏️ Edit Hourly Production";
+  ).innerHTML =
+
+    '<i class="fa-solid fa-pen"></i> Edit Hourly Production';
 
 
   document.getElementById(
     "submitBtn"
-  ).innerText =
-    "UPDATE HOURLY DATA ➜";
+  ).innerHTML =
+
+    'UPDATE HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
   document.getElementById(
@@ -3411,6 +3779,7 @@ function editRow(
   window.scrollTo({
 
     top:0,
+
     behavior:"smooth"
 
   });
@@ -3432,14 +3801,16 @@ function resetForm(){
 
   document.getElementById(
     "formTitle"
-  ).innerText =
-    "📝 Hourly Production Entry";
+  ).innerHTML =
+
+    '<i class="fa-solid fa-clipboard-list"></i> Hourly Production Entry';
 
 
   document.getElementById(
     "submitBtn"
-  ).innerText =
-    "SUBMIT HOURLY DATA ➜";
+  ).innerHTML =
+
+    'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
   document.getElementById(
@@ -3677,10 +4048,15 @@ function getReportMetrics(
   return {
 
     output:p.output,
+
     input:input,
+
     me:me,
+
     rop:rop,
+
     size:p.size,
+
     sheets:p.sheets
 
   };
