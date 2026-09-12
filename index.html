@@ -214,6 +214,11 @@ button{
   font-weight:900;
 }
 
+button:disabled{
+  opacity:0.65;
+  cursor:not-allowed;
+}
+
 .primary-btn{
   width:100%;
   background:#0284c7;
@@ -285,8 +290,7 @@ button{
   position:fixed;
   left:50%;
   bottom:18px;
-  transform:translateX(-50%)
-  translateY(100px);
+  transform:translateX(-50%) translateY(100px);
 
   width:calc(100% - 30px);
   max-width:430px;
@@ -312,9 +316,7 @@ button{
 }
 
 .toast.show{
-  transform:translateX(-50%)
-  translateY(0);
-
+  transform:translateX(-50%) translateY(0);
   opacity:1;
 }
 
@@ -376,30 +378,69 @@ td{
 ================================ */
 
 .action{
-  padding:3px 4px;
-  border-radius:3px;
-  font-size:6px;
+  border-radius:4px;
   margin:1px;
+  font-weight:900;
 }
 
 .edit{
   background:#0284c7;
   color:#fff;
+  font-size:6px;
+  padding:4px 5px;
 }
 
 .delete{
   background:#dc2626;
   color:#fff;
+  font-size:6px;
+  padding:4px 5px;
 }
+
+
+/* LARGE WHATSAPP ICON */
 
 .whatsapp{
   background:#16a34a;
   color:#fff;
+
+  width:30px;
+  height:28px;
+
+  padding:0;
+
+  border-radius:5px;
+
+  font-size:16px;
+
+  line-height:28px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
+
+
+/* LARGE PDF ICON */
 
 .pdf{
   background:#7c3aed;
   color:#fff;
+
+  width:30px;
+  height:28px;
+
+  padding:0;
+
+  border-radius:5px;
+
+  font-size:16px;
+
+  line-height:28px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 
 
@@ -1277,7 +1318,7 @@ let settings = {
   targetProd:"",
   targetSize:"",
   batchWeight:"",
-  sftConversion:2.5
+  sftConversion:2.54
 
 };
 
@@ -2023,14 +2064,16 @@ function renderTable(rows){
 
           <button
             class="action whatsapp"
-            onclick="sendHourWhatsApp(${r.rowIndex})">
-            WA
+            onclick="sendHourWhatsApp(${r.rowIndex})"
+            title="Send WhatsApp">
+            📱
           </button>
 
           <button
             class="action pdf"
-            onclick="generateHourPDF(${r.rowIndex})">
-            PDF
+            onclick="generateHourPDF(${r.rowIndex})"
+            title="Generate PDF">
+            📄
           </button>
 
         </td>
@@ -2196,7 +2239,7 @@ function updateTopPanel(
   );
 
 
-  /* TARGET SIZE EQUIVALENT */
+  /* TARGET SIZE EQUIVALENT SHEETS */
 
   const producedEquivalentSheets =
 
@@ -2235,7 +2278,7 @@ function updateTopPanel(
     );
 
 
-  /* LATEST SAVED HOUR */
+  /* LATEST HOUR */
 
   let latestHour = 0;
 
@@ -2317,7 +2360,7 @@ function updateTopPanel(
     (
       Number(
         settings.sftConversion
-      ) || 2.5
+      ) || 2.54
     );
 
 
@@ -3526,7 +3569,7 @@ function deleteRow(
 
 
 /* =====================================================
-   GET ROW BY INDEX
+   GET ROW
 ===================================================== */
 
 function getRowByIndex(
@@ -3547,7 +3590,7 @@ function getRowByIndex(
 
 
 /* =====================================================
-   CALCULATE METRICS FOR REPORT
+   REPORT METRICS
 ===================================================== */
 
 function getReportMetrics(
@@ -3677,12 +3720,6 @@ function sendHourWhatsApp(
     );
 
 
-  const date =
-    formatDisplayDate(
-      row.date
-    );
-
-
   let message = "";
 
 
@@ -3692,7 +3729,9 @@ function sendHourWhatsApp(
 
   message +=
     "Date: " +
-    date +
+    formatDisplayDate(
+      row.date
+    ) +
     "\n";
 
 
@@ -4500,8 +4539,6 @@ function generateShiftPDF(){
   y += 10;
 
 
-  /* TABLE HEADER */
-
   const headers = [
 
     "Hour",
@@ -4593,25 +4630,33 @@ function generateShiftPDF(){
       const values = [
 
         row.hour,
+
         m.size
           ? m.size.toFixed(2)
           : "-",
+
         m.sheets || "-",
+
         row.beater !== ""
           ? String(row.beater)
           : "-",
+
         row.bd !== ""
           ? String(row.bd)
           : "-",
+
         m.output > 0
           ? m.output.toFixed(2)
           : "-",
+
         m.input > 0
           ? m.input.toFixed(2)
           : "-",
+
         m.me !== ""
           ? m.me.toFixed(1) + "%"
           : "-",
+
         m.rop !== ""
           ? m.rop.toFixed(2)
           : "-"
@@ -4798,7 +4843,7 @@ function generateShiftPDF(){
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHtml(
