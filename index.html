@@ -1,484 +1,2810 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visaka Production Dashboard</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
-    body { background-color: #000000; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 12px 8px 30px 8px; }
 
-    .app-viewport { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
-    
-    .card { background: #07142b; border: 2px solid #38bdf8; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-    .card h2 { color: #ffff00; font-size: 18px; font-weight: 900; text-align: center; text-transform: uppercase; }
-    .card h3 { color: #38bdf8; font-size: 15px; font-weight: 900; }
+<meta charset="UTF-8">
 
-    /* TOP TARGET SUMMARY PANEL (Redesigned per exact specifications) */
-    .target-panel { background: #0f172a; border: 2px solid #facc15; border-radius: 10px; overflow: hidden; }
-    .top-req-box { background: #1e293b; color: #ffff00; font-size: 24px; font-weight: 900; text-align: center; padding: 10px; border-bottom: 2px solid #facc15; }
-    .top-req-box span { display: block; font-size: 11px; color: #38bdf8; text-transform: uppercase; margin-top: 2px; }
-    
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center; border-bottom: 2px solid #facc15; }
-    .grid-col { padding: 8px 4px; border-right: 1.5px solid #facc15; font-size: 10px; font-weight: bold; color: #38bdf8; background: #09203f; }
-    .grid-col:last-child { border-right: none; }
-    .grid-col span { display: block; font-size: 13px; font-weight: 900; color: #ffff00; margin-top: 3px; }
-    
-    .meta-row { display: flex; justify-content: space-around; background: #07142b; padding: 6px; font-size: 11px; font-weight: bold; border-bottom: 2px solid #facc15; color: #facc15; }
-    .magenta-footer { background: #db2777; color: #ffffff; font-size: 13px; font-weight: 900; text-align: center; padding: 10px; text-transform: uppercase; }
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { color: #00ffff; font-size: 12px; font-weight: 800; }
-    .form-input { width: 100%; background: #000000; color: #ffff00; border: 1.5px solid #38bdf8; padding: 10px; font-size: 14px; border-radius: 6px; outline: none; font-weight: bold; }
+<title>Visaka Production Dashboard</title>
 
-    .btn-submit { width: 100%; background: linear-gradient(90deg, #10b981, #059669); color: #ffffff; font-size: 15px; font-weight: 900; padding: 12px; border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
-    .btn-cancel { background: #dc2626; margin-top: 6px; display: none; }
-    .btn-settings { background: #0284c7; margin-bottom: 6px; }
 
-    .standard-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
-    .standard-table th { background-color: #ff8c00; color: #000000; font-weight: 900; font-size: 9px; padding: 6px 2px; border: 1px solid #8b0000; text-align: center; }
-    .standard-table td { border: 1px solid #8b0000; padding: 6px 2px; font-size: 9px; font-weight: bold; text-align: center; color: #ffffff; background: #000; }
-    .cyan-cell { background-color: #00ffff !important; color: #000000 !important; font-weight: 900 !important; }
-    
-    .action-btn { padding: 3px 5px; font-size: 8px; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; }
-    .btn-edit { background: #0284c7; color: #fff; margin-right: 2px; }
-    .btn-del { background: #dc2626; color: #fff; }
-  </style>
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Segoe UI",Roboto,Arial,sans-serif;
+}
+
+
+body{
+  background:#000;
+  color:#fff;
+  min-height:100vh;
+  padding:10px 8px 30px;
+}
+
+
+.app{
+  width:100%;
+  max-width:480px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.card{
+  background:#07142b;
+  border:2px solid #38bdf8;
+  border-radius:11px;
+  padding:12px;
+}
+
+
+.card h3{
+  color:#38bdf8;
+  font-size:14px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+
+/* ================================
+   TOP TARGET PANEL
+================================ */
+
+.target-panel{
+  background:#0f172a;
+  border:2px solid #facc15;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+
+.banner{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 9px;
+  background:#0284c7;
+  color:#000;
+  font-size:10px;
+  font-weight:900;
+}
+
+
+.main-target{
+  background:#1e293b;
+  text-align:center;
+  padding:9px 5px;
+  border-bottom:1px solid #facc15;
+}
+
+
+.main-target .number{
+  color:#ffff00;
+  font-size:23px;
+  font-weight:900;
+}
+
+
+.main-target .label{
+  color:#38bdf8;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+
+.summary-cell{
+  text-align:center;
+  padding:7px 2px;
+  background:#09203f;
+  border-right:1px solid #facc15;
+}
+
+
+.summary-cell:last-child{
+  border-right:none;
+}
+
+
+.summary-cell .title{
+  color:#38bdf8;
+  font-size:8px;
+  font-weight:900;
+}
+
+
+.summary-cell .value{
+  color:#ffff00;
+  font-size:12px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+
+.meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  text-align:center;
+  border-top:1px solid #facc15;
+  border-bottom:1px solid #facc15;
+}
+
+
+.meta-cell{
+  padding:5px 2px;
+  color:#facc15;
+  font-size:9px;
+  font-weight:900;
+  border-right:1px solid #facc15;
+}
+
+
+.meta-cell:last-child{
+  border-right:none;
+}
+
+
+.latest{
+  background:#07142b;
+  color:#fff;
+  text-align:center;
+  padding:6px;
+  font-size:9px;
+  font-weight:900;
+}
+
+
+.latest span{
+  color:#00ffff;
+}
+
+
+.time-footer{
+  background:#db2777;
+  color:#fff;
+  text-align:center;
+  padding:9px;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.row{
+  display:flex;
+  gap:7px;
+}
+
+
+.col{
+  flex:1;
+}
+
+
+.group{
+  margin-bottom:8px;
+}
+
+
+label{
+  display:block;
+  color:#00ffff;
+  font-size:9px;
+  font-weight:900;
+  margin-bottom:3px;
+}
+
+
+input,
+select{
+  width:100%;
+  background:#000;
+  color:#ffff00;
+  border:1px solid #38bdf8;
+  border-radius:5px;
+  padding:8px;
+  font-size:12px;
+  font-weight:800;
+  outline:none;
+}
+
+
+input::placeholder{
+  color:#64748b;
+  font-weight:600;
+}
+
+
+button{
+  width:100%;
+  border:none;
+  border-radius:6px;
+  padding:10px;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+
+.btn-save{
+  background:#0284c7;
+  color:#fff;
+}
+
+
+.btn-submit{
+  background:#10b981;
+  color:#fff;
+}
+
+
+.btn-cancel{
+  background:#dc2626;
+  color:#fff;
+  display:none;
+  margin-top:5px;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:620px;
+}
+
+
+th{
+  background:#ff8c00;
+  color:#000;
+  font-size:8px;
+  font-weight:900;
+  padding:5px 3px;
+  border:1px solid #8b0000;
+  white-space:nowrap;
+}
+
+
+td{
+  background:#000;
+  color:#fff;
+  font-size:8px;
+  font-weight:800;
+  text-align:center;
+  padding:5px 3px;
+  border:1px solid #8b0000;
+  white-space:nowrap;
+}
+
+
+.hour-cell{
+  background:#00ffff !important;
+  color:#000 !important;
+}
+
+
+.yellow{
+  color:#ffff00;
+}
+
+
+.cyan{
+  color:#38bdf8;
+}
+
+
+.action{
+  padding:3px 5px;
+  font-size:7px;
+  border-radius:3px;
+}
+
+
+.edit{
+  background:#0284c7;
+  color:#fff;
+}
+
+
+.delete{
+  background:#dc2626;
+  color:#fff;
+}
+
+
+/* ================================
+   SUMMARY
+================================ */
+
+.summary-box{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:5px;
+}
+
+
+.stat{
+  background:#000;
+  border:1px solid #38bdf8;
+  border-radius:5px;
+  padding:6px;
+  text-align:center;
+}
+
+
+.stat-title{
+  color:#38bdf8;
+  font-size:8px;
+  font-weight:900;
+}
+
+
+.stat-value{
+  color:#ffff00;
+  font-size:12px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+
+.status{
+  text-align:center;
+  margin-top:7px;
+  padding:7px;
+  border-radius:5px;
+  background:#111827;
+  color:#00ffff;
+  font-size:10px;
+  font-weight:900;
+}
+
+
+.hidden{
+  display:none;
+}
+
+</style>
+
 </head>
+
+
 <body>
 
-  <div class="app-viewport">
-    
-    <!-- TOP TARGET SUMMARY PANEL -->
-    <div class="target-panel">
-      <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #0284c7; color: #000; font-weight: 900; font-size: 12px;">
-        <span id="bannerShift">Shift: A</span>
-        <span id="bannerDate">25-Jul-2026</span>
-      </div>
-      
-      <div class="top-req-box">
-        <span id="topReqSheetsVal">SETUP REQUIRED</span>
-        <span>Total Required Sheets</span>
-      </div>
+<div class="app">
 
-      <div class="grid-3">
-        <div class="grid-col">Produced Sheets<span id="bannerProduced">-</span></div>
-        <div class="grid-col">Remaining Sheets<span id="bannerReqSheet">-</span></div>
-        <div class="grid-col">Required / Hr<span id="bannerReqHr">-</span></div>
-      </div>
 
-      <div class="meta-row">
-        <span>Target Size: <strong id="bannerTargetSize" style="color:#fff;">-</strong> m</span>
-        <span>SFT: <strong id="bannerSft" style="color:#fff;">-</strong></span>
-      </div>
+<!-- =====================================================
+     TOP TARGET PANEL
+====================================================== -->
 
-      <div class="magenta-footer" id="bannerTimeLeft">REMAINING HOURS NOT SET</div>
+<div class="target-panel">
+
+  <div class="banner">
+    <span id="bannerShift">Shift A</span>
+    <span id="bannerDate">-</span>
+  </div>
+
+
+  <div class="main-target">
+
+    <div class="number"
+         id="topReqSheets">
+      SETUP REQUIRED
     </div>
 
-    <!-- MASTER SETTINGS PANEL -->
-    <div class="card">
-      <h3>⚙️ Master Settings</h3>
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>Target Production (MT)</label>
-          <input type="number" id="setConfigTarget" class="form-input" placeholder="e.g. 130">
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>Target Size (m)</label>
-          <input type="number" step="0.01" id="setConfigTargetSize" class="form-input" placeholder="e.g. 6">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Batch Weight (kg)</label>
-        <input type="number" id="setConfigBatch" class="form-input" placeholder="e.g. 1250">
-      </div>
-      <button class="btn-submit btn-settings" onclick="saveSettingsData()">Save Settings 💾</button>
-    </div>
-
-    <!-- HOURLY ENTRY FORM -->
-    <div class="card">
-      <h3 id="formTitle">📝 Hourly Production Entry</h3>
-      <input type="hidden" id="editRowIndex" value="">
-      
-      <div class="form-group">
-        <label>Operator Name</label>
-        <input type="text" id="opName" class="form-input" placeholder="Enter your name...">
-      </div>
-
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>Shift</label>
-          <select id="opShift" class="form-input" onchange="renderDashboard()">
-            <option value="A">Shift A</option>
-            <option value="B">Shift B</option>
-            <option value="C">Shift C</option>
-          </select>
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>Production Hour</label>
-          <select id="opHour" class="form-input" onchange="renderDashboard()">
-            <option value="1st Hour">1st Hour</option>
-            <option value="2nd Hour">2nd Hour</option>
-            <option value="3rd Hour">3rd Hour</option>
-            <option value="4th Hour">4th Hour</option>
-            <option value="5th Hour">5th Hour</option>
-            <option value="6th Hour">6th Hour</option>
-            <option value="7th Hour">7th Hour</option>
-            <option value="8th Hour">8th Hour</option>
-          </select>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>1st Size (m)</label>
-          <input type="text" id="opSize1" class="form-input" value="6">
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>2nd Size (m)</label>
-          <input type="text" id="opSize2" class="form-input" value="6.00">
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>1st Size Sheets</label>
-          <input type="number" id="opS1" class="form-input" placeholder="Blank if running 2nd">
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>2nd Size Sheets</label>
-          <input type="number" id="opS2" class="form-input" placeholder="Blank if running 1st">
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>Moulding / ME Pickup</label>
-          <input type="number" id="opMoulding" class="form-input" value="">
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>Beater (Common)</label>
-          <input type="number" id="opBeater" class="form-input" value="">
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px;">
-        <div class="form-group" style="flex: 1;">
-          <label>B/D (min)</label>
-          <input type="number" id="opBD" class="form-input" value="">
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label>CSR (Rejection)</label>
-          <input type="number" id="opGSR" class="form-input" value="">
-        </div>
-      </div>
-
-      <button class="btn-submit" id="submitBtn" onclick="submitProductionEntry()">Submit Hourly Data ➔</button>
-      <button class="btn-submit btn-cancel" id="cancelBtn" onclick="resetForm()">Cancel Edit</button>
-    </div>
-
-    <!-- PRODUCTION LOG TABLE -->
-    <div class="card">
-      <h3>📊 Production Log</h3>
-      <div style="overflow-x: auto;">
-        <table class="standard-table">
-          <thead>
-            <tr>
-              <th>Hour</th>
-              <th>Sz</th>
-              <th>Sheets</th>
-              <th>Beater</th>
-              <th>BD</th>
-              <th>Output MT</th>
-              <th>Input MT</th>
-              <th>ME%</th>
-              <th>ROP</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="productionTableBody">
-            <tr><td colspan="10" style="padding: 12px; color: #94a3b8;">Loading data...</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="label">
+      Total Required Sheets
     </div>
 
   </div>
 
-  <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
-    let globalData = [];
-    let masterSettings = { targetProd: "", targetSize: "", batchWeight: "", sftConversion: 2.54 };
 
-    function loadDashboardData() {
-      const s = document.createElement('script');
-      s.src = `${SCRIPT_URL}?action=getDashboardData&callback=handleDashboardResponse&t=${Date.now()}`;
-      document.head.appendChild(s);
-    }
+  <div class="summary-grid">
 
-    window.handleDashboardResponse = function(res) {
-      if (!res || res.status !== "success") return;
-      
-      globalData = res.data.rows || [];
-      masterSettings = res.data.masterSettings || masterSettings;
-      
-      if (masterSettings.targetProd !== "") document.getElementById('setConfigTarget').value = masterSettings.targetProd;
-      if (masterSettings.targetSize !== "") document.getElementById('setConfigTargetSize').value = masterSettings.targetSize;
-      if (masterSettings.batchWeight !== "") document.getElementById('setConfigBatch').value = masterSettings.batchWeight;
+    <div class="summary-cell">
+      <div class="title">
+        Produced Eq. Sheets
+      </div>
+
+      <div class="value"
+           id="producedSheets">
+        -
+      </div>
+    </div>
+
+
+    <div class="summary-cell">
+
+      <div class="title">
+        Remaining Eq. Sheets
+      </div>
+
+      <div class="value"
+           id="remainingSheets">
+        -
+      </div>
+
+    </div>
+
+
+    <div class="summary-cell">
+
+      <div class="title">
+        Required / Hr
+      </div>
+
+      <div class="value"
+           id="requiredPerHour">
+        -
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="meta">
+
+    <div class="meta-cell">
+      Target Size:
+      <span id="targetSizeDisplay">-</span> m
+    </div>
+
+    <div class="meta-cell">
+      SFT:
+      <span id="sftDisplay">-</span>
+    </div>
+
+  </div>
+
+
+  <div class="latest">
+    Latest Production:
+    <span id="latestProduction">
+      No entry yet
+    </span>
+  </div>
+
+
+  <div class="time-footer"
+       id="timeLeft">
+    REMAINING HOURS NOT SET
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MASTER SETTINGS
+====================================================== -->
+
+<div class="card">
+
+  <h3>
+    ⚙️ Master Settings
+  </h3>
+
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Target Production (MT)
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="targetProd"
+          placeholder="e.g. 130">
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Target Size (m)
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="targetSize"
+          placeholder="e.g. 6">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="group">
+
+    <label>
+      Batch Weight (kg)
+    </label>
+
+    <input
+      type="number"
+      step="0.01"
+      id="batchWeight"
+      placeholder="e.g. 1250">
+
+  </div>
+
+
+  <button
+    class="btn-save"
+    id="saveSettingsBtn"
+    onclick="saveSettings()">
+
+    SAVE SETTINGS 💾
+
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     HOURLY ENTRY
+====================================================== -->
+
+<div class="card">
+
+  <h3 id="formTitle">
+    📝 Hourly Production Entry
+  </h3>
+
+
+  <input
+    type="hidden"
+    id="editRowIndex"
+    value="">
+
+
+  <!-- DATE -->
+
+  <div class="group">
+
+    <label>
+      Production Date
+    </label>
+
+    <input
+      type="date"
+      id="productionDate">
+
+  </div>
+
+
+  <!-- OPERATOR -->
+
+  <div class="group">
+
+    <label>
+      Operator Name
+    </label>
+
+    <input
+      type="text"
+      id="operator"
+      placeholder="Enter operator name">
+
+  </div>
+
+
+  <!-- SHIFT + HOUR -->
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Shift
+        </label>
+
+        <select
+          id="shift"
+          onchange="renderDashboard()">
+
+          <option value="A">
+            Shift A
+          </option>
+
+          <option value="B">
+            Shift B
+          </option>
+
+          <option value="C">
+            Shift C
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Production Hour
+        </label>
+
+        <select
+          id="hour"
+          onchange="renderDashboard()">
+
+          <option value="1st Hour">1st Hour</option>
+          <option value="2nd Hour">2nd Hour</option>
+          <option value="3rd Hour">3rd Hour</option>
+          <option value="4th Hour">4th Hour</option>
+          <option value="5th Hour">5th Hour</option>
+          <option value="6th Hour">6th Hour</option>
+          <option value="7th Hour">7th Hour</option>
+          <option value="8th Hour">8th Hour</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SIZE -->
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          1st Size (m)
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="size1"
+          placeholder="e.g. 5.85">
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          2nd Size (m)
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="size2"
+          placeholder="e.g. 6">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SHEETS -->
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          1st Size Sheets
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="s1Sheets"
+          placeholder="Blank if running 2nd">
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          2nd Size Sheets
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="s2Sheets"
+          placeholder="Blank if running 1st">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MOULDING + BEATER -->
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Moulding / ME Pickup
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="moulding">
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Beater (Common)
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="beater">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BD + GSR -->
+
+  <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          B/D (Min)
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          max="60"
+          id="bd">
+
+      </div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          GSR (Rejection)
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          id="gsr">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="btn-submit"
+    id="submitBtn"
+    onclick="submitEntry()">
+
+    SUBMIT HOURLY DATA ➜
+
+  </button>
+
+
+  <button
+    class="btn-cancel"
+    id="cancelBtn"
+    onclick="resetForm()">
+
+    CANCEL EDIT
+
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     PRODUCTION LOG
+====================================================== -->
+
+<div class="card">
+
+  <h3>
+    📊 Production Log & Metrics
+  </h3>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Hour</th>
+          <th>Size</th>
+          <th>Sheets</th>
+          <th>Beater</th>
+          <th>BD</th>
+          <th>Output MT</th>
+          <th>Input MT</th>
+          <th>ME%</th>
+          <th>ROP</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="tableBody">
+
+        <tr>
+
+          <td colspan="10">
+            Loading...
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- SHIFT SUMMARY -->
+
+  <div class="summary-box">
+
+    <div class="stat">
+
+      <div class="stat-title">
+        Total Production
+      </div>
+
+      <div class="stat-value"
+           id="totalOutput">
+        -
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-title">
+        Total Input
+      </div>
+
+      <div class="stat-value"
+           id="totalInput">
+        -
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-title">
+        Overall ME%
+      </div>
+
+      <div class="stat-value"
+           id="overallME">
+        -
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-title">
+        Overall ROP
+      </div>
+
+      <div class="stat-value"
+           id="overallROP">
+        -
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="status"
+       id="targetStatus">
+    -
+  </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
+
+
+const PRODUCTION_CONSTANT = 12.8;
+
+const SHIFT_HOURS = 8;
+
+let globalData = [];
+
+let settings = {
+  targetProd:"",
+  targetSize:"",
+  batchWeight:"",
+  sftConversion:2.5
+};
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function getToday(){
+
+  const d = new Date();
+
+  const y = d.getFullYear();
+
+  const m = String(d.getMonth()+1).padStart(2,"0");
+
+  const day = String(d.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+}
+
+
+function formatDisplayDate(dateStr){
+
+  if(!dateStr) return "-";
+
+  const parts = dateStr.split("-");
+
+  if(parts.length !== 3) return dateStr;
+
+  const months = [
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
+  ];
+
+  return `${parts[2]}-${months[Number(parts[1])-1]}-${parts[0]}`;
+}
+
+
+/* =====================================================
+   JSONP
+===================================================== */
+
+function jsonp(url){
+
+  const script = document.createElement("script");
+
+  script.src = url;
+
+  document.body.appendChild(script);
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData(){
+
+  const callback =
+    "dashboardCallback_" + Date.now();
+
+  window[callback] = function(res){
+
+    try{
+
+      if(!res || res.status !== "success"){
+
+        alert(
+          res && res.message
+          ? res.message
+          : "Unable to load data."
+        );
+
+        return;
+      }
+
+
+      globalData =
+        res.data.rows || [];
+
+
+      settings =
+        res.data.masterSettings || settings;
+
+
+      document.getElementById("targetProd").value =
+        settings.targetProd !== ""
+        ? settings.targetProd
+        : "";
+
+
+      document.getElementById("targetSize").value =
+        settings.targetSize !== ""
+        ? settings.targetSize
+        : "";
+
+
+      document.getElementById("batchWeight").value =
+        settings.batchWeight !== ""
+        ? settings.batchWeight
+        : "";
+
 
       renderDashboard();
-    };
 
-    function saveSettingsData() {
-      const target = document.getElementById('setConfigTarget').value;
-      const targetSize = document.getElementById('setConfigTargetSize').value;
-      const batch = document.getElementById('setConfigBatch').value;
+    }finally{
 
-      const s = document.createElement('script');
-      s.src = `${SCRIPT_URL}?action=saveSettings&targetProd=${target}&targetSize=${targetSize}&batchWeight=${batch}&callback=handleSettingsSaveResponse&t=${Date.now()}`;
-      document.head.appendChild(s);
+      delete window[callback];
+
     }
 
-    window.handleSettingsSaveResponse = function(res) {
-      if (res && res.status === "success") {
-        alert("Settings saved successfully!");
-        loadDashboardData();
-      } else {
-        alert("Failed to save settings.");
-      }
-    };
+  };
 
-    function renderDashboard() {
-      const tbody = document.getElementById('productionTableBody');
-      const selectedShift = document.getElementById('opShift').value;
-      
-      if (globalData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="padding: 12px; color: #94a3b8;">No entries found yet.</td></tr>';
-        updateBanner(0);
-        return;
-      }
 
-      let totalProducedSheets = 0;
-      let html = '';
+  jsonp(
+    SCRIPT_URL +
+    "?action=getDashboardData" +
+    "&callback=" +
+    callback +
+    "&t=" +
+    Date.now()
+  );
 
-      globalData.forEach(r => {
-        let sheets = 0;
-        let sizeUsed = 0;
+}
 
-        if (r.s2Sheets !== "" && r.s2Sheets !== null && !isNaN(r.s2Sheets)) {
-          sheets = Number(r.s2Sheets);
-          sizeUsed = Number(r.size2) || 0;
-        } else if (r.s1Sheets !== "" && r.s1Sheets !== null && !isNaN(r.s1Sheets)) {
-          sheets = Number(r.s1Sheets);
-          sizeUsed = Number(r.size1) || 0;
-        }
 
-        if (r.shift === selectedShift && sheets > 0) {
-          totalProducedSheets += sheets;
-        }
+/* =====================================================
+   CURRENT FILTER
+===================================================== */
 
-        // Output MT = Sheets * Size * 12.8 / 1000
-        let outputMTStr = "";
-        let outputMTVal = 0;
-        if (sheets > 0 && sizeUsed > 0 && !isNaN(sheets)) {
-          outputMTVal = (sheets * sizeUsed * 12.8) / 1000;
-          outputMTStr = outputMTVal.toFixed(2);
-        }
+function getSelectedDate(){
 
-        // Input MT = Beater * BatchWeight / 1000
-        let inputMTStr = "";
-        let inputMTVal = 0;
-        if (masterSettings.batchWeight !== "" && r.beater !== "" && r.beater !== null && !isNaN(r.beater)) {
-          inputMTVal = (Number(r.beater) * masterSettings.batchWeight) / 1000;
-          inputMTStr = inputMTVal.toFixed(2);
-        }
+  return document.getElementById(
+    "productionDate"
+  ).value;
 
-        // ME% = (1 - Output/Input) * 100 (Blank if input blank or zero)
-        let mePctStr = "";
-        if (sheets > 0 && inputMTVal > 0) {
-          let meVal = (1 - (outputMTVal / inputMTVal)) * 100;
-          mePctStr = meVal.toFixed(1) + "%";
-        }
+}
 
-        // ROP = Output * 60 / (60 - Breakdown)
-        let ropStr = "";
-        if (sheets > 0 && outputMTVal > 0) {
-          let bd = Number(r.bd) || 0;
-          if (bd < 60) {
-            let runMin = Math.max(1, 60 - bd);
-            let ropVal = (outputMTVal * 60) / runMin;
-            ropStr = ropVal.toFixed(2);
-          }
-        }
 
-        const displaySheets = sheets > 0 ? sheets : "";
+function getSelectedShift(){
 
-        html += `<tr>
-          <td class="cyan-cell">${r.hour}</td>
-          <td>${sizeUsed || ""}</td>
-          <td style="color: #ffff00;">${displaySheets}</td>
-          <td>${r.beater !== "" ? r.beater : ""}</td>
-          <td>${r.bd !== "" ? r.bd : ""}</td>
-          <td style="color: #facc15;">${outputMTStr}</td>
-          <td>${inputMTStr}</td>
-          <td style="color: #38bdf8;">${mePctStr}</td>
-          <td>${ropStr}</td>
-          <td>
-            <button class="action-btn btn-edit" onclick="editRow(${r.rowIndex})">Edit</button>
-            <button class="action-btn btn-del" onclick="deleteRow(${r.rowIndex})">Del</button>
-          </td>
-        </tr>`;
-      });
+  return document.getElementById(
+    "shift"
+  ).value;
 
-      tbody.innerHTML = html;
-      updateBanner(totalProducedSheets);
+}
+
+
+/* =====================================================
+   FILTER ROWS
+===================================================== */
+
+function getFilteredRows(){
+
+  const date =
+    getSelectedDate();
+
+  const shift =
+    getSelectedShift();
+
+
+  return globalData.filter(r => {
+
+    return (
+      String(r.date) === String(date) &&
+      String(r.shift) === String(shift)
+    );
+
+  });
+
+}
+
+
+/* =====================================================
+   GET PRODUCTION VALUES
+===================================================== */
+
+function getRowProduction(r){
+
+  let sheets = 0;
+
+  let size = 0;
+
+  let source = "";
+
+
+  if(
+    r.s2Sheets !== "" &&
+    r.s2Sheets !== null &&
+    !isNaN(r.s2Sheets)
+  ){
+
+    sheets = Number(r.s2Sheets);
+
+    size = Number(r.size2) || 0;
+
+    source = "2nd";
+
+  }else if(
+    r.s1Sheets !== "" &&
+    r.s1Sheets !== null &&
+    !isNaN(r.s1Sheets)
+  ){
+
+    sheets = Number(r.s1Sheets);
+
+    size = Number(r.size1) || 0;
+
+    source = "1st";
+
+  }
+
+
+  let output = 0;
+
+
+  if(
+    sheets > 0 &&
+    size > 0
+  ){
+
+    output =
+      sheets *
+      size *
+      PRODUCTION_CONSTANT /
+      1000;
+
+  }
+
+
+  return {
+    sheets,
+    size,
+    output,
+    source
+  };
+
+}
+
+
+/* =====================================================
+   RENDER DASHBOARD
+===================================================== */
+
+function renderDashboard(){
+
+  const rows =
+    getFilteredRows();
+
+
+  renderTable(rows);
+
+  updateTopPanel(rows);
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+function renderTable(rows){
+
+  const tbody =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  if(rows.length === 0){
+
+    tbody.innerHTML =
+      `<tr>
+        <td colspan="10"
+            style="padding:12px;color:#94a3b8;">
+          No production entry for this date/shift.
+        </td>
+      </tr>`;
+
+    updateShiftSummary([]);
+
+    return;
+
+  }
+
+
+  rows.sort(
+    (a,b) =>
+      Number(a.hourNumber || 0) -
+      Number(b.hourNumber || 0)
+  );
+
+
+  let html = "";
+
+
+  rows.forEach(r => {
+
+    const p =
+      getRowProduction(r);
+
+
+    let input = "";
+
+    let inputVal = 0;
+
+
+    if(
+      settings.batchWeight !== "" &&
+      r.beater !== "" &&
+      r.beater !== null &&
+      !isNaN(r.beater) &&
+      Number(r.beater) > 0
+    ){
+
+      inputVal =
+        Number(r.beater) *
+        Number(settings.batchWeight) /
+        1000;
+
+      input =
+        inputVal.toFixed(2);
+
     }
 
-    function updateBanner(totalProducedSheets) {
-      const targetProd = masterSettings.targetProd;
-      const targetSize = masterSettings.targetSize;
-      
-      if (targetProd === "" || targetSize === "" || isNaN(targetProd) || isNaN(targetSize) || targetSize <= 0) {
-        document.getElementById('topReqSheetsVal').innerText = "SETUP REQUIRED";
-        document.getElementById('bannerProduced').innerText = "-";
-        document.getElementById('bannerReqSheet').innerText = "-";
-        document.getElementById('bannerReqHr').innerText = "-";
-        document.getElementById('bannerTargetSize').innerText = "-";
-        document.getElementById('bannerSft').innerText = "-";
-        document.getElementById('bannerTimeLeft').innerText = "REMAINING HOURS NOT SET";
-        return;
-      }
 
-      // Required Sheets = Target MT * 1000 / (Target Size * 12.8)
-      const totalReqSheets = (targetProd * 1000) / (targetSize * 12.8);
-      document.getElementById('topReqSheetsVal').innerText = totalReqSheets.toFixed(2);
-      document.getElementById('bannerProduced').innerText = totalProducedSheets.toFixed(2);
+    let me = "";
 
-      // Remaining Sheets = Total Required Sheets - Produced Sheets (min 0)
-      const reqSheets = Math.max(0, totalReqSheets - totalProducedSheets);
-      document.getElementById('bannerReqSheet').innerText = reqSheets.toFixed(2);
 
-      // Remaining Hours based on 8-hour shift and completed hour
-      const currentHourStr = document.getElementById('opHour').value;
-      const completedHours = parseInt(currentHourStr) || 1;
-      const remainingHours = Math.max(0, 8 - completedHours);
+    if(
+      p.output > 0 &&
+      inputVal > 0
+    ){
 
-      // Required/Hr = Remaining Sheets / Remaining Hours
-      const reqPerHr = remainingHours > 0 ? (reqSheets / remainingHours) : 0;
-      document.getElementById('bannerReqHr').innerText = reqPerHr.toFixed(2);
+      me =
+        (
+          (1 - p.output / inputVal) *
+          100
+        ).toFixed(1) + "%";
 
-      // SFT calculation from Target Size
-      const sftVal = targetSize * masterSettings.sftConversion;
-      document.getElementById('bannerTargetSize').innerText = targetSize;
-      document.getElementById('bannerSft').innerText = sftVal.toFixed(2);
-
-      document.getElementById('bannerTimeLeft').innerText = `ONLY ${remainingHours} HOURS LEFT`;
     }
 
-    function submitProductionEntry() {
-      const name = document.getElementById('opName').value.trim();
-      if (!name) {
-        alert("Please enter operator name.");
-        return;
+
+    let rop = "";
+
+
+    const bd =
+      Number(r.bd) || 0;
+
+
+    if(
+      p.output > 0 &&
+      bd < 60
+    ){
+
+      const running =
+        60 - bd;
+
+
+      if(running > 0){
+
+        rop =
+          (
+            p.output *
+            60 /
+            running
+          ).toFixed(2);
+
       }
 
-      const rowIndex = document.getElementById('editRowIndex').value;
-      const shift = document.getElementById('opShift').value;
-      const hour = document.getElementById('opHour').value;
-      const size1 = document.getElementById('opSize1').value;
-      const size2 = document.getElementById('opSize2').value;
-      const s1Sheets = document.getElementById('opS1').value;
-      const s2Sheets = document.getElementById('opS2').value;
-      const moulding = document.getElementById('opMoulding').value;
-      const beater = document.getElementById('opBeater').value;
-      const bd = document.getElementById('opBD').value;
-      const gsr = document.getElementById('opGSR').value;
-
-      const btn = document.getElementById('submitBtn');
-      btn.innerText = rowIndex ? "Updating..." : "Submitting...";
-      btn.disabled = true;
-
-      let url = `${SCRIPT_URL}?action=submitHourly&shift=${encodeURIComponent(shift)}&hour=${encodeURIComponent(hour)}&size1=${encodeURIComponent(size1)}&size2=${encodeURIComponent(size2)}&s1Sheets=${s1Sheets}&s2Sheets=${s2Sheets}&moulding=${moulding}&beater=${beater}&bd=${bd}&gsr=${gsr}&operator=${encodeURIComponent(name)}&callback=handleSubmitResponse&t=${Date.now()}`;
-      
-      if (rowIndex) {
-        url += `&rowIndex=${rowIndex}`;
-      }
-
-      const s = document.createElement('script');
-      s.src = url;
-      document.head.appendChild(s);
     }
 
-    window.handleSubmitResponse = function(res) {
-      const btn = document.getElementById('submitBtn');
-      btn.innerText = "Submit Hourly Data ➔";
+
+    const sizeDisplay =
+      p.size > 0
+      ? Number(p.size).toFixed(2)
+      : "";
+
+
+    const sheetsDisplay =
+      p.sheets > 0
+      ? p.sheets
+      : "";
+
+
+    html += `
+
+      <tr>
+
+        <td class="hour-cell">
+          ${escapeHtml(r.hour)}
+        </td>
+
+        <td>
+          ${sizeDisplay}
+        </td>
+
+        <td class="yellow">
+          ${sheetsDisplay}
+        </td>
+
+        <td>
+          ${r.beater !== "" ? r.beater : ""}
+        </td>
+
+        <td>
+          ${r.bd !== "" ? r.bd : ""}
+        </td>
+
+        <td class="yellow">
+          ${p.output > 0
+            ? p.output.toFixed(2)
+            : ""}
+        </td>
+
+        <td>
+          ${input}
+        </td>
+
+        <td class="cyan">
+          ${me}
+        </td>
+
+        <td>
+          ${rop}
+        </td>
+
+        <td>
+
+          <button
+            class="action edit"
+            onclick="editRow(${r.rowIndex})">
+            Edit
+          </button>
+
+          <button
+            class="action delete"
+            onclick="deleteRow(${r.rowIndex})">
+            Del
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+
+  });
+
+
+  tbody.innerHTML = html;
+
+
+  updateShiftSummary(rows);
+
+}
+
+
+/* =====================================================
+   TOP TARGET PANEL
+===================================================== */
+
+function updateTopPanel(rows){
+
+  const targetProd =
+    Number(settings.targetProd);
+
+
+  const targetSize =
+    Number(settings.targetSize);
+
+
+  document.getElementById(
+    "bannerShift"
+  ).innerText =
+    "Shift " +
+    getSelectedShift();
+
+
+  document.getElementById(
+    "bannerDate"
+  ).innerText =
+    formatDisplayDate(
+      getSelectedDate()
+    );
+
+
+  /* ---------------------------------
+     NO TARGET SETUP
+  --------------------------------- */
+
+  if(
+    !targetProd ||
+    targetProd <= 0 ||
+    !targetSize ||
+    targetSize <= 0
+  ){
+
+    document.getElementById(
+      "topReqSheets"
+    ).innerText =
+      "SETUP REQUIRED";
+
+
+    document.getElementById(
+      "producedSheets"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "remainingSheets"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "requiredPerHour"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "targetSizeDisplay"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "sftDisplay"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "targetStatus"
+    ).innerText =
+      "SET TARGET PRODUCTION AND TARGET SIZE";
+
+
+    updateRemainingHours(rows);
+
+    return;
+
+  }
+
+
+  /* ---------------------------------
+     TOTAL REQUIRED SHEETS
+  --------------------------------- */
+
+  const totalRequiredSheets =
+    (
+      targetProd *
+      1000
+    ) /
+    (
+      targetSize *
+      PRODUCTION_CONSTANT
+    );
+
+
+  document.getElementById(
+    "topReqSheets"
+  ).innerText =
+    totalRequiredSheets.toFixed(2);
+
+
+  /* ---------------------------------
+     ACTUAL TOTAL PRODUCTION MT
+  --------------------------------- */
+
+  let totalOutput = 0;
+
+
+  rows.forEach(r => {
+
+    const p =
+      getRowProduction(r);
+
+    totalOutput += p.output;
+
+  });
+
+
+  /* ---------------------------------
+     TARGET-SIZE EQUIVALENT SHEETS
+
+     IMPORTANT:
+     Different actual sizes must NOT
+     simply be added as raw sheets.
+
+     Convert actual MT production into
+     equivalent sheets of Target Size.
+  --------------------------------- */
+
+  const producedEquivalentSheets =
+    (
+      totalOutput *
+      1000
+    ) /
+    (
+      targetSize *
+      PRODUCTION_CONSTANT
+    );
+
+
+  document.getElementById(
+    "producedSheets"
+  ).innerText =
+    producedEquivalentSheets.toFixed(2);
+
+
+  /* ---------------------------------
+     REMAINING TARGET EQUIVALENT SHEETS
+  --------------------------------- */
+
+  const remaining =
+    Math.max(
+      0,
+      totalRequiredSheets -
+      producedEquivalentSheets
+    );
+
+
+  document.getElementById(
+    "remainingSheets"
+  ).innerText =
+    remaining.toFixed(2);
+
+
+  /* ---------------------------------
+     COMPLETED HOUR
+
+     VERY IMPORTANT:
+
+     Do NOT use the dropdown's selected
+     hour.
+
+     Use the latest ACTUALLY SAVED hour.
+  --------------------------------- */
+
+  let latestHour = 0;
+
+  rows.forEach(r => {
+
+    const n =
+      Number(r.hourNumber) || 0;
+
+    if(n > latestHour){
+
+      latestHour = n;
+
+    }
+
+  });
+
+
+  const remainingHours =
+    Math.max(
+      0,
+      SHIFT_HOURS - latestHour
+    );
+
+
+  /* ---------------------------------
+     REQUIRED PER HOUR
+  --------------------------------- */
+
+  let requiredPerHour = 0;
+
+
+  if(remaining <= 0){
+
+    requiredPerHour = 0;
+
+  }else if(remainingHours > 0){
+
+    requiredPerHour =
+      remaining /
+      remainingHours;
+
+  }
+
+
+  document.getElementById(
+    "requiredPerHour"
+  ).innerText =
+    remainingHours > 0
+    ? requiredPerHour.toFixed(2)
+    : remaining <= 0
+      ? "0.00"
+      : "SHIFT OVER";
+
+
+  /* ---------------------------------
+     TARGET SIZE
+  --------------------------------- */
+
+  document.getElementById(
+    "targetSizeDisplay"
+  ).innerText =
+    targetSize.toFixed(2);
+
+
+  /* ---------------------------------
+     SFT
+
+     Plant dashboard example:
+     5.85 m -> 14.6 SFT
+     Therefore factor = 2.5
+  --------------------------------- */
+
+  const sft =
+    targetSize *
+    (
+      Number(settings.sftConversion) ||
+      2.5
+    );
+
+
+  document.getElementById(
+    "sftDisplay"
+  ).innerText =
+    sft.toFixed(1);
+
+
+  /* ---------------------------------
+     LATEST PRODUCTION
+  --------------------------------- */
+
+  showLatestProduction(rows);
+
+
+  /* ---------------------------------
+     TIME STATUS
+  --------------------------------- */
+
+  updateRemainingHours(rows);
+
+
+  /* ---------------------------------
+     TARGET STATUS
+  --------------------------------- */
+
+  const achievement =
+    targetProd > 0
+    ? (
+        totalOutput /
+        targetProd
+      ) * 100
+    : 0;
+
+
+  if(achievement >= 100){
+
+    document.getElementById(
+      "targetStatus"
+    ).innerText =
+      "🎯 TARGET ACHIEVED — " +
+      achievement.toFixed(1) +
+      "%";
+
+  }else{
+
+    document.getElementById(
+      "targetStatus"
+    ).innerText =
+      "Target Achievement: " +
+      achievement.toFixed(1) +
+      "%";
+
+  }
+
+}
+
+
+/* =====================================================
+   REMAINING HOURS
+===================================================== */
+
+function updateRemainingHours(rows){
+
+  let latestHour = 0;
+
+
+  rows.forEach(r => {
+
+    const n =
+      Number(r.hourNumber) || 0;
+
+    if(n > latestHour){
+
+      latestHour = n;
+
+    }
+
+  });
+
+
+  const remaining =
+    Math.max(
+      0,
+      SHIFT_HOURS -
+      latestHour
+    );
+
+
+  const footer =
+    document.getElementById(
+      "timeLeft"
+    );
+
+
+  if(latestHour === 0){
+
+    footer.innerText =
+      "8 HOURS AVAILABLE";
+
+  }else if(remaining === 0){
+
+    footer.innerText =
+      "SHIFT COMPLETED";
+
+  }else{
+
+    footer.innerText =
+      "ONLY " +
+      remaining +
+      " HOURS LEFT";
+
+  }
+
+}
+
+
+/* =====================================================
+   LATEST PRODUCTION
+===================================================== */
+
+function showLatestProduction(rows){
+
+  const el =
+    document.getElementById(
+      "latestProduction"
+    );
+
+
+  if(rows.length === 0){
+
+    el.innerText =
+      "No entry yet";
+
+    return;
+
+  }
+
+
+  let latest = null;
+
+
+  rows.forEach(r => {
+
+    const n =
+      Number(r.hourNumber) || 0;
+
+
+    if(
+      !latest ||
+      n > Number(latest.hourNumber || 0)
+    ){
+
+      latest = r;
+
+    }
+
+  });
+
+
+  if(!latest){
+
+    el.innerText =
+      "No entry yet";
+
+    return;
+
+  }
+
+
+  const p =
+    getRowProduction(latest);
+
+
+  if(p.sheets > 0){
+
+    el.innerText =
+      `${latest.hour}: ` +
+      `${p.sheets} sheets / ` +
+      `${p.output.toFixed(2)} MT`;
+
+  }else{
+
+    el.innerText =
+      `${latest.hour}: No sheet production`;
+
+  }
+
+}
+
+
+/* =====================================================
+   SHIFT SUMMARY
+===================================================== */
+
+function updateShiftSummary(rows){
+
+  let totalOutput = 0;
+
+  let totalInput = 0;
+
+  let totalBD = 0;
+
+
+  rows.forEach(r => {
+
+    const p =
+      getRowProduction(r);
+
+
+    totalOutput += p.output;
+
+
+    if(
+      settings.batchWeight !== "" &&
+      r.beater !== "" &&
+      Number(r.beater) > 0
+    ){
+
+      totalInput +=
+        Number(r.beater) *
+        Number(settings.batchWeight) /
+        1000;
+
+    }
+
+
+    if(
+      r.bd !== "" &&
+      !isNaN(r.bd)
+    ){
+
+      totalBD +=
+        Number(r.bd);
+
+    }
+
+  });
+
+
+  document.getElementById(
+    "totalOutput"
+  ).innerText =
+    totalOutput > 0
+    ? totalOutput.toFixed(2) + " MT"
+    : "-";
+
+
+  document.getElementById(
+    "totalInput"
+  ).innerText =
+    totalInput > 0
+    ? totalInput.toFixed(2) + " MT"
+    : "-";
+
+
+  /* OVERALL ME */
+
+  if(
+    totalOutput > 0 &&
+    totalInput > 0
+  ){
+
+    const me =
+      (
+        1 -
+        totalOutput /
+        totalInput
+      ) * 100;
+
+
+    document.getElementById(
+      "overallME"
+    ).innerText =
+      me.toFixed(1) + "%";
+
+  }else{
+
+    document.getElementById(
+      "overallME"
+    ).innerText =
+      "-";
+
+  }
+
+
+  /* OVERALL ROP */
+
+  if(totalOutput > 0){
+
+    const scheduledMinutes =
+      SHIFT_HOURS * 60;
+
+
+    const runningMinutes =
+      scheduledMinutes -
+      totalBD;
+
+
+    if(runningMinutes > 0){
+
+      const overallROP =
+        totalOutput *
+        scheduledMinutes /
+        runningMinutes;
+
+
+      document.getElementById(
+        "overallROP"
+      ).innerText =
+        overallROP.toFixed(2);
+
+    }else{
+
+      document.getElementById(
+        "overallROP"
+      ).innerText =
+        "-";
+
+    }
+
+  }else{
+
+    document.getElementById(
+      "overallROP"
+    ).innerText =
+      "-";
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE SETTINGS
+===================================================== */
+
+function saveSettings(){
+
+  const targetProd =
+    document.getElementById(
+      "targetProd"
+    ).value.trim();
+
+
+  const targetSize =
+    document.getElementById(
+      "targetSize"
+    ).value.trim();
+
+
+  const batchWeight =
+    document.getElementById(
+      "batchWeight"
+    ).value.trim();
+
+
+  if(
+    targetProd === "" ||
+    Number(targetProd) <= 0
+  ){
+
+    alert(
+      "Please enter Target Production."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    targetSize === "" ||
+    Number(targetSize) <= 0
+  ){
+
+    alert(
+      "Please enter Target Size in meter (m)."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    batchWeight === "" ||
+    Number(batchWeight) <= 0
+  ){
+
+    alert(
+      "Please enter Batch Weight."
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "saveSettingsBtn"
+    );
+
+
+  btn.disabled = true;
+
+  btn.innerText =
+    "SAVING...";
+
+
+  const callback =
+    "settingsCallback_" + Date.now();
+
+
+  window[callback] =
+    function(res){
+
       btn.disabled = false;
-      resetForm();
 
-      if (res && res.status === "success") {
-        alert("Production data saved successfully!");
-        loadDashboardData();
-      } else {
-        alert("Operation failed.");
+      btn.innerText =
+        "SAVE SETTINGS 💾";
+
+
+      delete window[callback];
+
+
+      if(
+        res &&
+        res.status === "success"
+      ){
+
+        alert(
+          "Settings saved successfully."
+        );
+
+        loadData();
+
+      }else{
+
+        alert(
+          res && res.message
+          ? res.message
+          : "Failed to save settings."
+        );
+
       }
+
     };
 
-    function editRow(idx) {
-      const row = globalData.find(r => r.rowIndex === idx);
-      if (!row) return;
 
-      document.getElementById('editRowIndex').value = row.rowIndex;
-      document.getElementById('opName').value = row.name;
-      document.getElementById('opShift').value = row.shift;
-      document.getElementById('opHour').value = row.hour;
-      document.getElementById('opSize1').value = row.size1;
-      document.getElementById('opSize2').value = row.size2;
-      document.getElementById('opS1').value = row.s1Sheets;
-      document.getElementById('opS2').value = row.s2Sheets;
-      document.getElementById('opMoulding').value = row.moulding;
-      document.getElementById('opBeater').value = row.beater;
-      document.getElementById('opBD').value = row.bd;
-      document.getElementById('opGSR').value = row.gsr;
+  jsonp(
+    SCRIPT_URL +
+    "?action=saveSettings" +
+    "&targetProd=" +
+    encodeURIComponent(targetProd) +
+    "&targetSize=" +
+    encodeURIComponent(targetSize) +
+    "&batchWeight=" +
+    encodeURIComponent(batchWeight) +
+    "&callback=" +
+    callback +
+    "&t=" +
+    Date.now()
+  );
 
-      document.getElementById('formTitle').innerText = "✏️ Edit Hourly Entry (Row " + idx + ")";
-      document.getElementById('submitBtn').innerText = "Update Entry ➔";
-      document.getElementById('cancelBtn').style.display = "block";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+}
 
-    function resetForm() {
-      document.getElementById('editRowIndex').value = "";
-      document.getElementById('formTitle').innerText = "📝 Hourly Production Entry";
-      document.getElementById('submitBtn').innerText = "Submit Hourly Data ➔";
-      document.getElementById('cancelBtn').style.display = "none";
-      document.getElementById('opS1').value = "";
-      document.getElementById('opS2').value = "";
-      document.getElementById('opMoulding').value = "";
-      document.getElementById('opBeater').value = "";
-      document.getElementById('opBD').value = "";
-      document.getElementById('opGSR').value = "";
-    }
 
-    function deleteRow(idx) {
-      if (!confirm("Are you sure you want to delete this hourly entry?")) return;
+/* =====================================================
+   SUBMIT ENTRY
+===================================================== */
 
-      const s = document.createElement('script');
-      s.src = `${SCRIPT_URL}?action=deleteHourly&rowIndex=${idx}&callback=handleDeleteResponse&t=${Date.now()}`;
-      document.head.appendChild(s);
-    }
+function submitEntry(){
 
-    window.handleDeleteResponse = function(res) {
-      if (res && res.status === "success") {
-        alert("Entry deleted successfully!");
-        loadDashboardData();
-      } else {
-        alert("Delete failed.");
+  const operator =
+    document.getElementById(
+      "operator"
+    ).value.trim();
+
+
+  if(!operator){
+
+    alert(
+      "Please enter Operator Name."
+    );
+
+    return;
+
+  }
+
+
+  const date =
+    getSelectedDate();
+
+
+  const shift =
+    getSelectedShift();
+
+
+  const hour =
+    document.getElementById(
+      "hour"
+    ).value;
+
+
+  const size1 =
+    document.getElementById(
+      "size1"
+    ).value.trim();
+
+
+  const size2 =
+    document.getElementById(
+      "size2"
+    ).value.trim();
+
+
+  const s1Sheets =
+    document.getElementById(
+      "s1Sheets"
+    ).value.trim();
+
+
+  const s2Sheets =
+    document.getElementById(
+      "s2Sheets"
+    ).value.trim();
+
+
+  const moulding =
+    document.getElementById(
+      "moulding"
+    ).value.trim();
+
+
+  const beater =
+    document.getElementById(
+      "beater"
+    ).value.trim();
+
+
+  const bd =
+    document.getElementById(
+      "bd"
+    ).value.trim();
+
+
+  const gsr =
+    document.getElementById(
+      "gsr"
+    ).value.trim();
+
+
+  /* ONE SIZE PER HOUR */
+
+  if(
+    s1Sheets !== "" &&
+    s2Sheets !== ""
+  ){
+
+    alert(
+      "One hour can have only one running size. Enter either 1st Size Sheets OR 2nd Size Sheets."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    s1Sheets !== "" &&
+    (
+      size1 === "" ||
+      Number(size1) <= 0
+    )
+  ){
+
+    alert(
+      "Please enter valid 1st Size (m)."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    s2Sheets !== "" &&
+    (
+      size2 === "" ||
+      Number(size2) <= 0
+    )
+  ){
+
+    alert(
+      "Please enter valid 2nd Size (m)."
+    );
+
+    return;
+
+  }
+
+
+  const rowIndex =
+    document.getElementById(
+      "editRowIndex"
+    ).value;
+
+
+  const btn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+
+  btn.disabled = true;
+
+  btn.innerText =
+    rowIndex
+    ? "UPDATING..."
+    : "SUBMITTING...";
+
+
+  const callback =
+    "submitCallback_" + Date.now();
+
+
+  window[callback] =
+    function(res){
+
+      btn.disabled = false;
+
+      btn.innerText =
+        "SUBMIT HOURLY DATA ➜";
+
+
+      delete window[callback];
+
+
+      if(
+        res &&
+        res.status === "success"
+      ){
+
+        alert(
+          "Hourly production saved successfully."
+        );
+
+
+        resetForm();
+
+        loadData();
+
+      }else{
+
+        alert(
+          res && res.message
+          ? res.message
+          : "Unable to save production."
+        );
+
       }
+
     };
 
-    window.onload = function() {
-      loadDashboardData();
+
+  let url =
+    SCRIPT_URL +
+    "?action=submitHourly" +
+    "&date=" +
+    encodeURIComponent(date) +
+    "&shift=" +
+    encodeURIComponent(shift) +
+    "&hour=" +
+    encodeURIComponent(hour) +
+    "&size1=" +
+    encodeURIComponent(size1) +
+    "&size2=" +
+    encodeURIComponent(size2) +
+    "&s1Sheets=" +
+    encodeURIComponent(s1Sheets) +
+    "&s2Sheets=" +
+    encodeURIComponent(s2Sheets) +
+    "&moulding=" +
+    encodeURIComponent(moulding) +
+    "&beater=" +
+    encodeURIComponent(beater) +
+    "&bd=" +
+    encodeURIComponent(bd) +
+    "&gsr=" +
+    encodeURIComponent(gsr) +
+    "&operator=" +
+    encodeURIComponent(operator) +
+    "&callback=" +
+    callback +
+    "&t=" +
+    Date.now();
+
+
+  if(rowIndex){
+
+    url +=
+      "&rowIndex=" +
+      encodeURIComponent(rowIndex);
+
+  }
+
+
+  jsonp(url);
+
+}
+
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+function editRow(rowIndex){
+
+  const row =
+    globalData.find(
+      r =>
+        Number(r.rowIndex) ===
+        Number(rowIndex)
+    );
+
+
+  if(!row){
+
+    alert(
+      "Row not found."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "editRowIndex"
+  ).value =
+    row.rowIndex;
+
+
+  document.getElementById(
+    "productionDate"
+  ).value =
+    row.date;
+
+
+  document.getElementById(
+    "operator"
+  ).value =
+    row.name || "";
+
+
+  document.getElementById(
+    "shift"
+  ).value =
+    row.shift || "A";
+
+
+  document.getElementById(
+    "hour"
+  ).value =
+    row.hour || "1st Hour";
+
+
+  document.getElementById(
+    "size1"
+  ).value =
+    row.size1 !== ""
+    ? row.size1
+    : "";
+
+
+  document.getElementById(
+    "size2"
+  ).value =
+    row.size2 !== ""
+    ? row.size2
+    : "";
+
+
+  document.getElementById(
+    "s1Sheets"
+  ).value =
+    row.s1Sheets !== ""
+    ? row.s1Sheets
+    : "";
+
+
+  document.getElementById(
+    "s2Sheets"
+  ).value =
+    row.s2Sheets !== ""
+    ? row.s2Sheets
+    : "";
+
+
+  document.getElementById(
+    "moulding"
+  ).value =
+    row.moulding !== ""
+    ? row.moulding
+    : "";
+
+
+  document.getElementById(
+    "beater"
+  ).value =
+    row.beater !== ""
+    ? row.beater
+    : "";
+
+
+  document.getElementById(
+    "bd"
+  ).value =
+    row.bd !== ""
+    ? row.bd
+    : "";
+
+
+  document.getElementById(
+    "gsr"
+  ).value =
+    row.gsr !== ""
+    ? row.gsr
+    : "";
+
+
+  document.getElementById(
+    "formTitle"
+  ).innerText =
+    "✏️ Edit Hourly Production";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).innerText =
+    "UPDATE HOURLY DATA ➜";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "block";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetForm(){
+
+  document.getElementById(
+    "editRowIndex"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formTitle"
+  ).innerText =
+    "📝 Hourly Production Entry";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).innerText =
+    "SUBMIT HOURLY DATA ➜";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "s1Sheets"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "s2Sheets"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "moulding"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "beater"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "bd"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "gsr"
+  ).value =
+    "";
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+function deleteRow(rowIndex){
+
+  if(
+    !confirm(
+      "Delete this hourly production entry?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const callback =
+    "deleteCallback_" + Date.now();
+
+
+  window[callback] =
+    function(res){
+
+      delete window[callback];
+
+
+      if(
+        res &&
+        res.status === "success"
+      ){
+
+        alert(
+          "Entry deleted successfully."
+        );
+
+        loadData();
+
+      }else{
+
+        alert(
+          res && res.message
+          ? res.message
+          : "Delete failed."
+        );
+
+      }
+
     };
-  </script>
+
+
+  jsonp(
+    SCRIPT_URL +
+    "?action=deleteHourly" +
+    "&rowIndex=" +
+    encodeURIComponent(rowIndex) +
+    "&callback=" +
+    callback +
+    "&t=" +
+    Date.now()
+  );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value){
+
+  if(value === null || value === undefined){
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+window.onload =
+function(){
+
+  document.getElementById(
+    "productionDate"
+  ).value =
+    getToday();
+
+
+  document.getElementById(
+    "productionDate"
+  ).addEventListener(
+    "change",
+    renderDashboard
+  );
+
+
+  loadData();
+
+};
+
+</script>
+
 </body>
 </html>
