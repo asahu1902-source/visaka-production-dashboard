@@ -14,13 +14,17 @@
     .card h2 { color: #ffff00; font-size: 18px; font-weight: 900; text-align: center; text-transform: uppercase; }
     .card h3 { color: #38bdf8; font-size: 15px; font-weight: 900; }
 
-    /* TOP TARGET PROGRESS PANEL */
+    /* TOP TARGET SUMMARY PANEL (Redesigned per exact specifications) */
     .target-panel { background: #0f172a; border: 2px solid #facc15; border-radius: 10px; overflow: hidden; }
-    .top-req-box { background: #1e293b; color: #ffff00; font-size: 26px; font-weight: 900; text-align: center; padding: 12px; border-bottom: 2px solid #facc15; }
+    .top-req-box { background: #1e293b; color: #ffff00; font-size: 24px; font-weight: 900; text-align: center; padding: 10px; border-bottom: 2px solid #facc15; }
+    .top-req-box span { display: block; font-size: 11px; color: #38bdf8; text-transform: uppercase; margin-top: 2px; }
+    
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center; border-bottom: 2px solid #facc15; }
-    .grid-col { padding: 8px 4px; border-right: 1.5px solid #facc15; font-size: 11px; font-weight: bold; color: #38bdf8; background: #09203f; }
+    .grid-col { padding: 8px 4px; border-right: 1.5px solid #facc15; font-size: 10px; font-weight: bold; color: #38bdf8; background: #09203f; }
     .grid-col:last-child { border-right: none; }
-    .grid-col span { display: block; font-size: 14px; font-weight: 900; color: #ffff00; margin-top: 3px; }
+    .grid-col span { display: block; font-size: 13px; font-weight: 900; color: #ffff00; margin-top: 3px; }
+    
+    .meta-row { display: flex; justify-content: space-around; background: #07142b; padding: 6px; font-size: 11px; font-weight: bold; border-bottom: 2px solid #facc15; color: #facc15; }
     .magenta-footer { background: #db2777; color: #ffffff; font-size: 13px; font-weight: 900; text-align: center; padding: 10px; text-transform: uppercase; }
 
     .form-group { display: flex; flex-direction: column; gap: 4px; }
@@ -51,27 +55,42 @@
         <span id="bannerShift">Shift: A</span>
         <span id="bannerDate">25-Jul-2026</span>
       </div>
-      <div class="top-req-box" id="topReqSheetsVal">SETUP REQUIRED</div>
-      <div class="grid-3">
-        <div class="grid-col">Req. Sheet<span id="bannerReqSheet">-</span></div>
-        <div class="grid-col">Req./Hr<span id="bannerReqHr">-</span></div>
-        <div class="grid-col">SFT<span id="bannerSft">-</span></div>
+      
+      <div class="top-req-box">
+        <span id="topReqSheetsVal">SETUP REQUIRED</span>
+        <span>Total Required Sheets</span>
       </div>
-      <div class="magenta-footer" id="bannerTimeLeft">SHIFT TIME NOT CONFIGURED</div>
+
+      <div class="grid-3">
+        <div class="grid-col">Produced Sheets<span id="bannerProduced">-</span></div>
+        <div class="grid-col">Remaining Sheets<span id="bannerReqSheet">-</span></div>
+        <div class="grid-col">Required / Hr<span id="bannerReqHr">-</span></div>
+      </div>
+
+      <div class="meta-row">
+        <span>Target Size: <strong id="bannerTargetSize" style="color:#fff;">-</strong> m</span>
+        <span>SFT: <strong id="bannerSft" style="color:#fff;">-</strong></span>
+      </div>
+
+      <div class="magenta-footer" id="bannerTimeLeft">REMAINING HOURS NOT SET</div>
     </div>
 
-    <!-- CONFIGURATION PANEL -->
+    <!-- MASTER SETTINGS PANEL -->
     <div class="card">
-      <h3>⚙️ Master Settings (Target & Batch)</h3>
+      <h3>⚙️ Master Settings</h3>
       <div style="display: flex; gap: 8px;">
         <div class="form-group" style="flex: 1;">
           <label>Target Production (MT)</label>
-          <input type="number" id="setConfigTarget" class="form-input" placeholder="e.g. 140">
+          <input type="number" id="setConfigTarget" class="form-input" placeholder="e.g. 130">
         </div>
         <div class="form-group" style="flex: 1;">
-          <label>Batch Weight (kg)</label>
-          <input type="number" id="setConfigBatch" class="form-input" placeholder="e.g. 1250">
+          <label>Target Size (m)</label>
+          <input type="number" step="0.01" id="setConfigTargetSize" class="form-input" placeholder="e.g. 6">
         </div>
+      </div>
+      <div class="form-group">
+        <label>Batch Weight (kg)</label>
+        <input type="number" id="setConfigBatch" class="form-input" placeholder="e.g. 1250">
       </div>
       <button class="btn-submit btn-settings" onclick="saveSettingsData()">Save Settings 💾</button>
     </div>
@@ -96,11 +115,11 @@
           </select>
         </div>
         <div class="form-group" style="flex: 1;">
-          <label>Hour</label>
-          <select id="opHour" class="form-input">
+          <label>Production Hour</label>
+          <select id="opHour" class="form-input" onchange="renderDashboard()">
             <option value="1st Hour">1st Hour</option>
             <option value="2nd Hour">2nd Hour</option>
-            <option value="3rd Hour" selected>3rd Hour</option>
+            <option value="3rd Hour">3rd Hour</option>
             <option value="4th Hour">4th Hour</option>
             <option value="5th Hour">5th Hour</option>
             <option value="6th Hour">6th Hour</option>
@@ -113,7 +132,7 @@
       <div style="display: flex; gap: 8px;">
         <div class="form-group" style="flex: 1;">
           <label>1st Size (m)</label>
-          <input type="text" id="opSize1" class="form-input" value="5.85">
+          <input type="text" id="opSize1" class="form-input" value="6">
         </div>
         <div class="form-group" style="flex: 1;">
           <label>2nd Size (m)</label>
@@ -134,7 +153,7 @@
 
       <div style="display: flex; gap: 8px;">
         <div class="form-group" style="flex: 1;">
-          <label>Moulding (MG Pickup)</label>
+          <label>Moulding / ME Pickup</label>
           <input type="number" id="opMoulding" class="form-input" value="">
         </div>
         <div class="form-group" style="flex: 1;">
@@ -145,11 +164,11 @@
 
       <div style="display: flex; gap: 8px;">
         <div class="form-group" style="flex: 1;">
-          <label>B/D (Min)</label>
+          <label>B/D (min)</label>
           <input type="number" id="opBD" class="form-input" value="">
         </div>
         <div class="form-group" style="flex: 1;">
-          <label>GSR (Rejection)</label>
+          <label>CSR (Rejection)</label>
           <input type="number" id="opGSR" class="form-input" value="">
         </div>
       </div>
@@ -160,7 +179,7 @@
 
     <!-- PRODUCTION LOG TABLE -->
     <div class="card">
-      <h3>📊 Production Log & Metrics</h3>
+      <h3>📊 Production Log</h3>
       <div style="overflow-x: auto;">
         <table class="standard-table">
           <thead>
@@ -168,10 +187,10 @@
               <th>Hour</th>
               <th>Sz</th>
               <th>Sheets</th>
-              <th>Mld</th>
-              <th>Beat</th>
-              <th>Output</th>
-              <th>Input</th>
+              <th>Beater</th>
+              <th>BD</th>
+              <th>Output MT</th>
+              <th>Input MT</th>
               <th>ME%</th>
               <th>ROP</th>
               <th>Action</th>
@@ -189,15 +208,7 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
     let globalData = [];
-    let masterSettings = { 
-      targetProd: "", 
-      batchWeight: "", 
-      sft1: 14.6, 
-      sft2: 15.2,
-      shiftAStart: "06:00", shiftAEnd: "14:00",
-      shiftBStart: "14:00", shiftBEnd: "22:00",
-      shiftCStart: "22:00", shiftCEnd: "06:00"
-    };
+    let masterSettings = { targetProd: "", targetSize: "", batchWeight: "", sftConversion: 2.54 };
 
     function loadDashboardData() {
       const s = document.createElement('script');
@@ -211,8 +222,8 @@
       globalData = res.data.rows || [];
       masterSettings = res.data.masterSettings || masterSettings;
       
-      // Populate settings UI inputs
       if (masterSettings.targetProd !== "") document.getElementById('setConfigTarget').value = masterSettings.targetProd;
+      if (masterSettings.targetSize !== "") document.getElementById('setConfigTargetSize').value = masterSettings.targetSize;
       if (masterSettings.batchWeight !== "") document.getElementById('setConfigBatch').value = masterSettings.batchWeight;
 
       renderDashboard();
@@ -220,10 +231,11 @@
 
     function saveSettingsData() {
       const target = document.getElementById('setConfigTarget').value;
+      const targetSize = document.getElementById('setConfigTargetSize').value;
       const batch = document.getElementById('setConfigBatch').value;
 
       const s = document.createElement('script');
-      s.src = `${SCRIPT_URL}?action=saveSettings&targetProd=${target}&batchWeight=${batch}&callback=handleSettingsSaveResponse&t=${Date.now()}`;
+      s.src = `${SCRIPT_URL}?action=saveSettings&targetProd=${target}&targetSize=${targetSize}&batchWeight=${batch}&callback=handleSettingsSaveResponse&t=${Date.now()}`;
       document.head.appendChild(s);
     }
 
@@ -242,43 +254,35 @@
       
       if (globalData.length === 0) {
         tbody.innerHTML = '<tr><td colspan="10" style="padding: 12px; color: #94a3b8;">No entries found yet.</td></tr>';
-        updateBanner(0, 0, 5.85);
+        updateBanner(0);
         return;
       }
 
       let totalProducedSheets = 0;
-      let totalProdMT = 0;
-      let activeSize = 5.85;
-
       let html = '';
+
       globalData.forEach(r => {
         let sheets = 0;
-        let sizeUsed = Number(r.size1) || 5.85;
-        let isSecondSize = false;
+        let sizeUsed = 0;
 
         if (r.s2Sheets !== "" && r.s2Sheets !== null && !isNaN(r.s2Sheets)) {
           sheets = Number(r.s2Sheets);
-          sizeUsed = Number(r.size2) || 6.00;
-          isSecondSize = true;
+          sizeUsed = Number(r.size2) || 0;
         } else if (r.s1Sheets !== "" && r.s1Sheets !== null && !isNaN(r.s1Sheets)) {
           sheets = Number(r.s1Sheets);
-          sizeUsed = Number(r.size1) || 5.85;
+          sizeUsed = Number(r.size1) || 0;
         }
 
-        activeSize = sizeUsed;
-        if (r.shift === selectedShift) {
+        if (r.shift === selectedShift && sheets > 0) {
           totalProducedSheets += sheets;
         }
 
         // Output MT = Sheets * Size * 12.8 / 1000
         let outputMTStr = "";
         let outputMTVal = 0;
-        if (sheets > 0 && !isNaN(sheets)) {
+        if (sheets > 0 && sizeUsed > 0 && !isNaN(sheets)) {
           outputMTVal = (sheets * sizeUsed * 12.8) / 1000;
           outputMTStr = outputMTVal.toFixed(2);
-          if (r.shift === selectedShift) {
-            totalProdMT += outputMTVal;
-          }
         }
 
         // Input MT = Beater * BatchWeight / 1000
@@ -289,7 +293,7 @@
           inputMTStr = inputMTVal.toFixed(2);
         }
 
-        // ME% = (1 - Output/Input) * 100
+        // ME% = (1 - Output/Input) * 100 (Blank if input blank or zero)
         let mePctStr = "";
         if (sheets > 0 && inputMTVal > 0) {
           let meVal = (1 - (outputMTVal / inputMTVal)) * 100;
@@ -298,22 +302,23 @@
 
         // ROP = Output * 60 / (60 - Breakdown)
         let ropStr = "";
-        if (sheets > 0) {
+        if (sheets > 0 && outputMTVal > 0) {
           let bd = Number(r.bd) || 0;
-          let runMin = Math.max(1, 60 - bd);
-          let ropVal = (outputMTVal * 60) / runMin;
-          ropStr = ropVal.toFixed(2);
+          if (bd < 60) {
+            let runMin = Math.max(1, 60 - bd);
+            let ropVal = (outputMTVal * 60) / runMin;
+            ropStr = ropVal.toFixed(2);
+          }
         }
 
         const displaySheets = sheets > 0 ? sheets : "";
-        const sheetColColor = isSecondSize ? "#38bdf8" : "#ffff00";
 
         html += `<tr>
           <td class="cyan-cell">${r.hour}</td>
-          <td>${sizeUsed}</td>
-          <td style="color: ${sheetColColor};">${displaySheets}</td>
-          <td style="color: #10b981; font-weight: 900;">${r.moulding !== "" ? r.moulding : ""}</td>
+          <td>${sizeUsed || ""}</td>
+          <td style="color: #ffff00;">${displaySheets}</td>
           <td>${r.beater !== "" ? r.beater : ""}</td>
+          <td>${r.bd !== "" ? r.bd : ""}</td>
           <td style="color: #facc15;">${outputMTStr}</td>
           <td>${inputMTStr}</td>
           <td style="color: #38bdf8;">${mePctStr}</td>
@@ -326,82 +331,48 @@
       });
 
       tbody.innerHTML = html;
-      updateBanner(totalProducedSheets, totalProdMT, activeSize);
+      updateBanner(totalProducedSheets);
     }
 
-    function updateBanner(totalProducedSheets, totalProdMT, size) {
+    function updateBanner(totalProducedSheets) {
       const targetProd = masterSettings.targetProd;
+      const targetSize = masterSettings.targetSize;
       
-      if (targetProd === "" || isNaN(targetProd)) {
+      if (targetProd === "" || targetSize === "" || isNaN(targetProd) || isNaN(targetSize) || targetSize <= 0) {
         document.getElementById('topReqSheetsVal').innerText = "SETUP REQUIRED";
+        document.getElementById('bannerProduced').innerText = "-";
         document.getElementById('bannerReqSheet').innerText = "-";
         document.getElementById('bannerReqHr').innerText = "-";
-        document.getElementById('bannerSft').innerText = size == 6.0 ? masterSettings.sft2 : masterSettings.sft1;
-        updateRemainingHoursDisplay();
+        document.getElementById('bannerTargetSize').innerText = "-";
+        document.getElementById('bannerSft').innerText = "-";
+        document.getElementById('bannerTimeLeft').innerText = "REMAINING HOURS NOT SET";
         return;
       }
 
-      // Total Required Sheets = Target MT * 1000 / (Size * 12.8)
-      const totalReqSheets = (targetProd * 1000) / (size * 12.8);
+      // Required Sheets = Target MT * 1000 / (Target Size * 12.8)
+      const totalReqSheets = (targetProd * 1000) / (targetSize * 12.8);
       document.getElementById('topReqSheetsVal').innerText = totalReqSheets.toFixed(2);
+      document.getElementById('bannerProduced').innerText = totalProducedSheets.toFixed(2);
 
-      // Req. Sheet = Total Required - Produced Sheets
+      // Remaining Sheets = Total Required Sheets - Produced Sheets (min 0)
       const reqSheets = Math.max(0, totalReqSheets - totalProducedSheets);
       document.getElementById('bannerReqSheet').innerText = reqSheets.toFixed(2);
 
-      // Dynamic Remaining Hours calculation based on system clock and shift times
-      const remHours = calculateRemainingShiftHours();
-      const reqPerHr = remHours > 0 ? (reqSheets / remHours) : reqSheets;
+      // Remaining Hours based on 8-hour shift and completed hour
+      const currentHourStr = document.getElementById('opHour').value;
+      const completedHours = parseInt(currentHourStr) || 1;
+      const remainingHours = Math.max(0, 8 - completedHours);
+
+      // Required/Hr = Remaining Sheets / Remaining Hours
+      const reqPerHr = remainingHours > 0 ? (reqSheets / remainingHours) : 0;
       document.getElementById('bannerReqHr').innerText = reqPerHr.toFixed(2);
-      document.getElementById('bannerSft').innerText = size == 6.0 ? masterSettings.sft2 : masterSettings.sft1;
-      
-      updateRemainingHoursDisplay(remHours);
-    }
 
-    function calculateRemainingShiftHours() {
-      const selectedShift = document.getElementById('opShift').value;
-      let startTimeStr = masterSettings.shiftAStart;
-      let endTimeStr = masterSettings.shiftAEnd;
+      // SFT calculation from Target Size
+      const sftVal = targetSize * masterSettings.sftConversion;
+      document.getElementById('bannerTargetSize').innerText = targetSize;
+      document.getElementById('bannerSft').innerText = sftVal.toFixed(2);
 
-      if (selectedShift === "B") {
-        startTimeStr = masterSettings.shiftBStart;
-        endTimeStr = masterSettings.shiftBEnd;
-      } else if (selectedShift === "C") {
-        startTimeStr = masterSettings.shiftCStart;
-        endTimeStr = masterSettings.shiftCEnd;
-      }
-
-      if (!startTimeStr || !endTimeStr) return -1;
-
-      const now = new Date();
-      const currentHour = now.getHours();
-      const currentMin = now.getMinutes();
-      const currentTimeVal = currentHour * 60 + currentMin;
-
-      const [endH, endM] = endTimeStr.split(':').map(Number);
-      let endTimeVal = endH * 60 + endM;
-
-      if (endTimeVal <= currentTimeVal) {
-        endTimeVal += 24 * 60; // Crosses midnight
-      }
-
-      const diffMin = Math.max(0, endTimeVal - currentTimeVal);
-      return diffMin / 60;
-    }
-
-    function updateRemainingHoursDisplay(remHours) {
-      const el = document.getElementById('bannerTimeLeft');
-      if (remHours === undefined || remHours < 0) {
-        el.innerText = "SHIFT TIME NOT CONFIGURED";
-        return;
-      }
-      if (remHours === 0) {
-        el.innerText = "SHIFT COMPLETED";
-        return;
-      }
-      const wholeHrs = Math.floor(remHours);
-      const remMins = Math.round((remHours - wholeHrs) * 60);
-      el.innerText = `Only ${wholeHrs} Hr ${remMins} Min Left`;
+      document.getElementById('bannerTimeLeft').innerText = `ONLY ${remainingHours} HOURS LEFT`;
     }
 
     function submitProductionEntry() {
