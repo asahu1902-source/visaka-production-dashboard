@@ -6,37 +6,144 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
-<title>Visaka Production Dashboard</title>
+<title>Production Dashboard</title>
+
+<!-- PDF LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
 <style>
 
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
   font-family:-apple-system,BlinkMacSystemFont,
   "Segoe UI",Roboto,Arial,sans-serif;
 }
 
-
 body{
   background:#000;
   color:#fff;
-  min-height:100vh;
   padding:10px 8px 30px;
 }
 
-
 .app{
-  width:100%;
   max-width:480px;
   margin:auto;
+}
+
+
+/* ================================
+   TOP PANEL
+================================ */
+
+.target-panel{
+  background:#07142b;
+  border:2px solid #facc15;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+
+.banner{
   display:flex;
-  flex-direction:column;
-  gap:12px;
+  justify-content:space-between;
+  background:#0284c7;
+  color:#000;
+  padding:6px 9px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.main-target{
+  text-align:center;
+  background:#1e293b;
+  padding:9px;
+  border-bottom:1px solid #facc15;
+}
+
+.main-target .number{
+  color:#ffff00;
+  font-size:22px;
+  font-weight:900;
+}
+
+.main-target .label{
+  color:#38bdf8;
+  font-size:8px;
+  font-weight:900;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.summary-cell{
+  text-align:center;
+  padding:7px 2px;
+  background:#09203f;
+  border-right:1px solid #facc15;
+}
+
+.summary-cell:last-child{
+  border-right:none;
+}
+
+.summary-cell .title{
+  color:#38bdf8;
+  font-size:7px;
+  font-weight:900;
+}
+
+.summary-cell .value{
+  color:#ffff00;
+  font-size:11px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid #facc15;
+  border-bottom:1px solid #facc15;
+}
+
+.meta-cell{
+  text-align:center;
+  padding:5px 2px;
+  color:#facc15;
+  font-size:8px;
+  font-weight:900;
+  border-right:1px solid #facc15;
+}
+
+.meta-cell:last-child{
+  border-right:none;
+}
+
+.latest{
+  text-align:center;
+  padding:6px;
+  background:#07142b;
+  font-size:8px;
+  font-weight:900;
+}
+
+.latest span{
+  color:#00ffff;
+}
+
+.time-footer{
+  text-align:center;
+  background:#db2777;
+  padding:8px;
+  font-size:10px;
+  font-weight:900;
 }
 
 
@@ -46,146 +153,16 @@ body{
 
 .card{
   background:#07142b;
-  border:2px solid #38bdf8;
-  border-radius:11px;
-  padding:12px;
-}
-
-
-.card h3{
-  color:#38bdf8;
-  font-size:14px;
-  font-weight:900;
+  border:1.5px solid #38bdf8;
+  border-radius:9px;
+  padding:10px;
   margin-bottom:10px;
 }
 
-
-/* ================================
-   TOP TARGET PANEL
-================================ */
-
-.target-panel{
-  background:#0f172a;
-  border:2px solid #facc15;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-
-.banner{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 9px;
-  background:#0284c7;
-  color:#000;
-  font-size:10px;
-  font-weight:900;
-}
-
-
-.main-target{
-  background:#1e293b;
-  text-align:center;
-  padding:9px 5px;
-  border-bottom:1px solid #facc15;
-}
-
-
-.main-target .number{
-  color:#ffff00;
-  font-size:23px;
-  font-weight:900;
-}
-
-
-.main-target .label{
+.card h3{
   color:#38bdf8;
-  font-size:9px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-}
-
-
-.summary-cell{
-  text-align:center;
-  padding:7px 2px;
-  background:#09203f;
-  border-right:1px solid #facc15;
-}
-
-
-.summary-cell:last-child{
-  border-right:none;
-}
-
-
-.summary-cell .title{
-  color:#38bdf8;
-  font-size:8px;
-  font-weight:900;
-}
-
-
-.summary-cell .value{
-  color:#ffff00;
   font-size:12px;
-  font-weight:900;
-  margin-top:2px;
-}
-
-
-.meta{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  text-align:center;
-  border-top:1px solid #facc15;
-  border-bottom:1px solid #facc15;
-}
-
-
-.meta-cell{
-  padding:5px 2px;
-  color:#facc15;
-  font-size:9px;
-  font-weight:900;
-  border-right:1px solid #facc15;
-}
-
-
-.meta-cell:last-child{
-  border-right:none;
-}
-
-
-.latest{
-  background:#07142b;
-  color:#fff;
-  text-align:center;
-  padding:6px;
-  font-size:9px;
-  font-weight:900;
-}
-
-
-.latest span{
-  color:#00ffff;
-}
-
-
-.time-footer{
-  background:#db2777;
-  color:#fff;
-  text-align:center;
-  padding:9px;
-  font-size:11px;
-  font-weight:900;
-  text-transform:uppercase;
+  margin-bottom:9px;
 }
 
 
@@ -198,25 +175,21 @@ body{
   gap:7px;
 }
 
-
 .col{
   flex:1;
 }
 
-
 .group{
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
-
 
 label{
   display:block;
   color:#00ffff;
-  font-size:9px;
+  font-size:8px;
   font-weight:900;
   margin-bottom:3px;
 }
-
 
 input,
 select{
@@ -226,46 +199,127 @@ select{
   border:1px solid #38bdf8;
   border-radius:5px;
   padding:8px;
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
   outline:none;
 }
 
-
 input::placeholder{
   color:#64748b;
-  font-weight:600;
 }
-
 
 button{
-  width:100%;
   border:none;
-  border-radius:6px;
-  padding:10px;
-  font-size:11px;
-  font-weight:900;
   cursor:pointer;
+  font-weight:900;
 }
 
-
-.btn-save{
+.primary-btn{
+  width:100%;
   background:#0284c7;
   color:#fff;
+  padding:9px;
+  border-radius:5px;
+  font-size:10px;
 }
 
-
-.btn-submit{
+.submit-btn{
+  width:100%;
   background:#10b981;
   color:#fff;
+  padding:9px;
+  border-radius:5px;
+  font-size:10px;
+}
+
+.cancel-btn{
+  width:100%;
+  background:#dc2626;
+  color:#fff;
+  padding:8px;
+  border-radius:5px;
+  font-size:9px;
+  margin-top:5px;
+  display:none;
 }
 
 
-.btn-cancel{
-  background:#dc2626;
-  color:#fff;
+/* ================================
+   PROGRESS
+================================ */
+
+.progress-area{
   display:none;
-  margin-top:5px;
+  margin-top:7px;
+}
+
+.progress-text{
+  text-align:center;
+  color:#00ffff;
+  font-size:8px;
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.progress-bg{
+  width:100%;
+  height:6px;
+  background:#1e293b;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:#10b981;
+  transition:width .2s linear;
+}
+
+
+/* ================================
+   TOAST
+================================ */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%)
+  translateY(100px);
+
+  width:calc(100% - 30px);
+  max-width:430px;
+
+  background:#10b981;
+  color:#fff;
+
+  padding:11px 14px;
+  border-radius:8px;
+
+  text-align:center;
+
+  font-size:10px;
+  font-weight:900;
+
+  z-index:9999;
+
+  opacity:0;
+
+  transition:
+    transform .25s ease,
+    opacity .25s ease;
+}
+
+.toast.show{
+  transform:translateX(-50%)
+  translateY(0);
+
+  opacity:1;
+}
+
+.toast.error{
+  background:#dc2626;
 }
 
 
@@ -277,68 +331,74 @@ button{
   overflow-x:auto;
 }
 
-
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:620px;
+  min-width:650px;
 }
-
 
 th{
   background:#ff8c00;
   color:#000;
-  font-size:8px;
-  font-weight:900;
   padding:5px 3px;
   border:1px solid #8b0000;
+  font-size:7px;
   white-space:nowrap;
 }
-
 
 td{
   background:#000;
   color:#fff;
-  font-size:8px;
-  font-weight:800;
-  text-align:center;
   padding:5px 3px;
   border:1px solid #8b0000;
+  text-align:center;
+  font-size:7px;
   white-space:nowrap;
 }
-
 
 .hour-cell{
   background:#00ffff !important;
   color:#000 !important;
+  font-weight:900;
 }
-
 
 .yellow{
   color:#ffff00;
 }
-
 
 .cyan{
   color:#38bdf8;
 }
 
 
-.action{
-  padding:3px 5px;
-  font-size:7px;
-  border-radius:3px;
-}
+/* ================================
+   ACTION BUTTONS
+================================ */
 
+.action{
+  padding:3px 4px;
+  border-radius:3px;
+  font-size:6px;
+  margin:1px;
+}
 
 .edit{
   background:#0284c7;
   color:#fff;
 }
 
-
 .delete{
   background:#dc2626;
+  color:#fff;
+}
+
+.whatsapp{
+  background:#16a34a;
+  color:#fff;
+}
+
+.pdf{
+  background:#7c3aed;
   color:#fff;
 }
 
@@ -348,12 +408,11 @@ td{
 ================================ */
 
 .summary-box{
-  margin-top:10px;
+  margin-top:8px;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
   gap:5px;
 }
-
 
 .stat{
   background:#000;
@@ -363,36 +422,56 @@ td{
   text-align:center;
 }
 
-
 .stat-title{
   color:#38bdf8;
+  font-size:7px;
+  font-weight:900;
+}
+
+.stat-value{
+  color:#ffff00;
+  font-size:11px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+.status{
+  text-align:center;
+  margin-top:7px;
+  background:#111827;
+  color:#00ffff;
+  padding:7px;
+  border-radius:5px;
   font-size:8px;
   font-weight:900;
 }
 
 
-.stat-value{
-  color:#ffff00;
-  font-size:12px;
-  font-weight:900;
-  margin-top:2px;
+/* ================================
+   REPORT BUTTONS
+================================ */
+
+.report-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:9px;
 }
 
-
-.status{
-  text-align:center;
-  margin-top:7px;
-  padding:7px;
+.report-btn{
+  padding:9px;
   border-radius:5px;
-  background:#111827;
-  color:#00ffff;
-  font-size:10px;
-  font-weight:900;
+  font-size:8px;
 }
 
+.report-wa{
+  background:#16a34a;
+  color:#fff;
+}
 
-.hidden{
-  display:none;
+.report-pdf{
+  background:#7c3aed;
+  color:#fff;
 }
 
 </style>
@@ -407,25 +486,35 @@ td{
 
 <!-- =====================================================
      TOP TARGET PANEL
-====================================================== -->
+===================================================== -->
 
 <div class="target-panel">
 
   <div class="banner">
-    <span id="bannerShift">Shift A</span>
-    <span id="bannerDate">-</span>
+
+    <span id="bannerShift">
+      Shift A
+    </span>
+
+    <span id="bannerDate">
+      -
+    </span>
+
   </div>
 
 
   <div class="main-target">
 
-    <div class="number"
-         id="topReqSheets">
+    <div
+      class="number"
+      id="topReqSheets">
+
       SETUP REQUIRED
+
     </div>
 
     <div class="label">
-      Total Required Sheets
+      TOTAL REQUIRED SHEETS
     </div>
 
   </div>
@@ -434,26 +523,17 @@ td{
   <div class="summary-grid">
 
     <div class="summary-cell">
-      <div class="title">
-        Produced Eq. Sheets
-      </div>
-
-      <div class="value"
-           id="producedSheets">
-        -
-      </div>
-    </div>
-
-
-    <div class="summary-cell">
 
       <div class="title">
-        Remaining Eq. Sheets
+        PRODUCED EQ. SHEETS
       </div>
 
-      <div class="value"
-           id="remainingSheets">
+      <div
+        class="value"
+        id="producedSheets">
+
         -
+
       </div>
 
     </div>
@@ -462,12 +542,32 @@ td{
     <div class="summary-cell">
 
       <div class="title">
-        Required / Hr
+        REMAINING EQ. SHEETS
       </div>
 
-      <div class="value"
-           id="requiredPerHour">
+      <div
+        class="value"
+        id="remainingSheets">
+
         -
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-cell">
+
+      <div class="title">
+        REQUIRED / HR
+      </div>
+
+      <div
+        class="value"
+        id="requiredPerHour">
+
+        -
+
       </div>
 
     </div>
@@ -478,29 +578,45 @@ td{
   <div class="meta">
 
     <div class="meta-cell">
+
       Target Size:
-      <span id="targetSizeDisplay">-</span> m
+      <span id="targetSizeDisplay">
+        -
+      </span>
+      m
+
     </div>
 
+
     <div class="meta-cell">
+
       SFT:
-      <span id="sftDisplay">-</span>
+      <span id="sftDisplay">
+        -
+      </span>
+
     </div>
 
   </div>
 
 
   <div class="latest">
+
     Latest Production:
+
     <span id="latestProduction">
       No entry yet
     </span>
+
   </div>
 
 
-  <div class="time-footer"
-       id="timeLeft">
-    REMAINING HOURS NOT SET
+  <div
+    class="time-footer"
+    id="timeLeft">
+
+    8 HOURS AVAILABLE
+
   </div>
 
 </div>
@@ -508,7 +624,7 @@ td{
 
 <!-- =====================================================
      MASTER SETTINGS
-====================================================== -->
+===================================================== -->
 
 <div class="card">
 
@@ -575,7 +691,7 @@ td{
 
 
   <button
-    class="btn-save"
+    class="primary-btn"
     id="saveSettingsBtn"
     onclick="saveSettings()">
 
@@ -583,12 +699,36 @@ td{
 
   </button>
 
+
+  <div
+    class="progress-area"
+    id="settingsProgress">
+
+    <div
+      class="progress-text"
+      id="settingsProgressText">
+
+      SAVING SETTINGS...
+
+    </div>
+
+    <div class="progress-bg">
+
+      <div
+        class="progress-bar"
+        id="settingsProgressBar">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
 <!-- =====================================================
      HOURLY ENTRY
-====================================================== -->
+===================================================== -->
 
 <div class="card">
 
@@ -599,8 +739,7 @@ td{
 
   <input
     type="hidden"
-    id="editRowIndex"
-    value="">
+    id="editRowIndex">
 
 
   <!-- DATE -->
@@ -646,9 +785,7 @@ td{
           Shift
         </label>
 
-        <select
-          id="shift"
-          onchange="renderDashboard()">
+        <select id="shift">
 
           <option value="A">
             Shift A
@@ -677,18 +814,39 @@ td{
           Production Hour
         </label>
 
-        <select
-          id="hour"
-          onchange="renderDashboard()">
+        <select id="hour">
 
-          <option value="1st Hour">1st Hour</option>
-          <option value="2nd Hour">2nd Hour</option>
-          <option value="3rd Hour">3rd Hour</option>
-          <option value="4th Hour">4th Hour</option>
-          <option value="5th Hour">5th Hour</option>
-          <option value="6th Hour">6th Hour</option>
-          <option value="7th Hour">7th Hour</option>
-          <option value="8th Hour">8th Hour</option>
+          <option value="1st Hour">
+            1st Hour
+          </option>
+
+          <option value="2nd Hour">
+            2nd Hour
+          </option>
+
+          <option value="3rd Hour">
+            3rd Hour
+          </option>
+
+          <option value="4th Hour">
+            4th Hour
+          </option>
+
+          <option value="5th Hour">
+            5th Hour
+          </option>
+
+          <option value="6th Hour">
+            6th Hour
+          </option>
+
+          <option value="7th Hour">
+            7th Hour
+          </option>
+
+          <option value="8th Hour">
+            8th Hour
+          </option>
 
         </select>
 
@@ -789,9 +947,28 @@ td{
   </div>
 
 
-  <!-- MOULDING + BEATER -->
+  <!-- BEATER + MOULDING -->
 
   <div class="row">
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Beater
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="beater">
+
+      </div>
+
+    </div>
+
 
     <div class="col">
 
@@ -805,25 +982,6 @@ td{
           type="number"
           step="0.01"
           id="moulding">
-
-      </div>
-
-    </div>
-
-
-    <div class="col">
-
-      <div class="group">
-
-        <label>
-          Beater (Common)
-        </label>
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="beater">
 
       </div>
 
@@ -877,7 +1035,7 @@ td{
 
 
   <button
-    class="btn-submit"
+    class="submit-btn"
     id="submitBtn"
     onclick="submitEntry()">
 
@@ -887,7 +1045,7 @@ td{
 
 
   <button
-    class="btn-cancel"
+    class="cancel-btn"
     id="cancelBtn"
     onclick="resetForm()">
 
@@ -895,12 +1053,36 @@ td{
 
   </button>
 
+
+  <div
+    class="progress-area"
+    id="submitProgress">
+
+    <div
+      class="progress-text"
+      id="submitProgressText">
+
+      SUBMITTING HOURLY DATA...
+
+    </div>
+
+    <div class="progress-bg">
+
+      <div
+        class="progress-bar"
+        id="submitProgressBar">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
 <!-- =====================================================
      PRODUCTION LOG
-====================================================== -->
+===================================================== -->
 
 <div class="card">
 
@@ -922,8 +1104,8 @@ td{
           <th>Sheets</th>
           <th>Beater</th>
           <th>BD</th>
-          <th>Output MT</th>
-          <th>Input MT</th>
+          <th>Output</th>
+          <th>Input</th>
           <th>ME%</th>
           <th>ROP</th>
           <th>Action</th>
@@ -957,12 +1139,15 @@ td{
     <div class="stat">
 
       <div class="stat-title">
-        Total Production
+        TOTAL PRODUCTION
       </div>
 
-      <div class="stat-value"
-           id="totalOutput">
+      <div
+        class="stat-value"
+        id="totalOutput">
+
         -
+
       </div>
 
     </div>
@@ -971,12 +1156,15 @@ td{
     <div class="stat">
 
       <div class="stat-title">
-        Total Input
+        TOTAL INPUT
       </div>
 
-      <div class="stat-value"
-           id="totalInput">
+      <div
+        class="stat-value"
+        id="totalInput">
+
         -
+
       </div>
 
     </div>
@@ -985,12 +1173,15 @@ td{
     <div class="stat">
 
       <div class="stat-title">
-        Overall ME%
+        OVERALL ME%
       </div>
 
-      <div class="stat-value"
-           id="overallME">
+      <div
+        class="stat-value"
+        id="overallME">
+
         -
+
       </div>
 
     </div>
@@ -999,12 +1190,15 @@ td{
     <div class="stat">
 
       <div class="stat-title">
-        Overall ROP
+        OVERALL ROP
       </div>
 
-      <div class="stat-value"
-           id="overallROP">
+      <div
+        class="stat-value"
+        id="overallROP">
+
         -
+
       </div>
 
     </div>
@@ -1012,13 +1206,51 @@ td{
   </div>
 
 
-  <div class="status"
-       id="targetStatus">
+  <div
+    class="status"
+    id="targetStatus">
+
     -
+
+  </div>
+
+
+  <!-- REPORT BUTTONS -->
+
+  <div class="report-buttons">
+
+    <button
+      class="report-btn report-wa"
+      onclick="sendShiftWhatsApp()">
+
+      📱 WHATSAPP SHIFT REPORT
+
+    </button>
+
+
+    <button
+      class="report-btn report-pdf"
+      onclick="generateShiftPDF()">
+
+      📄 PDF SHIFT REPORT
+
+    </button>
+
   </div>
 
 </div>
 
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast">
+
+  Success
 
 </div>
 
@@ -1041,11 +1273,171 @@ const SHIFT_HOURS = 8;
 let globalData = [];
 
 let settings = {
+
   targetProd:"",
   targetSize:"",
   batchWeight:"",
   sftConversion:2.5
+
 };
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+
+function showToast(
+  message,
+  isError = false
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.innerText =
+    message;
+
+
+  toast.classList.toggle(
+    "error",
+    isError
+  );
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2500
+    );
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function startProgress(
+  areaId,
+  barId,
+  textId,
+  text
+){
+
+  const area =
+    document.getElementById(
+      areaId
+    );
+
+
+  const bar =
+    document.getElementById(
+      barId
+    );
+
+
+  const textEl =
+    document.getElementById(
+      textId
+    );
+
+
+  area.style.display =
+    "block";
+
+
+  textEl.innerText =
+    text;
+
+
+  bar.style.width =
+    "5%";
+
+
+  let progress =
+    5;
+
+
+  const timer =
+    setInterval(
+      () => {
+
+        progress +=
+          Math.random() * 12;
+
+
+        if(progress >= 88){
+
+          progress = 88;
+
+          clearInterval(
+            timer
+          );
+
+        }
+
+
+        bar.style.width =
+          progress + "%";
+
+      },
+      180
+    );
+
+
+  return function finish(){
+
+    clearInterval(
+      timer
+    );
+
+
+    bar.style.width =
+      "100%";
+
+
+    textEl.innerText =
+      "COMPLETED ✓";
+
+
+    setTimeout(
+      () => {
+
+        area.style.display =
+          "none";
+
+        bar.style.width =
+          "0%";
+
+      },
+      700
+    );
+
+  };
+
+}
 
 
 /* =====================================================
@@ -1054,32 +1446,80 @@ let settings = {
 
 function getToday(){
 
-  const d = new Date();
+  const d =
+    new Date();
 
-  const y = d.getFullYear();
 
-  const m = String(d.getMonth()+1).padStart(2,"0");
+  const y =
+    d.getFullYear();
 
-  const day = String(d.getDate()).padStart(2,"0");
 
-  return `${y}-${m}-${day}`;
+  const m =
+    String(
+      d.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      d.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return (
+    y +
+    "-" +
+    m +
+    "-" +
+    day
+  );
+
 }
 
 
-function formatDisplayDate(dateStr){
+function formatDisplayDate(
+  dateStr
+){
 
-  if(!dateStr) return "-";
+  if(!dateStr)
+    return "-";
 
-  const parts = dateStr.split("-");
 
-  if(parts.length !== 3) return dateStr;
+  const parts =
+    dateStr.split("-");
+
+
+  if(parts.length !== 3)
+    return dateStr;
+
 
   const months = [
-    "Jan","Feb","Mar","Apr","May","Jun",
-    "Jul","Aug","Sep","Oct","Nov","Dec"
+
+    "Jan","Feb","Mar","Apr",
+    "May","Jun","Jul","Aug",
+    "Sep","Oct","Nov","Dec"
+
   ];
 
-  return `${parts[2]}-${months[Number(parts[1])-1]}-${parts[0]}`;
+
+  return (
+
+    parts[2] +
+    "-" +
+    months[
+      Number(parts[1]) - 1
+    ] +
+    "-" +
+    parts[0]
+
+  );
+
 }
 
 
@@ -1089,91 +1529,120 @@ function formatDisplayDate(dateStr){
 
 function jsonp(url){
 
-  const script = document.createElement("script");
-
-  script.src = url;
-
-  document.body.appendChild(script);
-
-}
+  const script =
+    document.createElement(
+      "script"
+    );
 
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
-
-function loadData(){
-
-  const callback =
-    "dashboardCallback_" + Date.now();
-
-  window[callback] = function(res){
-
-    try{
-
-      if(!res || res.status !== "success"){
-
-        alert(
-          res && res.message
-          ? res.message
-          : "Unable to load data."
-        );
-
-        return;
-      }
+  script.src =
+    url;
 
 
-      globalData =
-        res.data.rows || [];
-
-
-      settings =
-        res.data.masterSettings || settings;
-
-
-      document.getElementById("targetProd").value =
-        settings.targetProd !== ""
-        ? settings.targetProd
-        : "";
-
-
-      document.getElementById("targetSize").value =
-        settings.targetSize !== ""
-        ? settings.targetSize
-        : "";
-
-
-      document.getElementById("batchWeight").value =
-        settings.batchWeight !== ""
-        ? settings.batchWeight
-        : "";
-
-
-      renderDashboard();
-
-    }finally{
-
-      delete window[callback];
-
-    }
-
-  };
-
-
-  jsonp(
-    SCRIPT_URL +
-    "?action=getDashboardData" +
-    "&callback=" +
-    callback +
-    "&t=" +
-    Date.now()
+  document.body.appendChild(
+    script
   );
 
 }
 
 
 /* =====================================================
-   CURRENT FILTER
+   LOAD
+===================================================== */
+
+function loadData(){
+
+  const callback =
+    "dashboardCallback_" +
+    Date.now();
+
+
+  window[callback] =
+    function(res){
+
+      try{
+
+        if(
+          !res ||
+          res.status !==
+          "success"
+        ){
+
+          showToast(
+            res && res.message
+              ? res.message
+              : "Unable to load data.",
+            true
+          );
+
+          return;
+
+        }
+
+
+        globalData =
+          res.data.rows ||
+          [];
+
+
+        settings =
+          res.data.masterSettings ||
+          settings;
+
+
+        document.getElementById(
+          "targetProd"
+        ).value =
+          settings.targetProd !== ""
+            ? settings.targetProd
+            : "";
+
+
+        document.getElementById(
+          "targetSize"
+        ).value =
+          settings.targetSize !== ""
+            ? settings.targetSize
+            : "";
+
+
+        document.getElementById(
+          "batchWeight"
+        ).value =
+          settings.batchWeight !== ""
+            ? settings.batchWeight
+            : "";
+
+
+        renderDashboard();
+
+      }finally{
+
+        delete window[
+          callback
+        ];
+
+      }
+
+    };
+
+
+  jsonp(
+
+    SCRIPT_URL +
+    "?action=getDashboardData" +
+    "&callback=" +
+    callback +
+    "&t=" +
+    Date.now()
+
+  );
+
+}
+
+
+/* =====================================================
+   FILTER
 ===================================================== */
 
 function getSelectedDate(){
@@ -1194,33 +1663,34 @@ function getSelectedShift(){
 }
 
 
-/* =====================================================
-   FILTER ROWS
-===================================================== */
-
 function getFilteredRows(){
 
   const date =
     getSelectedDate();
 
+
   const shift =
     getSelectedShift();
 
 
-  return globalData.filter(r => {
+  return globalData.filter(
+    r =>
 
-    return (
-      String(r.date) === String(date) &&
-      String(r.shift) === String(shift)
-    );
+      String(r.date) ===
+      String(date)
 
-  });
+      &&
+
+      String(r.shift) ===
+      String(shift)
+
+  );
 
 }
 
 
 /* =====================================================
-   GET PRODUCTION VALUES
+   PRODUCTION CALCULATION
 ===================================================== */
 
 function getRowProduction(r){
@@ -1238,23 +1708,43 @@ function getRowProduction(r){
     !isNaN(r.s2Sheets)
   ){
 
-    sheets = Number(r.s2Sheets);
+    sheets =
+      Number(
+        r.s2Sheets
+      );
 
-    size = Number(r.size2) || 0;
 
-    source = "2nd";
+    size =
+      Number(
+        r.size2
+      ) || 0;
 
-  }else if(
+
+    source =
+      "2nd";
+
+  }
+
+  else if(
     r.s1Sheets !== "" &&
     r.s1Sheets !== null &&
     !isNaN(r.s1Sheets)
   ){
 
-    sheets = Number(r.s1Sheets);
+    sheets =
+      Number(
+        r.s1Sheets
+      );
 
-    size = Number(r.size1) || 0;
 
-    source = "1st";
+    size =
+      Number(
+        r.size1
+      ) || 0;
+
+
+    source =
+      "1st";
 
   }
 
@@ -1268,6 +1758,7 @@ function getRowProduction(r){
   ){
 
     output =
+
       sheets *
       size *
       PRODUCTION_CONSTANT /
@@ -1277,17 +1768,19 @@ function getRowProduction(r){
 
 
   return {
+
     sheets,
     size,
     output,
     source
+
   };
 
 }
 
 
 /* =====================================================
-   RENDER DASHBOARD
+   DASHBOARD
 ===================================================== */
 
 function renderDashboard(){
@@ -1296,9 +1789,14 @@ function renderDashboard(){
     getFilteredRows();
 
 
-  renderTable(rows);
+  renderTable(
+    rows
+  );
 
-  updateTopPanel(rows);
+
+  updateTopPanel(
+    rows
+  );
 
 }
 
@@ -1315,17 +1813,25 @@ function renderTable(rows){
     );
 
 
-  if(rows.length === 0){
+  if(
+    rows.length === 0
+  ){
 
     tbody.innerHTML =
+
       `<tr>
-        <td colspan="10"
-            style="padding:12px;color:#94a3b8;">
+        <td
+          colspan="10"
+          style="padding:12px;color:#94a3b8;">
           No production entry for this date/shift.
         </td>
       </tr>`;
 
-    updateShiftSummary([]);
+
+    updateShiftSummary(
+      []
+    );
+
 
     return;
 
@@ -1334,104 +1840,122 @@ function renderTable(rows){
 
   rows.sort(
     (a,b) =>
-      Number(a.hourNumber || 0) -
-      Number(b.hourNumber || 0)
+      Number(
+        a.hourNumber || 0
+      ) -
+      Number(
+        b.hourNumber || 0
+      )
   );
 
 
   let html = "";
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    const p =
-      getRowProduction(r);
-
-
-    let input = "";
-
-    let inputVal = 0;
+      const p =
+        getRowProduction(
+          r
+        );
 
 
-    if(
-      settings.batchWeight !== "" &&
-      r.beater !== "" &&
-      r.beater !== null &&
-      !isNaN(r.beater) &&
-      Number(r.beater) > 0
-    ){
+      let input = "";
 
-      inputVal =
-        Number(r.beater) *
-        Number(settings.batchWeight) /
-        1000;
-
-      input =
-        inputVal.toFixed(2);
-
-    }
+      let inputVal = 0;
 
 
-    let me = "";
+      if(
+        settings.batchWeight !== "" &&
+        r.beater !== "" &&
+        Number(r.beater) > 0
+      ){
+
+        inputVal =
+
+          Number(r.beater) *
+          Number(settings.batchWeight) /
+          1000;
 
 
-    if(
-      p.output > 0 &&
-      inputVal > 0
-    ){
-
-      me =
-        (
-          (1 - p.output / inputVal) *
-          100
-        ).toFixed(1) + "%";
-
-    }
-
-
-    let rop = "";
-
-
-    const bd =
-      Number(r.bd) || 0;
-
-
-    if(
-      p.output > 0 &&
-      bd < 60
-    ){
-
-      const running =
-        60 - bd;
-
-
-      if(running > 0){
-
-        rop =
-          (
-            p.output *
-            60 /
-            running
-          ).toFixed(2);
+        input =
+          inputVal.toFixed(2);
 
       }
 
-    }
+
+      let me = "";
 
 
-    const sizeDisplay =
-      p.size > 0
-      ? Number(p.size).toFixed(2)
-      : "";
+      if(
+        p.output > 0 &&
+        inputVal > 0
+      ){
+
+        me =
+
+          (
+            (
+              1 -
+              p.output /
+              inputVal
+            ) *
+            100
+          ).toFixed(1)
+          + "%";
+
+      }
 
 
-    const sheetsDisplay =
-      p.sheets > 0
-      ? p.sheets
-      : "";
+      let rop = "";
 
 
-    html += `
+      const bd =
+        Number(r.bd) || 0;
+
+
+      if(
+        p.output > 0 &&
+        bd < 60
+      ){
+
+        const running =
+          60 - bd;
+
+
+        if(
+          running > 0
+        ){
+
+          rop =
+
+            (
+              p.output *
+              60 /
+              running
+            ).toFixed(2);
+
+        }
+
+      }
+
+
+      const sizeDisplay =
+        p.size > 0
+          ? Number(
+              p.size
+            ).toFixed(2)
+          : "";
+
+
+      const sheetsDisplay =
+        p.sheets > 0
+          ? p.sheets
+          : "";
+
+
+      html += `
 
       <tr>
 
@@ -1448,17 +1972,27 @@ function renderTable(rows){
         </td>
 
         <td>
-          ${r.beater !== "" ? r.beater : ""}
+          ${
+            r.beater !== ""
+              ? r.beater
+              : ""
+          }
         </td>
 
         <td>
-          ${r.bd !== "" ? r.bd : ""}
+          ${
+            r.bd !== ""
+              ? r.bd
+              : ""
+          }
         </td>
 
         <td class="yellow">
-          ${p.output > 0
-            ? p.output.toFixed(2)
-            : ""}
+          ${
+            p.output > 0
+              ? p.output.toFixed(2)
+              : ""
+          }
         </td>
 
         <td>
@@ -1487,34 +2021,57 @@ function renderTable(rows){
             Del
           </button>
 
+          <button
+            class="action whatsapp"
+            onclick="sendHourWhatsApp(${r.rowIndex})">
+            WA
+          </button>
+
+          <button
+            class="action pdf"
+            onclick="generateHourPDF(${r.rowIndex})">
+            PDF
+          </button>
+
         </td>
 
       </tr>
-    `;
 
-  });
+      `;
+
+    }
+  );
 
 
-  tbody.innerHTML = html;
+  tbody.innerHTML =
+    html;
 
 
-  updateShiftSummary(rows);
+  updateShiftSummary(
+    rows
+  );
 
 }
 
 
 /* =====================================================
-   TOP TARGET PANEL
+   TOP PANEL
 ===================================================== */
 
-function updateTopPanel(rows){
+function updateTopPanel(
+  rows
+){
 
   const targetProd =
-    Number(settings.targetProd);
+    Number(
+      settings.targetProd
+    );
 
 
   const targetSize =
-    Number(settings.targetSize);
+    Number(
+      settings.targetSize
+    );
 
 
   document.getElementById(
@@ -1531,10 +2088,6 @@ function updateTopPanel(rows){
       getSelectedDate()
     );
 
-
-  /* ---------------------------------
-     NO TARGET SETUP
-  --------------------------------- */
 
   if(
     !targetProd ||
@@ -1580,27 +2133,33 @@ function updateTopPanel(rows){
 
 
     document.getElementById(
+      "latestProduction"
+    ).innerText =
+      "No target setup";
+
+
+    document.getElementById(
       "targetStatus"
     ).innerText =
       "SET TARGET PRODUCTION AND TARGET SIZE";
 
 
-    updateRemainingHours(rows);
+    updateRemainingHours(
+      rows
+    );
+
 
     return;
 
   }
 
 
-  /* ---------------------------------
-     TOTAL REQUIRED SHEETS
-  --------------------------------- */
+  /* REQUIRED SHEETS */
 
   const totalRequiredSheets =
-    (
-      targetProd *
-      1000
-    ) /
+
+    targetProd *
+    1000 /
     (
       targetSize *
       PRODUCTION_CONSTANT
@@ -1610,42 +2169,39 @@ function updateTopPanel(rows){
   document.getElementById(
     "topReqSheets"
   ).innerText =
-    totalRequiredSheets.toFixed(2);
+
+    totalRequiredSheets.toFixed(
+      2
+    );
 
 
-  /* ---------------------------------
-     ACTUAL TOTAL PRODUCTION MT
-  --------------------------------- */
+  /* ACTUAL PRODUCTION */
 
   let totalOutput = 0;
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    const p =
-      getRowProduction(r);
-
-    totalOutput += p.output;
-
-  });
+      const p =
+        getRowProduction(
+          r
+        );
 
 
-  /* ---------------------------------
-     TARGET-SIZE EQUIVALENT SHEETS
+      totalOutput +=
+        p.output;
 
-     IMPORTANT:
-     Different actual sizes must NOT
-     simply be added as raw sheets.
+    }
+  );
 
-     Convert actual MT production into
-     equivalent sheets of Target Size.
-  --------------------------------- */
+
+  /* TARGET SIZE EQUIVALENT */
 
   const producedEquivalentSheets =
-    (
-      totalOutput *
-      1000
-    ) /
+
+    totalOutput *
+    1000 /
     (
       targetSize *
       PRODUCTION_CONSTANT
@@ -1655,14 +2211,14 @@ function updateTopPanel(rows){
   document.getElementById(
     "producedSheets"
   ).innerText =
-    producedEquivalentSheets.toFixed(2);
 
+    producedEquivalentSheets.toFixed(
+      2
+    );
 
-  /* ---------------------------------
-     REMAINING TARGET EQUIVALENT SHEETS
-  --------------------------------- */
 
   const remaining =
+
     Math.max(
       0,
       totalRequiredSheets -
@@ -1673,57 +2229,58 @@ function updateTopPanel(rows){
   document.getElementById(
     "remainingSheets"
   ).innerText =
-    remaining.toFixed(2);
 
-
-  /* ---------------------------------
-     COMPLETED HOUR
-
-     VERY IMPORTANT:
-
-     Do NOT use the dropdown's selected
-     hour.
-
-     Use the latest ACTUALLY SAVED hour.
-  --------------------------------- */
-
-  let latestHour = 0;
-
-  rows.forEach(r => {
-
-    const n =
-      Number(r.hourNumber) || 0;
-
-    if(n > latestHour){
-
-      latestHour = n;
-
-    }
-
-  });
-
-
-  const remainingHours =
-    Math.max(
-      0,
-      SHIFT_HOURS - latestHour
+    remaining.toFixed(
+      2
     );
 
 
-  /* ---------------------------------
-     REQUIRED PER HOUR
-  --------------------------------- */
+  /* LATEST SAVED HOUR */
+
+  let latestHour = 0;
+
+
+  rows.forEach(
+    r => {
+
+      const n =
+        Number(
+          r.hourNumber
+        ) || 0;
+
+
+      if(
+        n > latestHour
+      ){
+
+        latestHour =
+          n;
+
+      }
+
+    }
+  );
+
+
+  const remainingHours =
+
+    Math.max(
+      0,
+      SHIFT_HOURS -
+      latestHour
+    );
+
 
   let requiredPerHour = 0;
 
 
-  if(remaining <= 0){
-
-    requiredPerHour = 0;
-
-  }else if(remainingHours > 0){
+  if(
+    remaining > 0 &&
+    remainingHours > 0
+  ){
 
     requiredPerHour =
+
       remaining /
       remainingHours;
 
@@ -1733,86 +2290,88 @@ function updateTopPanel(rows){
   document.getElementById(
     "requiredPerHour"
   ).innerText =
+
     remainingHours > 0
-    ? requiredPerHour.toFixed(2)
-    : remaining <= 0
-      ? "0.00"
-      : "SHIFT OVER";
+      ? requiredPerHour.toFixed(2)
+      : remaining <= 0
+        ? "0.00"
+        : "SHIFT OVER";
 
 
-  /* ---------------------------------
-     TARGET SIZE
-  --------------------------------- */
+  /* TARGET SIZE */
 
   document.getElementById(
     "targetSizeDisplay"
   ).innerText =
-    targetSize.toFixed(2);
+
+    targetSize.toFixed(
+      2
+    );
 
 
-  /* ---------------------------------
-     SFT
-
-     Plant dashboard example:
-     5.85 m -> 14.6 SFT
-     Therefore factor = 2.5
-  --------------------------------- */
+  /* SFT */
 
   const sft =
+
     targetSize *
     (
-      Number(settings.sftConversion) ||
-      2.5
+      Number(
+        settings.sftConversion
+      ) || 2.5
     );
 
 
   document.getElementById(
     "sftDisplay"
   ).innerText =
-    sft.toFixed(1);
+
+    sft.toFixed(
+      1
+    );
 
 
-  /* ---------------------------------
-     LATEST PRODUCTION
-  --------------------------------- */
-
-  showLatestProduction(rows);
+  showLatestProduction(
+    rows
+  );
 
 
-  /* ---------------------------------
-     TIME STATUS
-  --------------------------------- */
-
-  updateRemainingHours(rows);
+  updateRemainingHours(
+    rows
+  );
 
 
-  /* ---------------------------------
-     TARGET STATUS
-  --------------------------------- */
+  /* TARGET ACHIEVEMENT */
 
   const achievement =
+
     targetProd > 0
-    ? (
-        totalOutput /
-        targetProd
-      ) * 100
-    : 0;
+      ? (
+          totalOutput /
+          targetProd
+        ) * 100
+      : 0;
 
 
-  if(achievement >= 100){
+  if(
+    achievement >= 100
+  ){
 
     document.getElementById(
       "targetStatus"
     ).innerText =
+
       "🎯 TARGET ACHIEVED — " +
       achievement.toFixed(1) +
       "%";
 
-  }else{
+  }
+
+  else{
 
     document.getElementById(
       "targetStatus"
     ).innerText =
+
       "Target Achievement: " +
       achievement.toFixed(1) +
       "%";
@@ -1826,26 +2385,37 @@ function updateTopPanel(rows){
    REMAINING HOURS
 ===================================================== */
 
-function updateRemainingHours(rows){
+function updateRemainingHours(
+  rows
+){
 
   let latestHour = 0;
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    const n =
-      Number(r.hourNumber) || 0;
+      const n =
+        Number(
+          r.hourNumber
+        ) || 0;
 
-    if(n > latestHour){
 
-      latestHour = n;
+      if(
+        n > latestHour
+      ){
+
+        latestHour =
+          n;
+
+      }
 
     }
-
-  });
+  );
 
 
   const remaining =
+
     Math.max(
       0,
       SHIFT_HOURS -
@@ -1859,19 +2429,28 @@ function updateRemainingHours(rows){
     );
 
 
-  if(latestHour === 0){
+  if(
+    latestHour === 0
+  ){
 
     footer.innerText =
       "8 HOURS AVAILABLE";
 
-  }else if(remaining === 0){
+  }
+
+  else if(
+    remaining === 0
+  ){
 
     footer.innerText =
       "SHIFT COMPLETED";
 
-  }else{
+  }
+
+  else{
 
     footer.innerText =
+
       "ONLY " +
       remaining +
       " HOURS LEFT";
@@ -1885,7 +2464,9 @@ function updateRemainingHours(rows){
    LATEST PRODUCTION
 ===================================================== */
 
-function showLatestProduction(rows){
+function showLatestProduction(
+  rows
+){
 
   const el =
     document.getElementById(
@@ -1893,7 +2474,9 @@ function showLatestProduction(rows){
     );
 
 
-  if(rows.length === 0){
+  if(
+    rows.length === 0
+  ){
 
     el.innerText =
       "No entry yet";
@@ -1906,22 +2489,25 @@ function showLatestProduction(rows){
   let latest = null;
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    const n =
-      Number(r.hourNumber) || 0;
+      if(
+        !latest ||
+        Number(
+          r.hourNumber || 0
+        ) >
+        Number(
+          latest.hourNumber || 0
+        )
+      ){
 
+        latest = r;
 
-    if(
-      !latest ||
-      n > Number(latest.hourNumber || 0)
-    ){
-
-      latest = r;
+      }
 
     }
-
-  });
+  );
 
 
   if(!latest){
@@ -1935,20 +2521,32 @@ function showLatestProduction(rows){
 
 
   const p =
-    getRowProduction(latest);
+    getRowProduction(
+      latest
+    );
 
 
-  if(p.sheets > 0){
-
-    el.innerText =
-      `${latest.hour}: ` +
-      `${p.sheets} sheets / ` +
-      `${p.output.toFixed(2)} MT`;
-
-  }else{
+  if(
+    p.sheets > 0
+  ){
 
     el.innerText =
-      `${latest.hour}: No sheet production`;
+
+      latest.hour +
+      ": " +
+      p.sheets +
+      " sheets / " +
+      p.output.toFixed(2) +
+      " MT";
+
+  }
+
+  else{
+
+    el.innerText =
+
+      latest.hour +
+      ": No sheet production";
 
   }
 
@@ -1959,7 +2557,9 @@ function showLatestProduction(rows){
    SHIFT SUMMARY
 ===================================================== */
 
-function updateShiftSummary(rows){
+function updateShiftSummary(
+  rows
+){
 
   let totalOutput = 0;
 
@@ -1968,59 +2568,69 @@ function updateShiftSummary(rows){
   let totalBD = 0;
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    const p =
-      getRowProduction(r);
+      const p =
+        getRowProduction(
+          r
+        );
 
 
-    totalOutput += p.output;
+      totalOutput +=
+        p.output;
 
 
-    if(
-      settings.batchWeight !== "" &&
-      r.beater !== "" &&
-      Number(r.beater) > 0
-    ){
+      if(
+        settings.batchWeight !== "" &&
+        r.beater !== "" &&
+        Number(r.beater) > 0
+      ){
 
-      totalInput +=
-        Number(r.beater) *
-        Number(settings.batchWeight) /
-        1000;
+        totalInput +=
+
+          Number(r.beater) *
+          Number(
+            settings.batchWeight
+          ) /
+          1000;
+
+      }
+
+
+      if(
+        r.bd !== "" &&
+        !isNaN(r.bd)
+      ){
+
+        totalBD +=
+          Number(r.bd);
+
+      }
 
     }
-
-
-    if(
-      r.bd !== "" &&
-      !isNaN(r.bd)
-    ){
-
-      totalBD +=
-        Number(r.bd);
-
-    }
-
-  });
+  );
 
 
   document.getElementById(
     "totalOutput"
   ).innerText =
+
     totalOutput > 0
-    ? totalOutput.toFixed(2) + " MT"
-    : "-";
+      ? totalOutput.toFixed(2) +
+        " MT"
+      : "-";
 
 
   document.getElementById(
     "totalInput"
   ).innerText =
+
     totalInput > 0
-    ? totalInput.toFixed(2) + " MT"
-    : "-";
+      ? totalInput.toFixed(2) +
+        " MT"
+      : "-";
 
-
-  /* OVERALL ME */
 
   if(
     totalOutput > 0 &&
@@ -2028,6 +2638,7 @@ function updateShiftSummary(rows){
   ){
 
     const me =
+
       (
         1 -
         totalOutput /
@@ -2038,9 +2649,13 @@ function updateShiftSummary(rows){
     document.getElementById(
       "overallME"
     ).innerText =
-      me.toFixed(1) + "%";
 
-  }else{
+      me.toFixed(1) +
+      "%";
+
+  }
+
+  else{
 
     document.getElementById(
       "overallME"
@@ -2050,22 +2665,26 @@ function updateShiftSummary(rows){
   }
 
 
-  /* OVERALL ROP */
-
-  if(totalOutput > 0){
+  if(
+    totalOutput > 0
+  ){
 
     const scheduledMinutes =
       SHIFT_HOURS * 60;
 
 
     const runningMinutes =
+
       scheduledMinutes -
       totalBD;
 
 
-    if(runningMinutes > 0){
+    if(
+      runningMinutes > 0
+    ){
 
       const overallROP =
+
         totalOutput *
         scheduledMinutes /
         runningMinutes;
@@ -2074,9 +2693,12 @@ function updateShiftSummary(rows){
       document.getElementById(
         "overallROP"
       ).innerText =
+
         overallROP.toFixed(2);
 
-    }else{
+    }
+
+    else{
 
       document.getElementById(
         "overallROP"
@@ -2085,7 +2707,9 @@ function updateShiftSummary(rows){
 
     }
 
-  }else{
+  }
+
+  else{
 
     document.getElementById(
       "overallROP"
@@ -2126,8 +2750,9 @@ function saveSettings(){
     Number(targetProd) <= 0
   ){
 
-    alert(
-      "Please enter Target Production."
+    showToast(
+      "Please enter Target Production.",
+      true
     );
 
     return;
@@ -2140,8 +2765,9 @@ function saveSettings(){
     Number(targetSize) <= 0
   ){
 
-    alert(
-      "Please enter Target Size in meter (m)."
+    showToast(
+      "Please enter Target Size in meter (m).",
+      true
     );
 
     return;
@@ -2154,8 +2780,9 @@ function saveSettings(){
     Number(batchWeight) <= 0
   ){
 
-    alert(
-      "Please enter Batch Weight."
+    showToast(
+      "Please enter Batch Weight.",
+      true
     );
 
     return;
@@ -2169,45 +2796,74 @@ function saveSettings(){
     );
 
 
-  btn.disabled = true;
+  btn.disabled =
+    true;
+
 
   btn.innerText =
     "SAVING...";
 
 
+  const finish =
+    startProgress(
+
+      "settingsProgress",
+      "settingsProgressBar",
+      "settingsProgressText",
+      "SAVING SETTINGS..."
+
+    );
+
+
   const callback =
-    "settingsCallback_" + Date.now();
+    "settingsCallback_" +
+    Date.now();
 
 
   window[callback] =
     function(res){
 
-      btn.disabled = false;
+      btn.disabled =
+        false;
+
 
       btn.innerText =
         "SAVE SETTINGS 💾";
 
 
-      delete window[callback];
+      finish();
+
+
+      delete window[
+        callback
+      ];
 
 
       if(
         res &&
-        res.status === "success"
+        res.status ===
+        "success"
       ){
 
-        alert(
-          "Settings saved successfully."
+        showToast(
+          "✓ Settings Saved Successfully"
         );
+
 
         loadData();
 
-      }else{
+      }
 
-        alert(
+      else{
+
+        showToast(
+
           res && res.message
-          ? res.message
-          : "Failed to save settings."
+            ? res.message
+            : "Failed to save settings.",
+
+          true
+
         );
 
       }
@@ -2216,25 +2872,33 @@ function saveSettings(){
 
 
   jsonp(
+
     SCRIPT_URL +
     "?action=saveSettings" +
     "&targetProd=" +
-    encodeURIComponent(targetProd) +
+    encodeURIComponent(
+      targetProd
+    ) +
     "&targetSize=" +
-    encodeURIComponent(targetSize) +
+    encodeURIComponent(
+      targetSize
+    ) +
     "&batchWeight=" +
-    encodeURIComponent(batchWeight) +
+    encodeURIComponent(
+      batchWeight
+    ) +
     "&callback=" +
     callback +
     "&t=" +
     Date.now()
+
   );
 
 }
 
 
 /* =====================================================
-   SUBMIT ENTRY
+   SUBMIT
 ===================================================== */
 
 function submitEntry(){
@@ -2247,8 +2911,9 @@ function submitEntry(){
 
   if(!operator){
 
-    alert(
-      "Please enter Operator Name."
+    showToast(
+      "Please enter Operator Name.",
+      true
     );
 
     return;
@@ -2318,15 +2983,14 @@ function submitEntry(){
     ).value.trim();
 
 
-  /* ONE SIZE PER HOUR */
-
   if(
     s1Sheets !== "" &&
     s2Sheets !== ""
   ){
 
-    alert(
-      "One hour can have only one running size. Enter either 1st Size Sheets OR 2nd Size Sheets."
+    showToast(
+      "Enter either 1st Size Sheets OR 2nd Size Sheets.",
+      true
     );
 
     return;
@@ -2342,8 +3006,9 @@ function submitEntry(){
     )
   ){
 
-    alert(
-      "Please enter valid 1st Size (m)."
+    showToast(
+      "Please enter valid 1st Size (m).",
+      true
     );
 
     return;
@@ -2359,8 +3024,9 @@ function submitEntry(){
     )
   ){
 
-    alert(
-      "Please enter valid 2nd Size (m)."
+    showToast(
+      "Please enter valid 2nd Size (m).",
+      true
     );
 
     return;
@@ -2380,37 +3046,66 @@ function submitEntry(){
     );
 
 
-  btn.disabled = true;
+  btn.disabled =
+    true;
+
 
   btn.innerText =
     rowIndex
-    ? "UPDATING..."
-    : "SUBMITTING...";
+      ? "UPDATING..."
+      : "SUBMITTING...";
+
+
+  const finish =
+    startProgress(
+
+      "submitProgress",
+      "submitProgressBar",
+      "submitProgressText",
+
+      rowIndex
+        ? "UPDATING HOURLY DATA..."
+        : "SUBMITTING HOURLY DATA..."
+
+    );
 
 
   const callback =
-    "submitCallback_" + Date.now();
+    "submitCallback_" +
+    Date.now();
 
 
   window[callback] =
     function(res){
 
-      btn.disabled = false;
+      btn.disabled =
+        false;
+
 
       btn.innerText =
         "SUBMIT HOURLY DATA ➜";
 
 
-      delete window[callback];
+      finish();
+
+
+      delete window[
+        callback
+      ];
 
 
       if(
         res &&
-        res.status === "success"
+        res.status ===
+        "success"
       ){
 
-        alert(
-          "Hourly production saved successfully."
+        showToast(
+
+          rowIndex
+            ? "✓ Hourly Data Updated Successfully"
+            : "✓ Hourly Data Submitted Successfully"
+
         );
 
 
@@ -2418,12 +3113,18 @@ function submitEntry(){
 
         loadData();
 
-      }else{
+      }
 
-        alert(
+      else{
+
+        showToast(
+
           res && res.message
-          ? res.message
-          : "Unable to save production."
+            ? res.message
+            : "Unable to save production.",
+
+          true
+
         );
 
       }
@@ -2432,34 +3133,73 @@ function submitEntry(){
 
 
   let url =
+
     SCRIPT_URL +
     "?action=submitHourly" +
+
     "&date=" +
-    encodeURIComponent(date) +
+    encodeURIComponent(
+      date
+    ) +
+
     "&shift=" +
-    encodeURIComponent(shift) +
+    encodeURIComponent(
+      shift
+    ) +
+
     "&hour=" +
-    encodeURIComponent(hour) +
+    encodeURIComponent(
+      hour
+    ) +
+
     "&size1=" +
-    encodeURIComponent(size1) +
+    encodeURIComponent(
+      size1
+    ) +
+
     "&size2=" +
-    encodeURIComponent(size2) +
+    encodeURIComponent(
+      size2
+    ) +
+
     "&s1Sheets=" +
-    encodeURIComponent(s1Sheets) +
+    encodeURIComponent(
+      s1Sheets
+    ) +
+
     "&s2Sheets=" +
-    encodeURIComponent(s2Sheets) +
+    encodeURIComponent(
+      s2Sheets
+    ) +
+
     "&moulding=" +
-    encodeURIComponent(moulding) +
+    encodeURIComponent(
+      moulding
+    ) +
+
     "&beater=" +
-    encodeURIComponent(beater) +
+    encodeURIComponent(
+      beater
+    ) +
+
     "&bd=" +
-    encodeURIComponent(bd) +
+    encodeURIComponent(
+      bd
+    ) +
+
     "&gsr=" +
-    encodeURIComponent(gsr) +
+    encodeURIComponent(
+      gsr
+    ) +
+
     "&operator=" +
-    encodeURIComponent(operator) +
+    encodeURIComponent(
+      operator
+    ) +
+
     "&callback=" +
     callback +
+
     "&t=" +
     Date.now();
 
@@ -2467,8 +3207,11 @@ function submitEntry(){
   if(rowIndex){
 
     url +=
+
       "&rowIndex=" +
-      encodeURIComponent(rowIndex);
+      encodeURIComponent(
+        rowIndex
+      );
 
   }
 
@@ -2482,20 +3225,27 @@ function submitEntry(){
    EDIT
 ===================================================== */
 
-function editRow(rowIndex){
+function editRow(
+  rowIndex
+){
 
   const row =
     globalData.find(
       r =>
-        Number(r.rowIndex) ===
-        Number(rowIndex)
+        Number(
+          r.rowIndex
+        ) ===
+        Number(
+          rowIndex
+        )
     );
 
 
   if(!row){
 
-    alert(
-      "Row not found."
+    showToast(
+      "Row not found.",
+      true
     );
 
     return;
@@ -2537,64 +3287,64 @@ function editRow(rowIndex){
     "size1"
   ).value =
     row.size1 !== ""
-    ? row.size1
-    : "";
+      ? row.size1
+      : "";
 
 
   document.getElementById(
     "size2"
   ).value =
     row.size2 !== ""
-    ? row.size2
-    : "";
+      ? row.size2
+      : "";
 
 
   document.getElementById(
     "s1Sheets"
   ).value =
     row.s1Sheets !== ""
-    ? row.s1Sheets
-    : "";
+      ? row.s1Sheets
+      : "";
 
 
   document.getElementById(
     "s2Sheets"
   ).value =
     row.s2Sheets !== ""
-    ? row.s2Sheets
-    : "";
-
-
-  document.getElementById(
-    "moulding"
-  ).value =
-    row.moulding !== ""
-    ? row.moulding
-    : "";
+      ? row.s2Sheets
+      : "";
 
 
   document.getElementById(
     "beater"
   ).value =
     row.beater !== ""
-    ? row.beater
-    : "";
+      ? row.beater
+      : "";
+
+
+  document.getElementById(
+    "moulding"
+  ).value =
+    row.moulding !== ""
+      ? row.moulding
+      : "";
 
 
   document.getElementById(
     "bd"
   ).value =
     row.bd !== ""
-    ? row.bd
-    : "";
+      ? row.bd
+      : "";
 
 
   document.getElementById(
     "gsr"
   ).value =
     row.gsr !== ""
-    ? row.gsr
-    : "";
+      ? row.gsr
+      : "";
 
 
   document.getElementById(
@@ -2616,8 +3366,10 @@ function editRow(rowIndex){
 
 
   window.scrollTo({
+
     top:0,
     behavior:"smooth"
+
   });
 
 }
@@ -2666,13 +3418,13 @@ function resetForm(){
 
 
   document.getElementById(
-    "moulding"
+    "beater"
   ).value =
     "";
 
 
   document.getElementById(
-    "beater"
+    "moulding"
   ).value =
     "";
 
@@ -2695,7 +3447,9 @@ function resetForm(){
    DELETE
 ===================================================== */
 
-function deleteRow(rowIndex){
+function deleteRow(
+  rowIndex
+){
 
   if(
     !confirm(
@@ -2709,32 +3463,43 @@ function deleteRow(rowIndex){
 
 
   const callback =
-    "deleteCallback_" + Date.now();
+    "deleteCallback_" +
+    Date.now();
 
 
   window[callback] =
     function(res){
 
-      delete window[callback];
+      delete window[
+        callback
+      ];
 
 
       if(
         res &&
-        res.status === "success"
+        res.status ===
+        "success"
       ){
 
-        alert(
-          "Entry deleted successfully."
+        showToast(
+          "✓ Entry Deleted Successfully"
         );
+
 
         loadData();
 
-      }else{
+      }
 
-        alert(
+      else{
+
+        showToast(
+
           res && res.message
-          ? res.message
-          : "Delete failed."
+            ? res.message
+            : "Delete failed.",
+
+          true
+
         );
 
       }
@@ -2743,26 +3508,1307 @@ function deleteRow(rowIndex){
 
 
   jsonp(
+
     SCRIPT_URL +
     "?action=deleteHourly" +
     "&rowIndex=" +
-    encodeURIComponent(rowIndex) +
+    encodeURIComponent(
+      rowIndex
+    ) +
     "&callback=" +
     callback +
     "&t=" +
     Date.now()
+
   );
 
 }
 
 
 /* =====================================================
-   ESCAPE HTML
+   GET ROW BY INDEX
 ===================================================== */
 
-function escapeHtml(value){
+function getRowByIndex(
+  rowIndex
+){
 
-  if(value === null || value === undefined){
+  return globalData.find(
+    r =>
+      Number(
+        r.rowIndex
+      ) ===
+      Number(
+        rowIndex
+      )
+  );
+
+}
+
+
+/* =====================================================
+   CALCULATE METRICS FOR REPORT
+===================================================== */
+
+function getReportMetrics(
+  row
+){
+
+  const p =
+    getRowProduction(
+      row
+    );
+
+
+  let input = 0;
+
+
+  if(
+    settings.batchWeight !== "" &&
+    row.beater !== "" &&
+    Number(row.beater) > 0
+  ){
+
+    input =
+
+      Number(row.beater) *
+      Number(settings.batchWeight) /
+      1000;
+
+  }
+
+
+  let me = "";
+
+
+  if(
+    input > 0 &&
+    p.output > 0
+  ){
+
+    me =
+
+      (
+        (
+          1 -
+          p.output /
+          input
+        ) *
+        100
+      );
+
+  }
+
+
+  let rop = "";
+
+
+  const bd =
+    Number(row.bd) || 0;
+
+
+  if(
+    p.output > 0 &&
+    bd < 60
+  ){
+
+    const running =
+      60 - bd;
+
+
+    if(
+      running > 0
+    ){
+
+      rop =
+
+        p.output *
+        60 /
+        running;
+
+    }
+
+  }
+
+
+  return {
+
+    output:p.output,
+    input:input,
+    me:me,
+    rop:rop,
+    size:p.size,
+    sheets:p.sheets
+
+  };
+
+}
+
+
+/* =====================================================
+   WHATSAPP - SINGLE HOUR
+===================================================== */
+
+function sendHourWhatsApp(
+  rowIndex
+){
+
+  const row =
+    getRowByIndex(
+      rowIndex
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const m =
+    getReportMetrics(
+      row
+    );
+
+
+  const date =
+    formatDisplayDate(
+      row.date
+    );
+
+
+  let message = "";
+
+
+  message +=
+    "📊 HOURLY PRODUCTION REPORT\n\n";
+
+
+  message +=
+    "Date: " +
+    date +
+    "\n";
+
+
+  message +=
+    "Shift: " +
+    row.shift +
+    "\n";
+
+
+  message +=
+    "Hour: " +
+    row.hour +
+    "\n\n";
+
+
+  message +=
+    "Operator: " +
+    (
+      row.name ||
+      "-"
+    ) +
+    "\n\n";
+
+
+  message +=
+    "Size: " +
+    (
+      m.size
+        ? m.size + " m"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Sheets: " +
+    (
+      m.sheets || "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Beater: " +
+    (
+      row.beater !== ""
+        ? row.beater
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Batch Weight: " +
+    (
+      settings.batchWeight !== ""
+        ? settings.batchWeight +
+          " kg"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Input: " +
+    (
+      m.input > 0
+        ? m.input.toFixed(2) +
+          " MT"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "B/D: " +
+    (
+      row.bd !== ""
+        ? row.bd +
+          " min"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Output: " +
+    (
+      m.output > 0
+        ? m.output.toFixed(2) +
+          " MT"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "ME: " +
+    (
+      m.me !== ""
+        ? m.me.toFixed(2) +
+          "%"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "ROP: " +
+    (
+      m.rop !== ""
+        ? m.rop.toFixed(2) +
+          " MT/hr"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Moulding: " +
+    (
+      row.moulding !== ""
+        ? row.moulding
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "GSR: " +
+    (
+      row.gsr !== ""
+        ? row.gsr
+        : "-"
+    );
+
+
+  const url =
+    "https://wa.me/?text=" +
+    encodeURIComponent(
+      message
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =====================================================
+   WHATSAPP - SHIFT REPORT
+===================================================== */
+
+function sendShiftWhatsApp(){
+
+  const rows =
+    getFilteredRows();
+
+
+  if(
+    rows.length === 0
+  ){
+
+    showToast(
+      "No production data for this shift.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  rows.sort(
+    (a,b) =>
+      Number(
+        a.hourNumber || 0
+      ) -
+      Number(
+        b.hourNumber || 0
+      )
+  );
+
+
+  let totalOutput = 0;
+
+  let totalInput = 0;
+
+  let totalBD = 0;
+
+
+  let message = "";
+
+
+  message +=
+    "📊 SHIFT PRODUCTION REPORT\n\n";
+
+
+  message +=
+    "Date: " +
+    formatDisplayDate(
+      getSelectedDate()
+    ) +
+    "\n";
+
+
+  message +=
+    "Shift: " +
+    getSelectedShift() +
+    "\n\n";
+
+
+  rows.forEach(
+    row => {
+
+      const m =
+        getReportMetrics(
+          row
+        );
+
+
+      totalOutput +=
+        m.output;
+
+
+      totalInput +=
+        m.input;
+
+
+      totalBD +=
+        Number(row.bd) || 0;
+
+
+      message +=
+        "━━━━━━━━━━━━━━\n";
+
+
+      message +=
+        row.hour +
+        "\n";
+
+
+      message +=
+        "Size: " +
+        (
+          m.size
+            ? m.size + " m"
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "Sheets: " +
+        (
+          m.sheets || "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "Beater: " +
+        (
+          row.beater !== ""
+            ? row.beater
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "BD: " +
+        (
+          row.bd !== ""
+            ? row.bd + " min"
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "Output: " +
+        (
+          m.output > 0
+            ? m.output.toFixed(2) +
+              " MT"
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "Input: " +
+        (
+          m.input > 0
+            ? m.input.toFixed(2) +
+              " MT"
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "ME: " +
+        (
+          m.me !== ""
+            ? m.me.toFixed(2) +
+              "%"
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "ROP: " +
+        (
+          m.rop !== ""
+            ? m.rop.toFixed(2) +
+              " MT/hr"
+            : "-"
+        ) +
+        "\n";
+
+    }
+  );
+
+
+  const overallME =
+
+    totalOutput > 0 &&
+    totalInput > 0
+
+      ? (
+          1 -
+          totalOutput /
+          totalInput
+        ) * 100
+
+      : null;
+
+
+  const runningMinutes =
+
+    SHIFT_HOURS * 60 -
+    totalBD;
+
+
+  const overallROP =
+
+    totalOutput > 0 &&
+    runningMinutes > 0
+
+      ? totalOutput *
+        SHIFT_HOURS *
+        60 /
+        runningMinutes
+
+      : null;
+
+
+  message +=
+    "━━━━━━━━━━━━━━\n";
+
+
+  message +=
+    "SHIFT SUMMARY\n\n";
+
+
+  message +=
+    "Total Production: " +
+    (
+      totalOutput > 0
+        ? totalOutput.toFixed(2) +
+          " MT"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Total Input: " +
+    (
+      totalInput > 0
+        ? totalInput.toFixed(2) +
+          " MT"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Overall ME: " +
+    (
+      overallME !== null
+        ? overallME.toFixed(2) +
+          "%"
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+    "Overall ROP: " +
+    (
+      overallROP !== null
+        ? overallROP.toFixed(2) +
+          " MT/hr"
+        : "-"
+    );
+
+
+  const url =
+    "https://wa.me/?text=" +
+    encodeURIComponent(
+      message
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =====================================================
+   PDF - SINGLE HOUR
+===================================================== */
+
+function generateHourPDF(
+  rowIndex
+){
+
+  const row =
+    getRowByIndex(
+      rowIndex
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF();
+
+
+  const m =
+    getReportMetrics(
+      row
+    );
+
+
+  let y = 18;
+
+
+  doc.setFontSize(
+    16
+  );
+
+
+  doc.text(
+    "HOURLY PRODUCTION REPORT",
+    105,
+    y,
+    {
+      align:"center"
+    }
+  );
+
+
+  y += 12;
+
+
+  doc.setFontSize(
+    10
+  );
+
+
+  doc.text(
+    "Date: " +
+    formatDisplayDate(
+      row.date
+    ),
+    15,
+    y
+  );
+
+
+  y += 7;
+
+
+  doc.text(
+    "Shift: " +
+    row.shift,
+    15,
+    y
+  );
+
+
+  y += 7;
+
+
+  doc.text(
+    "Hour: " +
+    row.hour,
+    15,
+    y
+  );
+
+
+  y += 7;
+
+
+  doc.text(
+    "Operator: " +
+    (
+      row.name || "-"
+    ),
+    15,
+    y
+  );
+
+
+  y += 12;
+
+
+  doc.setFontSize(
+    12
+  );
+
+
+  doc.text(
+    "PRODUCTION",
+    15,
+    y
+  );
+
+
+  y += 8;
+
+
+  doc.setFontSize(
+    10
+  );
+
+
+  const lines = [
+
+    [
+      "Size",
+      m.size
+        ? m.size + " m"
+        : "-"
+    ],
+
+    [
+      "Sheets",
+      m.sheets || "-"
+    ],
+
+    [
+      "Beater",
+      row.beater !== ""
+        ? row.beater
+        : "-"
+    ],
+
+    [
+      "Batch Weight",
+      settings.batchWeight !== ""
+        ? settings.batchWeight + " kg"
+        : "-"
+    ],
+
+    [
+      "Input",
+      m.input > 0
+        ? m.input.toFixed(2) + " MT"
+        : "-"
+    ],
+
+    [
+      "Breakdown",
+      row.bd !== ""
+        ? row.bd + " min"
+        : "-"
+    ],
+
+    [
+      "Output",
+      m.output > 0
+        ? m.output.toFixed(2) + " MT"
+        : "-"
+    ],
+
+    [
+      "ME%",
+      m.me !== ""
+        ? m.me.toFixed(2) + "%"
+        : "-"
+    ],
+
+    [
+      "ROP",
+      m.rop !== ""
+        ? m.rop.toFixed(2) + " MT/hr"
+        : "-"
+    ],
+
+    [
+      "Moulding",
+      row.moulding !== ""
+        ? row.moulding
+        : "-"
+    ],
+
+    [
+      "GSR",
+      row.gsr !== ""
+        ? row.gsr
+        : "-"
+    ]
+
+  ];
+
+
+  lines.forEach(
+    item => {
+
+      doc.text(
+        item[0] + ":",
+        20,
+        y
+      );
+
+
+      doc.text(
+        String(item[1]),
+        80,
+        y
+      );
+
+
+      y += 7;
+
+    }
+  );
+
+
+  y += 8;
+
+
+  doc.setFontSize(
+    8
+  );
+
+
+  doc.text(
+    "Generated from Production Dashboard",
+    105,
+    y,
+    {
+      align:"center"
+    }
+  );
+
+
+  const filename =
+
+    "Hourly_" +
+    row.hour.replace(
+      /\s+/g,
+      "_"
+    ) +
+    "_" +
+    row.date +
+    "_Shift_" +
+    row.shift +
+    ".pdf";
+
+
+  doc.save(
+    filename
+  );
+
+
+  showToast(
+    "✓ Hourly PDF Generated Successfully"
+  );
+
+}
+
+
+/* =====================================================
+   PDF - SHIFT
+===================================================== */
+
+function generateShiftPDF(){
+
+  const rows =
+    getFilteredRows();
+
+
+  if(
+    rows.length === 0
+  ){
+
+    showToast(
+      "No production data for this shift.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF();
+
+
+  rows.sort(
+    (a,b) =>
+      Number(
+        a.hourNumber || 0
+      ) -
+      Number(
+        b.hourNumber || 0
+      )
+  );
+
+
+  let y = 15;
+
+
+  doc.setFontSize(
+    16
+  );
+
+
+  doc.text(
+    "SHIFT PRODUCTION REPORT",
+    105,
+    y,
+    {
+      align:"center"
+    }
+  );
+
+
+  y += 9;
+
+
+  doc.setFontSize(
+    10
+  );
+
+
+  doc.text(
+    "Date: " +
+    formatDisplayDate(
+      getSelectedDate()
+    ),
+    15,
+    y
+  );
+
+
+  y += 6;
+
+
+  doc.text(
+    "Shift: " +
+    getSelectedShift(),
+    15,
+    y
+  );
+
+
+  y += 10;
+
+
+  /* TABLE HEADER */
+
+  const headers = [
+
+    "Hour",
+    "Size",
+    "Sheets",
+    "Beater",
+    "BD",
+    "Output",
+    "Input",
+    "ME%",
+    "ROP"
+
+  ];
+
+
+  const xPositions = [
+
+    12,
+    32,
+    53,
+    73,
+    92,
+    108,
+    130,
+    150,
+    169
+
+  ];
+
+
+  doc.setFontSize(
+    7
+  );
+
+
+  headers.forEach(
+    (h,i) => {
+
+      doc.text(
+        h,
+        xPositions[i],
+        y
+      );
+
+    }
+  );
+
+
+  y += 6;
+
+
+  let totalOutput = 0;
+
+  let totalInput = 0;
+
+  let totalBD = 0;
+
+
+  rows.forEach(
+    row => {
+
+      if(y > 270){
+
+        doc.addPage();
+
+        y = 15;
+
+      }
+
+
+      const m =
+        getReportMetrics(
+          row
+        );
+
+
+      totalOutput +=
+        m.output;
+
+
+      totalInput +=
+        m.input;
+
+
+      totalBD +=
+        Number(row.bd) || 0;
+
+
+      const values = [
+
+        row.hour,
+        m.size
+          ? m.size.toFixed(2)
+          : "-",
+        m.sheets || "-",
+        row.beater !== ""
+          ? String(row.beater)
+          : "-",
+        row.bd !== ""
+          ? String(row.bd)
+          : "-",
+        m.output > 0
+          ? m.output.toFixed(2)
+          : "-",
+        m.input > 0
+          ? m.input.toFixed(2)
+          : "-",
+        m.me !== ""
+          ? m.me.toFixed(1) + "%"
+          : "-",
+        m.rop !== ""
+          ? m.rop.toFixed(2)
+          : "-"
+
+      ];
+
+
+      values.forEach(
+        (v,i) => {
+
+          doc.text(
+            String(v),
+            xPositions[i],
+            y
+          );
+
+        }
+      );
+
+
+      y += 6;
+
+    }
+  );
+
+
+  y += 7;
+
+
+  if(y > 265){
+
+    doc.addPage();
+
+    y = 15;
+
+  }
+
+
+  const overallME =
+
+    totalOutput > 0 &&
+    totalInput > 0
+
+      ? (
+          1 -
+          totalOutput /
+          totalInput
+        ) * 100
+
+      : null;
+
+
+  const runningMinutes =
+
+    SHIFT_HOURS * 60 -
+    totalBD;
+
+
+  const overallROP =
+
+    totalOutput > 0 &&
+    runningMinutes > 0
+
+      ? totalOutput *
+        SHIFT_HOURS *
+        60 /
+        runningMinutes
+
+      : null;
+
+
+  doc.setFontSize(
+    11
+  );
+
+
+  doc.text(
+    "SHIFT SUMMARY",
+    15,
+    y
+  );
+
+
+  y += 7;
+
+
+  doc.setFontSize(
+    9
+  );
+
+
+  doc.text(
+    "Total Production: " +
+    (
+      totalOutput > 0
+        ? totalOutput.toFixed(2) +
+          " MT"
+        : "-"
+    ),
+    20,
+    y
+  );
+
+
+  y += 6;
+
+
+  doc.text(
+    "Total Input: " +
+    (
+      totalInput > 0
+        ? totalInput.toFixed(2) +
+          " MT"
+        : "-"
+    ),
+    20,
+    y
+  );
+
+
+  y += 6;
+
+
+  doc.text(
+    "Overall ME: " +
+    (
+      overallME !== null
+        ? overallME.toFixed(2) +
+          "%"
+        : "-"
+    ),
+    20,
+    y
+  );
+
+
+  y += 6;
+
+
+  doc.text(
+    "Overall ROP: " +
+    (
+      overallROP !== null
+        ? overallROP.toFixed(2) +
+          " MT/hr"
+        : "-"
+    ),
+    20,
+    y
+  );
+
+
+  y += 6;
+
+
+  doc.text(
+    "Total Breakdown: " +
+    totalBD +
+    " min",
+    20,
+    y
+  );
+
+
+  const filename =
+
+    "Shift_" +
+    getSelectedShift() +
+    "_" +
+    getSelectedDate() +
+    "_Production_Report.pdf";
+
+
+  doc.save(
+    filename
+  );
+
+
+  showToast(
+    "✓ Shift PDF Generated Successfully"
+  );
+
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHtml(
+  value
+){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
 
     return "";
 
@@ -2770,17 +4816,61 @@ function escapeHtml(value){
 
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
 /* =====================================================
-   INITIALIZE
+   EVENTS
+===================================================== */
+
+document
+  .getElementById(
+    "productionDate"
+  )
+  .addEventListener(
+    "change",
+    renderDashboard
+  );
+
+
+document
+  .getElementById(
+    "shift"
+  )
+  .addEventListener(
+    "change",
+    renderDashboard
+  );
+
+
+/* =====================================================
+   START
 ===================================================== */
 
 window.onload =
@@ -2792,14 +4882,6 @@ function(){
     getToday();
 
 
-  document.getElementById(
-    "productionDate"
-  ).addEventListener(
-    "change",
-    renderDashboard
-  );
-
-
   loadData();
 
 };
@@ -2807,4 +4889,5 @@ function(){
 </script>
 
 </body>
+
 </html>
