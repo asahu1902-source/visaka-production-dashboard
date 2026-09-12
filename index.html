@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visaka Production Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background-color: #000000; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 12px 8px 30px 8px; }
+
+    .app-viewport { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
+    
+    .card { background: #07142b; border: 2px solid #38bdf8; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .card h2 { color: #ffff00; font-size: 18px; font-weight: 900; text-align: center; text-transform: uppercase; }
+    .card h3 { color: #38bdf8; font-size: 15px; font-weight: 900; }
+
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { color: #00ffff; font-size: 12px; font-weight: 800; }
+    .form-input { width: 100%; background: #000000; color: #ffff00; border: 1.5px solid #38bdf8; padding: 10px; font-size: 14px; border-radius: 6px; outline: none; font-weight: bold; }
+
+    .btn-submit { width: 100%; background: linear-gradient(90deg, #10b981, #059669); color: #ffffff; font-size: 15px; font-weight: 900; padding: 12px; border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+
+    .standard-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+    .standard-table th { background-color: #ff8c00; color: #000000; font-weight: 900; font-size: 11px; padding: 6px 4px; border: 1px solid #8b0000; text-align: center; }
+    .standard-table td { border: 1px solid #8b0000; padding: 6px 4px; font-size: 11px; font-weight: bold; text-align: center; color: #ffffff; background: #000; }
+    .cyan-cell { background-color: #00ffff !important; color: #000000 !important; font-weight: 900 !important; }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    
+    <!-- HEADER CARD -->
+    <div class="card" style="text-align: center;">
+      <h2>⚡ VISAKA PRODUCTION DASHBOARD</h2>
+      <p style="color: #38bdf8; font-size: 13px; font-weight: bold;">Real-time Hourly Entry & Tracking</p>
+    </div>
+
+    <!-- HOURLY ENTRY FORM -->
+    <div class="card">
+      <h3>📝 Hourly Production Entry</h3>
+      
+      <div class="form-group">
+        <label>Operator Name</label>
+        <input type="text" id="opName" class="form-input" placeholder="Enter your name...">
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <div class="form-group" style="flex: 1;">
+          <label>Shift</label>
+          <select id="opShift" class="form-input">
+            <option value="A">Shift A</option>
+            <option value="B">Shift B</option>
+            <option value="C">Shift C</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>Hour</label>
+          <select id="opHour" class="form-input">
+            <option value="1st Hour">1st Hour</option>
+            <option value="2nd Hour">2nd Hour</option>
+            <option value="3rd Hour" selected>3rd Hour</option>
+            <option value="4th Hour">4th Hour</option>
+            <option value="5th Hour">5th Hour</option>
+            <option value="6th Hour">6th Hour</option>
+            <option value="7th Hour">7th Hour</option>
+            <option value="8th Hour">8th Hour</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <div class="form-group" style="flex: 1;">
+          <label>Size</label>
+          <select id="opSize" class="form-input">
+            <option value="6.0">6.0m</option>
+            <option value="5.85" selected>5.85m</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>1st Size Sheets</label>
+          <input type="number" id="opS1" class="form-input" value="0">
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <div class="form-group" style="flex: 1;">
+          <label>2nd Size Sheets</label>
+          <input type="number" id="opS2" class="form-input" value="0">
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>Moulding (MG Pickup)</label>
+          <input type="number" id="opMoulding" class="form-input" value="0">
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <div class="form-group" style="flex: 1;">
+          <label>Beater</label>
+          <input type="number" id="opBeater" class="form-input" value="0">
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>B/D (Min)</label>
+          <input type="number" id="opBD" class="form-input" value="0">
+        </div>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitProductionEntry()">Submit Hourly Data ➔</button>
+    </div>
+
+    <!-- LIVE DATA TABLE -->
+    <div class="card">
+      <h3>📊 Today's Production Log</h3>
+      <div style="overflow-x: auto;">
+        <table class="standard-table">
+          <thead>
+            <tr>
+              <th>Hour</th>
+              <th>Size</th>
+              <th>1st Shts</th>
+              <th>2nd Shts</th>
+              <th>Moulding</th>
+              <th>Beater</th>
+              <th>Operator</th>
+            </tr>
+          </thead>
+          <tbody id="productionTableBody">
+            <tr><td colspan="7" style="padding: 12px; color: #94a3b8;">Loading data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
+
+    function loadDashboardData() {
+      const s = document.createElement('script');
+      s.src = `${SCRIPT_URL}?action=getDashboardData&callback=handleDashboardResponse&t=${Date.now()}`;
+      document.head.appendChild(s);
+    }
+
+    window.handleDashboardResponse = function(res) {
+      if (!res || res.status !== "success") return;
+      
+      const tbody = document.getElementById('productionTableBody');
+      const rows = res.data.rows || [];
+      
+      if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="padding: 12px; color: #94a3b8;">No entries found yet.</td></tr>';
+        return;
+      }
+
+      let html = '';
+      rows.slice(-10).reverse().forEach(r => {
+        html += `<tr>
+          <td class="cyan-cell">${r.hour}</td>
+          <td>${r.size}</td>
+          <td style="color: #ffff00;">${r.s1Sheets}</td>
+          <td style="color: #ffff00;">${r.s2Sheets}</td>
+          <td style="color: #10b981; font-weight: 900;">${r.moulding}</td>
+          <td>${r.beater}</td>
+          <td style="text-align: left; padding-left: 6px;">${r.name}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    };
+
+    function submitProductionEntry() {
+      const name = document.getElementById('opName').value.trim();
+      if (!name) {
+        alert("Please enter operator name.");
+        return;
+      }
+
+      const shift = document.getElementById('opShift').value;
+      const hour = document.getElementById('opHour').value;
+      const size = document.getElementById('opSize').value;
+      const s1Sheets = document.getElementById('opS1').value;
+      const s2Sheets = document.getElementById('opS2').value;
+      const moulding = document.getElementById('opMoulding').value;
+      const beater = document.getElementById('opBeater').value;
+      const bd = document.getElementById('opBD').value;
+
+      const btn = document.getElementById('submitBtn');
+      btn.innerText = "Submitting...";
+      btn.disabled = true;
+
+      const s = document.createElement('script');
+      s.src = `${SCRIPT_URL}?action=submitHourly&shift=${encodeURIComponent(shift)}&hour=${encodeURIComponent(hour)}&size=${encodeURIComponent(size)}&s1Sheets=${s1Sheets}&s2Sheets=${s2Sheets}&moulding=${moulding}&beater=${beater}&bd=${bd}&operator=${encodeURIComponent(name)}&callback=handleSubmitResponse&t=${Date.now()}`;
+      document.head.appendChild(s);
+    }
+
+    window.handleSubmitResponse = function(res) {
+      const btn = document.getElementById('submitBtn');
+      btn.innerText = "Submit Hourly Data ➔";
+      btn.disabled = false;
+
+      if (res && res.status === "success") {
+        alert("Hourly production submitted successfully!");
+        loadDashboardData();
+      } else {
+        alert("Submission failed.");
+      }
+    };
+
+    window.onload = function() {
+      loadDashboardData();
+    };
+  </script>
+</body>
+</html>
