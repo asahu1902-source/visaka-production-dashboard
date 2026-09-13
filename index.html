@@ -10,48 +10,54 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Production Dashboard</title>
 
-<!-- PDF LIBRARY -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- FONT AWESOME -->
+
 <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
 <style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
 
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+}
+
+html{
+  font-size:16px;
 }
 
 body{
+
   background:#000;
+
   color:#fff;
 
-  padding:12px 10px 35px;
+  font-family:
+  Arial,
+  Helvetica,
+  sans-serif;
 
-  font-size:15px;
+  padding:12px 8px 35px;
+
+  font-size:16px;
 
   -webkit-text-size-adjust:100%;
+
 }
 
 .app{
+
   width:100%;
-  max-width:650px;
+
+  max-width:760px;
+
   margin:auto;
+
 }
 
 
@@ -60,164 +66,192 @@ body{
 ===================================================== */
 
 .target-panel{
+
   background:#07142b;
 
-  border:2px solid #facc15;
+  border:2px solid #38bdf8;
 
   border-radius:12px;
 
   overflow:hidden;
 
   margin-bottom:14px;
+
 }
 
 .banner{
-  display:flex;
-
-  justify-content:space-between;
-  align-items:center;
 
   background:#0284c7;
 
-  color:#fff;
+  padding:10px 12px;
 
-  padding:9px 12px;
+  display:flex;
 
-  font-size:13px;
+  justify-content:space-between;
 
-  font-weight:900;
+  align-items:center;
+
+  font-size:15px;
+
+  font-weight:1000;
+
 }
 
 .main-target{
-  text-align:center;
 
-  background:#1e293b;
+  background:#172033;
+
+  text-align:center;
 
   padding:14px 8px;
 
   border-bottom:1px solid #facc15;
+
 }
 
 .main-target .number{
+
   color:#ffff00;
 
   font-size:30px;
 
-  font-weight:900;
+  font-weight:1000;
+
 }
 
 .main-target .label{
+
   color:#38bdf8;
 
-  font-size:12px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
 
-  margin-top:3px;
+  margin-top:4px;
+
 }
 
 .summary-grid{
+
   display:grid;
 
   grid-template-columns:
-    repeat(3,1fr);
+  repeat(3,1fr);
+
 }
 
 .summary-cell{
+
   text-align:center;
 
   padding:11px 4px;
 
-  background:#09203f;
-
   border-right:1px solid #facc15;
+
 }
 
 .summary-cell:last-child{
+
   border-right:none;
+
 }
 
 .summary-cell .title{
-  color:#38bdf8;
 
-  font-size:10px;
+  color:#00ffff;
 
-  font-weight:900;
+  font-size:11px;
+
+  font-weight:1000;
+
 }
 
 .summary-cell .value{
+
   color:#ffff00;
 
-  font-size:17px;
+  font-size:18px;
 
-  font-weight:900;
+  font-weight:1000;
 
   margin-top:4px;
+
 }
 
 .meta{
+
   display:grid;
 
   grid-template-columns:
-    1fr 1fr;
+  1fr 1fr;
 
   border-top:1px solid #facc15;
 
-  border-bottom:1px solid #facc15;
 }
 
 .meta-cell{
+
   text-align:center;
 
-  padding:9px 4px;
+  padding:10px 4px;
 
   color:#facc15;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
 
   border-right:1px solid #facc15;
+
 }
 
 .meta-cell:last-child{
+
   border-right:none;
+
 }
 
 .latest{
+
   text-align:center;
 
-  padding:10px;
+  padding:10px 5px;
 
   background:#07142b;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
+
 }
 
 .latest span{
+
   color:#00ffff;
+
 }
 
 .time-footer{
+
   text-align:center;
 
   background:#db2777;
 
   padding:11px;
 
-  font-size:13px;
+  font-size:15px;
 
-  font-weight:900;
+  font-weight:1000;
+
 }
 
 
 /* =====================================================
-   CARDS
+   CARD
 ===================================================== */
 
 .card{
+
   background:#07142b;
 
   border:1.5px solid #38bdf8;
@@ -227,16 +261,19 @@ body{
   padding:14px;
 
   margin-bottom:14px;
+
 }
 
 .card h3{
+
   color:#38bdf8;
 
-  font-size:17px;
+  font-size:19px;
 
-  font-weight:900;
+  font-weight:1000;
 
-  margin-bottom:13px;
+  margin-bottom:14px;
+
 }
 
 
@@ -245,31 +282,39 @@ body{
 ===================================================== */
 
 .row{
+
   display:flex;
 
   gap:10px;
+
 }
 
 .col{
+
   flex:1;
 
   min-width:0;
+
 }
 
 .group{
-  margin-bottom:11px;
+
+  margin-bottom:12px;
+
 }
 
 label{
+
   display:block;
 
   color:#00ffff;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
 
   margin-bottom:5px;
+
 }
 
 input,
@@ -277,7 +322,7 @@ select{
 
   width:100%;
 
-  min-height:44px;
+  min-height:47px;
 
   background:#000;
 
@@ -289,26 +334,31 @@ select{
 
   padding:9px 10px;
 
-  font-size:15px;
+  font-size:17px;
 
-  font-weight:800;
+  font-weight:900;
 
   outline:none;
+
 }
 
 input::placeholder{
+
   color:#64748b;
 
-  font-size:12px;
+  font-size:13px;
+
 }
 
 input:focus,
 select:focus{
+
   border-color:#00ffff;
 
   box-shadow:
-    0 0 0 2px
-    rgba(0,255,255,.12);
+  0 0 0 2px
+  rgba(0,255,255,.12);
+
 }
 
 
@@ -317,71 +367,110 @@ select:focus{
 ===================================================== */
 
 button{
+
   border:none;
 
   cursor:pointer;
 
-  font-weight:900;
+  font-weight:1000;
 
   -webkit-tap-highlight-color:transparent;
+
 }
 
 button:disabled{
-  opacity:.65;
+
+  opacity:.6;
 
   cursor:not-allowed;
+
 }
 
 .primary-btn{
+
   width:100%;
 
-  min-height:46px;
+  min-height:49px;
 
   background:#0284c7;
 
   color:#fff;
 
-  padding:10px;
+  border-radius:7px;
 
-  border-radius:6px;
+  font-size:15px;
 
-  font-size:13px;
 }
 
 .submit-btn{
+
   width:100%;
 
-  min-height:48px;
+  min-height:51px;
 
   background:#10b981;
 
   color:#fff;
 
-  padding:10px;
+  border-radius:7px;
 
-  border-radius:6px;
+  font-size:15px;
 
-  font-size:13px;
 }
 
 .cancel-btn{
+
+  display:none;
+
   width:100%;
 
-  min-height:42px;
+  min-height:45px;
+
+  margin-top:8px;
 
   background:#dc2626;
 
   color:#fff;
 
-  padding:9px;
+  border-radius:7px;
 
-  border-radius:6px;
+  font-size:14px;
 
-  font-size:12px;
+}
 
-  margin-top:7px;
 
-  display:none;
+/* =====================================================
+   REFRESH
+===================================================== */
+
+.refresh-btn{
+
+  width:100%;
+
+  min-height:47px;
+
+  margin-bottom:12px;
+
+  background:#334155;
+
+  color:#fff;
+
+  border:1px solid #38bdf8;
+
+  border-radius:7px;
+
+  font-size:15px;
+
+  font-weight:1000;
+
+}
+
+.refresh-btn i{
+
+  font-size:18px;
+
+  margin-right:5px;
+
 }
 
 
@@ -390,99 +479,51 @@ button:disabled{
 ===================================================== */
 
 .progress-area{
+
   display:none;
 
   margin-top:10px;
+
 }
 
 .progress-text{
+
   text-align:center;
 
   color:#00ffff;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
 
   margin-bottom:6px;
+
 }
 
 .progress-bg{
+
   width:100%;
 
-  height:9px;
+  height:10px;
 
   background:#1e293b;
 
   border-radius:10px;
 
   overflow:hidden;
+
 }
 
 .progress-bar{
+
   width:0%;
 
   height:100%;
 
   background:#10b981;
 
-  transition:
-    width .2s linear;
-}
+  transition:width .2s linear;
 
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast{
-  position:fixed;
-
-  left:50%;
-
-  bottom:20px;
-
-  transform:
-    translateX(-50%)
-    translateY(120px);
-
-  width:calc(100% - 30px);
-
-  max-width:500px;
-
-  background:#10b981;
-
-  color:#fff;
-
-  padding:14px 16px;
-
-  border-radius:9px;
-
-  text-align:center;
-
-  font-size:13px;
-
-  font-weight:900;
-
-  z-index:9999;
-
-  opacity:0;
-
-  transition:
-    transform .25s ease,
-    opacity .25s ease;
-}
-
-.toast.show{
-  transform:
-    translateX(-50%)
-    translateY(0);
-
-  opacity:1;
-}
-
-.toast.error{
-  background:#dc2626;
 }
 
 
@@ -491,82 +532,95 @@ button:disabled{
 ===================================================== */
 
 .table-wrap{
+
+  width:100%;
+
   overflow-x:auto;
 
   -webkit-overflow-scrolling:touch;
 
-  border-radius:5px;
 }
 
 table{
+
   width:100%;
+
+  min-width:1050px;
 
   border-collapse:collapse;
 
-  min-width:760px;
 }
 
 th{
+
   background:#ff8c00;
 
   color:#000;
 
-  padding:9px 6px;
+  padding:11px 6px;
 
   border:1px solid #8b0000;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:900;
+  font-weight:1000;
 
   white-space:nowrap;
+
 }
 
 td{
+
   background:#000;
 
   color:#fff;
 
-  padding:9px 6px;
+  padding:11px 6px;
 
   border:1px solid #8b0000;
 
   text-align:center;
 
-  font-size:11px;
+  font-size:13px;
 
-  font-weight:700;
+  font-weight:900;
 
   white-space:nowrap;
+
 }
 
 .hour-cell{
+
   background:#00ffff !important;
 
   color:#000 !important;
 
-  font-weight:900;
+  font-weight:1000;
+
 }
 
 .yellow{
+
   color:#ffff00;
+
 }
 
 .cyan{
+
   color:#38bdf8;
+
 }
 
 
 /* =====================================================
-   ACTION ICON BUTTONS
+   ACTION ICONS
 ===================================================== */
 
 .action{
-  width:40px;
 
-  height:38px;
+  width:43px;
 
-  border:none;
+  height:40px;
 
   border-radius:7px;
 
@@ -580,60 +634,49 @@ td{
 
   justify-content:center;
 
-  cursor:pointer;
-
-  transition:
-    transform .12s ease,
-    opacity .12s ease;
-}
-
-.action:active{
-  transform:scale(.92);
 }
 
 .action i{
-  font-size:20px;
+
+  font-size:21px;
+
 }
 
-
-/* EDIT */
-
 .edit{
+
   background:#0284c7;
 
   color:#fff;
+
 }
 
-
-/* DELETE */
-
 .delete{
+
   background:#dc2626;
 
   color:#fff;
+
 }
 
-
-/* WHATSAPP */
-
 .whatsapp{
+
   background:#16a34a;
 
   color:#fff;
+
 }
 
-
-/* PDF */
-
 .pdf{
+
   background:#dc2626;
 
   color:#fff;
+
 }
 
 
 /* =====================================================
-   SHIFT SUMMARY
+   SUMMARY CARDS
 ===================================================== */
 
 .summary-box{
@@ -643,9 +686,10 @@ td{
   display:grid;
 
   grid-template-columns:
-    1fr 1fr;
+  1fr 1fr;
 
   gap:8px;
+
 }
 
 .stat{
@@ -656,11 +700,9 @@ td{
 
   border-radius:9px;
 
-  padding:13px 6px;
+  padding:15px 6px;
 
-  text-align:center;
-
-  min-height:82px;
+  min-height:90px;
 
   display:flex;
 
@@ -669,47 +711,101 @@ td{
   justify-content:center;
 
   align-items:center;
+
+  text-align:center;
+
 }
 
 .stat-title{
 
   color:#00ffff;
 
-  font-size:12px;
+  font-size:14px;
 
-  font-weight:900;
+  font-weight:1000;
 
-  letter-spacing:.2px;
 }
 
 .stat-value{
 
   color:#ffff00;
 
-  font-size:21px;
+  font-size:25px;
 
-  font-weight:900;
+  font-weight:1000;
 
   margin-top:5px;
+
 }
 
-.status{
 
-  text-align:center;
+/* =====================================================
+   GSR CARD
+===================================================== */
+
+.gsr-card{
 
   margin-top:9px;
 
-  background:#111827;
+  background:#000;
+
+  border:2px solid #facc15;
+
+  border-radius:9px;
+
+  padding:15px 8px;
+
+  text-align:center;
+
+}
+
+.gsr-title{
 
   color:#00ffff;
 
-  padding:11px 7px;
+  font-size:15px;
 
-  border-radius:7px;
+  font-weight:1000;
 
-  font-size:12px;
+}
 
-  font-weight:900;
+.gsr-value{
+
+  color:#ffff00;
+
+  font-size:27px;
+
+  font-weight:1000;
+
+  margin-top:5px;
+
+}
+
+
+/* =====================================================
+   TARGET ACHIEVEMENT
+===================================================== */
+
+.status{
+
+  margin-top:10px;
+
+  background:#111827;
+
+  border-radius:8px;
+
+  padding:15px 7px;
+
+  text-align:center;
+
+  color:#00ffff;
+
+  font-size:18px;
+
+  font-weight:1000;
+
+  border:1px solid #1e293b;
+
 }
 
 
@@ -722,24 +818,21 @@ td{
   display:grid;
 
   grid-template-columns:
-    1fr 1fr;
+  1fr 1fr;
 
   gap:9px;
 
   margin-top:11px;
+
 }
 
 .report-btn{
 
-  min-height:52px;
+  min-height:58px;
 
   padding:9px 6px;
 
   border-radius:8px;
-
-  font-size:11px;
-
-  font-weight:900;
 
   display:flex;
 
@@ -749,11 +842,16 @@ td{
 
   gap:8px;
 
-  cursor:pointer;
+  font-size:13px;
+
+  font-weight:1000;
+
 }
 
 .report-btn i{
-  font-size:22px;
+
+  font-size:26px;
+
 }
 
 .report-wa{
@@ -761,6 +859,7 @@ td{
   background:#16a34a;
 
   color:#fff;
+
 }
 
 .report-pdf{
@@ -768,6 +867,68 @@ td{
   background:#dc2626;
 
   color:#fff;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+  position:fixed;
+
+  left:50%;
+
+  bottom:20px;
+
+  transform:
+  translateX(-50%)
+  translateY(120px);
+
+  width:calc(100% - 30px);
+
+  max-width:500px;
+
+  background:#10b981;
+
+  color:#fff;
+
+  padding:16px;
+
+  border-radius:9px;
+
+  text-align:center;
+
+  font-size:15px;
+
+  font-weight:1000;
+
+  z-index:9999;
+
+  opacity:0;
+
+  transition:
+  transform .25s ease,
+  opacity .25s ease;
+
+}
+
+.toast.show{
+
+  transform:
+  translateX(-50%)
+  translateY(0);
+
+  opacity:1;
+
+}
+
+.toast.error{
+
+  background:#dc2626;
+
 }
 
 
@@ -778,89 +939,81 @@ td{
 @media(max-width:480px){
 
   body{
-    padding:10px 7px 30px;
-  }
 
-  .app{
-    max-width:100%;
+    padding:9px 6px 30px;
+
   }
 
   .card{
+
     padding:12px;
+
   }
 
   .card h3{
-    font-size:16px;
-  }
 
-  label{
-    font-size:10px;
+    font-size:18px;
+
   }
 
   input,
   select{
-    font-size:14px;
 
-    min-height:43px;
+    font-size:17px;
+
+    min-height:47px;
+
   }
 
-  .summary-cell .title{
-    font-size:9px;
-  }
+  label{
 
-  .summary-cell .value{
-    font-size:15px;
-  }
+    font-size:12px;
 
-  .stat-title{
-    font-size:11px;
   }
 
   .stat-value{
-    font-size:19px;
+
+    font-size:22px;
+
   }
 
-  .report-btn{
-    font-size:10px;
+  .status{
+
+    font-size:16px;
+
   }
 
 }
 
 
 /* =====================================================
-   SMALL MOBILE
+   VERY SMALL MOBILE
 ===================================================== */
 
 @media(max-width:360px){
 
   .row{
+
     gap:6px;
-  }
 
-  .card{
-    padding:10px;
-  }
-
-  .main-target .number{
-    font-size:26px;
   }
 
   .summary-cell .value{
-    font-size:14px;
+
+    font-size:15px;
+
   }
 
   .stat-value{
-    font-size:17px;
+
+    font-size:20px;
+
   }
 
-  .action{
-    width:37px;
+  .report-btn{
 
-    height:36px;
-  }
+    font-size:11px;
 
-  .action i{
-    font-size:18px;
   }
 
 }
@@ -872,14 +1025,16 @@ td{
 
 <body>
 
+
 <div class="app">
 
 
 <!-- =====================================================
-     TOP TARGET PANEL
+     TOP PANEL
 ===================================================== -->
 
 <div class="target-panel">
+
 
   <div class="banner">
 
@@ -905,13 +1060,16 @@ td{
     </div>
 
     <div class="label">
+
       TOTAL REQUIRED SHEETS
+
     </div>
 
   </div>
 
 
   <div class="summary-grid">
+
 
     <div class="summary-cell">
 
@@ -963,17 +1121,17 @@ td{
 
     </div>
 
+
   </div>
 
 
   <div class="meta">
 
+
     <div class="meta-cell">
 
       Target Size:
-      <span id="targetSizeDisplay">
-        -
-      </span>
+      <span id="targetSizeDisplay">-</span>
       m
 
     </div>
@@ -982,11 +1140,10 @@ td{
     <div class="meta-cell">
 
       SFT:
-      <span id="sftDisplay">
-        -
-      </span>
+      <span id="sftDisplay">-</span>
 
     </div>
+
 
   </div>
 
@@ -1019,13 +1176,18 @@ td{
 
 <div class="card">
 
+
   <h3>
+
     <i class="fa-solid fa-gear"></i>
+
     Master Settings
+
   </h3>
 
 
   <div class="row">
+
 
     <div class="col">
 
@@ -1110,6 +1272,7 @@ td{
       <div
         class="progress-bar"
         id="settingsProgressBar">
+
       </div>
 
     </div>
@@ -1120,14 +1283,16 @@ td{
 
 
 <!-- =====================================================
-     HOURLY ENTRY
+     HOURLY PRODUCTION ENTRY
 ===================================================== -->
 
 <div class="card">
 
+
   <h3 id="formTitle">
 
     <i class="fa-solid fa-clipboard-list"></i>
+
     Hourly Production Entry
 
   </h3>
@@ -1136,21 +1301,6 @@ td{
   <input
     type="hidden"
     id="editRowIndex">
-
-
-  <!-- PRODUCTION DATE -->
-
-  <div class="group">
-
-    <label>
-      Production Date
-    </label>
-
-    <input
-      type="date"
-      id="productionDate">
-
-  </div>
 
 
   <!-- OPERATOR -->
@@ -1173,6 +1323,7 @@ td{
 
   <div class="row">
 
+
     <div class="col">
 
       <div class="group">
@@ -1181,21 +1332,14 @@ td{
           Shift
         </label>
 
-        <select id="shift">
+        <!-- PLAIN TEXT BOX - NO DROPDOWN -->
 
-          <option value="A">
-            Shift A
-          </option>
-
-          <option value="B">
-            Shift B
-          </option>
-
-          <option value="C">
-            Shift C
-          </option>
-
-        </select>
+        <input
+          type="text"
+          id="shift"
+          value="A"
+          maxlength="1"
+          placeholder="A / B / C">
 
       </div>
 
@@ -1210,7 +1354,13 @@ td{
           Production Hour
         </label>
 
+        <!-- ONLY DROPDOWN IN ENTIRE APP -->
+
         <select id="hour">
+
+          <option value="">
+            Select Hour
+          </option>
 
           <option value="1st Hour">
             1st Hour
@@ -1257,6 +1407,7 @@ td{
 
   <div class="row">
 
+
     <div class="col">
 
       <div class="group">
@@ -1288,7 +1439,7 @@ td{
           type="number"
           step="0.01"
           id="size2"
-          placeholder="e.g. 6">
+          placeholder="e.g. 6.00">
 
       </div>
 
@@ -1300,6 +1451,7 @@ td{
   <!-- SHEETS -->
 
   <div class="row">
+
 
     <div class="col">
 
@@ -1343,27 +1495,9 @@ td{
   </div>
 
 
-  <!-- BEATER + MOULDING -->
+  <!-- MOULDING + BEATER -->
 
   <div class="row">
-
-    <div class="col">
-
-      <div class="group">
-
-        <label>
-          Beater
-        </label>
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="beater">
-
-      </div>
-
-    </div>
 
 
     <div class="col">
@@ -1383,12 +1517,32 @@ td{
 
     </div>
 
+
+    <div class="col">
+
+      <div class="group">
+
+        <label>
+          Beater
+        </label>
+
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="beater">
+
+      </div>
+
+    </div>
+
   </div>
 
 
   <!-- BD + GSR -->
 
   <div class="row">
+
 
     <div class="col">
 
@@ -1415,12 +1569,13 @@ td{
       <div class="group">
 
         <label>
-          GSR (Rejection)
+          GSR (Rejection Sheets)
         </label>
 
         <input
           type="number"
-          step="0.01"
+          step="1"
+          min="0"
           id="gsr">
 
       </div>
@@ -1436,6 +1591,7 @@ td{
     onclick="submitEntry()">
 
     SUBMIT HOURLY DATA
+
     <i class="fa-solid fa-arrow-right"></i>
 
   </button>
@@ -1463,11 +1619,13 @@ td{
 
     </div>
 
+
     <div class="progress-bg">
 
       <div
         class="progress-bar"
         id="submitProgressBar">
+
       </div>
 
     </div>
@@ -1483,31 +1641,60 @@ td{
 
 <div class="card">
 
+
   <h3>
 
     <i class="fa-solid fa-chart-column"></i>
+
     Production Log & Metrics
 
   </h3>
 
 
+  <button
+    class="refresh-btn"
+    id="refreshBtn"
+    onclick="refreshData()">
+
+    <i class="fa-solid fa-rotate-right"></i>
+
+    REFRESH DATA
+
+  </button>
+
+
   <div class="table-wrap">
 
+
     <table>
+
 
       <thead>
 
         <tr>
 
           <th>Hour</th>
+
           <th>Size</th>
+
           <th>Sheets</th>
+
+          <th>Moulding</th>
+
           <th>Beater</th>
+
           <th>BD</th>
+
+          <th>GSR</th>
+
           <th>Output</th>
+
           <th>Input</th>
+
           <th>ME%</th>
+
           <th>ROP</th>
+
           <th>Action</th>
 
         </tr>
@@ -1519,7 +1706,7 @@ td{
 
         <tr>
 
-          <td colspan="10">
+          <td colspan="12">
             Loading...
           </td>
 
@@ -1532,7 +1719,7 @@ td{
   </div>
 
 
-  <!-- SHIFT SUMMARY -->
+  <!-- SUMMARY -->
 
   <div class="summary-box">
 
@@ -1607,11 +1794,37 @@ td{
   </div>
 
 
+  <!-- GSR -->
+
+  <div class="gsr-card">
+
+    <div class="gsr-title">
+
+      <i class="fa-solid fa-circle-exclamation"></i>
+
+      TOTAL GSR SHEETS
+
+    </div>
+
+
+    <div
+      class="gsr-value"
+      id="totalGSR">
+
+      0 SHEETS
+
+    </div>
+
+  </div>
+
+
+  <!-- TARGET -->
+
   <div
     class="status"
     id="targetStatus">
 
-    -
+    TARGET ACHIEVEMENT: -
 
   </div>
 
@@ -1645,38 +1858,43 @@ td{
 
   </div>
 
-</div>
-
 
 </div>
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+</div>
+
 
 <div
-  class="toast"
-  id="toast">
+class="toast"
+id="toast">
 
-  Success
+Success
 
 </div>
 
 
 <script>
 
+
 /* =====================================================
-   CONFIG
+   IMPORTANT:
+   PASTE YOUR CURRENT GOOGLE APPS SCRIPT WEB APP URL HERE
 ===================================================== */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
+"PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 
-const PRODUCTION_CONSTANT = 12.8;
+const PRODUCTION_CONSTANT =
+12.8;
 
-const SHIFT_HOURS = 8;
+const SHIFT_HOURS =
+8;
+
+const REQUEST_TIMEOUT =
+15000;
+
 
 let globalData = [];
 
@@ -1730,120 +1948,175 @@ function showToast(
 
   toastTimer =
     setTimeout(
-      () => {
+      function(){
 
         toast.classList.remove(
           "show"
         );
 
       },
-      2500
+      3500
     );
 
 }
 
 
 /* =====================================================
-   PROGRESS
+   JSONP REQUEST
 ===================================================== */
 
-function startProgress(
-  areaId,
-  barId,
-  textId,
-  text
+function requestJSONP(
+  url,
+  onSuccess,
+  onTimeout
 ){
 
-  const area =
-    document.getElementById(
-      areaId
+  const callback =
+    "callback_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
     );
 
 
-  const bar =
-    document.getElementById(
-      barId
+  const script =
+    document.createElement(
+      "script"
     );
 
 
-  const textEl =
-    document.getElementById(
-      textId
-    );
-
-
-  area.style.display =
-    "block";
-
-
-  textEl.innerText =
-    text;
-
-
-  bar.style.width =
-    "5%";
-
-
-  let progress =
-    5;
+  let finished =
+    false;
 
 
   const timer =
-    setInterval(
-      () => {
+    setTimeout(
+      function(){
 
-        progress +=
-          Math.random() * 12;
+        if(
+          finished
+        ){
 
-
-        if(progress >= 88){
-
-          progress = 88;
-
-          clearInterval(
-            timer
-          );
+          return;
 
         }
 
 
-        bar.style.width =
-          progress + "%";
+        finished =
+          true;
+
+
+        script.remove();
+
+
+        delete window[
+          callback
+        ];
+
+
+        if(
+          onTimeout
+        ){
+
+          onTimeout();
+
+        }
 
       },
-      180
+      REQUEST_TIMEOUT
     );
 
 
-  return function finish(){
+  window[callback] =
+    function(res){
 
-    clearInterval(
-      timer
-    );
+      if(
+        finished
+      ){
 
+        return;
 
-    bar.style.width =
-      "100%";
-
-
-    textEl.innerText =
-      "COMPLETED ✓";
+      }
 
 
-    setTimeout(
-      () => {
+      finished =
+        true;
 
-        area.style.display =
-          "none";
 
-        bar.style.width =
-          "0%";
+      clearTimeout(
+        timer
+      );
 
-      },
-      700
-    );
 
-  };
+      script.remove();
+
+
+      delete window[
+        callback
+      ];
+
+
+      onSuccess(
+        res
+      );
+
+    };
+
+
+  script.onerror =
+    function(){
+
+      if(
+        finished
+      ){
+
+        return;
+
+      }
+
+
+      finished =
+        true;
+
+
+      clearTimeout(
+        timer
+      );
+
+
+      script.remove();
+
+
+      delete window[
+        callback
+      ];
+
+
+      if(
+        onTimeout
+      ){
+
+        onTimeout();
+
+      }
+
+    };
+
+
+  script.src =
+    url +
+    "&callback=" +
+    encodeURIComponent(
+      callback
+    ) +
+    "&t=" +
+    Date.now();
+
+
+  document.body.appendChild(
+    script
+  );
 
 }
 
@@ -1881,11 +2154,13 @@ function getToday(){
 
 
   return (
+
     y +
     "-" +
     m +
     "-" +
     day
+
   );
 
 }
@@ -1895,23 +2170,43 @@ function formatDisplayDate(
   dateStr
 ){
 
-  if(!dateStr)
+  if(
+    !dateStr
+  ){
+
     return "-";
+
+  }
 
 
   const parts =
-    dateStr.split("-");
+    String(dateStr)
+      .split("-");
 
 
-  if(parts.length !== 3)
+  if(
+    parts.length !== 3
+  ){
+
     return dateStr;
+
+  }
 
 
   const months = [
 
-    "Jan","Feb","Mar","Apr",
-    "May","Jun","Jul","Aug",
-    "Sep","Oct","Nov","Dec"
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
 
   ];
 
@@ -1932,24 +2227,67 @@ function formatDisplayDate(
 
 
 /* =====================================================
-   JSONP
+   HOUR NUMBER
 ===================================================== */
 
-function jsonp(url){
+function getHourNumber(
+  hour
+){
 
-  const script =
-    document.createElement(
-      "script"
-    );
-
-
-  script.src =
-    url;
+  const h =
+    String(hour || "")
+      .toLowerCase();
 
 
-  document.body.appendChild(
-    script
-  );
+  if(
+    h.includes("1st")
+  )
+    return 1;
+
+
+  if(
+    h.includes("2nd")
+  )
+    return 2;
+
+
+  if(
+    h.includes("3rd")
+  )
+    return 3;
+
+
+  if(
+    h.includes("4th")
+  )
+    return 4;
+
+
+  if(
+    h.includes("5th")
+  )
+    return 5;
+
+
+  if(
+    h.includes("6th")
+  )
+    return 6;
+
+
+  if(
+    h.includes("7th")
+  )
+    return 7;
+
+
+  if(
+    h.includes("8th")
+  )
+    return 8;
+
+
+  return 0;
 
 }
 
@@ -1958,91 +2296,110 @@ function jsonp(url){
    LOAD DATA
 ===================================================== */
 
-function loadData(){
+function loadData(
+  showMessage = false
+){
 
-  const callback =
-    "dashboardCallback_" +
-    Date.now();
+  requestJSONP(
 
+    SCRIPT_URL +
+    "?action=getDashboardData",
 
-  window[callback] =
     function(res){
 
-      try{
+      if(
 
-        if(
-          !res ||
-          res.status !==
-          "success"
-        ){
+        !res ||
 
-          showToast(
-            res && res.message
-              ? res.message
-              : "Unable to load data.",
-            true
-          );
+        res.status !==
+        "success"
 
-          return;
+      ){
 
-        }
+        showToast(
 
+          res &&
+          res.message
 
-        globalData =
-          res.data.rows ||
-          [];
+            ? res.message
 
+            : "Unable to load data.",
 
-        settings =
-          res.data.masterSettings ||
-          settings;
+          true
 
+        );
 
-        document.getElementById(
-          "targetProd"
-        ).value =
-          settings.targetProd !== ""
-            ? settings.targetProd
-            : "";
-
-
-        document.getElementById(
-          "targetSize"
-        ).value =
-          settings.targetSize !== ""
-            ? settings.targetSize
-            : "";
-
-
-        document.getElementById(
-          "batchWeight"
-        ).value =
-          settings.batchWeight !== ""
-            ? settings.batchWeight
-            : "";
-
-
-        renderDashboard();
-
-      }finally{
-
-        delete window[
-          callback
-        ];
+        return;
 
       }
 
-    };
+
+      globalData =
+        res.data.rows ||
+        [];
 
 
-  jsonp(
+      settings =
+        res.data.masterSettings ||
+        settings;
 
-    SCRIPT_URL +
-    "?action=getDashboardData" +
-    "&callback=" +
-    callback +
-    "&t=" +
-    Date.now()
+
+      document.getElementById(
+        "targetProd"
+      ).value =
+
+        settings.targetProd !== ""
+
+          ? settings.targetProd
+
+          : "";
+
+
+      document.getElementById(
+        "targetSize"
+      ).value =
+
+        settings.targetSize !== ""
+
+          ? settings.targetSize
+
+          : "";
+
+
+      document.getElementById(
+        "batchWeight"
+      ).value =
+
+        settings.batchWeight !== ""
+
+          ? settings.batchWeight
+
+          : "";
+
+
+      renderDashboard();
+
+
+      if(
+        showMessage
+      ){
+
+        showToast(
+          "✓ Data refreshed successfully"
+        );
+
+      }
+
+    },
+
+    function(){
+
+      showToast(
+        "Refresh timed out. Please try again.",
+        true
+      );
+
+    }
 
   );
 
@@ -2050,31 +2407,76 @@ function loadData(){
 
 
 /* =====================================================
-   FILTER
+   REFRESH
 ===================================================== */
 
-function getSelectedDate(){
+function refreshData(){
 
-  return document.getElementById(
-    "productionDate"
-  ).value;
+  const btn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.innerHTML =
+
+    '<i class="fa-solid fa-spinner fa-spin"></i> REFRESHING...';
+
+
+  loadData();
+
+
+  setTimeout(
+    function(){
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+
+        '<i class="fa-solid fa-rotate-right"></i> REFRESH DATA';
+
+    },
+    1600
+  );
 
 }
 
+
+/* =====================================================
+   SELECTED SHIFT
+===================================================== */
 
 function getSelectedShift(){
 
-  return document.getElementById(
-    "shift"
-  ).value;
+  return (
+
+    document.getElementById(
+      "shift"
+    ).value
+
+    || "A"
+
+  )
+    .trim()
+    .toUpperCase();
 
 }
 
+
+/* =====================================================
+   FILTER CURRENT SHIFT
+===================================================== */
 
 function getFilteredRows(){
 
   const date =
-    getSelectedDate();
+    getToday();
 
 
   const shift =
@@ -2082,16 +2484,22 @@ function getFilteredRows(){
 
 
   return globalData.filter(
-    r =>
+    function(r){
 
-      String(r.date) ===
-      String(date)
+      return (
 
-      &&
+        String(r.date) ===
+        String(date)
 
-      String(r.shift) ===
-      String(shift)
+        &&
 
+        String(r.shift)
+          .toUpperCase() ===
+        shift
+
+      );
+
+    }
   );
 
 }
@@ -2101,25 +2509,31 @@ function getFilteredRows(){
    PRODUCTION CALCULATION
 ===================================================== */
 
-function getRowProduction(r){
+function getRowProduction(
+  r
+){
 
-  let sheets = 0;
+  let sheets =
+    0;
 
-  let size = 0;
+  let size =
+    0;
 
-  let source = "";
 
+  /* 2ND SIZE HAS PRIORITY */
 
   if(
+
     r.s2Sheets !== "" &&
-    r.s2Sheets !== null &&
-    !isNaN(r.s2Sheets)
+
+    r.s2Sheets !== null
+
   ){
 
     sheets =
       Number(
         r.s2Sheets
-      );
+      ) || 0;
 
 
     size =
@@ -2127,22 +2541,21 @@ function getRowProduction(r){
         r.size2
       ) || 0;
 
-
-    source =
-      "2nd";
-
   }
 
+
   else if(
+
     r.s1Sheets !== "" &&
-    r.s1Sheets !== null &&
-    !isNaN(r.s1Sheets)
+
+    r.s1Sheets !== null
+
   ){
 
     sheets =
       Number(
         r.s1Sheets
-      );
+      ) || 0;
 
 
     size =
@@ -2150,19 +2563,19 @@ function getRowProduction(r){
         r.size1
       ) || 0;
 
-
-    source =
-      "1st";
-
   }
 
 
-  let output = 0;
+  let output =
+    0;
 
 
   if(
+
     sheets > 0 &&
+
     size > 0
+
   ){
 
     output =
@@ -2177,10 +2590,14 @@ function getRowProduction(r){
 
   return {
 
-    sheets,
-    size,
-    output,
-    source
+    sheets:
+      sheets,
+
+    size:
+      size,
+
+    output:
+      output
 
   };
 
@@ -2188,7 +2605,7 @@ function getRowProduction(r){
 
 
 /* =====================================================
-   DASHBOARD
+   RENDER DASHBOARD
 ===================================================== */
 
 function renderDashboard(){
@@ -2210,10 +2627,12 @@ function renderDashboard(){
 
 
 /* =====================================================
-   TABLE
+   RENDER TABLE
 ===================================================== */
 
-function renderTable(rows){
+function renderTable(
+  rows
+){
 
   const tbody =
     document.getElementById(
@@ -2230,14 +2649,14 @@ function renderTable(rows){
       `<tr>
 
         <td
-          colspan="10"
+          colspan="12"
           style="
-            padding:18px;
+            padding:22px;
             color:#94a3b8;
-            font-size:13px;
+            font-size:15px;
           ">
 
-          No production entry for this date/shift.
+          No production entry for this shift.
 
         </td>
 
@@ -2255,21 +2674,32 @@ function renderTable(rows){
 
 
   rows.sort(
-    (a,b) =>
-      Number(
-        a.hourNumber || 0
-      ) -
-      Number(
-        b.hourNumber || 0
-      )
+    function(a,b){
+
+      return (
+
+        getHourNumber(
+          a.hour
+        )
+
+        -
+
+        getHourNumber(
+          b.hour
+        )
+
+      );
+
+    }
   );
 
 
-  let html = "";
+  let html =
+    "";
 
 
   rows.forEach(
-    r => {
+    function(r){
 
       const p =
         getRowProduction(
@@ -2277,36 +2707,41 @@ function renderTable(rows){
         );
 
 
-      let input = "";
-
-      let inputVal = 0;
+      let inputVal =
+        0;
 
 
       if(
+
         settings.batchWeight !== "" &&
+
         r.beater !== "" &&
+
         Number(r.beater) > 0
+
       ){
 
         inputVal =
 
           Number(r.beater) *
-          Number(settings.batchWeight) /
+          Number(
+            settings.batchWeight
+          ) /
           1000;
-
-
-        input =
-          inputVal.toFixed(2);
 
       }
 
 
-      let me = "";
+      let me =
+        "";
 
 
       if(
+
         p.output > 0 &&
+
         inputVal > 0
+
       ){
 
         me =
@@ -2317,14 +2752,17 @@ function renderTable(rows){
               p.output /
               inputVal
             ) *
+
             100
-          ).toFixed(1)
-          + "%";
+
+          ).toFixed(1) +
+          "%";
 
       }
 
 
-      let rop = "";
+      let rop =
+        "";
 
 
       const bd =
@@ -2332,8 +2770,11 @@ function renderTable(rows){
 
 
       if(
+
         p.output > 0 &&
+
         bd < 60
+
       ){
 
         const running =
@@ -2350,25 +2791,12 @@ function renderTable(rows){
               p.output *
               60 /
               running
+
             ).toFixed(2);
 
         }
 
       }
-
-
-      const sizeDisplay =
-        p.size > 0
-          ? Number(
-              p.size
-            ).toFixed(2)
-          : "";
-
-
-      const sheetsDisplay =
-        p.sheets > 0
-          ? p.sheets
-          : "";
 
 
       html += `
@@ -2380,11 +2808,27 @@ function renderTable(rows){
         </td>
 
         <td>
-          ${sizeDisplay}
+          ${
+            p.size > 0
+              ? p.size.toFixed(2)
+              : ""
+          }
         </td>
 
         <td class="yellow">
-          ${sheetsDisplay}
+          ${
+            p.sheets > 0
+              ? p.sheets
+              : ""
+          }
+        </td>
+
+        <td>
+          ${
+            r.moulding !== ""
+              ? r.moulding
+              : ""
+          }
         </td>
 
         <td>
@@ -2405,6 +2849,14 @@ function renderTable(rows){
 
         <td class="yellow">
           ${
+            r.gsr !== ""
+              ? Number(r.gsr)
+              : ""
+          }
+        </td>
+
+        <td class="yellow">
+          ${
             p.output > 0
               ? p.output.toFixed(2)
               : ""
@@ -2412,7 +2864,11 @@ function renderTable(rows){
         </td>
 
         <td>
-          ${input}
+          ${
+            inputVal > 0
+              ? inputVal.toFixed(2)
+              : ""
+          }
         </td>
 
         <td class="cyan">
@@ -2448,7 +2904,7 @@ function renderTable(rows){
           <button
             class="action whatsapp"
             onclick="sendHourWhatsApp(${r.rowIndex})"
-            title="Send WhatsApp">
+            title="WhatsApp">
 
             <i class="fa-brands fa-whatsapp"></i>
 
@@ -2458,7 +2914,7 @@ function renderTable(rows){
           <button
             class="action pdf"
             onclick="generateHourPDF(${r.rowIndex})"
-            title="Generate PDF">
+            title="PDF">
 
             <i class="fa-solid fa-file-pdf"></i>
 
@@ -2508,6 +2964,7 @@ function updateTopPanel(
   document.getElementById(
     "bannerShift"
   ).innerText =
+
     "Shift " +
     getSelectedShift();
 
@@ -2515,16 +2972,18 @@ function updateTopPanel(
   document.getElementById(
     "bannerDate"
   ).innerText =
+
     formatDisplayDate(
-      getSelectedDate()
+      getToday()
     );
 
 
   if(
+
     !targetProd ||
-    targetProd <= 0 ||
-    !targetSize ||
-    targetSize <= 0
+
+    !targetSize
+
   ){
 
     document.getElementById(
@@ -2579,6 +3038,10 @@ function updateTopPanel(
   }
 
 
+  /* ===================================================
+     TARGET SHEETS
+  =================================================== */
+
   const totalRequiredSheets =
 
     targetProd *
@@ -2593,29 +3056,33 @@ function updateTopPanel(
     "topReqSheets"
   ).innerText =
 
-    totalRequiredSheets.toFixed(
-      2
-    );
+    totalRequiredSheets.toFixed(2);
 
 
-  let totalOutput = 0;
+  /* ===================================================
+     TOTAL PRODUCTION
+  =================================================== */
+
+  let totalOutput =
+    0;
 
 
   rows.forEach(
-    r => {
-
-      const p =
-        getRowProduction(
-          r
-        );
-
+    function(r){
 
       totalOutput +=
-        p.output;
+
+        getRowProduction(
+          r
+        ).output;
 
     }
   );
 
+
+  /* ===================================================
+     EQUIVALENT TARGET-SIZE SHEETS
+  =================================================== */
 
   const producedEquivalentSheets =
 
@@ -2631,17 +3098,22 @@ function updateTopPanel(
     "producedSheets"
   ).innerText =
 
-    producedEquivalentSheets.toFixed(
-      2
-    );
+    producedEquivalentSheets.toFixed(2);
 
+
+  /* ===================================================
+     REMAINING SHEETS
+  =================================================== */
 
   const remaining =
 
     Math.max(
+
       0,
+
       totalRequiredSheets -
       producedEquivalentSheets
+
     );
 
 
@@ -2649,21 +3121,24 @@ function updateTopPanel(
     "remainingSheets"
   ).innerText =
 
-    remaining.toFixed(
-      2
-    );
+    remaining.toFixed(2);
 
 
-  let latestHour = 0;
+  /* ===================================================
+     REMAINING HOURS
+  =================================================== */
+
+  let latestHour =
+    0;
 
 
   rows.forEach(
-    r => {
+    function(r){
 
       const n =
-        Number(
-          r.hourNumber
-        ) || 0;
+        getHourNumber(
+          r.hour
+        );
 
 
       if(
@@ -2682,18 +3157,25 @@ function updateTopPanel(
   const remainingHours =
 
     Math.max(
+
       0,
+
       SHIFT_HOURS -
       latestHour
+
     );
 
 
-  let requiredPerHour = 0;
+  let requiredPerHour =
+    0;
 
 
   if(
+
     remaining > 0 &&
+
     remainingHours > 0
+
   ){
 
     requiredPerHour =
@@ -2709,19 +3191,25 @@ function updateTopPanel(
   ).innerText =
 
     remainingHours > 0
+
       ? requiredPerHour.toFixed(2)
+
       : remaining <= 0
+
         ? "0.00"
+
         : "SHIFT OVER";
 
+
+  /* ===================================================
+     SIZE + SFT
+  =================================================== */
 
   document.getElementById(
     "targetSizeDisplay"
   ).innerText =
 
-    targetSize.toFixed(
-      2
-    );
+    targetSize.toFixed(2);
 
 
   const sft =
@@ -2751,41 +3239,35 @@ function updateTopPanel(
   );
 
 
+  /* ===================================================
+     TARGET ACHIEVEMENT
+  =================================================== */
+
   const achievement =
 
     targetProd > 0
+
       ? (
           totalOutput /
           targetProd
         ) * 100
+
       : 0;
 
 
-  if(
+  document.getElementById(
+    "targetStatus"
+  ).innerText =
+
     achievement >= 100
-  ){
 
-    document.getElementById(
-      "targetStatus"
-    ).innerText =
+      ? "TARGET ACHIEVED: " +
+        achievement.toFixed(1) +
+        "%"
 
-      "TARGET ACHIEVED — " +
-      achievement.toFixed(1) +
-      "%";
-
-  }
-
-  else{
-
-    document.getElementById(
-      "targetStatus"
-    ).innerText =
-
-      "Target Achievement: " +
-      achievement.toFixed(1) +
-      "%";
-
-  }
+      : "TARGET ACHIEVEMENT: " +
+        achievement.toFixed(1) +
+        "%";
 
 }
 
@@ -2798,16 +3280,17 @@ function updateRemainingHours(
   rows
 ){
 
-  let latestHour = 0;
+  let latestHour =
+    0;
 
 
   rows.forEach(
-    r => {
+    function(r){
 
       const n =
-        Number(
-          r.hourNumber
-        ) || 0;
+        getHourNumber(
+          r.hour
+        );
 
 
       if(
@@ -2826,9 +3309,12 @@ function updateRemainingHours(
   const remaining =
 
     Math.max(
+
       0,
+
       SHIFT_HOURS -
       latestHour
+
     );
 
 
@@ -2853,6 +3339,15 @@ function updateRemainingHours(
 
     footer.innerText =
       "SHIFT COMPLETED";
+
+  }
+
+  else if(
+    remaining === 1
+  ){
+
+    footer.innerText =
+      "ONLY 1 HOUR LEFT";
 
   }
 
@@ -2895,38 +3390,34 @@ function showLatestProduction(
   }
 
 
-  let latest = null;
+  let latest =
+    null;
 
 
   rows.forEach(
-    r => {
+    function(r){
 
       if(
+
         !latest ||
-        Number(
-          r.hourNumber || 0
+
+        getHourNumber(
+          r.hour
         ) >
-        Number(
-          latest.hourNumber || 0
+
+        getHourNumber(
+          latest.hour
         )
+
       ){
 
-        latest = r;
+        latest =
+          r;
 
       }
 
     }
   );
-
-
-  if(!latest){
-
-    el.innerText =
-      "No entry yet";
-
-    return;
-
-  }
 
 
   const p =
@@ -2970,15 +3461,21 @@ function updateShiftSummary(
   rows
 ){
 
-  let totalOutput = 0;
+  let totalOutput =
+    0;
 
-  let totalInput = 0;
+  let totalInput =
+    0;
 
-  let totalBD = 0;
+  let totalBD =
+    0;
+
+  let totalGSR =
+    0;
 
 
   rows.forEach(
-    r => {
+    function(r){
 
       const p =
         getRowProduction(
@@ -2990,10 +3487,16 @@ function updateShiftSummary(
         p.output;
 
 
+      /* INPUT = BEATER × BATCH WEIGHT */
+
       if(
+
         settings.batchWeight !== "" &&
+
         r.beater !== "" &&
+
         Number(r.beater) > 0
+
       ){
 
         totalInput +=
@@ -3008,12 +3511,26 @@ function updateShiftSummary(
 
 
       if(
-        r.bd !== "" &&
-        !isNaN(r.bd)
+        r.bd !== ""
       ){
 
         totalBD +=
-          Number(r.bd);
+          Number(r.bd) || 0;
+
+      }
+
+
+      /* =================================================
+         GSR IS COMPLETELY SEPARATE
+         NO PRODUCTION CALCULATION
+      ================================================= */
+
+      if(
+        r.gsr !== ""
+      ){
+
+        totalGSR +=
+          Number(r.gsr) || 0;
 
       }
 
@@ -3021,29 +3538,42 @@ function updateShiftSummary(
   );
 
 
+  /* TOTAL OUTPUT */
+
   document.getElementById(
     "totalOutput"
   ).innerText =
 
     totalOutput > 0
+
       ? totalOutput.toFixed(2) +
         " MT"
+
       : "-";
 
+
+  /* TOTAL INPUT */
 
   document.getElementById(
     "totalInput"
   ).innerText =
 
     totalInput > 0
+
       ? totalInput.toFixed(2) +
         " MT"
+
       : "-";
 
 
+  /* OVERALL ME */
+
   if(
+
     totalOutput > 0 &&
+
     totalInput > 0
+
   ){
 
     const me =
@@ -3052,6 +3582,7 @@ function updateShiftSummary(
         1 -
         totalOutput /
         totalInput
+
       ) * 100;
 
 
@@ -3073,6 +3604,8 @@ function updateShiftSummary(
 
   }
 
+
+  /* OVERALL ROP */
 
   if(
     totalOutput > 0
@@ -3127,6 +3660,18 @@ function updateShiftSummary(
 
   }
 
+
+  /* ===================================================
+     TOTAL GSR CARD
+  =================================================== */
+
+  document.getElementById(
+    "totalGSR"
+  ).innerText =
+
+    totalGSR +
+    " SHEETS";
+
 }
 
 
@@ -3155,8 +3700,10 @@ function saveSettings(){
 
 
   if(
+
     targetProd === "" ||
     Number(targetProd) <= 0
+
   ){
 
     showToast(
@@ -3170,8 +3717,10 @@ function saveSettings(){
 
 
   if(
+
     targetSize === "" ||
     Number(targetSize) <= 0
+
   ){
 
     showToast(
@@ -3185,8 +3734,10 @@ function saveSettings(){
 
 
   if(
+
     batchWeight === "" ||
     Number(batchWeight) <= 0
+
   ){
 
     showToast(
@@ -3215,43 +3766,53 @@ function saveSettings(){
 
   const finish =
     startProgress(
-
       "settingsProgress",
       "settingsProgressBar",
       "settingsProgressText",
       "SAVING SETTINGS..."
-
     );
 
 
-  const callback =
-    "settingsCallback_" +
-    Date.now();
+  requestJSONP(
 
+    SCRIPT_URL +
+    "?action=saveSettings" +
 
-  window[callback] =
+    "&targetProd=" +
+    encodeURIComponent(
+      targetProd
+    ) +
+
+    "&targetSize=" +
+    encodeURIComponent(
+      targetSize
+    ) +
+
+    "&batchWeight=" +
+    encodeURIComponent(
+      batchWeight
+    ),
+
     function(res){
+
+      finish();
+
 
       btn.disabled =
         false;
 
 
       btn.innerHTML =
+
         'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
 
 
-      finish();
-
-
-      delete window[
-        callback
-      ];
-
-
       if(
+
         res &&
         res.status ===
         "success"
+
       ){
 
         showToast(
@@ -3268,7 +3829,9 @@ function saveSettings(){
         showToast(
 
           res && res.message
+
             ? res.message
+
             : "Failed to save settings.",
 
           true
@@ -3277,31 +3840,138 @@ function saveSettings(){
 
       }
 
-    };
+    },
+
+    function(){
+
+      finish();
 
 
-  jsonp(
+      btn.disabled =
+        false;
 
-    SCRIPT_URL +
-    "?action=saveSettings" +
-    "&targetProd=" +
-    encodeURIComponent(
-      targetProd
-    ) +
-    "&targetSize=" +
-    encodeURIComponent(
-      targetSize
-    ) +
-    "&batchWeight=" +
-    encodeURIComponent(
-      batchWeight
-    ) +
-    "&callback=" +
-    callback +
-    "&t=" +
-    Date.now()
+
+      btn.innerHTML =
+
+        'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
+
+
+      showToast(
+
+        "Response delayed. Click Refresh Data to check whether settings were saved.",
+
+        true
+
+      );
+
+    }
 
   );
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function startProgress(
+  areaId,
+  barId,
+  textId,
+  text
+){
+
+  const area =
+    document.getElementById(
+      areaId
+    );
+
+
+  const bar =
+    document.getElementById(
+      barId
+    );
+
+
+  const textEl =
+    document.getElementById(
+      textId
+    );
+
+
+  area.style.display =
+    "block";
+
+
+  textEl.innerText =
+    text;
+
+
+  bar.style.width =
+    "5%";
+
+
+  let progress =
+    5;
+
+
+  const timer =
+    setInterval(
+      function(){
+
+        progress +=
+          Math.random() * 8;
+
+
+        if(
+          progress >= 85
+        ){
+
+          progress =
+            85;
+
+        }
+
+
+        bar.style.width =
+          progress + "%";
+
+      },
+      250
+    );
+
+
+  return function finish(){
+
+    clearInterval(
+      timer
+    );
+
+
+    bar.style.width =
+      "100%";
+
+
+    textEl.innerText =
+      "COMPLETED ✓";
+
+
+    setTimeout(
+      function(){
+
+        area.style.display =
+          "none";
+
+
+        bar.style.width =
+          "0%";
+
+      },
+      600
+    );
+
+  };
 
 }
 
@@ -3318,24 +3988,11 @@ function submitEntry(){
     ).value.trim();
 
 
-  if(!operator){
-
-    showToast(
-      "Please enter Operator Name.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  const date =
-    getSelectedDate();
-
-
   const shift =
-    getSelectedShift();
+    document.getElementById(
+      "shift"
+    ).value.trim()
+      .toUpperCase();
 
 
   const hour =
@@ -3392,9 +4049,62 @@ function submitEntry(){
     ).value.trim();
 
 
+  const rowIndex =
+    document.getElementById(
+      "editRowIndex"
+    ).value;
+
+
   if(
+    !operator
+  ){
+
+    showToast(
+      "Please enter Operator Name.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !["A","B","C"].includes(
+      shift
+    )
+  ){
+
+    showToast(
+      "Shift must be A, B or C.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+    getHourNumber(hour) === 0
+  ){
+
+    showToast(
+      "Please select Production Hour.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+
     s1Sheets !== "" &&
+
     s2Sheets !== ""
+
   ){
 
     showToast(
@@ -3408,15 +4118,18 @@ function submitEntry(){
 
 
   if(
+
     s1Sheets !== "" &&
+
     (
       size1 === "" ||
       Number(size1) <= 0
     )
+
   ){
 
     showToast(
-      "Please enter valid 1st Size (m).",
+      "Please enter valid 1st Size in meter (m).",
       true
     );
 
@@ -3426,15 +4139,18 @@ function submitEntry(){
 
 
   if(
+
     s2Sheets !== "" &&
+
     (
       size2 === "" ||
       Number(size2) <= 0
     )
+
   ){
 
     showToast(
-      "Please enter valid 2nd Size (m).",
+      "Please enter valid 2nd Size in meter (m).",
       true
     );
 
@@ -3443,10 +4159,43 @@ function submitEntry(){
   }
 
 
-  const rowIndex =
-    document.getElementById(
-      "editRowIndex"
-    ).value;
+  if(
+
+    bd !== "" &&
+
+    (
+      Number(bd) < 0 ||
+      Number(bd) > 60
+    )
+
+  ){
+
+    showToast(
+      "B/D must be between 0 and 60 minutes.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+
+    gsr !== "" &&
+
+    Number(gsr) < 0
+
+  ){
+
+    showToast(
+      "GSR cannot be negative.",
+      true
+    );
+
+    return;
+
+  }
 
 
   const btn =
@@ -3460,95 +4209,41 @@ function submitEntry(){
 
 
   btn.innerHTML =
+
     rowIndex
-      ? 'UPDATING...'
-      : 'SUBMITTING...';
+
+      ? "UPDATING..."
+
+      : "SUBMITTING...";
 
 
   const finish =
     startProgress(
 
       "submitProgress",
+
       "submitProgressBar",
+
       "submitProgressText",
 
       rowIndex
+
         ? "UPDATING HOURLY DATA..."
+
         : "SUBMITTING HOURLY DATA..."
 
     );
 
 
-  const callback =
-    "submitCallback_" +
-    Date.now();
-
-
-  window[callback] =
-    function(res){
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
-
-
-      finish();
-
-
-      delete window[
-        callback
-      ];
-
-
-      if(
-        res &&
-        res.status ===
-        "success"
-      ){
-
-        showToast(
-
-          rowIndex
-            ? "✓ Hourly Data Updated Successfully"
-            : "✓ Hourly Data Submitted Successfully"
-
-        );
-
-
-        resetForm();
-
-        loadData();
-
-      }
-
-      else{
-
-        showToast(
-
-          res && res.message
-            ? res.message
-            : "Unable to save production.",
-
-          true
-
-        );
-
-      }
-
-    };
-
-
   let url =
 
     SCRIPT_URL +
+
     "?action=submitHourly" +
 
     "&date=" +
     encodeURIComponent(
-      date
+      getToday()
     ) +
 
     "&shift=" +
@@ -3604,16 +4299,12 @@ function submitEntry(){
     "&operator=" +
     encodeURIComponent(
       operator
-    ) +
-
-    "&callback=" +
-    callback +
-
-    "&t=" +
-    Date.now();
+    );
 
 
-  if(rowIndex){
+  if(
+    rowIndex
+  ){
 
     url +=
 
@@ -3625,7 +4316,93 @@ function submitEntry(){
   }
 
 
-  jsonp(url);
+  requestJSONP(
+
+    url,
+
+    function(res){
+
+      finish();
+
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+
+        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
+
+
+      if(
+
+        res &&
+        res.status ===
+        "success"
+
+      ){
+
+        showToast(
+
+          rowIndex
+
+            ? "✓ Hourly Data Updated Successfully"
+
+            : "✓ Hourly Data Submitted Successfully"
+
+        );
+
+
+        resetForm();
+
+
+        loadData();
+
+      }
+
+      else{
+
+        showToast(
+
+          res && res.message
+
+            ? res.message
+
+            : "Unable to save production.",
+
+          true
+
+        );
+
+      }
+
+    },
+
+    function(){
+
+      finish();
+
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+
+        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
+
+
+      showToast(
+
+        "Response delayed. DO NOT submit again. Click REFRESH DATA and check Production Log.",
+
+        true
+
+      );
+
+    }
+
+  );
 
 }
 
@@ -3640,13 +4417,15 @@ function editRow(
 
   const row =
     globalData.find(
-      r =>
-        Number(
+      function(r){
+
+        return Number(
           r.rowIndex
-        ) ===
-        Number(
+        ) === Number(
           rowIndex
-        )
+        );
+
+      }
     );
 
 
@@ -3669,12 +4448,6 @@ function editRow(
 
 
   document.getElementById(
-    "productionDate"
-  ).value =
-    row.date;
-
-
-  document.getElementById(
     "operator"
   ).value =
     row.name || "";
@@ -3689,7 +4462,7 @@ function editRow(
   document.getElementById(
     "hour"
   ).value =
-    row.hour || "1st Hour";
+    row.hour || "";
 
 
   document.getElementById(
@@ -3725,18 +4498,18 @@ function editRow(
 
 
   document.getElementById(
-    "beater"
-  ).value =
-    row.beater !== ""
-      ? row.beater
-      : "";
-
-
-  document.getElementById(
     "moulding"
   ).value =
     row.moulding !== ""
       ? row.moulding
+      : "";
+
+
+  document.getElementById(
+    "beater"
+  ).value =
+    row.beater !== ""
+      ? row.beater
       : "";
 
 
@@ -3788,7 +4561,7 @@ function editRow(
 
 
 /* =====================================================
-   RESET
+   RESET FORM
 ===================================================== */
 
 function resetForm(){
@@ -3820,6 +4593,12 @@ function resetForm(){
 
 
   document.getElementById(
+    "hour"
+  ).value =
+    "";
+
+
+  document.getElementById(
     "s1Sheets"
   ).value =
     "";
@@ -3832,13 +4611,13 @@ function resetForm(){
 
 
   document.getElementById(
-    "beater"
+    "moulding"
   ).value =
     "";
 
 
   document.getElementById(
-    "moulding"
+    "beater"
   ).value =
     "";
 
@@ -3876,23 +4655,25 @@ function deleteRow(
   }
 
 
-  const callback =
-    "deleteCallback_" +
-    Date.now();
+  requestJSONP(
 
+    SCRIPT_URL +
 
-  window[callback] =
+    "?action=deleteHourly" +
+
+    "&rowIndex=" +
+    encodeURIComponent(
+      rowIndex
+    ),
+
     function(res){
 
-      delete window[
-        callback
-      ];
-
-
       if(
+
         res &&
         res.status ===
         "success"
+
       ){
 
         showToast(
@@ -3909,7 +4690,9 @@ function deleteRow(
         showToast(
 
           res && res.message
+
             ? res.message
+
             : "Delete failed.",
 
           true
@@ -3918,21 +4701,19 @@ function deleteRow(
 
       }
 
-    };
+    },
 
+    function(){
 
-  jsonp(
+      showToast(
 
-    SCRIPT_URL +
-    "?action=deleteHourly" +
-    "&rowIndex=" +
-    encodeURIComponent(
-      rowIndex
-    ) +
-    "&callback=" +
-    callback +
-    "&t=" +
-    Date.now()
+        "Delete response timed out. Refresh and check the log.",
+
+        true
+
+      );
+
+    }
 
   );
 
@@ -3948,20 +4729,22 @@ function getRowByIndex(
 ){
 
   return globalData.find(
-    r =>
-      Number(
+    function(r){
+
+      return Number(
         r.rowIndex
-      ) ===
-      Number(
+      ) === Number(
         rowIndex
-      )
+      );
+
+    }
   );
 
 }
 
 
 /* =====================================================
-   REPORT METRICS
+   METRICS
 ===================================================== */
 
 function getReportMetrics(
@@ -3974,30 +4757,41 @@ function getReportMetrics(
     );
 
 
-  let input = 0;
+  let input =
+    0;
 
 
   if(
+
     settings.batchWeight !== "" &&
+
     row.beater !== "" &&
+
     Number(row.beater) > 0
+
   ){
 
     input =
 
       Number(row.beater) *
-      Number(settings.batchWeight) /
+      Number(
+        settings.batchWeight
+      ) /
       1000;
 
   }
 
 
-  let me = "";
+  let me =
+    "";
 
 
   if(
+
     input > 0 &&
+
     p.output > 0
+
   ){
 
     me =
@@ -4008,13 +4802,16 @@ function getReportMetrics(
           p.output /
           input
         ) *
+
         100
+
       );
 
   }
 
 
-  let rop = "";
+  let rop =
+    "";
 
 
   const bd =
@@ -4022,8 +4819,11 @@ function getReportMetrics(
 
 
   if(
+
     p.output > 0 &&
+
     bd < 60
+
   ){
 
     const running =
@@ -4047,17 +4847,26 @@ function getReportMetrics(
 
   return {
 
-    output:p.output,
+    output:
+      p.output,
 
-    input:input,
+    input:
+      input,
 
-    me:me,
+    me:
+      me,
 
-    rop:rop,
+    rop:
+      rop,
 
-    size:p.size,
+    size:
+      p.size,
 
-    sheets:p.sheets
+    sheets:
+      p.sheets,
+
+    gsr:
+      Number(row.gsr) || 0
 
   };
 
@@ -4065,7 +4874,7 @@ function getReportMetrics(
 
 
 /* =====================================================
-   WHATSAPP - SINGLE HOUR
+   HOURLY WHATSAPP
 ===================================================== */
 
 function sendHourWhatsApp(
@@ -4096,14 +4905,13 @@ function sendHourWhatsApp(
     );
 
 
-  let message = "";
+  let message =
 
-
-  message +=
     "📊 HOURLY PRODUCTION REPORT\n\n";
 
 
   message +=
+
     "Date: " +
     formatDisplayDate(
       row.date
@@ -4112,27 +4920,30 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "Shift: " +
     row.shift +
     "\n";
 
 
   message +=
+
     "Hour: " +
     row.hour +
-    "\n\n";
+    "\n";
 
 
   message +=
+
     "Operator: " +
     (
-      row.name ||
-      "-"
+      row.name || "-"
     ) +
     "\n\n";
 
 
   message +=
+
     "Size: " +
     (
       m.size
@@ -4143,6 +4954,7 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "Sheets: " +
     (
       m.sheets || "-"
@@ -4151,6 +4963,18 @@ function sendHourWhatsApp(
 
 
   message +=
+
+    "Moulding: " +
+    (
+      row.moulding !== ""
+        ? row.moulding
+        : "-"
+    ) +
+    "\n";
+
+
+  message +=
+
     "Beater: " +
     (
       row.beater !== ""
@@ -4161,6 +4985,7 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "Batch Weight: " +
     (
       settings.batchWeight !== ""
@@ -4172,6 +4997,7 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "Input: " +
     (
       m.input > 0
@@ -4183,6 +5009,7 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "B/D: " +
     (
       row.bd !== ""
@@ -4194,6 +5021,19 @@ function sendHourWhatsApp(
 
 
   message +=
+
+    "GSR: " +
+    (
+      row.gsr !== ""
+        ? row.gsr +
+          " sheets"
+        : "0 sheets"
+    ) +
+    "\n";
+
+
+  message +=
+
     "Output: " +
     (
       m.output > 0
@@ -4205,6 +5045,7 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "ME: " +
     (
       m.me !== ""
@@ -4216,37 +5057,20 @@ function sendHourWhatsApp(
 
 
   message +=
+
     "ROP: " +
     (
       m.rop !== ""
         ? m.rop.toFixed(2) +
           " MT/hr"
         : "-"
-    ) +
-    "\n";
-
-
-  message +=
-    "Moulding: " +
-    (
-      row.moulding !== ""
-        ? row.moulding
-        : "-"
-    ) +
-    "\n";
-
-
-  message +=
-    "GSR: " +
-    (
-      row.gsr !== ""
-        ? row.gsr
-        : "-"
     );
 
 
   const url =
+
     "https://wa.me/?text=" +
+
     encodeURIComponent(
       message
     );
@@ -4261,7 +5085,7 @@ function sendHourWhatsApp(
 
 
 /* =====================================================
-   WHATSAPP - SHIFT REPORT
+   SHIFT WHATSAPP
 ===================================================== */
 
 function sendShiftWhatsApp(){
@@ -4285,46 +5109,62 @@ function sendShiftWhatsApp(){
 
 
   rows.sort(
-    (a,b) =>
-      Number(
-        a.hourNumber || 0
-      ) -
-      Number(
-        b.hourNumber || 0
-      )
+    function(a,b){
+
+      return (
+
+        getHourNumber(
+          a.hour
+        )
+
+        -
+
+        getHourNumber(
+          b.hour
+        )
+
+      );
+
+    }
   );
 
 
-  let totalOutput = 0;
+  let totalOutput =
+    0;
 
-  let totalInput = 0;
+  let totalInput =
+    0;
 
-  let totalBD = 0;
+  let totalBD =
+    0;
+
+  let totalGSR =
+    0;
 
 
-  let message = "";
+  let message =
 
-
-  message +=
     "📊 SHIFT PRODUCTION REPORT\n\n";
 
 
   message +=
+
     "Date: " +
     formatDisplayDate(
-      getSelectedDate()
+      getToday()
     ) +
     "\n";
 
 
   message +=
+
     "Shift: " +
     getSelectedShift() +
     "\n\n";
 
 
   rows.forEach(
-    row => {
+    function(row){
 
       const m =
         getReportMetrics(
@@ -4342,6 +5182,10 @@ function sendShiftWhatsApp(){
 
       totalBD +=
         Number(row.bd) || 0;
+
+
+      totalGSR +=
+        Number(row.gsr) || 0;
 
 
       message +=
@@ -4372,6 +5216,16 @@ function sendShiftWhatsApp(){
 
 
       message +=
+        "Moulding: " +
+        (
+          row.moulding !== ""
+            ? row.moulding
+            : "-"
+        ) +
+        "\n";
+
+
+      message +=
         "Beater: " +
         (
           row.beater !== ""
@@ -4387,6 +5241,16 @@ function sendShiftWhatsApp(){
           row.bd !== ""
             ? row.bd + " min"
             : "-"
+        ) +
+        "\n";
+
+
+      message +=
+        "GSR: " +
+        (
+          row.gsr !== ""
+            ? row.gsr + " sheets"
+            : "0 sheets"
         ) +
         "\n";
 
@@ -4480,50 +5344,74 @@ function sendShiftWhatsApp(){
 
 
   message +=
+
     "Total Production: " +
+
     (
       totalOutput > 0
         ? totalOutput.toFixed(2) +
           " MT"
         : "-"
     ) +
+
     "\n";
 
 
   message +=
+
     "Total Input: " +
+
     (
       totalInput > 0
         ? totalInput.toFixed(2) +
           " MT"
         : "-"
     ) +
+
     "\n";
 
 
   message +=
+
     "Overall ME: " +
+
     (
       overallME !== null
         ? overallME.toFixed(2) +
           "%"
         : "-"
     ) +
+
     "\n";
 
 
   message +=
+
     "Overall ROP: " +
+
     (
       overallROP !== null
         ? overallROP.toFixed(2) +
           " MT/hr"
         : "-"
-    );
+    ) +
+
+    "\n";
+
+
+  message +=
+
+    "Total GSR: " +
+
+    totalGSR +
+
+    " sheets";
 
 
   const url =
+
     "https://wa.me/?text=" +
+
     encodeURIComponent(
       message
     );
@@ -4538,7 +5426,7 @@ function sendShiftWhatsApp(){
 
 
 /* =====================================================
-   PDF - SINGLE HOUR
+   HOURLY PDF
 ===================================================== */
 
 function generateHourPDF(
@@ -4579,7 +5467,8 @@ function generateHourPDF(
     );
 
 
-  let y = 18;
+  let y =
+    18;
 
 
   doc.setFontSize(
@@ -4605,75 +5494,29 @@ function generateHourPDF(
   );
 
 
-  doc.text(
-    "Date: " +
-    formatDisplayDate(
-      row.date
-    ),
-    15,
-    y
-  );
-
-
-  y += 7;
-
-
-  doc.text(
-    "Shift: " +
-    row.shift,
-    15,
-    y
-  );
-
-
-  y += 7;
-
-
-  doc.text(
-    "Hour: " +
-    row.hour,
-    15,
-    y
-  );
-
-
-  y += 7;
-
-
-  doc.text(
-    "Operator: " +
-    (
-      row.name || "-"
-    ),
-    15,
-    y
-  );
-
-
-  y += 12;
-
-
-  doc.setFontSize(
-    12
-  );
-
-
-  doc.text(
-    "PRODUCTION",
-    15,
-    y
-  );
-
-
-  y += 8;
-
-
-  doc.setFontSize(
-    10
-  );
-
-
   const lines = [
+
+    [
+      "Date",
+      formatDisplayDate(
+        row.date
+      )
+    ],
+
+    [
+      "Shift",
+      row.shift
+    ],
+
+    [
+      "Hour",
+      row.hour
+    ],
+
+    [
+      "Operator",
+      row.name || "-"
+    ],
 
     [
       "Size",
@@ -4688,6 +5531,13 @@ function generateHourPDF(
     ],
 
     [
+      "Moulding",
+      row.moulding !== ""
+        ? row.moulding
+        : "-"
+    ],
+
+    [
       "Beater",
       row.beater !== ""
         ? row.beater
@@ -4697,56 +5547,56 @@ function generateHourPDF(
     [
       "Batch Weight",
       settings.batchWeight !== ""
-        ? settings.batchWeight + " kg"
+        ? settings.batchWeight +
+          " kg"
         : "-"
     ],
 
     [
       "Input",
       m.input > 0
-        ? m.input.toFixed(2) + " MT"
+        ? m.input.toFixed(2) +
+          " MT"
         : "-"
     ],
 
     [
       "Breakdown",
       row.bd !== ""
-        ? row.bd + " min"
+        ? row.bd +
+          " min"
         : "-"
+    ],
+
+    [
+      "GSR",
+      (
+        Number(row.gsr) || 0
+      ) +
+      " sheets"
     ],
 
     [
       "Output",
       m.output > 0
-        ? m.output.toFixed(2) + " MT"
+        ? m.output.toFixed(2) +
+          " MT"
         : "-"
     ],
 
     [
       "ME%",
       m.me !== ""
-        ? m.me.toFixed(2) + "%"
+        ? m.me.toFixed(2) +
+          "%"
         : "-"
     ],
 
     [
       "ROP",
       m.rop !== ""
-        ? m.rop.toFixed(2) + " MT/hr"
-        : "-"
-    ],
-
-    [
-      "Moulding",
-      row.moulding !== ""
-        ? row.moulding
-        : "-"
-    ],
-
-    [
-      "GSR",
-      row.gsr !== ""
-        ? row.gsr
+        ? m.rop.toFixed(2) +
+          " MT/hr"
         : "-"
     ]
 
@@ -4754,7 +5604,7 @@ function generateHourPDF(
 
 
   lines.forEach(
-    item => {
+    function(item){
 
       doc.text(
         item[0] + ":",
@@ -4785,7 +5635,7 @@ function generateHourPDF(
 
 
   doc.text(
-    "Generated from Production Dashboard",
+    "GSR is a separate rejection-sheet count and is not included in production calculations.",
     105,
     y,
     {
@@ -4794,7 +5644,7 @@ function generateHourPDF(
   );
 
 
-  const filename =
+  doc.save(
 
     "Hourly_" +
     row.hour.replace(
@@ -4805,11 +5655,8 @@ function generateHourPDF(
     row.date +
     "_Shift_" +
     row.shift +
-    ".pdf";
+    ".pdf"
 
-
-  doc.save(
-    filename
   );
 
 
@@ -4821,7 +5668,7 @@ function generateHourPDF(
 
 
 /* =====================================================
-   PDF - SHIFT
+   SHIFT PDF
 ===================================================== */
 
 function generateShiftPDF(){
@@ -4855,17 +5702,28 @@ function generateShiftPDF(){
 
 
   rows.sort(
-    (a,b) =>
-      Number(
-        a.hourNumber || 0
-      ) -
-      Number(
-        b.hourNumber || 0
-      )
+    function(a,b){
+
+      return (
+
+        getHourNumber(
+          a.hour
+        )
+
+        -
+
+        getHourNumber(
+          b.hour
+        )
+
+      );
+
+    }
   );
 
 
-  let y = 15;
+  let y =
+    15;
 
 
   doc.setFontSize(
@@ -4883,18 +5741,18 @@ function generateShiftPDF(){
   );
 
 
-  y += 9;
+  y += 8;
 
 
   doc.setFontSize(
-    10
+    9
   );
 
 
   doc.text(
     "Date: " +
     formatDisplayDate(
-      getSelectedDate()
+      getToday()
     ),
     15,
     y
@@ -4912,7 +5770,7 @@ function generateShiftPDF(){
   );
 
 
-  y += 10;
+  y += 9;
 
 
   const headers = [
@@ -4920,8 +5778,10 @@ function generateShiftPDF(){
     "Hour",
     "Size",
     "Sheets",
-    "Beater",
+    "Mould",
+    "Beat",
     "BD",
+    "GSR",
     "Output",
     "Input",
     "ME%",
@@ -4930,17 +5790,19 @@ function generateShiftPDF(){
   ];
 
 
-  const xPositions = [
+  const x = [
 
-    12,
-    32,
-    53,
+    8,
+    27,
+    43,
+    58,
     73,
-    92,
-    108,
-    130,
-    150,
-    169
+    88,
+    101,
+    116,
+    135,
+    153,
+    174
 
   ];
 
@@ -4951,11 +5813,11 @@ function generateShiftPDF(){
 
 
   headers.forEach(
-    (h,i) => {
+    function(h,i){
 
       doc.text(
         h,
-        xPositions[i],
+        x[i],
         y
       );
 
@@ -4966,17 +5828,25 @@ function generateShiftPDF(){
   y += 6;
 
 
-  let totalOutput = 0;
+  let totalOutput =
+    0;
 
-  let totalInput = 0;
+  let totalInput =
+    0;
 
-  let totalBD = 0;
+  let totalBD =
+    0;
+
+  let totalGSR =
+    0;
 
 
   rows.forEach(
-    row => {
+    function(row){
 
-      if(y > 270){
+      if(
+        y > 270
+      ){
 
         doc.addPage();
 
@@ -5003,6 +5873,10 @@ function generateShiftPDF(){
         Number(row.bd) || 0;
 
 
+      totalGSR +=
+        Number(row.gsr) || 0;
+
+
       const values = [
 
         row.hour,
@@ -5013,6 +5887,10 @@ function generateShiftPDF(){
 
         m.sheets || "-",
 
+        row.moulding !== ""
+          ? String(row.moulding)
+          : "-",
+
         row.beater !== ""
           ? String(row.beater)
           : "-",
@@ -5020,6 +5898,8 @@ function generateShiftPDF(){
         row.bd !== ""
           ? String(row.bd)
           : "-",
+
+        Number(row.gsr) || 0,
 
         m.output > 0
           ? m.output.toFixed(2)
@@ -5030,7 +5910,8 @@ function generateShiftPDF(){
           : "-",
 
         m.me !== ""
-          ? m.me.toFixed(1) + "%"
+          ? m.me.toFixed(1) +
+            "%"
           : "-",
 
         m.rop !== ""
@@ -5041,11 +5922,11 @@ function generateShiftPDF(){
 
 
       values.forEach(
-        (v,i) => {
+        function(v,i){
 
           doc.text(
             String(v),
-            xPositions[i],
+            x[i],
             y
           );
 
@@ -5059,10 +5940,12 @@ function generateShiftPDF(){
   );
 
 
-  y += 7;
+  y += 8;
 
 
-  if(y > 265){
+  if(
+    y > 260
+  ){
 
     doc.addPage();
 
@@ -5189,25 +6072,40 @@ function generateShiftPDF(){
 
 
   doc.text(
-    "Total Breakdown: " +
-    totalBD +
-    " min",
+    "Total GSR: " +
+    totalGSR +
+    " sheets",
     20,
     y
   );
 
 
-  const filename =
+  y += 8;
+
+
+  doc.setFontSize(
+    8
+  );
+
+
+  doc.text(
+    "GSR is a separate rejection-sheet count and is not included in production calculations.",
+    105,
+    y,
+    {
+      align:"center"
+    }
+  );
+
+
+  doc.save(
 
     "Shift_" +
     getSelectedShift() +
     "_" +
-    getSelectedDate() +
-    "_Production_Report.pdf";
+    getToday() +
+    "_Production_Report.pdf"
 
-
-  doc.save(
-    filename
   );
 
 
@@ -5267,26 +6165,34 @@ function escapeHtml(
 
 
 /* =====================================================
-   EVENTS
+   SHIFT INPUT
 ===================================================== */
-
-document
-  .getElementById(
-    "productionDate"
-  )
-  .addEventListener(
-    "change",
-    renderDashboard
-  );
-
 
 document
   .getElementById(
     "shift"
   )
   .addEventListener(
-    "change",
-    renderDashboard
+    "input",
+    function(){
+
+      this.value =
+
+        this.value
+          .toUpperCase()
+          .replace(
+            /[^ABC]/g,
+            ""
+          )
+          .slice(
+            0,
+            1
+          );
+
+
+      renderDashboard();
+
+    }
   );
 
 
@@ -5298,9 +6204,9 @@ window.onload =
 function(){
 
   document.getElementById(
-    "productionDate"
+    "shift"
   ).value =
-    getToday();
+    "A";
 
 
   loadData();
