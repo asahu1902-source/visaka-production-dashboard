@@ -6,24 +6,22 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>Production Dashboard</title>
-
-
-<!-- PDF -->
-
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-</script>
+<title>Visaka Production Dashboard</title>
 
 
-<!-- ICONS -->
-
+<!-- FONT AWESOME -->
 <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+
+<!-- JSPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
 <style>
@@ -32,276 +30,267 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
    GLOBAL
 ===================================================== */
 
-*{
-  box-sizing:border-box;
-}
-
-html{
-  font-size:18px;
-}
-
-body{
-
-  margin:0;
-
-  padding:10px;
-
-  background:#000;
-
-  color:#fff;
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family:
-  Arial,
-  Helvetica,
-  sans-serif;
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}
 
-  font-size:18px;
+body {
 
+  background: #000;
+
+  color: #fff;
+
+  min-height: 100vh;
+
+  padding:
+    12px
+    8px
+    40px;
+
+  display: flex;
+
+  justify-content: center;
+
+  font-size: 15px;
+}
+
+
+.app {
+
+  width: 100%;
+
+  max-width: 850px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
 }
 
 
 /* =====================================================
-   APP
+   CARDS
 ===================================================== */
 
-.app{
+.card {
 
-  width:100%;
+  background: #07142b;
 
-  max-width:850px;
+  border:
+    2px solid
+    #00bfff;
 
-  margin:auto;
+  border-radius: 12px;
 
+  padding: 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  box-shadow:
+    0 0 12px
+    rgba(0,191,255,.12);
+}
+
+
+.section-title {
+
+  color: #00ffff;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
 }
 
 
 /* =====================================================
-   TOP DASHBOARD
+   TOP PANEL
 ===================================================== */
 
-.top{
+.target-panel {
 
-  background:#07142b;
+  background: #07142b;
 
-  border:2px solid #00bfff;
+  border:
+    2px solid
+    #facc15;
 
-  border-radius:14px;
+  border-radius: 12px;
 
-  overflow:hidden;
-
-  margin-bottom:15px;
-
+  overflow: hidden;
 }
 
 
-.top-header{
+.top-bar {
 
-  background:#087bb5;
+  background: #0284c7;
 
-  padding:14px;
+  color: #000;
 
-  display:flex;
+  padding: 8px 12px;
 
-  justify-content:space-between;
+  display: flex;
 
-  font-size:18px;
+  justify-content: space-between;
 
-  font-weight:900;
+  font-size: 14px;
 
+  font-weight: 900;
 }
 
 
-.target{
+.req-box {
 
-  text-align:center;
+  background: #172554;
 
-  padding:16px;
+  text-align: center;
 
-  background:#172033;
+  padding: 13px;
 
+  border-bottom:
+    2px solid
+    #facc15;
 }
 
 
-.target-number{
+.req-value {
 
-  color:#ffff00;
+  color: #ffff00;
 
-  font-size:36px;
+  font-size: 27px;
 
-  font-weight:1000;
-
+  font-weight: 900;
 }
 
 
-.target-label{
+.req-label {
 
-  color:#00ffff;
+  display: block;
 
-  font-size:15px;
+  color: #00ffff;
 
-  font-weight:900;
+  font-size: 12px;
 
-  margin-top:4px;
+  margin-top: 2px;
 
+  text-transform: uppercase;
+
+  font-weight: 900;
 }
 
 
-.top-grid{
+.kpi-grid {
 
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  repeat(3,1fr);
+    repeat(3, 1fr);
 
+  border-bottom:
+    2px solid
+    #facc15;
 }
 
 
-.top-box{
+.kpi {
 
-  text-align:center;
+  text-align: center;
 
-  padding:14px 5px;
+  padding: 10px 5px;
 
-  border-top:1px solid #facc15;
+  border-right:
+    1px solid
+    #facc15;
 
-  border-right:1px solid #facc15;
+  color: #00ffff;
 
+  font-size: 12px;
+
+  font-weight: 900;
 }
 
 
-.top-box:last-child{
+.kpi:last-child {
 
-  border-right:none;
-
+  border-right: none;
 }
 
 
-.top-label{
+.kpi-value {
 
-  color:#00ffff;
+  display: block;
 
-  font-size:13px;
+  color: #ffff00;
 
-  font-weight:1000;
+  font-size: 17px;
 
+  margin-top: 4px;
+
+  font-weight: 900;
 }
 
 
-.top-value{
+.meta-row {
 
-  color:#ffff00;
-
-  font-size:23px;
-
-  font-weight:1000;
-
-  margin-top:5px;
-
-}
-
-
-.top-info{
-
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
+  text-align: center;
+
+  background: #020617;
+
+  padding: 8px;
+
+  color: #facc15;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  border-bottom:
+    2px solid
+    #facc15;
 }
 
 
-.info-box{
+.meta-row strong {
 
-  text-align:center;
-
-  padding:12px 5px;
-
-  border-top:1px solid #facc15;
-
-  border-right:1px solid #facc15;
-
-  color:#facc15;
-
-  font-size:15px;
-
-  font-weight:1000;
-
+  color: #fff;
 }
 
 
-.info-box:last-child{
+.hours-banner {
 
-  border-right:none;
+  background: #db2777;
 
-}
+  color: #fff;
 
+  text-align: center;
 
-.latest{
+  padding: 11px;
 
-  text-align:center;
+  font-size: 16px;
 
-  padding:12px;
+  font-weight: 900;
 
-  border-top:1px solid #facc15;
-
-  font-size:15px;
-
-  font-weight:1000;
-
-}
-
-
-.latest span{
-
-  color:#00ffff;
-
-}
-
-
-.time-left{
-
-  text-align:center;
-
-  background:#db2777;
-
-  padding:13px;
-
-  font-size:18px;
-
-  font-weight:1000;
-
-}
-
-
-/* =====================================================
-   CARD
-===================================================== */
-
-.card{
-
-  background:#07142b;
-
-  border:2px solid #00bfff;
-
-  border-radius:13px;
-
-  padding:15px;
-
-  margin-bottom:15px;
-
-}
-
-
-.card-title{
-
-  color:#00ffff;
-
-  font-size:22px;
-
-  font-weight:1000;
-
-  margin-bottom:16px;
-
+  text-transform: uppercase;
 }
 
 
@@ -309,91 +298,97 @@ body{
    FORM
 ===================================================== */
 
-.row{
+.form-row {
 
-  display:flex;
+  display: grid;
 
-  gap:12px;
+  grid-template-columns:
+    1fr 1fr;
 
+  gap: 10px;
 }
 
 
-.col{
+.form-group {
 
-  flex:1;
+  display: flex;
 
+  flex-direction: column;
+
+  gap: 5px;
 }
 
 
-.field{
+.form-group.full {
 
-  margin-bottom:14px;
-
+  grid-column:
+    1 / -1;
 }
 
 
-label{
+label {
 
-  display:block;
+  color: #00ffff;
 
-  color:#00ffff;
+  font-size: 13px;
 
-  font-size:15px;
-
-  font-weight:1000;
-
-  margin-bottom:6px;
-
+  font-weight: 900;
 }
 
 
 input,
-select{
+select {
 
-  width:100%;
+  width: 100%;
 
-  height:52px;
+  height: 44px;
 
-  background:#000;
+  background: #000;
 
-  color:#ffff00;
+  color: #ffff00;
 
-  border:2px solid #00bfff;
+  border:
+    1.5px solid
+    #00bfff;
 
-  border-radius:7px;
+  border-radius: 6px;
 
-  padding:8px 12px;
+  padding:
+    8px 10px;
 
-  font-size:19px;
+  font-size: 15px;
 
-  font-weight:900;
+  font-weight: 800;
 
+  outline: none;
 }
 
 
-/* =====================================================
-   IMPORTANT:
-   ONLY SELECT IS HOUR.
-   ALL OTHER FIELDS ARE INPUT.
-===================================================== */
+input:focus,
+select:focus {
 
-select{
+  border-color:
+    #00ffff;
 
-  cursor:pointer;
-
+  box-shadow:
+    0 0 7px
+    rgba(0,255,255,.35);
 }
 
 
-button{
+/*
+ IMPORTANT:
+ Only Production Hour uses select.
+ Shift is INPUT.
+*/
 
-  border:0;
+#opShift {
 
-  cursor:pointer;
+  text-transform: uppercase;
 
-  font-family:inherit;
+  text-align: center;
 
-  font-weight:1000;
-
+  font-weight: 900;
 }
 
 
@@ -401,60 +396,67 @@ button{
    BUTTONS
 ===================================================== */
 
-.save-btn,
-.submit-btn,
-.refresh-btn{
+button {
 
-  width:100%;
-
-  min-height:53px;
-
-  border-radius:8px;
-
-  font-size:17px;
-
-  font-weight:1000;
-
+  cursor: pointer;
 }
 
 
-.save-btn{
+.btn {
 
-  background:#0284c7;
+  width: 100%;
 
-  color:#fff;
+  border: none;
 
+  border-radius: 8px;
+
+  padding: 12px;
+
+  font-size: 15px;
+
+  font-weight: 900;
+
+  color: #fff;
 }
 
 
-.submit-btn{
+.btn-save {
 
-  background:#10b981;
-
-  color:#fff;
-
+  background:
+    linear-gradient(
+      90deg,
+      #10b981,
+      #059669
+    );
 }
 
 
-.refresh-btn{
+.btn-settings {
 
-  background:#334155;
-
-  color:#fff;
-
-  border:2px solid #00bfff;
-
-  margin-bottom:12px;
-
+  background:
+    linear-gradient(
+      90deg,
+      #0284c7,
+      #0369a1
+    );
 }
 
 
-.save-btn i,
-.submit-btn i,
-.refresh-btn i{
+.btn-cancel {
 
-  margin-left:6px;
+  background: #dc2626;
 
+  display: none;
+}
+
+
+.btn-refresh {
+
+  background: #334155;
+
+  border:
+    1px solid
+    #38bdf8;
 }
 
 
@@ -462,204 +464,187 @@ button{
    PROGRESS
 ===================================================== */
 
-.progress{
+.progress-wrap {
 
-  display:none;
+  display: none;
 
-  margin-top:10px;
+  width: 100%;
 
+  height: 7px;
+
+  background: #020617;
+
+  border-radius: 10px;
+
+  overflow: hidden;
 }
 
 
-.progress-text{
+.progress-bar {
 
-  text-align:center;
+  width: 0%;
 
-  color:#00ffff;
+  height: 100%;
 
-  font-size:14px;
-
-  font-weight:1000;
-
-  margin-bottom:5px;
-
-}
-
-
-.progress-bg{
-
-  width:100%;
-
-  height:10px;
-
-  background:#1e293b;
-
-  border-radius:10px;
-
-  overflow:hidden;
-
-}
-
-
-.progress-bar{
-
-  width:0%;
-
-  height:100%;
-
-  background:#10b981;
+  background:
+    linear-gradient(
+      90deg,
+      #00ffff,
+      #10b981
+    );
 
   transition:
-  width .25s linear;
-
+    width .25s ease;
 }
 
 
 /* =====================================================
-   TABLE
+   PRODUCTION TABLE
 ===================================================== */
 
-.table-wrap{
+.table-wrap {
 
-  overflow-x:auto;
+  width: 100%;
 
-  width:100%;
+  overflow-x: auto;
 
+  border-radius: 6px;
 }
 
 
-table{
+.production-table {
 
-  border-collapse:collapse;
+  width: 100%;
 
-  width:100%;
+  min-width: 1050px;
 
-  min-width:1150px;
-
+  border-collapse: collapse;
 }
 
 
-th{
+.production-table th {
 
-  background:#ff8c00;
+  background: #a95f00;
 
-  color:#000;
+  color: #000;
 
-  padding:12px 7px;
+  border:
+    1px solid
+    #401900;
 
-  border:1px solid #8b0000;
+  padding: 9px 5px;
 
-  font-size:14px;
+  font-size: 12px;
 
-  font-weight:1000;
+  font-weight: 900;
 
-  white-space:nowrap;
+  text-align: center;
 
+  white-space: nowrap;
 }
 
 
-td{
+.production-table td {
 
-  background:#000;
+  background: #000;
 
-  color:#fff;
+  color: #fff;
 
-  padding:12px 7px;
+  border:
+    1px solid
+    #541010;
 
-  border:1px solid #8b0000;
+  padding: 8px 5px;
 
-  text-align:center;
+  font-size: 12px;
 
-  font-size:14px;
+  font-weight: 800;
 
-  font-weight:900;
+  text-align: center;
 
-  white-space:nowrap;
-
+  white-space: nowrap;
 }
 
 
-.hour{
+.production-table td.hour {
 
-  background:#00ffff !important;
+  background: #00bfff;
 
-  color:#000 !important;
+  color: #000;
 
-  font-weight:1000;
-
+  font-weight: 900;
 }
 
 
-.yellow{
+.production-table td.yellow {
 
-  color:#ffff00;
+  color: #ffff00;
+}
 
+
+.production-table td.cyan {
+
+  color: #00ffff;
 }
 
 
 /* =====================================================
-   ACTION ICONS
+   ACTION BUTTONS
 ===================================================== */
 
-.icon-btn{
+.action-buttons {
 
-  width:46px;
+  display: flex;
 
-  height:44px;
+  justify-content: center;
 
-  border-radius:8px;
-
-  margin:2px;
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
+  gap: 4px;
 }
 
 
-.icon-btn i{
+.action-btn {
 
-  font-size:23px;
+  width: 34px;
 
+  height: 32px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  color: #fff;
+
+  font-size: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
 
 
-.edit{
+.edit-btn {
 
-  background:#0284c7;
-
-  color:#fff;
-
+  background: #0284c7;
 }
 
 
-.delete{
+.delete-btn {
 
-  background:#dc2626;
-
-  color:#fff;
-
+  background: #dc2626;
 }
 
 
-.whatsapp{
+.whatsapp-btn {
 
-  background:#16a34a;
-
-  color:#fff;
-
+  background: #16a34a;
 }
 
 
-.pdf{
+.pdf-btn {
 
-  background:#dc2626;
-
-  color:#fff;
-
+  background: #dc2626;
 }
 
 
@@ -667,128 +652,100 @@ td{
    METRIC CARDS
 ===================================================== */
 
-.metrics{
+.metrics-grid {
 
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
-  gap:10px;
-
-  margin-top:12px;
-
+  gap: 8px;
 }
 
 
-.metric{
+.metric-box {
 
-  background:#000;
+  border:
+    1.5px solid
+    #00bfff;
 
-  border:2px solid #00bfff;
+  border-radius: 6px;
 
-  border-radius:10px;
+  padding: 9px;
 
-  padding:16px 7px;
+  text-align: center;
 
-  text-align:center;
-
+  background: #020617;
 }
 
 
-.metric-title{
+.metric-label {
 
-  color:#00ffff;
+  display: block;
 
-  font-size:15px;
+  color: #00ffff;
 
-  font-weight:1000;
+  font-size: 11px;
 
+  font-weight: 900;
 }
 
 
-.metric-value{
+.metric-value {
 
-  color:#ffff00;
+  display: block;
 
-  font-size:27px;
+  color: #ffff00;
 
-  font-weight:1000;
+  font-size: 18px;
 
-  margin-top:6px;
+  font-weight: 900;
 
-}
-
-
-/* =====================================================
-   GSR CARD
-===================================================== */
-
-.gsr-card{
-
-  margin-top:12px;
-
-  background:#000;
-
-  border:3px solid #facc15;
-
-  border-radius:11px;
-
-  text-align:center;
-
-  padding:18px 8px;
-
-}
-
-
-.gsr-title{
-
-  color:#00ffff;
-
-  font-size:18px;
-
-  font-weight:1000;
-
-}
-
-
-.gsr-total{
-
-  color:#ffff00;
-
-  font-size:31px;
-
-  font-weight:1000;
-
-  margin-top:7px;
-
+  margin-top: 3px;
 }
 
 
 /* =====================================================
-   TARGET ACHIEVEMENT
+   GSR
 ===================================================== */
 
-.achievement{
+.gsr-card {
 
-  margin-top:12px;
+  border:
+    2px solid
+    #facc15;
 
-  background:#111827;
+  background: #020617;
 
-  border:2px solid #334155;
+  border-radius: 8px;
 
-  border-radius:10px;
+  padding: 12px;
 
-  padding:17px 8px;
+  text-align: center;
+}
 
-  text-align:center;
 
-  color:#00ffff;
+.gsr-title {
 
-  font-size:20px;
+  color: #00ffff;
 
-  font-weight:1000;
+  font-size: 13px;
 
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+
+.gsr-value {
+
+  color: #ffff00;
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  margin-top: 3px;
 }
 
 
@@ -796,63 +753,198 @@ td{
    REPORT BUTTONS
 ===================================================== */
 
-.report-buttons{
+.report-grid {
 
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
-  gap:10px;
-
-  margin-top:12px;
-
+  gap: 8px;
 }
 
 
-.report-btn{
+.report-btn {
 
-  min-height:65px;
+  border: none;
 
-  border-radius:10px;
+  border-radius: 7px;
 
-  display:flex;
+  padding: 12px;
 
-  align-items:center;
+  color: #fff;
 
-  justify-content:center;
+  font-size: 13px;
 
-  gap:9px;
-
-  font-size:15px;
-
-  font-weight:1000;
-
+  font-weight: 900;
 }
 
 
-.report-btn i{
+.whatsapp-report {
 
-  font-size:31px;
-
+  background: #16a34a;
 }
 
 
-.report-wa{
+.pdf-report {
 
-  background:#16a34a;
-
-  color:#fff;
-
+  background: #dc2626;
 }
 
 
-.report-pdf{
+/* =====================================================
+   DELETE ALL
+===================================================== */
 
-  background:#dc2626;
+.delete-all {
 
-  color:#fff;
+  width: 100%;
 
+  background: #dc2626;
+
+  color: #fff;
+
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 13px;
+
+  font-size: 16px;
+
+  font-weight: 900;
+}
+
+
+.delete-all:disabled {
+
+  opacity: .6;
+
+  cursor: wait;
+}
+
+
+/* =====================================================
+   CUSTOM CONFIRM MODAL
+===================================================== */
+
+.modal-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,.85);
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 99999;
+
+  padding: 20px;
+}
+
+
+.modal-box {
+
+  width: 100%;
+
+  max-width: 400px;
+
+  background: #07142b;
+
+  border:
+    2px solid
+    #00bfff;
+
+  border-radius: 14px;
+
+  padding: 22px;
+
+  text-align: center;
+
+  box-shadow:
+    0 0 30px
+    rgba(0,191,255,.3);
+}
+
+
+.modal-icon {
+
+  font-size: 38px;
+
+  margin-bottom: 10px;
+
+  color: #facc15;
+}
+
+
+.modal-title {
+
+  color: #ffff00;
+
+  font-size: 20px;
+
+  font-weight: 900;
+
+  margin-bottom: 8px;
+}
+
+
+.modal-message {
+
+  color: #fff;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  margin-bottom: 18px;
+}
+
+
+.modal-buttons {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+}
+
+
+.modal-buttons button {
+
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 12px;
+
+  font-size: 14px;
+
+  font-weight: 900;
+}
+
+
+.modal-cancel {
+
+  background: #475569;
+
+  color: #fff;
+}
+
+
+.modal-delete {
+
+  background: #dc2626;
+
+  color: #fff;
 }
 
 
@@ -860,60 +952,52 @@ td{
    TOAST
 ===================================================== */
 
-.toast{
+#toast {
 
-  position:fixed;
+  position: fixed;
 
-  left:50%;
+  left: 50%;
 
-  bottom:20px;
+  bottom: 25px;
 
   transform:
-  translate(-50%,120px);
+    translate(-50%, 100px);
 
-  width:
-  calc(100% - 30px);
+  opacity: 0;
 
-  max-width:500px;
+  transition: all .3s ease;
 
-  background:#10b981;
+  z-index: 100001;
 
-  color:#fff;
+  background: #07142b;
 
-  text-align:center;
+  color: #fff;
 
-  padding:16px;
+  border:
+    2px solid
+    #00bfff;
 
-  border-radius:9px;
+  border-radius: 10px;
 
-  font-size:16px;
+  padding:
+    12px 18px;
 
-  font-weight:1000;
+  font-size: 14px;
 
-  opacity:0;
+  font-weight: 900;
 
-  transition:
-  all .25s ease;
+  text-align: center;
 
-  z-index:99999;
-
+  max-width: 90%;
 }
 
 
-.toast.show{
+#toast.show {
 
   transform:
-  translate(-50%,0);
+    translate(-50%, 0);
 
-  opacity:1;
-
-}
-
-
-.toast.error{
-
-  background:#dc2626;
-
+  opacity: 1;
 }
 
 
@@ -921,61 +1005,91 @@ td{
    MOBILE
 ===================================================== */
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
-  html{
-    font-size:17px;
+  body {
+
+    padding:
+      8px
+      5px
+      30px;
+
+    font-size: 14px;
   }
 
 
-  body{
-    padding:7px;
+  .app {
+
+    max-width: 100%;
   }
 
 
-  .row{
-    gap:8px;
+  .card {
+
+    padding: 11px;
+
+    gap: 10px;
   }
 
 
-  .card{
-    padding:12px;
+  .section-title {
+
+    font-size: 16px;
+  }
+
+
+  .form-row {
+
+    gap: 7px;
+  }
+
+
+  label {
+
+    font-size: 12px;
   }
 
 
   input,
-  select{
-    height:51px;
-    font-size:18px;
+  select {
+
+    height: 42px;
+
+    font-size: 14px;
   }
 
 
-  label{
-    font-size:14px;
+  .req-value {
+
+    font-size: 23px;
   }
 
 
-  .card-title{
-    font-size:20px;
+  .kpi {
+
+    font-size: 10px;
+
+    padding: 8px 3px;
   }
 
 
-  .target-number{
-    font-size:31px;
+  .kpi-value {
+
+    font-size: 15px;
   }
 
 
-  .top-value{
-    font-size:20px;
+  .top-bar {
+
+    font-size: 12px;
   }
 
 
-  .metric-value{
-    font-size:24px;
-  }
+  .hours-banner {
 
+    font-size: 14px;
+  }
 }
-
 
 </style>
 
@@ -988,225 +1102,168 @@ td{
 <div class="app">
 
 
-<!-- =====================================================
-     TOP DASHBOARD
-===================================================== -->
+<!-- ===================================================
+     TOP TARGET PANEL
+==================================================== -->
 
-<div class="top">
+<div class="target-panel">
 
+  <div class="top-bar">
 
-  <div class="top-header">
-
-    <span id="topShift">
+    <span id="bannerShift">
       Shift A
     </span>
 
-    <span id="topDate">
+    <span id="bannerDate">
       -
     </span>
 
   </div>
 
 
-  <div class="target">
+  <div class="req-box">
 
     <div
-      class="target-number"
-      id="requiredSheets">
-
-      SET TARGET
-
+      class="req-value"
+      id="topReqSheetsVal"
+    >
+      SETUP REQUIRED
     </div>
 
-
-    <div class="target-label">
-
+    <span class="req-label">
       TOTAL REQUIRED SHEETS
+    </span>
+
+  </div>
+
+
+  <div class="kpi-grid">
+
+    <div class="kpi">
+
+      PRODUCED EQ. SHEETS
+
+      <span
+        class="kpi-value"
+        id="bannerProduced"
+      >
+        -
+      </span>
+
+    </div>
+
+
+    <div class="kpi">
+
+      REMAINING SHEETS
+
+      <span
+        class="kpi-value"
+        id="bannerReqSheet"
+      >
+        -
+      </span>
+
+    </div>
+
+
+    <div class="kpi">
+
+      REQUIRED / HR
+
+      <span
+        class="kpi-value"
+        id="bannerReqHr"
+      >
+        -
+      </span>
 
     </div>
 
   </div>
 
 
-  <div class="top-grid">
+  <div class="meta-row">
 
-
-    <div class="top-box">
-
-      <div class="top-label">
-        PRODUCED EQ. SHEETS
-      </div>
-
-      <div
-        class="top-value"
-        id="producedSheets">
-
-        -
-
-      </div>
-
-    </div>
-
-
-    <div class="top-box">
-
-      <div class="top-label">
-        REMAINING EQ. SHEETS
-      </div>
-
-      <div
-        class="top-value"
-        id="remainingSheets">
-
-        -
-
-      </div>
-
-    </div>
-
-
-    <div class="top-box">
-
-      <div class="top-label">
-        REQUIRED / HR
-      </div>
-
-      <div
-        class="top-value"
-        id="requiredPerHour">
-
-        -
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="top-info">
-
-
-    <div class="info-box">
-
+    <span>
       Target Size:
-
-      <span
-        id="targetSizeShow">
-
+      <strong id="bannerTargetSize">
         -
-
-      </span>
-
+      </strong>
       m
+    </span>
 
-    </div>
-
-
-    <div class="info-box">
-
-      Batch Weight:
-
-      <span
-        id="batchWeightShow">
-
+    <span>
+      SFT:
+      <strong id="bannerSft">
         -
-
-      </span>
-
-      kg
-
-    </div>
-
-  </div>
-
-
-  <div class="latest">
-
-    Latest Production:
-
-    <span
-      id="latest">
-
-      No entry yet
-
+      </strong>
     </span>
 
   </div>
 
 
   <div
-    class="time-left"
-    id="timeLeft">
-
-    8 HOURS AVAILABLE
-
+    class="hours-banner"
+    id="bannerTimeLeft"
+  >
+    REMAINING HOURS NOT SET
   </div>
-
 
 </div>
 
 
-<!-- =====================================================
+
+<!-- ===================================================
      MASTER SETTINGS
-===================================================== -->
+==================================================== -->
 
 <div class="card">
 
-
-  <div class="card-title">
-
-    <i class="fa-solid fa-gear"></i>
-
+  <div class="section-title">
+    <i class="fa-solid fa-gears"></i>
     Master Settings
-
   </div>
 
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        Target Production (MT)
+      </label>
 
-      <div class="field">
-
-        <label>
-          Target Production (MT)
-        </label>
-
-        <input
-          type="number"
-          step="0.01"
-          id="targetProd"
-          placeholder="Example: 130">
-
-      </div>
+      <input
+        type="number"
+        id="setConfigTarget"
+        inputmode="decimal"
+        placeholder="e.g. 130"
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        Target Size (m)
+      </label>
 
-        <label>
-          Target Size (m)
-        </label>
-
-        <input
-          type="number"
-          step="0.01"
-          id="targetSize"
-          placeholder="Example: 6">
-
-      </div>
+      <input
+        type="number"
+        id="setConfigTargetSize"
+        step="0.01"
+        inputmode="decimal"
+        placeholder="e.g. 6"
+      >
 
     </div>
 
   </div>
 
 
-  <div class="field">
+  <div class="form-group">
 
     <label>
       Batch Weight (kg)
@@ -1214,78 +1271,63 @@ td{
 
     <input
       type="number"
-      step="0.01"
-      id="batchWeight"
-      placeholder="Example: 1250">
+      id="setConfigBatch"
+      inputmode="decimal"
+      placeholder="e.g. 1250"
+    >
 
+  </div>
+
+
+  <div
+    class="progress-wrap"
+    id="settingsProgressWrap"
+  >
+    <div
+      class="progress-bar"
+      id="settingsProgress"
+    ></div>
   </div>
 
 
   <button
-    class="save-btn"
-    id="saveSettingsBtn"
-    onclick="saveSettings()">
-
-    SAVE SETTINGS
-
+    class="btn btn-settings"
+    id="settingsBtn"
+    onclick="saveSettingsData()"
+  >
     <i class="fa-solid fa-floppy-disk"></i>
-
+    SAVE SETTINGS
   </button>
-
-
-  <div
-    class="progress"
-    id="settingsProgress">
-
-    <div
-      class="progress-text"
-      id="settingsProgressText">
-
-      SAVING SETTINGS...
-
-    </div>
-
-    <div class="progress-bg">
-
-      <div
-        class="progress-bar"
-        id="settingsProgressBar">
-      </div>
-
-    </div>
-
-  </div>
-
 
 </div>
 
 
-<!-- =====================================================
+
+<!-- ===================================================
      HOURLY ENTRY
-===================================================== -->
+==================================================== -->
 
 <div class="card">
 
-
   <div
-    class="card-title"
-    id="formTitle">
-
-    <i class="fa-solid fa-clipboard-list"></i>
-
+    class="section-title"
+    id="formTitle"
+  >
+    <i class="fa-solid fa-pen-to-square"></i>
     Hourly Production Entry
-
   </div>
 
 
   <input
     type="hidden"
-    id="editRowIndex">
+    id="editRowIndex"
+    value=""
+  >
 
 
   <!-- OPERATOR -->
 
-  <div class="field">
+  <div class="form-group">
 
     <label>
       Operator Name
@@ -1293,93 +1335,86 @@ td{
 
     <input
       type="text"
-      id="operator"
-      placeholder="Enter operator name">
+      id="opName"
+      placeholder="Enter operator name"
+    >
 
   </div>
 
 
   <!-- SHIFT + HOUR -->
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        Shift
+      </label>
 
-      <div class="field">
-
-        <label>
-          Shift
-        </label>
-
-        <!-- NORMAL TEXT BOX -->
-
-        <input
-          type="text"
-          id="shift"
-          value="A"
-          maxlength="1"
-          placeholder="A / B / C">
-
-      </div>
+      <!-- NORMAL TEXT BOX -->
+      <input
+        type="text"
+        id="opShift"
+        value="A"
+        maxlength="1"
+        placeholder="A / B / C"
+        oninput="
+          this.value=this.value
+          .toUpperCase();
+          renderDashboard();
+        "
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        Production Hour
+      </label>
 
-        <label>
-          Production Hour
-        </label>
+      <!-- ONLY DROPDOWN IN FORM -->
 
+      <select
+        id="opHour"
+        onchange="renderDashboard()"
+      >
 
-        <!-- =================================================
-             ONLY DROPDOWN IN THE WHOLE APP
-        ================================================== -->
+        <option value="1st Hour">
+          1st Hour
+        </option>
 
-        <select id="hour">
+        <option value="2nd Hour">
+          2nd Hour
+        </option>
 
-          <option value="">
-            Select Hour
-          </option>
+        <option value="3rd Hour">
+          3rd Hour
+        </option>
 
-          <option value="1st Hour">
-            1st Hour
-          </option>
+        <option value="4th Hour">
+          4th Hour
+        </option>
 
-          <option value="2nd Hour">
-            2nd Hour
-          </option>
+        <option value="5th Hour">
+          5th Hour
+        </option>
 
-          <option value="3rd Hour">
-            3rd Hour
-          </option>
+        <option value="6th Hour">
+          6th Hour
+        </option>
 
-          <option value="4th Hour">
-            4th Hour
-          </option>
+        <option value="7th Hour">
+          7th Hour
+        </option>
 
-          <option value="5th Hour">
-            5th Hour
-          </option>
+        <option value="8th Hour">
+          8th Hour
+        </option>
 
-          <option value="6th Hour">
-            6th Hour
-          </option>
-
-          <option value="7th Hour">
-            7th Hour
-          </option>
-
-          <option value="8th Hour">
-            8th Hour
-          </option>
-
-        </select>
-
-      </div>
+      </select>
 
     </div>
 
@@ -1388,47 +1423,38 @@ td{
 
   <!-- SIZE -->
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        1st Size (m)
+      </label>
 
-      <div class="field">
-
-        <label>
-          1st Size (m)
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="0.01"
-          id="size1"
-          placeholder="Example: 5">
-
-      </div>
+      <input
+        type="number"
+        id="opSize1"
+        step="0.01"
+        value="6"
+        inputmode="decimal"
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        2nd Size (m)
+      </label>
 
-        <label>
-          2nd Size (m)
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="0.01"
-          id="size2"
-          placeholder="Example: 6">
-
-      </div>
+      <input
+        type="number"
+        id="opSize2"
+        step="0.01"
+        value="6"
+        inputmode="decimal"
+      >
 
     </div>
 
@@ -1437,99 +1463,74 @@ td{
 
   <!-- SHEETS -->
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        1st Size Sheets
+      </label>
 
-      <div class="field">
-
-        <label>
-          1st Size Sheets
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="s1Sheets"
-          placeholder="Enter sheets">
-
-      </div>
+      <input
+        type="number"
+        id="opS1"
+        inputmode="numeric"
+        placeholder="Blank if 2nd running"
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        2nd Size Sheets
+      </label>
 
-        <label>
-          2nd Size Sheets
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="s2Sheets"
-          placeholder="Enter sheets">
-
-      </div>
+      <input
+        type="number"
+        id="opS2"
+        inputmode="numeric"
+        placeholder="Blank if 1st running"
+      >
 
     </div>
 
   </div>
 
 
-  <!-- MOULDING + BEATER -->
+  <!-- BEATER + MOULDING -->
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        Beater (Common)
+      </label>
 
-      <div class="field">
-
-        <label>
-          Moulding
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="0.01"
-          id="moulding"
-          placeholder="Enter Moulding">
-
-      </div>
+      <input
+        type="number"
+        id="opBeater"
+        inputmode="decimal"
+        placeholder="Enter Beater"
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        Moulding / ME Pickup
+      </label>
 
-        <label>
-          Beater
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="beater"
-          placeholder="Enter Beater">
-
-      </div>
+      <input
+        type="number"
+        id="opMoulding"
+        inputmode="decimal"
+        placeholder="Enter Moulding"
+      >
 
     </div>
 
@@ -1538,106 +1539,89 @@ td{
 
   <!-- BD + GSR -->
 
-  <div class="row">
+  <div class="form-row">
 
+    <div class="form-group">
 
-    <div class="col">
+      <label>
+        B/D (min)
+      </label>
 
-      <div class="field">
-
-        <label>
-          B/D (Min)
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          max="60"
-          id="bd"
-          placeholder="Minutes">
-
-      </div>
+      <input
+        type="number"
+        id="opBD"
+        inputmode="decimal"
+        placeholder="Minutes"
+      >
 
     </div>
 
 
-    <div class="col">
+    <div class="form-group">
 
-      <div class="field">
+      <label>
+        GSR (Rejection Sheets)
+      </label>
 
-        <label>
-          GSR (Sheets)
-        </label>
-
-        <!-- NORMAL INPUT -->
-
-        <input
-          type="number"
-          step="1"
-          min="0"
-          id="gsr"
-          placeholder="GSR sheets">
-
-      </div>
+      <input
+        type="number"
+        id="opGSR"
+        inputmode="numeric"
+        placeholder="GSR sheets"
+      >
 
     </div>
+
+  </div>
+
+
+  <!-- SUBMIT PROGRESS -->
+
+  <div
+    class="progress-wrap"
+    id="submitProgressWrap"
+  >
+
+    <div
+      class="progress-bar"
+      id="submitProgress"
+    ></div>
 
   </div>
 
 
   <button
-    class="submit-btn"
+    class="btn btn-save"
     id="submitBtn"
-    onclick="submitEntry()">
-
+    onclick="submitProductionEntry()"
+  >
+    <i class="fa-solid fa-cloud-arrow-up"></i>
     SUBMIT HOURLY DATA
-
-    <i class="fa-solid fa-arrow-right"></i>
-
   </button>
 
 
-  <div
-    class="progress"
-    id="submitProgress">
-
-    <div
-      class="progress-text"
-      id="submitProgressText">
-
-      SUBMITTING...
-
-    </div>
-
-
-    <div class="progress-bg">
-
-      <div
-        class="progress-bar"
-        id="submitProgressBar">
-      </div>
-
-    </div>
-
-  </div>
-
+  <button
+    class="btn btn-cancel"
+    id="cancelBtn"
+    onclick="resetForm()"
+  >
+    <i class="fa-solid fa-xmark"></i>
+    CANCEL EDIT
+  </button>
 
 </div>
 
 
-<!-- =====================================================
+
+<!-- ===================================================
      PRODUCTION LOG
-===================================================== -->
+==================================================== -->
 
 <div class="card">
 
+  <div class="section-title">
 
-  <div class="card-title">
-
-    <i class="fa-solid fa-chart-column"></i>
+    <i class="fa-solid fa-chart-line"></i>
 
     Production Log & Metrics
 
@@ -1645,11 +1629,11 @@ td{
 
 
   <button
-    class="refresh-btn"
-    onclick="refreshData()"
-    id="refreshBtn">
+    class="btn btn-refresh"
+    onclick="loadDashboardData()"
+  >
 
-    <i class="fa-solid fa-rotate-right"></i>
+    <i class="fa-solid fa-rotate"></i>
 
     REFRESH DATA
 
@@ -1658,9 +1642,7 @@ td{
 
   <div class="table-wrap">
 
-
-    <table>
-
+    <table class="production-table">
 
       <thead>
 
@@ -1695,110 +1677,104 @@ td{
       </thead>
 
 
-      <tbody
-        id="tableBody">
+      <tbody id="productionTableBody">
 
         <tr>
 
-          <td colspan="12">
-            Loading...
+          <td
+            colspan="12"
+            style="
+              padding:18px;
+              color:#94a3b8;
+            "
+          >
+
+            Loading data...
+
           </td>
 
         </tr>
 
       </tbody>
 
-
     </table>
 
   </div>
 
 
-  <!-- ===================================================
-       METRICS
-  ==================================================== -->
+  <!-- METRICS -->
 
-  <div class="metrics">
+  <div class="metrics-grid">
 
+    <div class="metric-box">
 
-    <div class="metric">
-
-      <div class="metric-title">
+      <span class="metric-label">
         TOTAL PRODUCTION
-      </div>
+      </span>
 
-      <div
+      <span
         class="metric-value"
-        id="totalOutput">
-
-        -
-
-      </div>
+        id="totalProduction"
+      >
+        0.00 MT
+      </span>
 
     </div>
 
 
-    <div class="metric">
+    <div class="metric-box">
 
-      <div class="metric-title">
+      <span class="metric-label">
         TOTAL INPUT
-      </div>
+      </span>
 
-      <div
+      <span
         class="metric-value"
-        id="totalInput">
-
-        -
-
-      </div>
+        id="totalInput"
+      >
+        0.00 MT
+      </span>
 
     </div>
 
 
-    <div class="metric">
+    <div class="metric-box">
 
-      <div class="metric-title">
+      <span class="metric-label">
         OVERALL ME%
-      </div>
+      </span>
 
-      <div
+      <span
         class="metric-value"
-        id="overallME">
-
-        -
-
-      </div>
+        id="overallME"
+      >
+        0.0%
+      </span>
 
     </div>
 
 
-    <div class="metric">
+    <div class="metric-box">
 
-      <div class="metric-title">
+      <span class="metric-label">
         OVERALL ROP
-      </div>
+      </span>
 
-      <div
+      <span
         class="metric-value"
-        id="overallROP">
-
-        -
-
-      </div>
+        id="overallROP"
+      >
+        0.00 MT/hr
+      </span>
 
     </div>
-
 
   </div>
 
 
-  <!-- ===================================================
-       GSR CARD
-       COMPLETELY SEPARATE
-  ==================================================== -->
+  <!-- GSR SEPARATE CARD -->
 
   <div class="gsr-card">
-
 
     <div class="gsr-title">
 
@@ -1808,42 +1784,41 @@ td{
 
     </div>
 
-
     <div
-      class="gsr-total"
-      id="totalGSR">
+      class="gsr-value"
+      id="totalGSR"
+    >
 
       0 SHEETS
 
     </div>
 
-
   </div>
 
 
-  <!-- ===================================================
-       TARGET ACHIEVEMENT
-  ==================================================== -->
+  <!-- DELETE ALL -->
 
-  <div
-    class="achievement"
-    id="achievement">
+  <button
+    class="delete-all"
+    id="deleteAllBtn"
+    onclick="openDeleteAllModal()"
+  >
 
-    TARGET ACHIEVEMENT: 0%
+    <i class="fa-solid fa-trash-can"></i>
 
-  </div>
+    DELETE ALL HOURS
+
+  </button>
 
 
-  <!-- ===================================================
-       REPORT BUTTONS
-  ==================================================== -->
+  <!-- REPORT BUTTONS -->
 
-  <div class="report-buttons">
-
+  <div class="report-grid">
 
     <button
-      class="report-btn report-wa"
-      onclick="sendShiftWhatsApp()">
+      class="report-btn whatsapp-report"
+      onclick="sendShiftWhatsApp()"
+    >
 
       <i class="fa-brands fa-whatsapp"></i>
 
@@ -1853,8 +1828,9 @@ td{
 
 
     <button
-      class="report-btn report-pdf"
-      onclick="generateShiftPDF()">
+      class="report-btn pdf-report"
+      onclick="generateShiftPDF()"
+    >
 
       <i class="fa-solid fa-file-pdf"></i>
 
@@ -1862,1509 +1838,1245 @@ td{
 
     </button>
 
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ===================================================
+     CUSTOM CONFIRM MODAL
+==================================================== -->
+
+<div
+  class="modal-overlay"
+  id="confirmModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-icon">
+
+      <i class="fa-solid fa-triangle-exclamation"></i>
+
+    </div>
+
+
+    <div
+      class="modal-title"
+      id="confirmTitle"
+    >
+
+      Are you sure?
+
+    </div>
+
+
+    <div
+      class="modal-message"
+      id="confirmMessage"
+    >
+
+      Please confirm this action.
+
+    </div>
+
+
+    <div class="modal-buttons">
+
+      <button
+        class="modal-cancel"
+        onclick="closeConfirmModal()"
+      >
+
+        CANCEL
+
+      </button>
+
+
+      <button
+        class="modal-delete"
+        id="confirmActionBtn"
+      >
+
+        DELETE
+
+      </button>
+
+    </div>
 
   </div>
 
-
 </div>
 
 
-</div>
 
-
-<!-- =====================================================
+<!-- ===================================================
      TOAST
-===================================================== -->
+==================================================== -->
 
-<div
-class="toast"
-id="toast">
+<div id="toast"></div>
 
-Success
-
-</div>
 
 
 <script>
 
 
 /* =====================================================
-   YOUR GOOGLE APPS SCRIPT URL
+   CONFIG
 ===================================================== */
 
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
 
 
-const PRODUCTION_CONSTANT =
-12.8;
+const OUTPUT_CONSTANT = 12.8;
+
+const SHIFT_HOURS = 8;
+
+const DEFAULT_SFT = 2.54;
 
 
-const SHIFT_HOURS =
-8;
+let globalData = [];
 
+let masterSettings = {
 
-const TIMEOUT =
-15000;
+  targetProd: "",
 
+  targetSize: "",
 
-let allRows = [];
+  batchWeight: "",
 
-
-let settings = {
-
-  targetProd:"",
-  targetSize:"",
-  batchWeight:"",
-  sftConversion:2.54
+  sftConversion: DEFAULT_SFT
 
 };
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+let pendingDeleteRow = null;
 
-let toastTimer;
-
-
-function toast(
-  message,
-  error=false
-){
-
-  const el =
-    document.getElementById(
-      "toast"
-    );
-
-
-  el.innerText =
-    message;
-
-
-  el.classList.toggle(
-    "error",
-    error
-  );
-
-
-  el.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
-
-  toastTimer =
-    setTimeout(
-      function(){
-
-        el.classList.remove(
-          "show"
-        );
-
-      },
-      3500
-    );
-
-}
 
 
 /* =====================================================
-   JSONP
+   JSONP LOADER
 ===================================================== */
 
-function jsonp(
-  url,
-  success,
-  failure
-){
-
-  const callback =
-    "cb_" +
-    Date.now() +
-    "_" +
-    Math.floor(
-      Math.random()*100000
-    );
-
+function jsonp(url, callbackName) {
 
   const script =
-    document.createElement(
-      "script"
-    );
-
-
-  let done =
-    false;
-
-
-  const timer =
-    setTimeout(
-      function(){
-
-        if(done) return;
-
-
-        done =
-          true;
-
-
-        script.remove();
-
-
-        delete window[
-          callback
-        ];
-
-
-        if(failure)
-          failure();
-
-      },
-      TIMEOUT
-    );
-
-
-  window[callback] =
-    function(data){
-
-      if(done) return;
-
-
-      done =
-        true;
-
-
-      clearTimeout(
-        timer
-      );
-
-
-      script.remove();
-
-
-      delete window[
-        callback
-      ];
-
-
-      success(
-        data
-      );
-
-    };
-
-
-  script.onerror =
-    function(){
-
-      if(done) return;
-
-
-      done =
-        true;
-
-
-      clearTimeout(
-        timer
-      );
-
-
-      script.remove();
-
-
-      delete window[
-        callback
-      ];
-
-
-      if(failure)
-        failure();
-
-    };
-
+    document.createElement("script");
 
   script.src =
     url +
     "&callback=" +
-    encodeURIComponent(
-      callback
-    ) +
+    callbackName +
     "&t=" +
     Date.now();
 
+  script.onerror = function() {
 
-  document.body.appendChild(
-    script
-  );
+    showToast(
+      "❌ Server connection failed."
+    );
 
-}
+    finishProgress();
 
+  };
 
-/* =====================================================
-   TODAY
-===================================================== */
-
-function today(){
-
-  const d =
-    new Date();
-
-
-  return (
-
-    d.getFullYear() +
-    "-" +
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0") +
-    "-" +
-    String(
-      d.getDate()
-    ).padStart(2,"0")
-
-  );
+  document.body.appendChild(script);
 
 }
 
 
+
 /* =====================================================
-   DATE DISPLAY
+   LOAD DATA
 ===================================================== */
 
-function displayDate(
-  value
-){
+function loadDashboardData() {
 
-  if(!value)
-    return "-";
+  showLoadingState();
 
 
-  const p =
-    String(value).split("-");
+  jsonp(
+
+    SCRIPT_URL +
+    "?action=getDashboardData",
+
+    "handleDashboardResponse"
+
+  );
+}
 
 
-  if(p.length !== 3)
-    return value;
+window.handleDashboardResponse =
+function(res) {
 
+  if (
+    !res ||
+    res.status !== "success"
+  ) {
+
+    showToast(
+      "❌ Failed to load dashboard."
+    );
+
+    return;
+  }
+
+
+  globalData =
+    res.data.rows || [];
+
+
+  masterSettings =
+    res.data.masterSettings ||
+    masterSettings;
+
+
+  document.getElementById(
+    "setConfigTarget"
+  ).value =
+    masterSettings.targetProd !== ""
+      ? masterSettings.targetProd
+      : "";
+
+
+  document.getElementById(
+    "setConfigTargetSize"
+  ).value =
+    masterSettings.targetSize !== ""
+      ? masterSettings.targetSize
+      : "";
+
+
+  document.getElementById(
+    "setConfigBatch"
+  ).value =
+    masterSettings.batchWeight !== ""
+      ? masterSettings.batchWeight
+      : "";
+
+
+  renderDashboard();
+
+};
+
+
+
+/* =====================================================
+   TODAY DATE
+===================================================== */
+
+function todayDateString() {
+
+  const d = new Date();
 
   const months = [
 
-    "Jan","Feb","Mar","Apr",
-    "May","Jun","Jul","Aug",
-    "Sep","Oct","Nov","Dec"
+    "Jan","Feb","Mar","Apr","May","Jun",
+
+    "Jul","Aug","Sep","Oct","Nov","Dec"
 
   ];
 
 
   return (
 
-    p[2] +
+    String(d.getDate()).padStart(2,"0") +
     "-" +
-    months[
-      Number(p[1])-1
-    ] +
+    months[d.getMonth()] +
     "-" +
-    p[0]
+    d.getFullYear()
 
   );
-
 }
 
 
-/* =====================================================
-   HOUR
-===================================================== */
-
-function hourNumber(
-  hour
-){
-
-  const h =
-    String(hour || "")
-      .toLowerCase();
-
-
-  if(h === "1st hour") return 1;
-  if(h === "2nd hour") return 2;
-  if(h === "3rd hour") return 3;
-  if(h === "4th hour") return 4;
-  if(h === "5th hour") return 5;
-  if(h === "6th hour") return 6;
-  if(h === "7th hour") return 7;
-  if(h === "8th hour") return 8;
-
-
-  return 0;
-
-}
-
 
 /* =====================================================
-   LOAD
+   DATE KEY
 ===================================================== */
 
-function loadData(){
+function todayKey() {
 
-  jsonp(
+  const d = new Date();
 
-    SCRIPT_URL +
-    "?action=getDashboardData",
+  return (
 
-    function(res){
+    d.getFullYear() +
 
-      if(
-        !res ||
-        res.status !== "success"
-      ){
+    "-" +
 
-        toast(
-          "Could not load data.",
-          true
-        );
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
 
-        return;
+    "-" +
 
-      }
-
-
-      allRows =
-        res.data.rows || [];
-
-
-      settings =
-        res.data.masterSettings || settings;
-
-
-      document.getElementById(
-        "targetProd"
-      ).value =
-        settings.targetProd || "";
-
-
-      document.getElementById(
-        "targetSize"
-      ).value =
-        settings.targetSize || "";
-
-
-      document.getElementById(
-        "batchWeight"
-      ).value =
-        settings.batchWeight || "";
-
-
-      render();
-
-    },
-
-    function(){
-
-      toast(
-        "Connection timed out. Click Refresh Data.",
-        true
-      );
-
-    }
+    String(
+      d.getDate()
+    ).padStart(2,"0")
 
   );
-
 }
 
 
+
 /* =====================================================
-   REFRESH
+   GET CURRENT SHIFT
 ===================================================== */
 
-function refreshData(){
+function getSelectedShift() {
 
-  const btn =
-    document.getElementById(
-      "refreshBtn"
+  return document
+    .getElementById("opShift")
+    .value
+    .trim()
+    .toUpperCase();
+}
+
+
+
+/* =====================================================
+   VALIDATE SHIFT
+===================================================== */
+
+function validShift() {
+
+  const shift =
+    getSelectedShift();
+
+
+  if (
+    !["A","B","C"].includes(shift)
+  ) {
+
+    showToast(
+      "⚠️ Shift must be A, B or C."
+    );
+
+    return false;
+  }
+
+
+  return true;
+}
+
+
+
+/* =====================================================
+   HOUR NUMBER
+===================================================== */
+
+function hourNumber(hour) {
+
+  const n =
+    parseInt(
+      String(hour || "")
     );
 
 
-  btn.disabled =
-    true;
-
-
-  btn.innerHTML =
-    '<i class="fa-solid fa-spinner fa-spin"></i> REFRESHING...';
-
-
-  jsonp(
-
-    SCRIPT_URL +
-    "?action=getDashboardData",
-
-    function(res){
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        '<i class="fa-solid fa-rotate-right"></i> REFRESH DATA';
-
-
-      if(
-        res &&
-        res.status === "success"
-      ){
-
-        allRows =
-          res.data.rows || [];
-
-
-        settings =
-          res.data.masterSettings || settings;
-
-
-        render();
-
-
-        toast(
-          "✓ Data Refreshed Successfully"
-        );
-
-      }
-
-      else{
-
-        toast(
-          "Refresh failed.",
-          true
-        );
-
-      }
-
-    },
-
-    function(){
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        '<i class="fa-solid fa-rotate-right"></i> REFRESH DATA';
-
-
-      toast(
-        "Refresh timed out. Please try again.",
-        true
-      );
-
-    }
-
-  );
-
+  return isNaN(n)
+    ? 0
+    : n;
 }
 
 
+
 /* =====================================================
-   CURRENT SHIFT ROWS
+   GET CURRENT SHIFT ROWS
 ===================================================== */
 
-function currentRows(){
+function getCurrentShiftRows() {
 
   const shift =
-    document.getElementById(
-      "shift"
-    ).value
-      .trim()
-      .toUpperCase();
+    getSelectedShift();
 
 
-  return allRows.filter(
-    function(r){
+  const today =
+    todayDateString();
+
+
+  return globalData.filter(
+    r => {
 
       return (
 
-        String(r.date) ===
-        today()
+        String(r.shift)
+          .trim()
+          .toUpperCase()
+        === shift
 
         &&
 
-        String(r.shift)
-          .toUpperCase() ===
-        shift
+        String(r.date)
+          .trim()
+        === today
 
       );
 
     }
   );
-
 }
 
 
-/* =====================================================
-   PRODUCTION
-===================================================== */
-
-function production(row){
-
-  let sheets =
-    0;
-
-  let size =
-    0;
-
-
-  /* 2ND SIZE */
-
-  if(
-    row.s2Sheets !== "" &&
-    row.s2Sheets !== null
-  ){
-
-    sheets =
-      Number(row.s2Sheets) || 0;
-
-
-    size =
-      Number(row.size2) || 0;
-
-  }
-
-
-  /* 1ST SIZE */
-
-  else if(
-    row.s1Sheets !== "" &&
-    row.s1Sheets !== null
-  ){
-
-    sheets =
-      Number(row.s1Sheets) || 0;
-
-
-    size =
-      Number(row.size1) || 0;
-
-  }
-
-
-  let output =
-    0;
-
-
-  if(
-    sheets > 0 &&
-    size > 0
-  ){
-
-    output =
-
-      sheets *
-      size *
-      PRODUCTION_CONSTANT /
-      1000;
-
-  }
-
-
-  return {
-
-    sheets:sheets,
-
-    size:size,
-
-    output:output
-
-  };
-
-}
-
 
 /* =====================================================
-   METRICS
+   RENDER DASHBOARD
 ===================================================== */
 
-function metrics(row){
+function renderDashboard() {
 
-  const p =
-    production(row);
-
-
-  let input =
-    0;
+  const shift =
+    getSelectedShift();
 
 
-  if(
-    settings.batchWeight !== "" &&
-    row.beater !== "" &&
-    Number(row.beater) > 0
-  ){
-
-    input =
-
-      Number(row.beater) *
-      Number(settings.batchWeight) /
-      1000;
-
-  }
+  document.getElementById(
+    "bannerShift"
+  ).innerText =
+    "Shift " + (
+      shift || "-"
+    );
 
 
-  let me = "";
+  document.getElementById(
+    "bannerDate"
+  ).innerText =
+    todayDateString();
 
-
-  if(
-    input > 0 &&
-    p.output > 0
-  ){
-
-    me =
-
-      (
-        1 -
-        p.output / input
-      ) * 100;
-
-  }
-
-
-  let rop = "";
-
-
-  const bd =
-    Number(row.bd) || 0;
-
-
-  if(
-    p.output > 0 &&
-    bd < 60
-  ){
-
-    const running =
-      60 - bd;
-
-
-    if(running > 0){
-
-      rop =
-
-        p.output *
-        60 /
-        running;
-
-    }
-
-  }
-
-
-  return {
-
-    output:p.output,
-
-    input:input,
-
-    me:me,
-
-    rop:rop,
-
-    sheets:p.sheets,
-
-    size:p.size
-
-  };
-
-}
-
-
-/* =====================================================
-   RENDER
-===================================================== */
-
-function render(){
 
   const rows =
-    currentRows();
-
-
-  rows.sort(
-    function(a,b){
-
-      return (
-        hourNumber(a.hour) -
-        hourNumber(b.hour)
-      );
-
-    }
-  );
+    getCurrentShiftRows();
 
 
   renderTable(rows);
 
-  renderTop(rows);
+  updateMetrics(rows);
 
-  renderSummary(rows);
+  updateGSR(rows);
+
+  updateBanner(rows);
 
 }
 
 
+
 /* =====================================================
-   TABLE
+   GET ROW PRODUCTION
 ===================================================== */
 
-function renderTable(rows){
+function getRowProduction(r) {
 
-  const body =
-    document.getElementById(
-      "tableBody"
-    );
+  let sheets = 0;
+
+  let size = 0;
 
 
-  if(rows.length === 0){
+  if (
 
-    body.innerHTML =
+    r.s2Sheets !== "" &&
 
-      `<tr>
-        <td
-          colspan="12"
-          style="
-            padding:25px;
-            color:#94a3b8;
-            font-size:17px;
-          ">
-          No production entry yet.
-        </td>
-      </tr>`;
+    r.s2Sheets !== null &&
 
-    return;
+    r.s2Sheets !== undefined &&
+
+    !isNaN(Number(r.s2Sheets)) &&
+
+    Number(r.s2Sheets) > 0
+
+  ) {
+
+    sheets =
+      Number(r.s2Sheets);
+
+    size =
+      Number(r.size2) || 0;
+
+  }
+
+  else if (
+
+    r.s1Sheets !== "" &&
+
+    r.s1Sheets !== null &&
+
+    r.s1Sheets !== undefined &&
+
+    !isNaN(Number(r.s1Sheets)) &&
+
+    Number(r.s1Sheets) > 0
+
+  ) {
+
+    sheets =
+      Number(r.s1Sheets);
+
+    size =
+      Number(r.size1) || 0;
 
   }
 
 
-  let html = "";
+  let output = 0;
 
 
-  rows.forEach(
-    function(row){
+  if (
+    sheets > 0 &&
+    size > 0
+  ) {
 
-      const m =
-        metrics(row);
+    output =
+      (
+        sheets *
+        size *
+        OUTPUT_CONSTANT
+      ) / 1000;
+
+  }
 
 
-      html += `
+  return {
+
+    sheets: sheets,
+
+    size: size,
+
+    output: output
+
+  };
+
+}
+
+
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+function renderTable(rows) {
+
+  const tbody =
+    document.getElementById(
+      "productionTableBody"
+    );
+
+
+  if (!rows.length) {
+
+    tbody.innerHTML = `
 
       <tr>
 
-        <td class="hour">
-          ${esc(row.hour)}
-        </td>
+        <td
+          colspan="12"
+          style="
+            padding:20px;
+            color:#94a3b8;
+          "
+        >
 
-        <td>
-          ${
-            m.size
-              ? Number(m.size).toFixed(2)
-              : ""
-          }
-        </td>
-
-        <td class="yellow">
-          ${
-            m.sheets || ""
-          }
-        </td>
-
-        <td>
-          ${
-            row.moulding !== ""
-              ? row.moulding
-              : ""
-          }
-        </td>
-
-        <td>
-          ${
-            row.beater !== ""
-              ? row.beater
-              : ""
-          }
-        </td>
-
-        <td>
-          ${
-            row.bd !== ""
-              ? row.bd
-              : ""
-          }
-        </td>
-
-        <!-- GSR HOURLY -->
-
-        <td class="yellow">
-
-          ${
-            row.gsr !== ""
-              ? Number(row.gsr)
-              : ""
-          }
-
-        </td>
-
-        <td class="yellow">
-
-          ${
-            m.output > 0
-              ? m.output.toFixed(2)
-              : ""
-          }
-
-        </td>
-
-        <td>
-
-          ${
-            m.input > 0
-              ? m.input.toFixed(2)
-              : ""
-          }
-
-        </td>
-
-        <td>
-
-          ${
-            m.me !== ""
-              ? m.me.toFixed(1) + "%"
-              : ""
-          }
-
-        </td>
-
-        <td>
-
-          ${
-            m.rop !== ""
-              ? m.rop.toFixed(2)
-              : ""
-          }
-
-        </td>
-
-
-        <td>
-
-
-          <!-- EDIT PEN -->
-
-          <button
-            class="icon-btn edit"
-            onclick="editRow(${row.rowIndex})"
-            title="Edit">
-
-            <i
-              class="fa-solid fa-pen">
-            </i>
-
-          </button>
-
-
-          <!-- DELETE BIN -->
-
-          <button
-            class="icon-btn delete"
-            onclick="deleteRow(${row.rowIndex})"
-            title="Delete">
-
-            <i
-              class="fa-solid fa-trash-can">
-            </i>
-
-          </button>
-
-
-          <!-- WHATSAPP -->
-
-          <button
-            class="icon-btn whatsapp"
-            onclick="hourWhatsApp(${row.rowIndex})"
-            title="WhatsApp">
-
-            <i
-              class="fa-brands fa-whatsapp">
-            </i>
-
-          </button>
-
-
-          <!-- PDF -->
-
-          <button
-            class="icon-btn pdf"
-            onclick="hourPDF(${row.rowIndex})"
-            title="PDF">
-
-            <i
-              class="fa-solid fa-file-pdf">
-            </i>
-
-          </button>
-
+          No production entries found.
 
         </td>
 
       </tr>
 
-      `;
-
-    }
-  );
-
-
-  body.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-   TOP CALCULATION
-===================================================== */
-
-function renderTop(rows){
-
-  const targetProd =
-    Number(
-      settings.targetProd
-    );
-
-
-  const targetSize =
-    Number(
-      settings.targetSize
-    );
-
-
-  document.getElementById(
-    "topShift"
-  ).innerText =
-    "Shift " +
-    (
-      document.getElementById(
-        "shift"
-      ).value || "A"
-    )
-      .toUpperCase();
-
-
-  document.getElementById(
-    "topDate"
-  ).innerText =
-    displayDate(
-      today()
-    );
-
-
-  if(
-    !targetProd ||
-    !targetSize
-  ){
-
-    document.getElementById(
-      "requiredSheets"
-    ).innerText =
-      "SET TARGET";
-
+    `;
 
     return;
-
   }
 
 
-  /* TARGET SHEETS */
-
-  const requiredSheets =
-
-    targetProd *
-    1000 /
-    (
-      targetSize *
-      PRODUCTION_CONSTANT
-    );
-
-
-  document.getElementById(
-    "requiredSheets"
-  ).innerText =
-
-    requiredSheets.toFixed(2);
-
-
-  /* TOTAL OUTPUT */
-
-  let output =
-    0;
-
-
-  rows.forEach(
-    function(r){
-
-      output +=
-        production(r).output;
-
-    }
+  rows.sort(
+    (a,b) =>
+      hourNumber(a.hour) -
+      hourNumber(b.hour)
   );
 
 
-  /* EQUIVALENT TARGET SIZE SHEETS */
-
-  const producedSheets =
-
-    output *
-    1000 /
-    (
-      targetSize *
-      PRODUCTION_CONSTANT
-    );
+  let html = "";
 
 
-  const remaining =
-
-    Math.max(
-      0,
-      requiredSheets -
-      producedSheets
-    );
-
-
-  document.getElementById(
-    "producedSheets"
-  ).innerText =
-    producedSheets.toFixed(2);
-
-
-  document.getElementById(
-    "remainingSheets"
-  ).innerText =
-    remaining.toFixed(2);
-
-
-  /* ===================================================
-     REMAINING HOURS
-     
-     Example:
-     1st hour completed
-     = 7 hours remaining
-     
-     NOT 13 HOURS
-  =================================================== */
-
-  let lastHour =
-    0;
-
-
-  rows.forEach(
-    function(r){
-
-      lastHour =
-        Math.max(
-          lastHour,
-          hourNumber(r.hour)
-        );
-
-    }
-  );
-
-
-  const remainingHours =
-
-    Math.max(
-      0,
-      SHIFT_HOURS -
-      lastHour
-    );
-
-
-  let perHour =
-    0;
-
-
-  if(
-    remainingHours > 0 &&
-    remaining > 0
-  ){
-
-    perHour =
-      remaining /
-      remainingHours;
-
-  }
-
-
-  document.getElementById(
-    "requiredPerHour"
-  ).innerText =
-
-    remainingHours > 0
-      ? perHour.toFixed(2)
-      : "0.00";
-
-
-  /* SIZE */
-
-  document.getElementById(
-    "targetSizeShow"
-  ).innerText =
-    targetSize;
-
-
-  /* BATCH */
-
-  document.getElementById(
-    "batchWeightShow"
-  ).innerText =
-    settings.batchWeight || "-";
-
-
-  /* LATEST */
-
-  if(rows.length){
-
-    const last =
-      rows[rows.length-1];
-
+  rows.forEach(function(r) {
 
     const p =
-      production(last);
+      getRowProduction(r);
 
 
-    document.getElementById(
-      "latest"
-    ).innerText =
-
-      last.hour +
-      " : " +
-      (
-        p.sheets || 0
-      ) +
-      " sheets / " +
-      p.output.toFixed(2) +
-      " MT";
-
-  }
-
-  else{
-
-    document.getElementById(
-      "latest"
-    ).innerText =
-      "No entry yet";
-
-  }
+    let input = 0;
 
 
-  /* TIME */
+    if (
 
-  const timeEl =
-    document.getElementById(
-      "timeLeft"
-    );
+      masterSettings.batchWeight !== "" &&
 
+      r.beater !== "" &&
 
-  if(
-    lastHour === 0
-  ){
+      r.beater !== null &&
 
-    timeEl.innerText =
-      "8 HOURS AVAILABLE";
+      !isNaN(Number(r.beater))
 
-  }
+    ) {
 
-  else if(
-    remainingHours === 1
-  ){
+      input =
+        (
+          Number(r.beater) *
+          Number(masterSettings.batchWeight)
+        ) / 1000;
 
-    timeEl.innerText =
-      "ONLY 1 HOUR LEFT";
-
-  }
-
-  else if(
-    remainingHours > 1
-  ){
-
-    timeEl.innerText =
-
-      "ONLY " +
-      remainingHours +
-      " HOURS LEFT";
-
-  }
-
-  else{
-
-    timeEl.innerText =
-      "SHIFT COMPLETED";
-
-  }
+    }
 
 
-  /* TARGET ACHIEVEMENT */
-
-  const achievement =
-
-    targetProd > 0
-      ? output /
-        targetProd *
-        100
-      : 0;
+    let me = "";
 
 
-  document.getElementById(
-    "achievement"
-  ).innerText =
+    if (
+      p.output > 0 &&
+      input > 0
+    ) {
 
-    "TARGET ACHIEVEMENT: " +
-    achievement.toFixed(1) +
-    "%";
+      me =
+        (
+          (
+            1 -
+            p.output / input
+          ) * 100
+        ).toFixed(1) +
+        "%";
+
+    }
+
+
+    let rop = "";
+
+
+    if (
+      p.output > 0
+    ) {
+
+      const bd =
+        Number(r.bd) || 0;
+
+
+      if (bd < 60) {
+
+        rop =
+          (
+            p.output *
+            60 /
+            Math.max(
+              1,
+              60 - bd
+            )
+          ).toFixed(2);
+
+      }
+
+    }
+
+
+    html += `
+
+      <tr>
+
+        <td class="hour">
+          ${escapeHTML(r.hour)}
+        </td>
+
+        <td>
+          ${p.size || ""}
+        </td>
+
+        <td class="yellow">
+          ${p.sheets || ""}
+        </td>
+
+        <td>
+          ${r.moulding !== "" ? r.moulding : ""}
+        </td>
+
+        <td>
+          ${r.beater !== "" ? r.beater : ""}
+        </td>
+
+        <td>
+          ${r.bd !== "" ? r.bd : ""}
+        </td>
+
+        <td class="yellow">
+          ${r.gsr !== "" ? r.gsr : ""}
+        </td>
+
+        <td class="yellow">
+          ${p.output > 0
+            ? p.output.toFixed(2)
+            : ""}
+        </td>
+
+        <td>
+          ${input > 0
+            ? input.toFixed(2)
+            : ""}
+        </td>
+
+        <td class="cyan">
+          ${me}
+        </td>
+
+        <td>
+          ${rop}
+        </td>
+
+        <td>
+
+          <div class="action-buttons">
+
+            <button
+              class="action-btn edit-btn"
+              title="Edit"
+              onclick="editRow(${r.rowIndex})"
+            >
+              <i class="fa-solid fa-pen"></i>
+            </button>
+
+            <button
+              class="action-btn delete-btn"
+              title="Delete"
+              onclick="deleteRow(${r.rowIndex})"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+
+            <button
+              class="action-btn whatsapp-btn"
+              title="WhatsApp"
+              onclick="sendRowWhatsApp(${r.rowIndex})"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </button>
+
+            <button
+              class="action-btn pdf-btn"
+              title="PDF"
+              onclick="generateRowPDF(${r.rowIndex})"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+
+  tbody.innerHTML = html;
 
 }
 
 
+
 /* =====================================================
-   SUMMARY
+   UPDATE METRICS
 ===================================================== */
 
-function renderSummary(rows){
+function updateMetrics(rows) {
 
-  let output =
-    0;
+  let totalOutput = 0;
 
-  let input =
-    0;
+  let totalInput = 0;
 
-  let bd =
-    0;
-
-  let gsr =
-    0;
+  let totalBD = 0;
 
 
-  rows.forEach(
-    function(row){
+  rows.forEach(function(r) {
 
-      const m =
-        metrics(row);
-
-
-      output +=
-        m.output;
+    const p =
+      getRowProduction(r);
 
 
-      input +=
-        m.input;
+    totalOutput +=
+      p.output;
 
 
-      bd +=
-        Number(row.bd) || 0;
+    if (
+      r.beater !== "" &&
+      r.beater !== null &&
+      !isNaN(Number(r.beater)) &&
+      masterSettings.batchWeight !== ""
+    ) {
 
-
-      /* =================================================
-         GSR ONLY ADDS GSR
-         NO PRODUCTION CONNECTION
-      ================================================= */
-
-      gsr +=
-        Number(row.gsr) || 0;
+      totalInput +=
+        (
+          Number(r.beater) *
+          Number(masterSettings.batchWeight)
+        ) / 1000;
 
     }
-  );
+
+
+    totalBD +=
+      Number(r.bd) || 0;
+
+  });
+
+
+  let overallME = 0;
+
+
+  if (totalInput > 0) {
+
+    overallME =
+      (
+        1 -
+        totalOutput /
+        totalInput
+      ) * 100;
+
+  }
+
+
+  let overallROP = 0;
+
+
+  if (totalOutput > 0) {
+
+    const runMinutes =
+      Math.max(
+        1,
+        rows.length * 60 -
+        totalBD
+      );
+
+
+    overallROP =
+      (
+        totalOutput *
+        60 /
+        runMinutes
+      );
+
+  }
 
 
   document.getElementById(
-    "totalOutput"
+    "totalProduction"
   ).innerText =
-
-    output > 0
-      ? output.toFixed(2) + " MT"
-      : "-";
+    totalOutput.toFixed(2) +
+    " MT";
 
 
   document.getElementById(
     "totalInput"
   ).innerText =
-
-    input > 0
-      ? input.toFixed(2) + " MT"
-      : "-";
+    totalInput.toFixed(2) +
+    " MT";
 
 
-  if(
-    output > 0 &&
-    input > 0
-  ){
-
-    document.getElementById(
-      "overallME"
-    ).innerText =
-
-      (
-        (
-          1 -
-          output / input
-        ) * 100
-      ).toFixed(1) +
-      "%";
-
-  }
-
-  else{
-
-    document.getElementById(
-      "overallME"
-    ).innerText =
-      "-";
-
-  }
+  document.getElementById(
+    "overallME"
+  ).innerText =
+    overallME.toFixed(1) +
+    "%";
 
 
-  if(output > 0){
+  document.getElementById(
+    "overallROP"
+  ).innerText =
+    overallROP.toFixed(2) +
+    " MT/hr";
 
-    const running =
-
-      SHIFT_HOURS * 60 -
-      bd;
-
-
-    if(running > 0){
-
-      document.getElementById(
-        "overallROP"
-      ).innerText =
-
-        (
-          output *
-          SHIFT_HOURS *
-          60 /
-          running
-        ).toFixed(2);
-
-    }
-
-  }
-
-  else{
-
-    document.getElementById(
-      "overallROP"
-    ).innerText =
-      "-";
-
-  }
+}
 
 
-  /* =====================================================
-     TOTAL GSR CARD
-  ===================================================== */
+
+/* =====================================================
+   GSR
+===================================================== */
+
+function updateGSR(rows) {
+
+  let total =
+    0;
+
+
+  rows.forEach(function(r) {
+
+    total +=
+      Number(r.gsr) || 0;
+
+  });
+
 
   document.getElementById(
     "totalGSR"
   ).innerText =
-
-    gsr +
+    total +
     " SHEETS";
 
 }
+
+
+
+/* =====================================================
+   TARGET BANNER
+===================================================== */
+
+function updateBanner(rows) {
+
+  const targetProd =
+    Number(masterSettings.targetProd);
+
+
+  const targetSize =
+    Number(masterSettings.targetSize);
+
+
+  if (
+
+    !targetProd ||
+    !targetSize ||
+    targetSize <= 0
+
+  ) {
+
+    document.getElementById(
+      "topReqSheetsVal"
+    ).innerText =
+      "SETUP REQUIRED";
+
+
+    document.getElementById(
+      "bannerProduced"
+    ).innerText = "-";
+
+
+    document.getElementById(
+      "bannerReqSheet"
+    ).innerText = "-";
+
+
+    document.getElementById(
+      "bannerReqHr"
+    ).innerText = "-";
+
+
+    document.getElementById(
+      "bannerTargetSize"
+    ).innerText = "-";
+
+
+    document.getElementById(
+      "bannerSft"
+    ).innerText = "-";
+
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      "REMAINING HOURS NOT SET";
+
+
+    return;
+  }
+
+
+  /* -----------------------------------------------
+     TARGET SIZE EQUIVALENT SHEETS
+  ------------------------------------------------ */
+
+  const totalRequiredSheets =
+    (
+      targetProd *
+      1000
+    ) /
+    (
+      targetSize *
+      OUTPUT_CONSTANT
+    );
+
+
+  /*
+     IMPORTANT:
+     Produced equivalent sheets are calculated
+     from actual Output MT.
+  */
+
+  let totalOutput = 0;
+
+
+  rows.forEach(function(r) {
+
+    totalOutput +=
+      getRowProduction(r).output;
+
+  });
+
+
+  const producedEquivalentSheets =
+    (
+      totalOutput *
+      1000
+    ) /
+    (
+      targetSize *
+      OUTPUT_CONSTANT
+    );
+
+
+  const remainingSheets =
+    Math.max(
+      0,
+      totalRequiredSheets -
+      producedEquivalentSheets
+    );
+
+
+  /* -----------------------------------------------
+     LATEST COMPLETED HOUR
+  ------------------------------------------------ */
+
+  let latestHour = 0;
+
+
+  rows.forEach(function(r) {
+
+    const n =
+      hourNumber(r.hour);
+
+
+    if (n > latestHour) {
+
+      latestHour = n;
+
+    }
+
+  });
+
+
+  /*
+     Before first entry = 8 hours.
+     After 1st = 7.
+     After 2nd = 6.
+     ...
+     After 8th = 0.
+  */
+
+  const remainingHours =
+    Math.max(
+      0,
+      SHIFT_HOURS -
+      latestHour
+    );
+
+
+  const requiredPerHour =
+    remainingHours > 0
+
+      ? remainingSheets /
+        remainingHours
+
+      : 0;
+
+
+  const sftConversion =
+    Number(
+      masterSettings.sftConversion
+    ) || DEFAULT_SFT;
+
+
+  const sft =
+    targetSize *
+    sftConversion;
+
+
+  /* -----------------------------------------------
+     DISPLAY
+  ------------------------------------------------ */
+
+  document.getElementById(
+    "topReqSheetsVal"
+  ).innerText =
+    totalRequiredSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerProduced"
+  ).innerText =
+    producedEquivalentSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerReqSheet"
+  ).innerText =
+    remainingSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerReqHr"
+  ).innerText =
+    requiredPerHour.toFixed(2);
+
+
+  document.getElementById(
+    "bannerTargetSize"
+  ).innerText =
+    targetSize;
+
+
+  document.getElementById(
+    "bannerSft"
+  ).innerText =
+    sft.toFixed(2);
+
+
+  if (remainingHours === 0) {
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      "NO HOURS LEFT";
+
+  }
+
+  else {
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      `ONLY ${remainingHours} HOURS AVAILABLE`;
+
+  }
+
+}
+
 
 
 /* =====================================================
    SAVE SETTINGS
 ===================================================== */
 
-function saveSettings(){
+function saveSettingsData() {
 
-  const targetProd =
+  const target =
     document.getElementById(
-      "targetProd"
+      "setConfigTarget"
     ).value.trim();
 
 
   const targetSize =
     document.getElementById(
-      "targetSize"
+      "setConfigTargetSize"
     ).value.trim();
 
 
-  const batchWeight =
+  const batch =
     document.getElementById(
-      "batchWeight"
+      "setConfigBatch"
     ).value.trim();
 
 
-  if(
-    !targetProd ||
-    Number(targetProd) <= 0
-  ){
-
-    toast(
-      "Enter Target Production.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
+  if (
+    !target ||
     !targetSize ||
-    Number(targetSize) <= 0
-  ){
+    !batch
+  ) {
 
-    toast(
-      "Enter Target Size in meter (m).",
-      true
+    showToast(
+      "⚠️ Please fill all Master Settings."
     );
 
     return;
-
-  }
-
-
-  if(
-    !batchWeight ||
-    Number(batchWeight) <= 0
-  ){
-
-    toast(
-      "Enter Batch Weight.",
-      true
-    );
-
-    return;
-
   }
 
 
   const btn =
     document.getElementById(
-      "saveSettingsBtn"
+      "settingsBtn"
     );
 
 
-  btn.disabled =
-    true;
+  const progressWrap =
+    document.getElementById(
+      "settingsProgressWrap"
+    );
 
+
+  const progress =
+    document.getElementById(
+      "settingsProgress"
+    );
+
+
+  btn.disabled = true;
 
   btn.innerHTML =
-    "SAVING...";
+    '<i class="fa-solid fa-spinner fa-spin"></i> SAVING...';
 
 
-  const finish =
-    progressStart(
-      "settingsProgress",
-      "settingsProgressBar",
-      "settingsProgressText",
-      "SAVING SETTINGS..."
-    );
+  progressWrap.style.display =
+    "block";
+
+  progress.style.width =
+    "25%";
+
+
+  window.handleSettingsSaveResponse =
+    function(res) {
+
+      progress.style.width =
+        "100%";
+
+
+      btn.disabled = false;
+
+      btn.innerHTML =
+        '<i class="fa-solid fa-floppy-disk"></i> SAVE SETTINGS';
+
+
+      setTimeout(
+        function() {
+
+          progressWrap.style.display =
+            "none";
+
+          progress.style.width =
+            "0%";
+
+        },
+        400
+      );
+
+
+      if (
+        res &&
+        res.status === "success"
+      ) {
+
+        showToast(
+          "✅ Settings saved successfully."
+        );
+
+        loadDashboardData();
+
+      }
+
+      else {
+
+        showToast(
+          "❌ Failed to save settings."
+        );
+
+      }
+
+    };
 
 
   jsonp(
@@ -3373,254 +3085,45 @@ function saveSettings(){
     "?action=saveSettings" +
 
     "&targetProd=" +
-    encodeURIComponent(
-      targetProd
-    ) +
+    encodeURIComponent(target) +
 
     "&targetSize=" +
-    encodeURIComponent(
-      targetSize
-    ) +
+    encodeURIComponent(targetSize) +
 
     "&batchWeight=" +
-    encodeURIComponent(
-      batchWeight
-    ),
+    encodeURIComponent(batch),
 
-    function(res){
-
-      finish();
-
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
-
-
-      if(
-        res &&
-        res.status === "success"
-      ){
-
-        toast(
-          "✓ Save Successful"
-        );
-
-
-        loadData();
-
-      }
-
-      else{
-
-        toast(
-          res.message ||
-          "Save failed.",
-          true
-        );
-
-      }
-
-    },
-
-    function(){
-
-      finish();
-
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
-
-
-      toast(
-        "Response delayed. Refresh to check saved data.",
-        true
-      );
-
-    }
+    "handleSettingsSaveResponse"
 
   );
 
 }
 
 
-/* =====================================================
-   PROGRESS
-===================================================== */
-
-function progressStart(
-  areaId,
-  barId,
-  textId,
-  message
-){
-
-  const area =
-    document.getElementById(
-      areaId
-    );
-
-
-  const bar =
-    document.getElementById(
-      barId
-    );
-
-
-  const text =
-    document.getElementById(
-      textId
-    );
-
-
-  area.style.display =
-    "block";
-
-
-  text.innerText =
-    message;
-
-
-  let value =
-    5;
-
-
-  bar.style.width =
-    value + "%";
-
-
-  const timer =
-    setInterval(
-      function(){
-
-        value +=
-          Math.random()*7;
-
-
-        if(value > 88)
-          value = 88;
-
-
-        bar.style.width =
-          value + "%";
-
-      },
-      250
-    );
-
-
-  return function(){
-
-    clearInterval(
-      timer
-    );
-
-
-    bar.style.width =
-      "100%";
-
-
-    text.innerText =
-      "COMPLETED ✓";
-
-
-    setTimeout(
-      function(){
-
-        area.style.display =
-          "none";
-
-
-        bar.style.width =
-          "0%";
-
-      },
-      600
-    );
-
-  };
-
-}
-
 
 /* =====================================================
-   SUBMIT
+   SUBMIT HOURLY
 ===================================================== */
 
-function submitEntry(){
+function submitProductionEntry() {
 
-  const operator =
+  if (!validShift()) return;
+
+
+  const name =
     document.getElementById(
-      "operator"
+      "opName"
     ).value.trim();
 
 
-  const shift =
-    document.getElementById(
-      "shift"
-    ).value.trim()
-      .toUpperCase();
+  if (!name) {
 
+    showToast(
+      "⚠️ Please enter operator name."
+    );
 
-  const hour =
-    document.getElementById(
-      "hour"
-    ).value;
-
-
-  const size1 =
-    document.getElementById(
-      "size1"
-    ).value.trim();
-
-
-  const size2 =
-    document.getElementById(
-      "size2"
-    ).value.trim();
-
-
-  const s1Sheets =
-    document.getElementById(
-      "s1Sheets"
-    ).value.trim();
-
-
-  const s2Sheets =
-    document.getElementById(
-      "s2Sheets"
-    ).value.trim();
-
-
-  const moulding =
-    document.getElementById(
-      "moulding"
-    ).value.trim();
-
-
-  const beater =
-    document.getElementById(
-      "beater"
-    ).value.trim();
-
-
-  const bd =
-    document.getElementById(
-      "bd"
-    ).value.trim();
-
-
-  const gsr =
-    document.getElementById(
-      "gsr"
-    ).value.trim();
+    return;
+  }
 
 
   const rowIndex =
@@ -3629,112 +3132,78 @@ function submitEntry(){
     ).value;
 
 
-  if(!operator){
+  const shift =
+    getSelectedShift();
 
-    toast(
-      "Enter Operator Name.",
-      true
+
+  const hour =
+    document.getElementById(
+      "opHour"
+    ).value;
+
+
+  const size1 =
+    document.getElementById(
+      "opSize1"
+    ).value;
+
+
+  const size2 =
+    document.getElementById(
+      "opSize2"
+    ).value;
+
+
+  const s1Sheets =
+    document.getElementById(
+      "opS1"
+    ).value;
+
+
+  const s2Sheets =
+    document.getElementById(
+      "opS2"
+    ).value;
+
+
+  const moulding =
+    document.getElementById(
+      "opMoulding"
+    ).value;
+
+
+  const beater =
+    document.getElementById(
+      "opBeater"
+    ).value;
+
+
+  const bd =
+    document.getElementById(
+      "opBD"
+    ).value;
+
+
+  const gsr =
+    document.getElementById(
+      "opGSR"
+    ).value;
+
+
+  /* ONLY ONE SIZE */
+
+  if (
+    s1Sheets &&
+    Number(s1Sheets) > 0 &&
+    s2Sheets &&
+    Number(s2Sheets) > 0
+  ) {
+
+    showToast(
+      "⚠️ Only one Size Sheets can be entered per hour."
     );
 
     return;
-
-  }
-
-
-  if(
-    !["A","B","C"].includes(shift)
-  ){
-
-    toast(
-      "Shift must be A, B or C.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-    hourNumber(hour) === 0
-  ){
-
-    toast(
-      "Select Production Hour.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-    s1Sheets !== "" &&
-    s2Sheets !== ""
-  ){
-
-    toast(
-      "Enter only one size sheet entry for an hour.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-    s1Sheets !== "" &&
-    (
-      size1 === "" ||
-      Number(size1) <= 0
-    )
-  ){
-
-    toast(
-      "Enter valid 1st Size in meter.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-    s2Sheets !== "" &&
-    (
-      size2 === "" ||
-      Number(size2) <= 0
-    )
-  ){
-
-    toast(
-      "Enter valid 2nd Size in meter.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-    bd !== "" &&
-    (
-      Number(bd) < 0 ||
-      Number(bd) > 60
-    )
-  ){
-
-    toast(
-      "B/D must be 0-60 minutes.",
-      true
-    );
-
-    return;
-
   }
 
 
@@ -3744,25 +3213,89 @@ function submitEntry(){
     );
 
 
-  btn.disabled =
-    true;
+  const wrap =
+    document.getElementById(
+      "submitProgressWrap"
+    );
 
+
+  const progress =
+    document.getElementById(
+      "submitProgress"
+    );
+
+
+  btn.disabled = true;
 
   btn.innerHTML =
-    rowIndex
-      ? "UPDATING..."
-      : "SUBMITTING...";
+    '<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...';
 
 
-  const finish =
-    progressStart(
-      "submitProgress",
-      "submitProgressBar",
-      "submitProgressText",
-      rowIndex
-        ? "UPDATING HOURLY DATA..."
-        : "SUBMITTING HOURLY DATA..."
-    );
+  wrap.style.display =
+    "block";
+
+  progress.style.width =
+    "20%";
+
+
+  window.handleSubmitResponse =
+    function(res) {
+
+      progress.style.width =
+        "100%";
+
+
+      setTimeout(
+        function() {
+
+          wrap.style.display =
+            "none";
+
+          progress.style.width =
+            "0%";
+
+        },
+        300
+      );
+
+
+      btn.disabled = false;
+
+      btn.innerHTML =
+        '<i class="fa-solid fa-cloud-arrow-up"></i> SUBMIT HOURLY DATA';
+
+
+      if (
+        res &&
+        res.status === "success"
+      ) {
+
+        showToast(
+          "✅ Production data saved successfully."
+        );
+
+
+        resetForm();
+
+        loadDashboardData();
+
+      }
+
+      else {
+
+        showToast(
+          "❌ " +
+          (
+            res &&
+            res.message
+              ? res.message
+              : "Operation failed."
+          )
+        );
+
+      }
+
+    };
 
 
   let url =
@@ -3771,178 +3304,83 @@ function submitEntry(){
 
     "?action=submitHourly" +
 
-    "&date=" +
-    encodeURIComponent(
-      today()
-    ) +
-
     "&shift=" +
-    encodeURIComponent(
-      shift
-    ) +
+    encodeURIComponent(shift) +
 
     "&hour=" +
-    encodeURIComponent(
-      hour
-    ) +
+    encodeURIComponent(hour) +
 
     "&size1=" +
-    encodeURIComponent(
-      size1
-    ) +
+    encodeURIComponent(size1) +
 
     "&size2=" +
-    encodeURIComponent(
-      size2
-    ) +
+    encodeURIComponent(size2) +
 
     "&s1Sheets=" +
-    encodeURIComponent(
-      s1Sheets
-    ) +
+    encodeURIComponent(s1Sheets) +
 
     "&s2Sheets=" +
-    encodeURIComponent(
-      s2Sheets
-    ) +
+    encodeURIComponent(s2Sheets) +
 
     "&moulding=" +
-    encodeURIComponent(
-      moulding
-    ) +
+    encodeURIComponent(moulding) +
 
     "&beater=" +
-    encodeURIComponent(
-      beater
-    ) +
+    encodeURIComponent(beater) +
 
     "&bd=" +
-    encodeURIComponent(
-      bd
-    ) +
+    encodeURIComponent(bd) +
 
     "&gsr=" +
-    encodeURIComponent(
-      gsr
-    ) +
+    encodeURIComponent(gsr) +
 
     "&operator=" +
-    encodeURIComponent(
-      operator
-    );
+    encodeURIComponent(name);
 
 
-  if(rowIndex){
+  if (rowIndex) {
 
     url +=
-
       "&rowIndex=" +
-      encodeURIComponent(
-        rowIndex
-      );
+      encodeURIComponent(rowIndex);
 
   }
 
 
+  progress.style.width =
+    "50%";
+
+
   jsonp(
-
     url,
-
-    function(res){
-
-      finish();
-
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
-
-
-      if(
-        res &&
-        res.status === "success"
-      ){
-
-        toast(
-          rowIndex
-            ? "✓ Update Successful"
-            : "✓ Submit Successful"
-        );
-
-
-        resetForm();
-
-
-        loadData();
-
-      }
-
-      else{
-
-        toast(
-          res.message ||
-          "Submit failed.",
-          true
-        );
-
-      }
-
-    },
-
-    function(){
-
-      finish();
-
-
-      btn.disabled =
-        false;
-
-
-      btn.innerHTML =
-        'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
-
-
-      toast(
-        "Response delayed. DO NOT submit again. Click Refresh Data.",
-        true
-      );
-
-    }
-
+    "handleSubmitResponse"
   );
 
 }
 
 
+
 /* =====================================================
-   EDIT
+   EDIT ROW
 ===================================================== */
 
-function editRow(rowIndex){
+function editRow(idx) {
 
   const row =
-    allRows.find(
-      function(r){
-
-        return Number(r.rowIndex) ===
-          Number(rowIndex);
-
-      }
+    globalData.find(
+      r =>
+        Number(r.rowIndex) ===
+        Number(idx)
     );
 
 
-  if(!row){
+  if (!row) {
 
-    toast(
-      "Entry not found.",
-      true
+    showToast(
+      "❌ Entry not found."
     );
 
     return;
-
   }
 
 
@@ -3953,67 +3391,67 @@ function editRow(rowIndex){
 
 
   document.getElementById(
-    "operator"
+    "opName"
   ).value =
     row.name || "";
 
 
   document.getElementById(
-    "shift"
+    "opShift"
   ).value =
     row.shift || "A";
 
 
   document.getElementById(
-    "hour"
+    "opHour"
   ).value =
-    row.hour || "";
+    row.hour || "1st Hour";
 
 
   document.getElementById(
-    "size1"
+    "opSize1"
   ).value =
     row.size1 || "";
 
 
   document.getElementById(
-    "size2"
+    "opSize2"
   ).value =
     row.size2 || "";
 
 
   document.getElementById(
-    "s1Sheets"
+    "opS1"
   ).value =
     row.s1Sheets || "";
 
 
   document.getElementById(
-    "s2Sheets"
+    "opS2"
   ).value =
     row.s2Sheets || "";
 
 
   document.getElementById(
-    "moulding"
-  ).value =
-    row.moulding || "";
-
-
-  document.getElementById(
-    "beater"
+    "opBeater"
   ).value =
     row.beater || "";
 
 
   document.getElementById(
-    "bd"
+    "opMoulding"
+  ).value =
+    row.moulding || "";
+
+
+  document.getElementById(
+    "opBD"
   ).value =
     row.bd || "";
 
 
   document.getElementById(
-    "gsr"
+    "opGSR"
   ).value =
     row.gsr || "";
 
@@ -4021,31 +3459,43 @@ function editRow(rowIndex){
   document.getElementById(
     "formTitle"
   ).innerHTML =
-    '<i class="fa-solid fa-pen"></i> Edit Hourly Production';
+
+    '<i class="fa-solid fa-pen"></i> ' +
+    "EDIT HOURLY ENTRY";
 
 
   document.getElementById(
     "submitBtn"
   ).innerHTML =
-    'UPDATE HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
+
+    '<i class="fa-solid fa-arrows-rotate"></i> UPDATE ENTRY';
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "block";
 
 
   window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
+    top: 0,
+    behavior: "smooth"
   });
+
+
+  showToast(
+    "✏️ Entry loaded for editing."
+  );
 
 }
 
 
+
 /* =====================================================
-   RESET
+   RESET FORM
 ===================================================== */
 
-function resetForm(){
+function resetForm() {
 
   document.getElementById(
     "editRowIndex"
@@ -4055,569 +3505,465 @@ function resetForm(){
   document.getElementById(
     "formTitle"
   ).innerHTML =
-    '<i class="fa-solid fa-clipboard-list"></i> Hourly Production Entry';
+
+    '<i class="fa-solid fa-pen-to-square"></i> ' +
+    "HOURLY PRODUCTION ENTRY";
 
 
   document.getElementById(
     "submitBtn"
   ).innerHTML =
-    'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
+
+    '<i class="fa-solid fa-cloud-arrow-up"></i> ' +
+    "SUBMIT HOURLY DATA";
 
 
   document.getElementById(
-    "hour"
+    "cancelBtn"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "opS1"
   ).value = "";
 
 
   document.getElementById(
-    "size1"
+    "opS2"
   ).value = "";
 
 
   document.getElementById(
-    "size2"
+    "opBeater"
   ).value = "";
 
 
   document.getElementById(
-    "s1Sheets"
+    "opMoulding"
   ).value = "";
 
 
   document.getElementById(
-    "s2Sheets"
+    "opBD"
   ).value = "";
 
 
   document.getElementById(
-    "moulding"
-  ).value = "";
-
-
-  document.getElementById(
-    "beater"
-  ).value = "";
-
-
-  document.getElementById(
-    "bd"
-  ).value = "";
-
-
-  document.getElementById(
-    "gsr"
+    "opGSR"
   ).value = "";
 
 }
 
 
+
 /* =====================================================
-   DELETE
+   DELETE ONE ROW
 ===================================================== */
 
-function deleteRow(rowIndex){
+function deleteRow(idx) {
 
-  if(
-    !confirm(
-      "Delete this hourly entry?"
-    )
-  ){
+  pendingDeleteRow =
+    idx;
 
-    return;
 
-  }
+  document.getElementById(
+    "confirmTitle"
+  ).innerText =
+    "Delete Hourly Entry?";
+
+
+  document.getElementById(
+    "confirmMessage"
+  ).innerText =
+    "This hourly production entry will be permanently deleted.";
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).innerText =
+    "DELETE";
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).onclick =
+    function() {
+
+      const row =
+        pendingDeleteRow;
+
+      closeConfirmModal();
+
+      performDeleteRow(row);
+
+    };
+
+
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "flex";
+
+}
+
+
+
+/* =====================================================
+   PERFORM DELETE
+===================================================== */
+
+function performDeleteRow(idx) {
+
+  showToast(
+    "⏳ Deleting entry..."
+  );
+
+
+  window.handleDeleteResponse =
+    function(res) {
+
+      if (
+        res &&
+        res.status === "success"
+      ) {
+
+        showToast(
+          "✅ Hourly entry deleted."
+        );
+
+        loadDashboardData();
+
+      }
+
+      else {
+
+        showToast(
+          "❌ Delete failed."
+        );
+
+      }
+
+    };
 
 
   jsonp(
 
     SCRIPT_URL +
+
     "?action=deleteHourly" +
+
     "&rowIndex=" +
-    encodeURIComponent(
-      rowIndex
-    ),
+    encodeURIComponent(idx),
 
-    function(res){
-
-      if(
-        res &&
-        res.status === "success"
-      ){
-
-        toast(
-          "✓ Entry Deleted Successfully"
-        );
-
-
-        loadData();
-
-      }
-
-      else{
-
-        toast(
-          res.message ||
-          "Delete failed.",
-          true
-        );
-
-      }
-
-    },
-
-    function(){
-
-      toast(
-        "Delete response delayed. Refresh Data.",
-        true
-      );
-
-    }
+    "handleDeleteResponse"
 
   );
 
 }
 
 
-/* =====================================================
-   FIND ROW
-===================================================== */
-
-function findRow(rowIndex){
-
-  return allRows.find(
-    function(r){
-
-      return Number(r.rowIndex) ===
-        Number(rowIndex);
-
-    }
-  );
-
-}
-
 
 /* =====================================================
-   HOURLY WHATSAPP
+   DELETE ALL MODAL
 ===================================================== */
 
-function hourWhatsApp(rowIndex){
+function openDeleteAllModal() {
 
-  const row =
-    findRow(rowIndex);
+  if (!validShift()) return;
 
 
-  if(!row){
+  const shift =
+    getSelectedShift();
 
-    toast(
-      "Entry not found.",
-      true
+
+  const rows =
+    getCurrentShiftRows();
+
+
+  if (!rows.length) {
+
+    showToast(
+      `ℹ️ No hours found for Shift ${shift}.`
     );
 
     return;
-
   }
 
 
-  const m =
-    metrics(row);
+  document.getElementById(
+    "confirmTitle"
+  ).innerText =
+    "DELETE ALL HOURS?";
 
 
-  let text =
+  document.getElementById(
+    "confirmMessage"
+  ).innerText =
 
-    "📊 HOURLY PRODUCTION REPORT\n\n";
-
-
-  text +=
-    "Date: " +
-    displayDate(row.date) +
-    "\n";
+    `All ${rows.length} saved hour(s) for Shift ${shift} on ${todayDateString()} will be permanently deleted.`;
 
 
-  text +=
-    "Shift: " +
-    row.shift +
-    "\n";
+  document.getElementById(
+    "confirmActionBtn"
+  ).innerText =
+    "DELETE ALL";
 
 
-  text +=
-    "Hour: " +
-    row.hour +
-    "\n";
+  document.getElementById(
+    "confirmActionBtn"
+  ).onclick =
+    function() {
+
+      closeConfirmModal();
+
+      performDeleteAll();
+
+    };
 
 
-  text +=
-    "Operator: " +
-    (row.name || "-") +
-    "\n\n";
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "flex";
+
+}
 
 
-  text +=
-    "Size: " +
-    (
-      m.size
-        ? m.size + " m"
-        : "-"
-    ) +
-    "\n";
+
+/* =====================================================
+   PERFORM DELETE ALL
+===================================================== */
+
+function performDeleteAll() {
+
+  const shift =
+    getSelectedShift();
 
 
-  text +=
-    "Sheets: " +
-    (
-      m.sheets || 0
-    ) +
-    "\n";
-
-
-  text +=
-    "Moulding: " +
-    (
-      row.moulding !== ""
-        ? row.moulding
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "Beater: " +
-    (
-      row.beater !== ""
-        ? row.beater
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "Batch Weight: " +
-    (
-      settings.batchWeight
-        ? settings.batchWeight +
-          " kg"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "Input: " +
-    (
-      m.input > 0
-        ? m.input.toFixed(2) +
-          " MT"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "B/D: " +
-    (
-      row.bd !== ""
-        ? row.bd + " min"
-        : "-"
-    ) +
-    "\n";
-
-
-  /* GSR */
-
-  text +=
-    "GSR: " +
-    (
-      Number(row.gsr) || 0
-    ) +
-    " sheets\n";
-
-
-  text +=
-    "Output: " +
-    (
-      m.output > 0
-        ? m.output.toFixed(2) +
-          " MT"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "ME: " +
-    (
-      m.me !== ""
-        ? m.me.toFixed(2) +
-          "%"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "ROP: " +
-    (
-      m.rop !== ""
-        ? m.rop.toFixed(2) +
-          " MT/hr"
-        : "-"
+  const btn =
+    document.getElementById(
+      "deleteAllBtn"
     );
+
+
+  btn.disabled = true;
+
+  btn.innerHTML =
+    '<i class="fa-solid fa-spinner fa-spin"></i> DELETING...';
+
+
+  window.handleDeleteAllResponse =
+    function(res) {
+
+      btn.disabled = false;
+
+      btn.innerHTML =
+        '<i class="fa-solid fa-trash-can"></i> DELETE ALL HOURS';
+
+
+      if (
+        res &&
+        res.status === "success"
+      ) {
+
+        showToast(
+
+          `✅ ${res.deleted || 0} hour(s) deleted successfully.`
+
+        );
+
+
+        loadDashboardData();
+
+      }
+
+      else {
+
+        showToast(
+          "❌ Delete All failed."
+        );
+
+      }
+
+    };
+
+
+  jsonp(
+
+    SCRIPT_URL +
+
+    "?action=deleteAllHours" +
+
+    "&shift=" +
+    encodeURIComponent(shift),
+
+    "handleDeleteAllResponse"
+
+  );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeConfirmModal() {
+
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "none";
+
+
+  pendingDeleteRow =
+    null;
+
+}
+
+
+
+/* =====================================================
+   WHATSAPP ONE ROW
+===================================================== */
+
+function sendRowWhatsApp(idx) {
+
+  const row =
+    globalData.find(
+      r =>
+        Number(r.rowIndex) ===
+        Number(idx)
+    );
+
+
+  if (!row) return;
+
+
+  const p =
+    getRowProduction(row);
+
+
+  const message =
+
+`VISAKA PRODUCTION
+
+Date: ${row.date}
+Shift: ${row.shift}
+Hour: ${row.hour}
+
+Size: ${p.size} m
+Sheets: ${p.sheets}
+
+Moulding: ${row.moulding || "-"}
+Beater: ${row.beater || "-"}
+B/D: ${row.bd || 0} min
+GSR: ${row.gsr || 0}
+
+Output: ${p.output.toFixed(2)} MT
+
+Operator: ${row.name || "-"}`;
 
 
   window.open(
 
     "https://wa.me/?text=" +
-    encodeURIComponent(text),
+    encodeURIComponent(message),
 
     "_blank"
 
   );
 
 }
+
 
 
 /* =====================================================
    SHIFT WHATSAPP
 ===================================================== */
 
-function sendShiftWhatsApp(){
+function sendShiftWhatsApp() {
+
+  const shift =
+    getSelectedShift();
+
 
   const rows =
-    currentRows();
+    getCurrentShiftRows();
 
 
-  if(!rows.length){
+  if (!rows.length) {
 
-    toast(
-      "No data for this shift.",
-      true
+    showToast(
+      "ℹ️ No production data available."
     );
 
     return;
-
   }
 
 
-  let output =
-    0;
+  let totalOutput = 0;
 
-  let input =
-    0;
+  let totalGSR = 0;
 
-  let bd =
-    0;
+  let message =
 
-  let gsr =
-    0;
+`VISAKA PRODUCTION REPORT
 
+Date: ${todayDateString()}
+Shift: ${shift}
 
-  let text =
-    "📊 SHIFT PRODUCTION REPORT\n\n";
-
-
-  text +=
-    "Date: " +
-    displayDate(today()) +
-    "\n";
-
-
-  text +=
-    "Shift: " +
-    document.getElementById(
-      "shift"
-    ).value.toUpperCase() +
-    "\n\n";
+`;
 
 
   rows
     .sort(
-      function(a,b){
-
-        return hourNumber(a.hour) -
-          hourNumber(b.hour);
-
-      }
+      (a,b) =>
+        hourNumber(a.hour) -
+        hourNumber(b.hour)
     )
-    .forEach(
-      function(row){
+    .forEach(function(r) {
 
-        const m =
-          metrics(row);
-
-
-        output +=
-          m.output;
+      const p =
+        getRowProduction(r);
 
 
-        input +=
-          m.input;
+      totalOutput +=
+        p.output;
 
 
-        bd +=
-          Number(row.bd) || 0;
+      totalGSR +=
+        Number(r.gsr) || 0;
 
 
-        gsr +=
-          Number(row.gsr) || 0;
+      message +=
+
+`${r.hour}
+Size: ${p.size} m
+Sheets: ${p.sheets}
+Output: ${p.output.toFixed(2)} MT
+Beater: ${r.beater || "-"}
+Moulding: ${r.moulding || "-"}
+B/D: ${r.bd || 0}
+GSR: ${r.gsr || 0}
+
+`;
+
+    });
 
 
-        text +=
-          "━━━━━━━━━━━━━━\n";
+  message +=
 
-
-        text +=
-          row.hour +
-          "\n";
-
-
-        text +=
-          "Size: " +
-          (
-            m.size
-              ? m.size + " m"
-              : "-"
-          ) +
-          "\n";
-
-
-        text +=
-          "Sheets: " +
-          (
-            m.sheets || 0
-          ) +
-          "\n";
-
-
-        text +=
-          "Moulding: " +
-          (
-            row.moulding || "-"
-          ) +
-          "\n";
-
-
-        text +=
-          "Beater: " +
-          (
-            row.beater || "-"
-          ) +
-          "\n";
-
-
-        text +=
-          "B/D: " +
-          (
-            row.bd !== ""
-              ? row.bd + " min"
-              : "-"
-          ) +
-          "\n";
-
-
-        text +=
-          "GSR: " +
-          (
-            Number(row.gsr) || 0
-          ) +
-          " sheets\n";
-
-
-        text +=
-          "Output: " +
-          (
-            m.output > 0
-              ? m.output.toFixed(2) +
-                " MT"
-              : "-"
-          ) +
-          "\n";
-
-      }
-    );
-
-
-  const me =
-
-    output > 0 &&
-    input > 0
-
-      ? (
-          1 -
-          output / input
-        ) * 100
-
-      : null;
-
-
-  const running =
-
-    SHIFT_HOURS * 60 -
-    bd;
-
-
-  const rop =
-
-    output > 0 &&
-    running > 0
-
-      ? output *
-        SHIFT_HOURS *
-        60 /
-        running
-
-      : null;
-
-
-  text +=
-    "━━━━━━━━━━━━━━\n";
-
-
-  text +=
-    "SHIFT SUMMARY\n\n";
-
-
-  text +=
-    "Total Production: " +
-    output.toFixed(2) +
-    " MT\n";
-
-
-  text +=
-    "Total Input: " +
-    input.toFixed(2) +
-    " MT\n";
-
-
-  text +=
-    "Overall ME: " +
-    (
-      me !== null
-        ? me.toFixed(2) + "%"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "Overall ROP: " +
-    (
-      rop !== null
-        ? rop.toFixed(2) + " MT/hr"
-        : "-"
-    ) +
-    "\n";
-
-
-  text +=
-    "TOTAL GSR: " +
-    gsr +
-    " SHEETS";
+`TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT
+TOTAL GSR: ${totalGSR} SHEETS`;
 
 
   window.open(
 
     "https://wa.me/?text=" +
-    encodeURIComponent(text),
+    encodeURIComponent(message),
 
     "_blank"
 
@@ -4626,280 +3972,151 @@ function sendShiftWhatsApp(){
 }
 
 
+
 /* =====================================================
-   HOURLY PDF
+   PDF ONE ROW
 ===================================================== */
 
-function hourPDF(rowIndex){
+function generateRowPDF(idx) {
 
   const row =
-    findRow(rowIndex);
-
-
-  if(!row){
-
-    toast(
-      "Entry not found.",
-      true
+    globalData.find(
+      r =>
+        Number(r.rowIndex) ===
+        Number(idx)
     );
 
-    return;
 
-  }
+  if (!row) return;
+
+
+  const p =
+    getRowProduction(row);
 
 
   const {
     jsPDF
-  } =
-    window.jspdf;
+  } = window.jspdf;
 
 
   const doc =
     new jsPDF();
 
 
-  const m =
-    metrics(row);
-
-
-  let y =
-    18;
-
-
-  doc.setFontSize(16);
-
+  doc.setFontSize(18);
 
   doc.text(
-    "HOURLY PRODUCTION REPORT",
-    105,
-    y,
-    {
-      align:"center"
-    }
+    "VISAKA PRODUCTION",
+    20,
+    20
   );
 
 
-  y += 12;
+  doc.setFontSize(11);
 
 
-  doc.setFontSize(10);
+  let y = 35;
 
 
-  const data = [
+  const lines = [
 
-    ["Date",displayDate(row.date)],
+    `Date: ${row.date}`,
 
-    ["Shift",row.shift],
+    `Shift: ${row.shift}`,
 
-    ["Hour",row.hour],
+    `Hour: ${row.hour}`,
 
-    ["Operator",row.name || "-"],
+    `Size: ${p.size} m`,
 
-    ["Size",m.size ? m.size+" m":"-"],
+    `Sheets: ${p.sheets}`,
 
-    ["Sheets",m.sheets || 0],
+    `Moulding: ${row.moulding || "-"}`,
 
-    ["Moulding",row.moulding || "-"],
+    `Beater: ${row.beater || "-"}`,
 
-    ["Beater",row.beater || "-"],
+    `B/D: ${row.bd || 0} min`,
 
-    ["Batch Weight",
-      settings.batchWeight
-        ? settings.batchWeight+" kg"
-        : "-"
-    ],
+    `GSR: ${row.gsr || 0} sheets`,
 
-    ["Input",
-      m.input > 0
-        ? m.input.toFixed(2)+" MT"
-        : "-"
-    ],
+    `Output: ${p.output.toFixed(2)} MT`,
 
-    ["B/D",
-      row.bd !== ""
-        ? row.bd+" min"
-        : "-"
-    ],
-
-    ["GSR",
-      (Number(row.gsr)||0)+" sheets"
-    ],
-
-    ["Output",
-      m.output > 0
-        ? m.output.toFixed(2)+" MT"
-        : "-"
-    ],
-
-    ["ME%",
-      m.me !== ""
-        ? m.me.toFixed(2)+"%"
-        : "-"
-    ],
-
-    ["ROP",
-      m.rop !== ""
-        ? m.rop.toFixed(2)+" MT/hr"
-        : "-"
-    ]
+    `Operator: ${row.name || "-"}`
 
   ];
 
 
-  data.forEach(
-    function(item){
+  lines.forEach(function(line) {
 
-      doc.text(
-        item[0] + ":",
-        20,
-        y
-      );
+    doc.text(
+      line,
+      20,
+      y
+    );
 
+    y += 9;
 
-      doc.text(
-        String(item[1]),
-        80,
-        y
-      );
-
-
-      y += 7;
-
-    }
-  );
-
-
-  y += 8;
-
-
-  doc.setFontSize(8);
-
-
-  doc.text(
-    "GSR is a separate rejection sheet count and is not used in production calculations.",
-    105,
-    y,
-    {
-      align:"center"
-    }
-  );
+  });
 
 
   doc.save(
-
-    "Hourly_" +
-    row.hour.replace(
-      /\s/g,
-      "_"
-    ) +
-    "_" +
-    row.date +
-    ".pdf"
-
-  );
-
-
-  toast(
-    "✓ PDF Generated Successfully"
+    `Visaka_${row.shift}_${row.hour}.pdf`
   );
 
 }
+
 
 
 /* =====================================================
    SHIFT PDF
 ===================================================== */
 
-function generateShiftPDF(){
+function generateShiftPDF() {
+
+  const shift =
+    getSelectedShift();
+
 
   const rows =
-    currentRows();
+    getCurrentShiftRows();
 
 
-  if(!rows.length){
+  if (!rows.length) {
 
-    toast(
-      "No data for this shift.",
-      true
+    showToast(
+      "ℹ️ No production data available."
     );
 
     return;
-
   }
 
 
   const {
     jsPDF
-  } =
-    window.jspdf;
+  } = window.jspdf;
 
 
   const doc =
-    new jsPDF();
+    new jsPDF({
+      orientation: "landscape"
+    });
 
 
-  rows.sort(
-    function(a,b){
-
-      return hourNumber(a.hour) -
-        hourNumber(b.hour);
-
-    }
-  );
-
-
-  let y =
-    15;
-
-
-  doc.setFontSize(16);
-
+  doc.setFontSize(18);
 
   doc.text(
-    "SHIFT PRODUCTION REPORT",
-    105,
-    y,
-    {
-      align:"center"
-    }
-  );
-
-
-  y += 9;
-
-
-  doc.setFontSize(9);
-
-
-  doc.text(
-    "Date: " +
-    displayDate(today()),
+    "VISAKA PRODUCTION REPORT",
     15,
-    y
+    18
   );
 
 
-  y += 6;
-
+  doc.setFontSize(11);
 
   doc.text(
-    "Shift: " +
-    document.getElementById(
-      "shift"
-    ).value.toUpperCase(),
+    `Date: ${todayDateString()}   Shift: ${shift}`,
     15,
-    y
+    27
   );
-
-
-  y += 10;
-
-
-  const x = [
-    7,27,42,57,72,
-    86,99,113,132,
-    151,173
-  ];
 
 
   const headers = [
@@ -4907,27 +4124,24 @@ function generateShiftPDF(){
     "Hour",
     "Size",
     "Sheets",
-    "Mould",
-    "Beat",
-    "BD",
+    "Moulding",
+    "Beater",
+    "B/D",
     "GSR",
-    "Output",
-    "Input",
-    "ME%",
-    "ROP"
+    "Output"
 
   ];
 
 
-  doc.setFontSize(7);
+  let y = 38;
 
 
   headers.forEach(
-    function(h,i){
+    function(h, i) {
 
       doc.text(
         h,
-        x[i],
+        15 + i * 32,
         y
       );
 
@@ -4935,90 +4149,61 @@ function generateShiftPDF(){
   );
 
 
-  y += 6;
+  y += 8;
 
 
-  let output =
-    0;
+  let totalOutput = 0;
 
-  let input =
-    0;
-
-  let bd =
-    0;
-
-  let gsr =
-    0;
+  let totalGSR = 0;
 
 
-  rows.forEach(
-    function(row){
+  rows
+    .sort(
+      (a,b) =>
+        hourNumber(a.hour) -
+        hourNumber(b.hour)
+    )
+    .forEach(function(r) {
 
-      const m =
-        metrics(row);
-
-
-      output +=
-        m.output;
-
-
-      input +=
-        m.input;
+      const p =
+        getRowProduction(r);
 
 
-      bd +=
-        Number(row.bd)||0;
+      totalOutput +=
+        p.output;
 
 
-      gsr +=
-        Number(row.gsr)||0;
+      totalGSR +=
+        Number(r.gsr) || 0;
 
 
       const values = [
 
-        row.hour,
+        r.hour,
 
-        m.size
-          ? m.size.toFixed(2)
-          : "-",
+        String(p.size),
 
-        m.sheets || "-",
+        String(p.sheets),
 
-        row.moulding || "-",
+        String(r.moulding || ""),
 
-        row.beater || "-",
+        String(r.beater || ""),
 
-        row.bd !== ""
-          ? row.bd
-          : "-",
+        String(r.bd || ""),
 
-        Number(row.gsr)||0,
+        String(r.gsr || ""),
 
-        m.output > 0
-          ? m.output.toFixed(2)
-          : "-",
-
-        m.input > 0
-          ? m.input.toFixed(2)
-          : "-",
-
-        m.me !== ""
-          ? m.me.toFixed(1)+"%"
-          : "-",
-
-        m.rop !== ""
-          ? m.rop.toFixed(2)
-          : "-"
+        p.output.toFixed(2)
 
       ];
 
 
       values.forEach(
-        function(v,i){
+        function(v, i) {
 
           doc.text(
-            String(v),
-            x[i],
+            v,
+            15 + i * 32,
             y
           );
 
@@ -5026,169 +4211,140 @@ function generateShiftPDF(){
       );
 
 
-      y += 6;
+      y += 8;
 
-    }
-  );
+
+      if (y > 190) {
+
+        doc.addPage();
+
+        y = 20;
+
+      }
+
+    });
 
 
   y += 8;
 
 
-  const me =
-
-    output > 0 &&
-    input > 0
-
-      ? (
-          1 -
-          output/input
-        )*100
-
-      : null;
-
-
-  const running =
-    SHIFT_HOURS*60-bd;
-
-
-  const rop =
-
-    output > 0 &&
-    running > 0
-
-      ? output*
-        SHIFT_HOURS*
-        60/running
-
-      : null;
-
-
-  doc.setFontSize(11);
-
+  doc.setFontSize(12);
 
   doc.text(
-    "SHIFT SUMMARY",
+    `TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT`,
     15,
     y
   );
 
 
-  y += 7;
-
-
-  doc.setFontSize(9);
-
-
-  doc.text(
-    "Total Production: " +
-    output.toFixed(2) +
-    " MT",
-    20,
-    y
-  );
-
-
-  y += 6;
-
-
-  doc.text(
-    "Total Input: " +
-    input.toFixed(2) +
-    " MT",
-    20,
-    y
-  );
-
-
-  y += 6;
-
-
-  doc.text(
-    "Overall ME: " +
-    (
-      me !== null
-        ? me.toFixed(2)+"%"
-        : "-"
-    ),
-    20,
-    y
-  );
-
-
-  y += 6;
-
-
-  doc.text(
-    "Overall ROP: " +
-    (
-      rop !== null
-        ? rop.toFixed(2)+" MT/hr"
-        : "-"
-    ),
-    20,
-    y
-  );
-
-
-  y += 6;
-
-
-  doc.text(
-    "TOTAL GSR: " +
-    gsr +
-    " SHEETS",
-    20,
-    y
-  );
-
-
   y += 8;
 
 
-  doc.setFontSize(8);
-
-
   doc.text(
-    "GSR is separate from production calculation.",
-    105,
-    y,
-    {
-      align:"center"
-    }
+    `TOTAL GSR: ${totalGSR} SHEETS`,
+    15,
+    y
   );
 
 
   doc.save(
-
-    "Shift_" +
-    document.getElementById(
-      "shift"
-    ).value.toUpperCase() +
-    "_" +
-    today() +
-    ".pdf"
-
-  );
-
-
-  toast(
-    "✓ Shift PDF Generated Successfully"
+    `Visaka_${todayDateString()}_Shift_${shift}.pdf`
   );
 
 }
 
 
+
 /* =====================================================
-   ESCAPE
+   TOAST
 ===================================================== */
 
-function esc(value){
+function showToast(message) {
 
-  if(
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.innerText =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(
+      function() {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+
+/* =====================================================
+   LOADING STATE
+===================================================== */
+
+function showLoadingState() {
+
+  document.getElementById(
+    "productionTableBody"
+  ).innerHTML = `
+
+    <tr>
+
+      <td
+        colspan="12"
+        style="
+          padding:20px;
+          color:#00ffff;
+        "
+      >
+
+        <i class="
+          fa-solid
+          fa-spinner
+          fa-spin
+        "></i>
+
+        Loading production data...
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+  if (
     value === null ||
     value === undefined
-  ){
+  ) {
 
     return "";
 
@@ -5197,56 +4353,43 @@ function esc(value){
 
   return String(value)
 
-    .replace(/&/g,"&amp;")
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
-    .replace(/</g,"&lt;")
+    .replace(
+      /</g,
+      "&lt;"
+    )
 
-    .replace(/>/g,"&gt;")
+    .replace(
+      />/g,
+      "&gt;"
+    )
 
-    .replace(/"/g,"&quot;")
+    .replace(
+      /"/g,
+      "&quot;"
+    )
 
-    .replace(/'/g,"&#039;");
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* =====================================================
-   SHIFT CHANGE
-===================================================== */
-
-document
-.getElementById("shift")
-.addEventListener(
-  "input",
-  function(){
-
-    this.value =
-      this.value
-        .toUpperCase()
-        .replace(
-          /[^ABC]/g,
-          ""
-        )
-        .substring(
-          0,
-          1
-        );
-
-
-    render();
-
-  }
-);
-
 
 /* =====================================================
-   START
+   INITIAL LOAD
 ===================================================== */
 
 window.onload =
-function(){
+function() {
 
-  loadData();
+  loadDashboardData();
 
 };
 
