@@ -7,1088 +7,573 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width,initial-scale=1.0"
 >
 
 <title>Visaka Production Dashboard</title>
 
-
-<!-- FONT AWESOME -->
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 >
 
-
-<!-- JSPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
 <style>
 
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
 }
 
 body {
-
-  background: #000;
-
-  color: #fff;
-
-  min-height: 100vh;
-
-  padding:
-    12px
-    8px
-    40px;
-
-  display: flex;
-
-  justify-content: center;
-
-  font-size: 15px;
+  background:#000;
+  color:#fff;
+  padding:10px 6px 40px;
+  font-size:15px;
 }
-
 
 .app {
-
-  width: 100%;
-
-  max-width: 850px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
+  width:100%;
+  max-width:850px;
+  margin:auto;
 }
-
-
-/* =====================================================
-   CARDS
-===================================================== */
 
 .card {
-
-  background: #07142b;
-
-  border:
-    2px solid
-    #00bfff;
-
-  border-radius: 12px;
-
-  padding: 15px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 12px;
-
-  box-shadow:
-    0 0 12px
-    rgba(0,191,255,.12);
+  background:#07142b;
+  border:2px solid #00bfff;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:10px;
 }
-
 
 .section-title {
-
-  color: #00ffff;
-
-  font-size: 18px;
-
-  font-weight: 900;
-
-  text-transform: uppercase;
+  color:#00ffff;
+  font-size:17px;
+  font-weight:900;
+  margin-bottom:10px;
 }
 
 
-/* =====================================================
-   TOP PANEL
-===================================================== */
+/* TOP */
 
 .target-panel {
-
-  background: #07142b;
-
-  border:
-    2px solid
-    #facc15;
-
-  border-radius: 12px;
-
-  overflow: hidden;
+  background:#07142b;
+  border:2px solid #00bfff;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:10px;
 }
-
 
 .top-bar {
-
-  background: #0284c7;
-
-  color: #000;
-
-  padding: 8px 12px;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  font-size: 14px;
-
-  font-weight: 900;
+  background:#0284c7;
+  color:#000;
+  display:flex;
+  justify-content:space-between;
+  padding:7px 10px;
+  font-size:13px;
+  font-weight:900;
 }
-
 
 .req-box {
-
-  background: #172554;
-
-  text-align: center;
-
-  padding: 13px;
-
-  border-bottom:
-    2px solid
-    #facc15;
+  text-align:center;
+  padding:12px;
+  border-bottom:1px solid #facc15;
 }
-
 
 .req-value {
-
-  color: #ffff00;
-
-  font-size: 27px;
-
-  font-weight: 900;
+  color:#ffff00;
+  font-size:25px;
+  font-weight:900;
 }
-
 
 .req-label {
-
-  display: block;
-
-  color: #00ffff;
-
-  font-size: 12px;
-
-  margin-top: 2px;
-
-  text-transform: uppercase;
-
-  font-weight: 900;
+  color:#00ffff;
+  font-size:11px;
+  font-weight:900;
 }
-
 
 .kpi-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  border-bottom:
-    2px solid
-    #facc15;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
 }
-
 
 .kpi {
-
-  text-align: center;
-
-  padding: 10px 5px;
-
-  border-right:
-    1px solid
-    #facc15;
-
-  color: #00ffff;
-
-  font-size: 12px;
-
-  font-weight: 900;
+  text-align:center;
+  padding:9px 3px;
+  border-right:1px solid #facc15;
+  color:#00ffff;
+  font-size:10px;
+  font-weight:900;
 }
-
 
 .kpi:last-child {
-
-  border-right: none;
+  border-right:none;
 }
-
 
 .kpi-value {
-
-  display: block;
-
-  color: #ffff00;
-
-  font-size: 17px;
-
-  margin-top: 4px;
-
-  font-weight: 900;
+  display:block;
+  color:#ffff00;
+  font-size:16px;
+  margin-top:3px;
 }
-
 
 .meta-row {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  text-align: center;
-
-  background: #020617;
-
-  padding: 8px;
-
-  color: #facc15;
-
-  font-size: 13px;
-
-  font-weight: 900;
-
-  border-bottom:
-    2px solid
-    #facc15;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  text-align:center;
+  padding:8px;
+  color:#facc15;
+  font-size:12px;
+  border-top:1px solid #facc15;
 }
-
 
 .meta-row strong {
-
-  color: #fff;
+  color:#fff;
 }
-
 
 .hours-banner {
-
-  background: #db2777;
-
-  color: #fff;
-
-  text-align: center;
-
-  padding: 11px;
-
-  font-size: 16px;
-
-  font-weight: 900;
-
-  text-transform: uppercase;
+  background:#db2777;
+  color:#fff;
+  text-align:center;
+  padding:9px;
+  font-size:14px;
+  font-weight:900;
 }
 
 
-/* =====================================================
-   FORM
-===================================================== */
+/* FORM */
 
 .form-row {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:8px;
 }
-
 
 .form-group {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 5px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom:8px;
 }
-
-
-.form-group.full {
-
-  grid-column:
-    1 / -1;
-}
-
 
 label {
-
-  color: #00ffff;
-
-  font-size: 13px;
-
-  font-weight: 900;
-}
-
-
-input,
-select {
-
-  width: 100%;
-
-  height: 44px;
-
-  background: #000;
-
-  color: #ffff00;
-
-  border:
-    1.5px solid
-    #00bfff;
-
-  border-radius: 6px;
-
-  padding:
-    8px 10px;
-
-  font-size: 15px;
-
-  font-weight: 800;
-
-  outline: none;
-}
-
-
-input:focus,
-select:focus {
-
-  border-color:
-    #00ffff;
-
-  box-shadow:
-    0 0 7px
-    rgba(0,255,255,.35);
+  color:#00ffff;
+  font-size:13px;
+  font-weight:900;
 }
 
 
 /*
- IMPORTANT:
- Only Production Hour uses select.
- Shift is INPUT.
+=====================================================
+ALL FIELDS ARE TEXT INPUTS.
+ONLY #opHour IS A SELECT.
+=====================================================
 */
 
+input,
+select {
+  width:100%;
+  height:43px;
+  background:#000;
+  color:#ffff00;
+  border:1.5px solid #00bfff;
+  border-radius:6px;
+  padding:8px 10px;
+  font-size:15px;
+  font-weight:800;
+  outline:none;
+}
+
+
+/* REMOVE ALL NUMBER SPINNERS */
+
+input[type="number"] {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+}
+
+
+/* Shift */
+
 #opShift {
-
-  text-transform: uppercase;
-
-  text-align: center;
-
-  font-weight: 900;
+  text-align:center;
+  text-transform:uppercase;
 }
 
 
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-button {
-
-  cursor: pointer;
-}
-
+/* BUTTON */
 
 .btn {
-
-  width: 100%;
-
-  border: none;
-
-  border-radius: 8px;
-
-  padding: 12px;
-
-  font-size: 15px;
-
-  font-weight: 900;
-
-  color: #fff;
+  width:100%;
+  border:none;
+  border-radius:7px;
+  padding:12px;
+  color:#fff;
+  font-size:14px;
+  font-weight:900;
+  margin-top:5px;
 }
-
-
-.btn-save {
-
-  background:
-    linear-gradient(
-      90deg,
-      #10b981,
-      #059669
-    );
-}
-
 
 .btn-settings {
-
-  background:
-    linear-gradient(
-      90deg,
-      #0284c7,
-      #0369a1
-    );
+  background:#0284c7;
 }
 
-
-.btn-cancel {
-
-  background: #dc2626;
-
-  display: none;
+.btn-save {
+  background:#10b981;
 }
-
 
 .btn-refresh {
+  background:#334155;
+  border:1px solid #00bfff;
+}
 
-  background: #334155;
-
-  border:
-    1px solid
-    #38bdf8;
+.btn-cancel {
+  display:none;
+  background:#dc2626;
 }
 
 
-/* =====================================================
-   PROGRESS
-===================================================== */
+/* PROGRESS */
 
 .progress-wrap {
-
-  display: none;
-
-  width: 100%;
-
-  height: 7px;
-
-  background: #020617;
-
-  border-radius: 10px;
-
-  overflow: hidden;
+  display:none;
+  height:7px;
+  background:#020617;
+  border-radius:10px;
+  overflow:hidden;
+  margin:6px 0;
 }
-
 
 .progress-bar {
-
-  width: 0%;
-
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      #00ffff,
-      #10b981
-    );
-
-  transition:
-    width .25s ease;
+  height:100%;
+  width:0%;
+  background:#00ffff;
+  transition:.3s;
 }
 
 
-/* =====================================================
-   PRODUCTION TABLE
-===================================================== */
+/* TABLE */
 
 .table-wrap {
-
-  width: 100%;
-
-  overflow-x: auto;
-
-  border-radius: 6px;
+  width:100%;
+  overflow-x:auto;
 }
-
 
 .production-table {
-
-  width: 100%;
-
-  min-width: 1050px;
-
-  border-collapse: collapse;
+  width:100%;
+  min-width:1150px;
+  border-collapse:collapse;
 }
-
 
 .production-table th {
-
-  background: #a95f00;
-
-  color: #000;
-
-  border:
-    1px solid
-    #401900;
-
-  padding: 9px 5px;
-
-  font-size: 12px;
-
-  font-weight: 900;
-
-  text-align: center;
-
-  white-space: nowrap;
+  background:#a95f00;
+  color:#000;
+  padding:8px 5px;
+  border:1px solid #401900;
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
 }
-
 
 .production-table td {
+  background:#000;
+  color:#fff;
+  border:1px solid #541010;
+  padding:8px 5px;
+  text-align:center;
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
+}
 
-  background: #000;
+.production-table .hour {
+  background:#00bfff;
+  color:#000;
+}
 
-  color: #fff;
+.production-table .yellow {
+  color:#ffff00;
+}
 
-  border:
-    1px solid
-    #541010;
-
-  padding: 8px 5px;
-
-  font-size: 12px;
-
-  font-weight: 800;
-
-  text-align: center;
-
-  white-space: nowrap;
+.production-table .cyan {
+  color:#00ffff;
 }
 
 
-.production-table td.hour {
-
-  background: #00bfff;
-
-  color: #000;
-
-  font-weight: 900;
-}
-
-
-.production-table td.yellow {
-
-  color: #ffff00;
-}
-
-
-.production-table td.cyan {
-
-  color: #00ffff;
-}
-
-
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
+/* ACTION */
 
 .action-buttons {
-
-  display: flex;
-
-  justify-content: center;
-
-  gap: 4px;
+  display:flex;
+  justify-content:center;
+  gap:4px;
 }
-
 
 .action-btn {
-
-  width: 34px;
-
-  height: 32px;
-
-  border: none;
-
-  border-radius: 5px;
-
-  color: #fff;
-
-  font-size: 15px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
+  width:32px;
+  height:31px;
+  border:none;
+  border-radius:5px;
+  color:#fff;
+  font-size:14px;
 }
-
 
 .edit-btn {
-
-  background: #0284c7;
+  background:#0284c7;
 }
-
 
 .delete-btn {
-
-  background: #dc2626;
+  background:#dc2626;
 }
-
 
 .whatsapp-btn {
-
-  background: #16a34a;
+  background:#16a34a;
 }
-
 
 .pdf-btn {
-
-  background: #dc2626;
+  background:#dc2626;
 }
 
 
-/* =====================================================
-   METRIC CARDS
-===================================================== */
+/* METRICS */
 
 .metrics-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:8px;
 }
-
 
 .metric-box {
-
-  border:
-    1.5px solid
-    #00bfff;
-
-  border-radius: 6px;
-
-  padding: 9px;
-
-  text-align: center;
-
-  background: #020617;
+  background:#020617;
+  border:1.5px solid #00bfff;
+  border-radius:6px;
+  padding:9px;
+  text-align:center;
 }
-
 
 .metric-label {
-
-  display: block;
-
-  color: #00ffff;
-
-  font-size: 11px;
-
-  font-weight: 900;
+  display:block;
+  color:#00ffff;
+  font-size:10px;
+  font-weight:900;
 }
-
 
 .metric-value {
-
-  display: block;
-
-  color: #ffff00;
-
-  font-size: 18px;
-
-  font-weight: 900;
-
-  margin-top: 3px;
+  display:block;
+  color:#ffff00;
+  font-size:17px;
+  font-weight:900;
+  margin-top:3px;
 }
 
 
-/* =====================================================
-   GSR
-===================================================== */
+/* GSR */
 
 .gsr-card {
-
-  border:
-    2px solid
-    #facc15;
-
-  background: #020617;
-
-  border-radius: 8px;
-
-  padding: 12px;
-
-  text-align: center;
+  background:#020617;
+  border:2px solid #facc15;
+  border-radius:7px;
+  padding:10px;
+  text-align:center;
+  margin-top:8px;
 }
-
 
 .gsr-title {
-
-  color: #00ffff;
-
-  font-size: 13px;
-
-  font-weight: 900;
-
-  text-transform: uppercase;
+  color:#00ffff;
+  font-size:12px;
+  font-weight:900;
 }
-
 
 .gsr-value {
-
-  color: #ffff00;
-
-  font-size: 22px;
-
-  font-weight: 900;
-
-  margin-top: 3px;
+  color:#ffff00;
+  font-size:21px;
+  font-weight:900;
+  margin-top:3px;
 }
 
 
-/* =====================================================
-   REPORT BUTTONS
-===================================================== */
-
-.report-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 8px;
-}
-
-
-.report-btn {
-
-  border: none;
-
-  border-radius: 7px;
-
-  padding: 12px;
-
-  color: #fff;
-
-  font-size: 13px;
-
-  font-weight: 900;
-}
-
-
-.whatsapp-report {
-
-  background: #16a34a;
-}
-
-
-.pdf-report {
-
-  background: #dc2626;
-}
-
-
-/* =====================================================
-   DELETE ALL
-===================================================== */
+/* DELETE ALL */
 
 .delete-all {
-
-  width: 100%;
-
-  background: #dc2626;
-
-  color: #fff;
-
-  border: none;
-
-  border-radius: 8px;
-
-  padding: 13px;
-
-  font-size: 16px;
-
-  font-weight: 900;
+  width:100%;
+  background:#dc2626;
+  color:#fff;
+  border:none;
+  border-radius:7px;
+  padding:13px;
+  margin-top:8px;
+  font-size:15px;
+  font-weight:900;
 }
-
 
 .delete-all:disabled {
-
-  opacity: .6;
-
-  cursor: wait;
+  opacity:.6;
 }
 
 
-/* =====================================================
-   CUSTOM CONFIRM MODAL
-===================================================== */
+/* REPORT */
+
+.report-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:8px;
+}
+
+.report-btn {
+  border:none;
+  border-radius:7px;
+  padding:12px 5px;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+
+.whatsapp-report {
+  background:#16a34a;
+}
+
+.pdf-report {
+  background:#dc2626;
+}
+
+
+/* MODAL */
 
 .modal-overlay {
-
-  position: fixed;
-
-  inset: 0;
-
-  background:
-    rgba(0,0,0,.85);
-
-  display: none;
-
-  align-items: center;
-
-  justify-content: center;
-
-  z-index: 99999;
-
-  padding: 20px;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  padding:20px;
 }
-
 
 .modal-box {
-
-  width: 100%;
-
-  max-width: 400px;
-
-  background: #07142b;
-
-  border:
-    2px solid
-    #00bfff;
-
-  border-radius: 14px;
-
-  padding: 22px;
-
-  text-align: center;
-
-  box-shadow:
-    0 0 30px
-    rgba(0,191,255,.3);
+  width:100%;
+  max-width:390px;
+  background:#07142b;
+  border:2px solid #00bfff;
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
 }
-
 
 .modal-icon {
-
-  font-size: 38px;
-
-  margin-bottom: 10px;
-
-  color: #facc15;
+  color:#facc15;
+  font-size:35px;
+  margin-bottom:8px;
 }
-
 
 .modal-title {
-
-  color: #ffff00;
-
-  font-size: 20px;
-
-  font-weight: 900;
-
-  margin-bottom: 8px;
+  color:#ffff00;
+  font-size:19px;
+  font-weight:900;
 }
-
 
 .modal-message {
-
-  color: #fff;
-
-  font-size: 14px;
-
-  line-height: 1.5;
-
-  margin-bottom: 18px;
+  color:#fff;
+  font-size:14px;
+  margin:10px 0 18px;
+  line-height:1.5;
 }
-
 
 .modal-buttons {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
-
 
 .modal-buttons button {
-
-  border: none;
-
-  border-radius: 8px;
-
-  padding: 12px;
-
-  font-size: 14px;
-
-  font-weight: 900;
+  border:none;
+  border-radius:7px;
+  padding:12px;
+  font-size:13px;
+  font-weight:900;
 }
-
 
 .modal-cancel {
-
-  background: #475569;
-
-  color: #fff;
+  background:#475569;
+  color:#fff;
 }
-
 
 .modal-delete {
-
-  background: #dc2626;
-
-  color: #fff;
+  background:#dc2626;
+  color:#fff;
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+/* TOAST */
 
 #toast {
-
-  position: fixed;
-
-  left: 50%;
-
-  bottom: 25px;
-
-  transform:
-    translate(-50%, 100px);
-
-  opacity: 0;
-
-  transition: all .3s ease;
-
-  z-index: 100001;
-
-  background: #07142b;
-
-  color: #fff;
-
-  border:
-    2px solid
-    #00bfff;
-
-  border-radius: 10px;
-
-  padding:
-    12px 18px;
-
-  font-size: 14px;
-
-  font-weight: 900;
-
-  text-align: center;
-
-  max-width: 90%;
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translate(-50%,100px);
+  opacity:0;
+  transition:.3s;
+  z-index:100001;
+  background:#07142b;
+  border:2px solid #00bfff;
+  color:#fff;
+  border-radius:8px;
+  padding:11px 15px;
+  font-size:13px;
+  font-weight:900;
+  text-align:center;
+  max-width:90%;
 }
-
 
 #toast.show {
-
-  transform:
-    translate(-50%, 0);
-
-  opacity: 1;
+  transform:translate(-50%,0);
+  opacity:1;
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* MOBILE */
 
 @media(max-width:600px) {
 
   body {
-
-    padding:
-      8px
-      5px
-      30px;
-
-    font-size: 14px;
+    padding:7px 4px 30px;
   }
-
-
-  .app {
-
-    max-width: 100%;
-  }
-
 
   .card {
-
-    padding: 11px;
-
-    gap: 10px;
+    padding:10px;
   }
-
 
   .section-title {
-
-    font-size: 16px;
+    font-size:16px;
   }
-
-
-  .form-row {
-
-    gap: 7px;
-  }
-
-
-  label {
-
-    font-size: 12px;
-  }
-
 
   input,
   select {
-
-    height: 42px;
-
-    font-size: 14px;
+    height:42px;
+    font-size:14px;
   }
 
+  label {
+    font-size:12px;
+  }
 
   .req-value {
-
-    font-size: 23px;
+    font-size:23px;
   }
 
-
-  .kpi {
-
-    font-size: 10px;
-
-    padding: 8px 3px;
-  }
-
-
-  .kpi-value {
-
-    font-size: 15px;
-  }
-
-
-  .top-bar {
-
-    font-size: 12px;
-  }
-
-
-  .hours-banner {
-
-    font-size: 14px;
-  }
 }
 
 </style>
@@ -1102,9 +587,9 @@ button {
 <div class="app">
 
 
-<!-- ===================================================
-     TOP TARGET PANEL
-==================================================== -->
+<!-- =================================================
+     TARGET PANEL
+================================================= -->
 
 <div class="target-panel">
 
@@ -1207,16 +692,16 @@ button {
     class="hours-banner"
     id="bannerTimeLeft"
   >
-    REMAINING HOURS NOT SET
+    8 HOURS AVAILABLE
   </div>
 
 </div>
 
 
 
-<!-- ===================================================
+<!-- =================================================
      MASTER SETTINGS
-==================================================== -->
+================================================= -->
 
 <div class="card">
 
@@ -1235,10 +720,10 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="setConfigTarget"
         inputmode="decimal"
-        placeholder="e.g. 130"
+        placeholder="Enter Target MT"
       >
 
     </div>
@@ -1251,11 +736,10 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="setConfigTargetSize"
-        step="0.01"
         inputmode="decimal"
-        placeholder="e.g. 6"
+        placeholder="Enter Target Size"
       >
 
     </div>
@@ -1270,10 +754,10 @@ button {
     </label>
 
     <input
-      type="number"
+      type="text"
       id="setConfigBatch"
       inputmode="decimal"
-      placeholder="e.g. 1250"
+      placeholder="Enter Batch Weight"
     >
 
   </div>
@@ -1283,10 +767,12 @@ button {
     class="progress-wrap"
     id="settingsProgressWrap"
   >
+
     <div
       class="progress-bar"
       id="settingsProgress"
     ></div>
+
   </div>
 
 
@@ -1295,17 +781,20 @@ button {
     id="settingsBtn"
     onclick="saveSettingsData()"
   >
+
     <i class="fa-solid fa-floppy-disk"></i>
+
     SAVE SETTINGS
+
   </button>
 
 </div>
 
 
 
-<!-- ===================================================
+<!-- =================================================
      HOURLY ENTRY
-==================================================== -->
+================================================= -->
 
 <div class="card">
 
@@ -1313,15 +802,17 @@ button {
     class="section-title"
     id="formTitle"
   >
+
     <i class="fa-solid fa-pen-to-square"></i>
+
     Hourly Production Entry
+
   </div>
 
 
   <input
     type="hidden"
     id="editRowIndex"
-    value=""
   >
 
 
@@ -1337,6 +828,7 @@ button {
       type="text"
       id="opName"
       placeholder="Enter operator name"
+      autocomplete="off"
     >
 
   </div>
@@ -1353,15 +845,17 @@ button {
       </label>
 
       <!-- NORMAL TEXT BOX -->
+
       <input
         type="text"
         id="opShift"
         value="A"
         maxlength="1"
         placeholder="A / B / C"
+        autocomplete="off"
         oninput="
-          this.value=this.value
-          .toUpperCase();
+          this.value =
+          this.value.toUpperCase();
           renderDashboard();
         "
       >
@@ -1375,11 +869,10 @@ button {
         Production Hour
       </label>
 
-      <!-- ONLY DROPDOWN IN FORM -->
+      <!-- ONLY DROPDOWN -->
 
       <select
         id="opHour"
-        onchange="renderDashboard()"
       >
 
         <option value="1st Hour">
@@ -1432,11 +925,11 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opSize1"
-        step="0.01"
-        value="6"
         inputmode="decimal"
+        value="6"
+        autocomplete="off"
       >
 
     </div>
@@ -1449,11 +942,10 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opSize2"
-        step="0.01"
-        value="6"
         inputmode="decimal"
+        autocomplete="off"
       >
 
     </div>
@@ -1472,10 +964,11 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opS1"
         inputmode="numeric"
-        placeholder="Blank if 2nd running"
+        placeholder="Enter sheets"
+        autocomplete="off"
       >
 
     </div>
@@ -1488,10 +981,11 @@ button {
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opS2"
         inputmode="numeric"
-        placeholder="Blank if 1st running"
+        placeholder="Enter sheets"
+        autocomplete="off"
       >
 
     </div>
@@ -1506,14 +1000,15 @@ button {
     <div class="form-group">
 
       <label>
-        Beater (Common)
+        Beater
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opBeater"
         inputmode="decimal"
         placeholder="Enter Beater"
+        autocomplete="off"
       >
 
     </div>
@@ -1522,14 +1017,15 @@ button {
     <div class="form-group">
 
       <label>
-        Moulding / ME Pickup
+        Moulding
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opMoulding"
         inputmode="decimal"
         placeholder="Enter Moulding"
+        autocomplete="off"
       >
 
     </div>
@@ -1544,14 +1040,15 @@ button {
     <div class="form-group">
 
       <label>
-        B/D (min)
+        B/D
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opBD"
         inputmode="decimal"
         placeholder="Minutes"
+        autocomplete="off"
       >
 
     </div>
@@ -1560,22 +1057,21 @@ button {
     <div class="form-group">
 
       <label>
-        GSR (Rejection Sheets)
+        GSR
       </label>
 
       <input
-        type="number"
+        type="text"
         id="opGSR"
         inputmode="numeric"
         placeholder="GSR sheets"
+        autocomplete="off"
       >
 
     </div>
 
   </div>
 
-
-  <!-- SUBMIT PROGRESS -->
 
   <div
     class="progress-wrap"
@@ -1595,8 +1091,11 @@ button {
     id="submitBtn"
     onclick="submitProductionEntry()"
   >
+
     <i class="fa-solid fa-cloud-arrow-up"></i>
+
     SUBMIT HOURLY DATA
+
   </button>
 
 
@@ -1605,17 +1104,20 @@ button {
     id="cancelBtn"
     onclick="resetForm()"
   >
+
     <i class="fa-solid fa-xmark"></i>
+
     CANCEL EDIT
+
   </button>
 
 </div>
 
 
 
-<!-- ===================================================
+<!-- =================================================
      PRODUCTION LOG
-==================================================== -->
+================================================= -->
 
 <div class="card">
 
@@ -1656,13 +1158,15 @@ button {
 
           <th>Moulding</th>
 
+          <th>Moulding MT</th>
+
           <th>Beater</th>
 
           <th>B/D</th>
 
           <th>GSR</th>
 
-          <th>Output</th>
+          <th>Total Output</th>
 
           <th>Input</th>
 
@@ -1682,10 +1186,10 @@ button {
         <tr>
 
           <td
-            colspan="12"
+            colspan="13"
             style="
-              padding:18px;
-              color:#94a3b8;
+              padding:20px;
+              color:#00ffff;
             "
           >
 
@@ -1772,7 +1276,7 @@ button {
   </div>
 
 
-  <!-- GSR SEPARATE CARD -->
+  <!-- GSR -->
 
   <div class="gsr-card">
 
@@ -1788,9 +1292,7 @@ button {
       class="gsr-value"
       id="totalGSR"
     >
-
       0 SHEETS
-
     </div>
 
   </div>
@@ -1811,7 +1313,7 @@ button {
   </button>
 
 
-  <!-- REPORT BUTTONS -->
+  <!-- REPORT -->
 
   <div class="report-grid">
 
@@ -1847,9 +1349,9 @@ button {
 
 
 
-<!-- ===================================================
-     CUSTOM CONFIRM MODAL
-==================================================== -->
+<!-- =================================================
+     CUSTOM DELETE MODAL
+================================================= -->
 
 <div
   class="modal-overlay"
@@ -1869,9 +1371,7 @@ button {
       class="modal-title"
       id="confirmTitle"
     >
-
       Are you sure?
-
     </div>
 
 
@@ -1879,9 +1379,7 @@ button {
       class="modal-message"
       id="confirmMessage"
     >
-
-      Please confirm this action.
-
+      Please confirm.
     </div>
 
 
@@ -1891,9 +1389,7 @@ button {
         class="modal-cancel"
         onclick="closeConfirmModal()"
       >
-
         CANCEL
-
       </button>
 
 
@@ -1901,9 +1397,7 @@ button {
         class="modal-delete"
         id="confirmActionBtn"
       >
-
         DELETE
-
       </button>
 
     </div>
@@ -1914,16 +1408,11 @@ button {
 
 
 
-<!-- ===================================================
-     TOAST
-==================================================== -->
-
 <div id="toast"></div>
 
 
 
 <script>
-
 
 /* =====================================================
    CONFIG
@@ -1932,8 +1421,9 @@ button {
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
 
-
 const OUTPUT_CONSTANT = 12.8;
+
+const MOULDING_CONSTANT = 7.7;
 
 const SHIFT_HOURS = 8;
 
@@ -1944,13 +1434,10 @@ let globalData = [];
 
 let masterSettings = {
 
-  targetProd: "",
-
-  targetSize: "",
-
-  batchWeight: "",
-
-  sftConversion: DEFAULT_SFT
+  targetProd:"",
+  targetSize:"",
+  batchWeight:"",
+  sftConversion:DEFAULT_SFT
 
 };
 
@@ -1958,9 +1445,8 @@ let masterSettings = {
 let pendingDeleteRow = null;
 
 
-
 /* =====================================================
-   JSONP LOADER
+   JSONP
 ===================================================== */
 
 function jsonp(url, callbackName) {
@@ -1975,30 +1461,30 @@ function jsonp(url, callbackName) {
     "&t=" +
     Date.now();
 
-  script.onerror = function() {
 
-    showToast(
-      "❌ Server connection failed."
-    );
+  script.onerror =
+    function() {
 
-    finishProgress();
+      showToast(
+        "❌ Server connection failed."
+      );
 
-  };
+      finishProgress();
+
+    };
+
 
   document.body.appendChild(script);
-
 }
 
 
-
 /* =====================================================
-   LOAD DATA
+   LOAD
 ===================================================== */
 
 function loadDashboardData() {
 
   showLoadingState();
-
 
   jsonp(
 
@@ -2020,7 +1506,7 @@ function(res) {
   ) {
 
     showToast(
-      "❌ Failed to load dashboard."
+      "❌ Failed to load data."
     );
 
     return;
@@ -2065,20 +1551,20 @@ function(res) {
 };
 
 
-
 /* =====================================================
-   TODAY DATE
+   DATE
 ===================================================== */
 
 function todayDateString() {
 
-  const d = new Date();
+  const d =
+    new Date();
 
   const months = [
 
-    "Jan","Feb","Mar","Apr","May","Jun",
-
-    "Jul","Aug","Sep","Oct","Nov","Dec"
+    "Jan","Feb","Mar","Apr",
+    "May","Jun","Jul","Aug",
+    "Sep","Oct","Nov","Dec"
 
   ];
 
@@ -2086,47 +1572,21 @@ function todayDateString() {
   return (
 
     String(d.getDate()).padStart(2,"0") +
+
     "-" +
+
     months[d.getMonth()] +
+
     "-" +
+
     d.getFullYear()
 
   );
 }
 
 
-
 /* =====================================================
-   DATE KEY
-===================================================== */
-
-function todayKey() {
-
-  const d = new Date();
-
-  return (
-
-    d.getFullYear() +
-
-    "-" +
-
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0") +
-
-    "-" +
-
-    String(
-      d.getDate()
-    ).padStart(2,"0")
-
-  );
-}
-
-
-
-/* =====================================================
-   GET CURRENT SHIFT
+   SHIFT
 ===================================================== */
 
 function getSelectedShift() {
@@ -2136,13 +1596,9 @@ function getSelectedShift() {
     .value
     .trim()
     .toUpperCase();
+
 }
 
-
-
-/* =====================================================
-   VALIDATE SHIFT
-===================================================== */
 
 function validShift() {
 
@@ -2166,7 +1622,6 @@ function validShift() {
 }
 
 
-
 /* =====================================================
    HOUR NUMBER
 ===================================================== */
@@ -2178,16 +1633,14 @@ function hourNumber(hour) {
       String(hour || "")
     );
 
-
   return isNaN(n)
     ? 0
     : n;
 }
 
 
-
 /* =====================================================
-   GET CURRENT SHIFT ROWS
+   CURRENT SHIFT ROWS
 ===================================================== */
 
 function getCurrentShiftRows() {
@@ -2201,20 +1654,20 @@ function getCurrentShiftRows() {
 
 
   return globalData.filter(
-    r => {
+    function(r) {
 
       return (
 
         String(r.shift)
           .trim()
           .toUpperCase()
-        === shift
+          === shift
 
         &&
 
         String(r.date)
           .trim()
-        === today
+          === today
 
       );
 
@@ -2223,9 +1676,122 @@ function getCurrentShiftRows() {
 }
 
 
+/* =====================================================
+   ROW PRODUCTION
+===================================================== */
+
+function getRowProduction(r) {
+
+  let sheets = 0;
+
+  let size = 0;
+
+
+  /* SECOND SIZE */
+
+  if (
+    r.s2Sheets !== "" &&
+    r.s2Sheets !== null &&
+    !isNaN(Number(r.s2Sheets)) &&
+    Number(r.s2Sheets) > 0
+  ) {
+
+    sheets =
+      Number(r.s2Sheets);
+
+    size =
+      Number(r.size2) || 0;
+
+  }
+
+
+  /* FIRST SIZE */
+
+  else if (
+    r.s1Sheets !== "" &&
+    r.s1Sheets !== null &&
+    !isNaN(Number(r.s1Sheets)) &&
+    Number(r.s1Sheets) > 0
+  ) {
+
+    sheets =
+      Number(r.s1Sheets);
+
+    size =
+      Number(r.size1) || 0;
+
+  }
+
+
+  /* SHEET PRODUCTION */
+
+  let sheetOutput = 0;
+
+
+  if (
+    sheets > 0 &&
+    size > 0
+  ) {
+
+    sheetOutput =
+
+      (
+        sheets *
+        size *
+        OUTPUT_CONSTANT
+      ) / 1000;
+
+  }
+
+
+  /* MOULDING PRODUCTION */
+
+  let mouldingOutput = 0;
+
+
+  const moulding =
+    Number(r.moulding) || 0;
+
+
+  if (moulding > 0) {
+
+    mouldingOutput =
+
+      (
+        moulding *
+        MOULDING_CONSTANT
+      ) / 1000;
+
+  }
+
+
+  /* TOTAL PRODUCTION */
+
+  const totalOutput =
+
+    sheetOutput +
+    mouldingOutput;
+
+
+  return {
+
+    sheets:sheets,
+
+    size:size,
+
+    sheetOutput:sheetOutput,
+
+    mouldingOutput:mouldingOutput,
+
+    output:totalOutput
+
+  };
+
+}
+
 
 /* =====================================================
-   RENDER DASHBOARD
+   RENDER
 ===================================================== */
 
 function renderDashboard() {
@@ -2237,9 +1803,8 @@ function renderDashboard() {
   document.getElementById(
     "bannerShift"
   ).innerText =
-    "Shift " + (
-      shift || "-"
-    );
+    "Shift " +
+    (shift || "-");
 
 
   document.getElementById(
@@ -2263,97 +1828,8 @@ function renderDashboard() {
 }
 
 
-
 /* =====================================================
-   GET ROW PRODUCTION
-===================================================== */
-
-function getRowProduction(r) {
-
-  let sheets = 0;
-
-  let size = 0;
-
-
-  if (
-
-    r.s2Sheets !== "" &&
-
-    r.s2Sheets !== null &&
-
-    r.s2Sheets !== undefined &&
-
-    !isNaN(Number(r.s2Sheets)) &&
-
-    Number(r.s2Sheets) > 0
-
-  ) {
-
-    sheets =
-      Number(r.s2Sheets);
-
-    size =
-      Number(r.size2) || 0;
-
-  }
-
-  else if (
-
-    r.s1Sheets !== "" &&
-
-    r.s1Sheets !== null &&
-
-    r.s1Sheets !== undefined &&
-
-    !isNaN(Number(r.s1Sheets)) &&
-
-    Number(r.s1Sheets) > 0
-
-  ) {
-
-    sheets =
-      Number(r.s1Sheets);
-
-    size =
-      Number(r.size1) || 0;
-
-  }
-
-
-  let output = 0;
-
-
-  if (
-    sheets > 0 &&
-    size > 0
-  ) {
-
-    output =
-      (
-        sheets *
-        size *
-        OUTPUT_CONSTANT
-      ) / 1000;
-
-  }
-
-
-  return {
-
-    sheets: sheets,
-
-    size: size,
-
-    output: output
-
-  };
-
-}
-
-
-
-/* =====================================================
-   RENDER TABLE
+   TABLE
 ===================================================== */
 
 function renderTable(rows) {
@@ -2371,7 +1847,7 @@ function renderTable(rows) {
       <tr>
 
         <td
-          colspan="12"
+          colspan="13"
           style="
             padding:20px;
             color:#94a3b8;
@@ -2391,200 +1867,248 @@ function renderTable(rows) {
 
 
   rows.sort(
-    (a,b) =>
-      hourNumber(a.hour) -
-      hourNumber(b.hour)
+    function(a,b) {
+
+      return
+        hourNumber(a.hour) -
+        hourNumber(b.hour);
+
+    }
   );
 
 
   let html = "";
 
 
-  rows.forEach(function(r) {
+  rows.forEach(
+    function(r) {
 
-    const p =
-      getRowProduction(r);
-
-
-    let input = 0;
+      const p =
+        getRowProduction(r);
 
 
-    if (
+      /* INPUT */
 
-      masterSettings.batchWeight !== "" &&
-
-      r.beater !== "" &&
-
-      r.beater !== null &&
-
-      !isNaN(Number(r.beater))
-
-    ) {
-
-      input =
-        (
-          Number(r.beater) *
-          Number(masterSettings.batchWeight)
-        ) / 1000;
-
-    }
+      let input = 0;
 
 
-    let me = "";
+      if (
+        masterSettings.batchWeight !== "" &&
+        r.beater !== "" &&
+        !isNaN(Number(r.beater))
+      ) {
 
+        input =
 
-    if (
-      p.output > 0 &&
-      input > 0
-    ) {
-
-      me =
-        (
           (
-            1 -
-            p.output / input
-          ) * 100
-        ).toFixed(1) +
-        "%";
-
-    }
-
-
-    let rop = "";
-
-
-    if (
-      p.output > 0
-    ) {
-
-      const bd =
-        Number(r.bd) || 0;
-
-
-      if (bd < 60) {
-
-        rop =
-          (
-            p.output *
-            60 /
-            Math.max(
-              1,
-              60 - bd
+            Number(r.beater) *
+            Number(
+              masterSettings.batchWeight
             )
-          ).toFixed(2);
+          ) / 1000;
 
       }
 
+
+      /* ME%
+
+         ME% is kept based on
+         sheet production, not
+         moulding production.
+      */
+
+      let me = "";
+
+
+      if (
+        p.sheetOutput > 0 &&
+        input > 0
+      ) {
+
+        me =
+
+          (
+            (
+              1 -
+              p.sheetOutput /
+              input
+            ) * 100
+          ).toFixed(1) +
+          "%";
+
+      }
+
+
+      /* ROP */
+
+      let rop = "";
+
+
+      if (
+        p.output > 0
+      ) {
+
+        const bd =
+          Number(r.bd) || 0;
+
+
+        if (bd < 60) {
+
+          rop =
+
+            (
+              p.output *
+              60 /
+              Math.max(
+                1,
+                60 - bd
+              )
+            ).toFixed(2);
+
+        }
+
+      }
+
+
+      html += `
+
+        <tr>
+
+          <td class="hour">
+            ${escapeHTML(r.hour)}
+          </td>
+
+          <td>
+            ${p.size || ""}
+          </td>
+
+          <td class="yellow">
+            ${p.sheets || ""}
+          </td>
+
+          <td>
+            ${
+              r.moulding !== ""
+                ? r.moulding
+                : ""
+            }
+          </td>
+
+          <td class="yellow">
+            ${
+              p.mouldingOutput > 0
+                ? p.mouldingOutput.toFixed(2)
+                : ""
+            }
+          </td>
+
+          <td>
+            ${
+              r.beater !== ""
+                ? r.beater
+                : ""
+            }
+          </td>
+
+          <td>
+            ${
+              r.bd !== ""
+                ? r.bd
+                : ""
+            }
+          </td>
+
+          <td class="yellow">
+            ${
+              r.gsr !== ""
+                ? r.gsr
+                : ""
+            }
+          </td>
+
+          <td class="yellow">
+            ${
+              p.output > 0
+                ? p.output.toFixed(2)
+                : ""
+            }
+          </td>
+
+          <td>
+            ${
+              input > 0
+                ? input.toFixed(2)
+                : ""
+            }
+          </td>
+
+          <td class="cyan">
+            ${me}
+          </td>
+
+          <td>
+            ${rop}
+          </td>
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                class="action-btn edit-btn"
+                title="Edit"
+                onclick="editRow(${r.rowIndex})"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+
+
+              <button
+                class="action-btn delete-btn"
+                title="Delete"
+                onclick="deleteRow(${r.rowIndex})"
+              >
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+
+
+              <button
+                class="action-btn whatsapp-btn"
+                title="WhatsApp"
+                onclick="sendRowWhatsApp(${r.rowIndex})"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+              </button>
+
+
+              <button
+                class="action-btn pdf-btn"
+                title="PDF"
+                onclick="generateRowPDF(${r.rowIndex})"
+              >
+                <i class="fa-solid fa-file-pdf"></i>
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
     }
+  );
 
 
-    html += `
-
-      <tr>
-
-        <td class="hour">
-          ${escapeHTML(r.hour)}
-        </td>
-
-        <td>
-          ${p.size || ""}
-        </td>
-
-        <td class="yellow">
-          ${p.sheets || ""}
-        </td>
-
-        <td>
-          ${r.moulding !== "" ? r.moulding : ""}
-        </td>
-
-        <td>
-          ${r.beater !== "" ? r.beater : ""}
-        </td>
-
-        <td>
-          ${r.bd !== "" ? r.bd : ""}
-        </td>
-
-        <td class="yellow">
-          ${r.gsr !== "" ? r.gsr : ""}
-        </td>
-
-        <td class="yellow">
-          ${p.output > 0
-            ? p.output.toFixed(2)
-            : ""}
-        </td>
-
-        <td>
-          ${input > 0
-            ? input.toFixed(2)
-            : ""}
-        </td>
-
-        <td class="cyan">
-          ${me}
-        </td>
-
-        <td>
-          ${rop}
-        </td>
-
-        <td>
-
-          <div class="action-buttons">
-
-            <button
-              class="action-btn edit-btn"
-              title="Edit"
-              onclick="editRow(${r.rowIndex})"
-            >
-              <i class="fa-solid fa-pen"></i>
-            </button>
-
-            <button
-              class="action-btn delete-btn"
-              title="Delete"
-              onclick="deleteRow(${r.rowIndex})"
-            >
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-
-            <button
-              class="action-btn whatsapp-btn"
-              title="WhatsApp"
-              onclick="sendRowWhatsApp(${r.rowIndex})"
-            >
-              <i class="fa-brands fa-whatsapp"></i>
-            </button>
-
-            <button
-              class="action-btn pdf-btn"
-              title="PDF"
-              onclick="generateRowPDF(${r.rowIndex})"
-            >
-              <i class="fa-solid fa-file-pdf"></i>
-            </button>
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-  });
-
-
-  tbody.innerHTML = html;
+  tbody.innerHTML =
+    html;
 
 }
 
 
-
 /* =====================================================
-   UPDATE METRICS
+   METRICS
 ===================================================== */
 
 function updateMetrics(rows) {
@@ -2595,49 +2119,70 @@ function updateMetrics(rows) {
 
   let totalBD = 0;
 
+  let totalMEInput = 0;
 
-  rows.forEach(function(r) {
-
-    const p =
-      getRowProduction(r);
+  let totalMESheetOutput = 0;
 
 
-    totalOutput +=
-      p.output;
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(r);
 
 
-    if (
-      r.beater !== "" &&
-      r.beater !== null &&
-      !isNaN(Number(r.beater)) &&
-      masterSettings.batchWeight !== ""
-    ) {
+      totalOutput +=
+        p.output;
 
-      totalInput +=
-        (
-          Number(r.beater) *
-          Number(masterSettings.batchWeight)
-        ) / 1000;
+
+      if (
+        masterSettings.batchWeight !== "" &&
+        r.beater !== "" &&
+        !isNaN(Number(r.beater))
+      ) {
+
+        const inp =
+
+          (
+            Number(r.beater) *
+            Number(
+              masterSettings.batchWeight
+            )
+          ) / 1000;
+
+
+        totalInput +=
+          inp;
+
+
+        totalMEInput +=
+          inp;
+
+
+        totalMESheetOutput +=
+          p.sheetOutput;
+
+      }
+
+
+      totalBD +=
+        Number(r.bd) || 0;
 
     }
-
-
-    totalBD +=
-      Number(r.bd) || 0;
-
-  });
+  );
 
 
   let overallME = 0;
 
 
-  if (totalInput > 0) {
+  if (totalMEInput > 0) {
 
     overallME =
+
       (
         1 -
-        totalOutput /
-        totalInput
+        totalMESheetOutput /
+        totalMEInput
       ) * 100;
 
   }
@@ -2649,6 +2194,7 @@ function updateMetrics(rows) {
   if (totalOutput > 0) {
 
     const runMinutes =
+
       Math.max(
         1,
         rows.length * 60 -
@@ -2657,6 +2203,7 @@ function updateMetrics(rows) {
 
 
     overallROP =
+
       (
         totalOutput *
         60 /
@@ -2669,6 +2216,7 @@ function updateMetrics(rows) {
   document.getElementById(
     "totalProduction"
   ).innerText =
+
     totalOutput.toFixed(2) +
     " MT";
 
@@ -2676,6 +2224,7 @@ function updateMetrics(rows) {
   document.getElementById(
     "totalInput"
   ).innerText =
+
     totalInput.toFixed(2) +
     " MT";
 
@@ -2683,6 +2232,7 @@ function updateMetrics(rows) {
   document.getElementById(
     "overallME"
   ).innerText =
+
     overallME.toFixed(1) +
     "%";
 
@@ -2690,11 +2240,11 @@ function updateMetrics(rows) {
   document.getElementById(
     "overallROP"
   ).innerText =
+
     overallROP.toFixed(2) +
     " MT/hr";
 
 }
-
 
 
 /* =====================================================
@@ -2703,48 +2253,51 @@ function updateMetrics(rows) {
 
 function updateGSR(rows) {
 
-  let total =
-    0;
+  let total = 0;
 
 
-  rows.forEach(function(r) {
+  rows.forEach(
+    function(r) {
 
-    total +=
-      Number(r.gsr) || 0;
+      total +=
+        Number(r.gsr) || 0;
 
-  });
+    }
+  );
 
 
   document.getElementById(
     "totalGSR"
   ).innerText =
+
     total +
     " SHEETS";
 
 }
 
 
-
 /* =====================================================
-   TARGET BANNER
+   TARGET
 ===================================================== */
 
 function updateBanner(rows) {
 
   const targetProd =
-    Number(masterSettings.targetProd);
+    Number(
+      masterSettings.targetProd
+    );
 
 
   const targetSize =
-    Number(masterSettings.targetSize);
+    Number(
+      masterSettings.targetSize
+    );
 
 
   if (
-
     !targetProd ||
     !targetSize ||
     targetSize <= 0
-
   ) {
 
     document.getElementById(
@@ -2781,50 +2334,53 @@ function updateBanner(rows) {
     document.getElementById(
       "bannerTimeLeft"
     ).innerText =
-      "REMAINING HOURS NOT SET";
+      "8 HOURS AVAILABLE";
 
 
     return;
   }
 
 
-  /* -----------------------------------------------
-     TARGET SIZE EQUIVALENT SHEETS
-  ------------------------------------------------ */
+  /* REQUIRED TARGET SHEETS */
 
   const totalRequiredSheets =
+
     (
       targetProd *
       1000
     ) /
+
     (
       targetSize *
       OUTPUT_CONSTANT
     );
 
 
-  /*
-     IMPORTANT:
-     Produced equivalent sheets are calculated
-     from actual Output MT.
-  */
+  /* TOTAL PRODUCTION
+     INCLUDING MOULDING */
 
   let totalOutput = 0;
 
 
-  rows.forEach(function(r) {
+  rows.forEach(
+    function(r) {
 
-    totalOutput +=
-      getRowProduction(r).output;
+      totalOutput +=
+        getRowProduction(r).output;
 
-  });
+    }
+  );
 
+
+  /* EQUIVALENT TARGET SHEETS */
 
   const producedEquivalentSheets =
+
     (
       totalOutput *
       1000
     ) /
+
     (
       targetSize *
       OUTPUT_CONSTANT
@@ -2832,6 +2388,7 @@ function updateBanner(rows) {
 
 
   const remainingSheets =
+
     Math.max(
       0,
       totalRequiredSheets -
@@ -2839,37 +2396,29 @@ function updateBanner(rows) {
     );
 
 
-  /* -----------------------------------------------
-     LATEST COMPLETED HOUR
-  ------------------------------------------------ */
+  /* LATEST COMPLETED HOUR */
 
   let latestHour = 0;
 
 
-  rows.forEach(function(r) {
+  rows.forEach(
+    function(r) {
 
-    const n =
-      hourNumber(r.hour);
+      const n =
+        hourNumber(r.hour);
 
 
-    if (n > latestHour) {
-
-      latestHour = n;
+      if (n > latestHour)
+        latestHour = n;
 
     }
+  );
 
-  });
 
-
-  /*
-     Before first entry = 8 hours.
-     After 1st = 7.
-     After 2nd = 6.
-     ...
-     After 8th = 0.
-  */
+  /* REMAINING HOURS */
 
   const remainingHours =
+
     Math.max(
       0,
       SHIFT_HOURS -
@@ -2878,6 +2427,7 @@ function updateBanner(rows) {
 
 
   const requiredPerHour =
+
     remainingHours > 0
 
       ? remainingSheets /
@@ -2897,31 +2447,31 @@ function updateBanner(rows) {
     sftConversion;
 
 
-  /* -----------------------------------------------
-     DISPLAY
-  ------------------------------------------------ */
-
   document.getElementById(
     "topReqSheetsVal"
   ).innerText =
+
     totalRequiredSheets.toFixed(2);
 
 
   document.getElementById(
     "bannerProduced"
   ).innerText =
+
     producedEquivalentSheets.toFixed(2);
 
 
   document.getElementById(
     "bannerReqSheet"
   ).innerText =
+
     remainingSheets.toFixed(2);
 
 
   document.getElementById(
     "bannerReqHr"
   ).innerText =
+
     requiredPerHour.toFixed(2);
 
 
@@ -2937,26 +2487,26 @@ function updateBanner(rows) {
     sft.toFixed(2);
 
 
-  if (remainingHours === 0) {
+  if (
+    remainingHours === 0
+  ) {
 
     document.getElementById(
       "bannerTimeLeft"
     ).innerText =
       "NO HOURS LEFT";
 
-  }
-
-  else {
+  } else {
 
     document.getElementById(
       "bannerTimeLeft"
     ).innerText =
-      `ONLY ${remainingHours} HOURS AVAILABLE`;
+
+      `${remainingHours} HOURS AVAILABLE`;
 
   }
 
 }
-
 
 
 /* =====================================================
@@ -2966,21 +2516,30 @@ function updateBanner(rows) {
 function saveSettingsData() {
 
   const target =
-    document.getElementById(
-      "setConfigTarget"
-    ).value.trim();
+    document
+      .getElementById(
+        "setConfigTarget"
+      )
+      .value
+      .trim();
 
 
   const targetSize =
-    document.getElementById(
-      "setConfigTargetSize"
-    ).value.trim();
+    document
+      .getElementById(
+        "setConfigTargetSize"
+      )
+      .value
+      .trim();
 
 
   const batch =
-    document.getElementById(
-      "setConfigBatch"
-    ).value.trim();
+    document
+      .getElementById(
+        "setConfigBatch"
+      )
+      .value
+      .trim();
 
 
   if (
@@ -2990,7 +2549,7 @@ function saveSettingsData() {
   ) {
 
     showToast(
-      "⚠️ Please fill all Master Settings."
+      "⚠️ Please fill all settings."
     );
 
     return;
@@ -3003,7 +2562,7 @@ function saveSettingsData() {
     );
 
 
-  const progressWrap =
+  const wrap =
     document.getElementById(
       "settingsProgressWrap"
     );
@@ -3021,14 +2580,14 @@ function saveSettingsData() {
     '<i class="fa-solid fa-spinner fa-spin"></i> SAVING...';
 
 
-  progressWrap.style.display =
+  wrap.style.display =
     "block";
 
   progress.style.width =
-    "25%";
+    "40%";
 
 
-  window.handleSettingsSaveResponse =
+  window.handleSettingsResponse =
     function(res) {
 
       progress.style.width =
@@ -3044,7 +2603,7 @@ function saveSettingsData() {
       setTimeout(
         function() {
 
-          progressWrap.style.display =
+          wrap.style.display =
             "none";
 
           progress.style.width =
@@ -3061,14 +2620,12 @@ function saveSettingsData() {
       ) {
 
         showToast(
-          "✅ Settings saved successfully."
+          "✅ Settings saved."
         );
 
         loadDashboardData();
 
-      }
-
-      else {
+      } else {
 
         showToast(
           "❌ Failed to save settings."
@@ -3082,6 +2639,7 @@ function saveSettingsData() {
   jsonp(
 
     SCRIPT_URL +
+
     "?action=saveSettings" +
 
     "&targetProd=" +
@@ -3093,33 +2651,34 @@ function saveSettingsData() {
     "&batchWeight=" +
     encodeURIComponent(batch),
 
-    "handleSettingsSaveResponse"
+    "handleSettingsResponse"
 
   );
 
 }
 
 
-
 /* =====================================================
-   SUBMIT HOURLY
+   SUBMIT
 ===================================================== */
 
 function submitProductionEntry() {
 
-  if (!validShift()) return;
+  if (!validShift())
+    return;
 
 
   const name =
-    document.getElementById(
-      "opName"
-    ).value.trim();
+    document
+      .getElementById("opName")
+      .value
+      .trim();
 
 
   if (!name) {
 
     showToast(
-      "⚠️ Please enter operator name."
+      "⚠️ Enter operator name."
     );
 
     return;
@@ -3154,13 +2713,13 @@ function submitProductionEntry() {
     ).value;
 
 
-  const s1Sheets =
+  const s1 =
     document.getElementById(
       "opS1"
     ).value;
 
 
-  const s2Sheets =
+  const s2 =
     document.getElementById(
       "opS2"
     ).value;
@@ -3190,17 +2749,15 @@ function submitProductionEntry() {
     ).value;
 
 
-  /* ONLY ONE SIZE */
-
   if (
-    s1Sheets &&
-    Number(s1Sheets) > 0 &&
-    s2Sheets &&
-    Number(s2Sheets) > 0
+    s1 &&
+    Number(s1) > 0 &&
+    s2 &&
+    Number(s2) > 0
   ) {
 
     showToast(
-      "⚠️ Only one Size Sheets can be entered per hour."
+      "⚠️ Only one size sheets per hour."
     );
 
     return;
@@ -3235,7 +2792,7 @@ function submitProductionEntry() {
     "block";
 
   progress.style.width =
-    "20%";
+    "25%";
 
 
   window.handleSubmitResponse =
@@ -3255,7 +2812,7 @@ function submitProductionEntry() {
             "0%";
 
         },
-        300
+        400
       );
 
 
@@ -3271,26 +2828,26 @@ function submitProductionEntry() {
       ) {
 
         showToast(
-          "✅ Production data saved successfully."
+          "✅ Production data saved."
         );
-
 
         resetForm();
 
         loadDashboardData();
 
-      }
-
-      else {
+      } else {
 
         showToast(
+
           "❌ " +
+
           (
             res &&
             res.message
               ? res.message
-              : "Operation failed."
+              : "Save failed."
           )
+
         );
 
       }
@@ -3303,6 +2860,9 @@ function submitProductionEntry() {
     SCRIPT_URL +
 
     "?action=submitHourly" +
+
+    "&operator=" +
+    encodeURIComponent(name) +
 
     "&shift=" +
     encodeURIComponent(shift) +
@@ -3317,10 +2877,10 @@ function submitProductionEntry() {
     encodeURIComponent(size2) +
 
     "&s1Sheets=" +
-    encodeURIComponent(s1Sheets) +
+    encodeURIComponent(s1) +
 
     "&s2Sheets=" +
-    encodeURIComponent(s2Sheets) +
+    encodeURIComponent(s2) +
 
     "&moulding=" +
     encodeURIComponent(moulding) +
@@ -3332,10 +2892,7 @@ function submitProductionEntry() {
     encodeURIComponent(bd) +
 
     "&gsr=" +
-    encodeURIComponent(gsr) +
-
-    "&operator=" +
-    encodeURIComponent(name);
+    encodeURIComponent(gsr);
 
 
   if (rowIndex) {
@@ -3347,10 +2904,6 @@ function submitProductionEntry() {
   }
 
 
-  progress.style.width =
-    "50%";
-
-
   jsonp(
     url,
     "handleSubmitResponse"
@@ -3359,18 +2912,21 @@ function submitProductionEntry() {
 }
 
 
-
 /* =====================================================
-   EDIT ROW
+   EDIT
 ===================================================== */
 
 function editRow(idx) {
 
   const row =
     globalData.find(
-      r =>
-        Number(r.rowIndex) ===
-        Number(idx)
+      function(r) {
+
+        return
+          Number(r.rowIndex) ===
+          Number(idx);
+
+      }
     );
 
 
@@ -3460,8 +3016,7 @@ function editRow(idx) {
     "formTitle"
   ).innerHTML =
 
-    '<i class="fa-solid fa-pen"></i> ' +
-    "EDIT HOURLY ENTRY";
+    '<i class="fa-solid fa-pen"></i> EDIT HOURLY ENTRY';
 
 
   document.getElementById(
@@ -3478,21 +3033,20 @@ function editRow(idx) {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    top:0,
+    behavior:"smooth"
   });
 
 
   showToast(
-    "✏️ Entry loaded for editing."
+    "✏️ Entry ready for editing."
   );
 
 }
 
 
-
 /* =====================================================
-   RESET FORM
+   RESET
 ===================================================== */
 
 function resetForm() {
@@ -3506,16 +3060,14 @@ function resetForm() {
     "formTitle"
   ).innerHTML =
 
-    '<i class="fa-solid fa-pen-to-square"></i> ' +
-    "HOURLY PRODUCTION ENTRY";
+    '<i class="fa-solid fa-pen-to-square"></i> HOURLY PRODUCTION ENTRY';
 
 
   document.getElementById(
     "submitBtn"
   ).innerHTML =
 
-    '<i class="fa-solid fa-cloud-arrow-up"></i> ' +
-    "SUBMIT HOURLY DATA";
+    '<i class="fa-solid fa-cloud-arrow-up"></i> SUBMIT HOURLY DATA';
 
 
   document.getElementById(
@@ -3556,9 +3108,8 @@ function resetForm() {
 }
 
 
-
 /* =====================================================
-   DELETE ONE ROW
+   DELETE ONE
 ===================================================== */
 
 function deleteRow(idx) {
@@ -3570,13 +3121,13 @@ function deleteRow(idx) {
   document.getElementById(
     "confirmTitle"
   ).innerText =
-    "Delete Hourly Entry?";
+    "DELETE HOURLY ENTRY?";
 
 
   document.getElementById(
     "confirmMessage"
   ).innerText =
-    "This hourly production entry will be permanently deleted.";
+    "This hourly entry will be permanently deleted.";
 
 
   document.getElementById(
@@ -3608,7 +3159,6 @@ function deleteRow(idx) {
 }
 
 
-
 /* =====================================================
    PERFORM DELETE
 ===================================================== */
@@ -3616,7 +3166,7 @@ function deleteRow(idx) {
 function performDeleteRow(idx) {
 
   showToast(
-    "⏳ Deleting entry..."
+    "⏳ Deleting..."
   );
 
 
@@ -3629,14 +3179,12 @@ function performDeleteRow(idx) {
       ) {
 
         showToast(
-          "✅ Hourly entry deleted."
+          "✅ Hour deleted."
         );
 
         loadDashboardData();
 
-      }
-
-      else {
+      } else {
 
         showToast(
           "❌ Delete failed."
@@ -3663,14 +3211,14 @@ function performDeleteRow(idx) {
 }
 
 
-
 /* =====================================================
    DELETE ALL MODAL
 ===================================================== */
 
 function openDeleteAllModal() {
 
-  if (!validShift()) return;
+  if (!validShift())
+    return;
 
 
   const shift =
@@ -3701,7 +3249,7 @@ function openDeleteAllModal() {
     "confirmMessage"
   ).innerText =
 
-    `All ${rows.length} saved hour(s) for Shift ${shift} on ${todayDateString()} will be permanently deleted.`;
+    `All ${rows.length} saved hour(s) of Shift ${shift} will be permanently deleted.`;
 
 
   document.getElementById(
@@ -3730,9 +3278,8 @@ function openDeleteAllModal() {
 }
 
 
-
 /* =====================================================
-   PERFORM DELETE ALL
+   DELETE ALL
 ===================================================== */
 
 function performDeleteAll() {
@@ -3769,16 +3316,13 @@ function performDeleteAll() {
 
         showToast(
 
-          `✅ ${res.deleted || 0} hour(s) deleted successfully.`
+          `✅ ${res.deleted || 0} hour(s) deleted.`
 
         );
 
-
         loadDashboardData();
 
-      }
-
-      else {
+      } else {
 
         showToast(
           "❌ Delete All failed."
@@ -3805,7 +3349,6 @@ function performDeleteAll() {
 }
 
 
-
 /* =====================================================
    CLOSE MODAL
 ===================================================== */
@@ -3824,9 +3367,8 @@ function closeConfirmModal() {
 }
 
 
-
 /* =====================================================
-   WHATSAPP ONE ROW
+   WHATSAPP ROW
 ===================================================== */
 
 function sendRowWhatsApp(idx) {
@@ -3839,7 +3381,8 @@ function sendRowWhatsApp(idx) {
     );
 
 
-  if (!row) return;
+  if (!row)
+    return;
 
 
   const p =
@@ -3857,12 +3400,15 @@ Hour: ${row.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
 
-Moulding: ${row.moulding || "-"}
-Beater: ${row.beater || "-"}
+Moulding: ${row.moulding || 0}
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+
+Beater: ${row.beater || 0}
 B/D: ${row.bd || 0} min
 GSR: ${row.gsr || 0}
 
-Output: ${p.output.toFixed(2)} MT
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+Total Production: ${p.output.toFixed(2)} MT
 
 Operator: ${row.name || "-"}`;
 
@@ -3877,7 +3423,6 @@ Operator: ${row.name || "-"}`;
   );
 
 }
-
 
 
 /* =====================================================
@@ -3897,7 +3442,7 @@ function sendShiftWhatsApp() {
   if (!rows.length) {
 
     showToast(
-      "ℹ️ No production data available."
+      "ℹ️ No production data."
     );
 
     return;
@@ -3906,7 +3451,10 @@ function sendShiftWhatsApp() {
 
   let totalOutput = 0;
 
+  let totalMoulding = 0;
+
   let totalGSR = 0;
+
 
   let message =
 
@@ -3918,13 +3466,15 @@ Shift: ${shift}
 `;
 
 
-  rows
-    .sort(
-      (a,b) =>
-        hourNumber(a.hour) -
-        hourNumber(b.hour)
-    )
-    .forEach(function(r) {
+  rows.sort(
+    (a,b) =>
+      hourNumber(a.hour) -
+      hourNumber(b.hour)
+  );
+
+
+  rows.forEach(
+    function(r) {
 
       const p =
         getRowProduction(r);
@@ -3932,6 +3482,10 @@ Shift: ${shift}
 
       totalOutput +=
         p.output;
+
+
+      totalMoulding +=
+        p.mouldingOutput;
 
 
       totalGSR +=
@@ -3943,20 +3497,26 @@ Shift: ${shift}
 `${r.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
-Output: ${p.output.toFixed(2)} MT
-Beater: ${r.beater || "-"}
-Moulding: ${r.moulding || "-"}
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+Moulding: ${r.moulding || 0}
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+Total Production: ${p.output.toFixed(2)} MT
+Beater: ${r.beater || 0}
 B/D: ${r.bd || 0}
 GSR: ${r.gsr || 0}
 
 `;
 
-    });
+    }
+  );
 
 
   message +=
 
-`TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT
+`TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT
+
+TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT
+
 TOTAL GSR: ${totalGSR} SHEETS`;
 
 
@@ -3972,9 +3532,8 @@ TOTAL GSR: ${totalGSR} SHEETS`;
 }
 
 
-
 /* =====================================================
-   PDF ONE ROW
+   PDF ROW
 ===================================================== */
 
 function generateRowPDF(idx) {
@@ -3987,7 +3546,8 @@ function generateRowPDF(idx) {
     );
 
 
-  if (!row) return;
+  if (!row)
+    return;
 
 
   const p =
@@ -3996,7 +3556,8 @@ function generateRowPDF(idx) {
 
   const {
     jsPDF
-  } = window.jspdf;
+  } =
+    window.jspdf;
 
 
   const doc =
@@ -4030,32 +3591,38 @@ function generateRowPDF(idx) {
 
     `Sheets: ${p.sheets}`,
 
-    `Moulding: ${row.moulding || "-"}`,
+    `Sheet Production: ${p.sheetOutput.toFixed(2)} MT`,
 
-    `Beater: ${row.beater || "-"}`,
+    `Moulding: ${row.moulding || 0}`,
+
+    `Moulding Production: ${p.mouldingOutput.toFixed(2)} MT`,
+
+    `Total Production: ${p.output.toFixed(2)} MT`,
+
+    `Beater: ${row.beater || 0}`,
 
     `B/D: ${row.bd || 0} min`,
 
     `GSR: ${row.gsr || 0} sheets`,
-
-    `Output: ${p.output.toFixed(2)} MT`,
 
     `Operator: ${row.name || "-"}`
 
   ];
 
 
-  lines.forEach(function(line) {
+  lines.forEach(
+    function(line) {
 
-    doc.text(
-      line,
-      20,
-      y
-    );
+      doc.text(
+        line,
+        20,
+        y
+      );
 
-    y += 9;
+      y += 9;
 
-  });
+    }
+  );
 
 
   doc.save(
@@ -4065,9 +3632,8 @@ function generateRowPDF(idx) {
 }
 
 
-
 /* =====================================================
-   SHIFT PDF
+   PDF SHIFT
 ===================================================== */
 
 function generateShiftPDF() {
@@ -4083,7 +3649,7 @@ function generateShiftPDF() {
   if (!rows.length) {
 
     showToast(
-      "ℹ️ No production data available."
+      "ℹ️ No production data."
     );
 
     return;
@@ -4092,12 +3658,13 @@ function generateShiftPDF() {
 
   const {
     jsPDF
-  } = window.jspdf;
+  } =
+    window.jspdf;
 
 
   const doc =
     new jsPDF({
-      orientation: "landscape"
+      orientation:"landscape"
     });
 
 
@@ -4119,29 +3686,30 @@ function generateShiftPDF() {
   );
 
 
+  let y = 38;
+
+
   const headers = [
 
     "Hour",
     "Size",
     "Sheets",
     "Moulding",
+    "Moulding MT",
     "Beater",
     "B/D",
     "GSR",
-    "Output"
+    "Total MT"
 
   ];
 
 
-  let y = 38;
-
-
   headers.forEach(
-    function(h, i) {
+    function(h,i) {
 
       doc.text(
         h,
-        15 + i * 32,
+        10 + i * 30,
         y
       );
 
@@ -4154,16 +3722,20 @@ function generateShiftPDF() {
 
   let totalOutput = 0;
 
+  let totalMoulding = 0;
+
   let totalGSR = 0;
 
 
-  rows
-    .sort(
-      (a,b) =>
-        hourNumber(a.hour) -
-        hourNumber(b.hour)
-    )
-    .forEach(function(r) {
+  rows.sort(
+    (a,b) =>
+      hourNumber(a.hour) -
+      hourNumber(b.hour)
+  );
+
+
+  rows.forEach(
+    function(r) {
 
       const p =
         getRowProduction(r);
@@ -4173,11 +3745,15 @@ function generateShiftPDF() {
         p.output;
 
 
+      totalMoulding +=
+        p.mouldingOutput;
+
+
       totalGSR +=
         Number(r.gsr) || 0;
 
 
-      const values = [
+      const vals = [
 
         r.hour,
 
@@ -4186,6 +3762,8 @@ function generateShiftPDF() {
         String(p.sheets),
 
         String(r.moulding || ""),
+
+        p.mouldingOutput.toFixed(2),
 
         String(r.beater || ""),
 
@@ -4198,12 +3776,12 @@ function generateShiftPDF() {
       ];
 
 
-      values.forEach(
-        function(v, i) {
+      vals.forEach(
+        function(v,i) {
 
           doc.text(
             v,
-            15 + i * 32,
+            10 + i * 30,
             y
           );
 
@@ -4214,7 +3792,7 @@ function generateShiftPDF() {
       y += 8;
 
 
-      if (y > 190) {
+      if (y > 185) {
 
         doc.addPage();
 
@@ -4222,17 +3800,26 @@ function generateShiftPDF() {
 
       }
 
-    });
+    }
+  );
 
 
   y += 8;
 
 
-  doc.setFontSize(12);
+  doc.text(
+    `TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT`,
+    10,
+    y
+  );
+
+
+  y += 8;
+
 
   doc.text(
     `TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT`,
-    15,
+    10,
     y
   );
 
@@ -4242,7 +3829,7 @@ function generateShiftPDF() {
 
   doc.text(
     `TOTAL GSR: ${totalGSR} SHEETS`,
-    15,
+    10,
     y
   );
 
@@ -4252,7 +3839,6 @@ function generateShiftPDF() {
   );
 
 }
-
 
 
 /* =====================================================
@@ -4296,9 +3882,8 @@ function showToast(message) {
 }
 
 
-
 /* =====================================================
-   LOADING STATE
+   LOADING
 ===================================================== */
 
 function showLoadingState() {
@@ -4310,7 +3895,7 @@ function showLoadingState() {
     <tr>
 
       <td
-        colspan="12"
+        colspan="13"
         style="
           padding:20px;
           color:#00ffff;
@@ -4323,7 +3908,7 @@ function showLoadingState() {
           fa-spin
         "></i>
 
-        Loading production data...
+        Loading data...
 
       </td>
 
@@ -4333,6 +3918,33 @@ function showLoadingState() {
 
 }
 
+
+/* =====================================================
+   PROGRESS RESET
+===================================================== */
+
+function finishProgress() {
+
+  const a =
+    document.getElementById(
+      "settingsProgressWrap"
+    );
+
+  const b =
+    document.getElementById(
+      "submitProgressWrap"
+    );
+
+
+  if (a)
+    a.style.display =
+      "none";
+
+  if (b)
+    b.style.display =
+      "none";
+
+}
 
 
 /* =====================================================
@@ -4344,11 +3956,8 @@ function escapeHTML(value) {
   if (
     value === null ||
     value === undefined
-  ) {
-
+  )
     return "";
-
-  }
 
 
   return String(value)
@@ -4381,9 +3990,8 @@ function escapeHTML(value) {
 }
 
 
-
 /* =====================================================
-   INITIAL LOAD
+   INITIAL
 ===================================================== */
 
 window.onload =
