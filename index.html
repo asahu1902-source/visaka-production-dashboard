@@ -5,14 +5,21 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
+<meta
+name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <title>Production Dashboard</title>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- PDF -->
 
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+</script>
+
+
+<!-- ICONS -->
 
 <link
 rel="stylesheet"
@@ -21,17 +28,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <style>
 
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 html{
-  font-size:16px;
+  font-size:18px;
 }
 
 body{
+
+  margin:0;
+
+  padding:10px;
 
   background:#000;
 
@@ -42,19 +55,20 @@ body{
   Helvetica,
   sans-serif;
 
-  padding:12px 8px 35px;
-
-  font-size:16px;
-
-  -webkit-text-size-adjust:100%;
+  font-size:18px;
 
 }
+
+
+/* =====================================================
+   APP
+===================================================== */
 
 .app{
 
   width:100%;
 
-  max-width:760px;
+  max-width:850px;
 
   margin:auto;
 
@@ -62,76 +76,77 @@ body{
 
 
 /* =====================================================
-   TOP PANEL
+   TOP DASHBOARD
 ===================================================== */
 
-.target-panel{
+.top{
 
   background:#07142b;
 
-  border:2px solid #38bdf8;
+  border:2px solid #00bfff;
 
-  border-radius:12px;
+  border-radius:14px;
 
   overflow:hidden;
 
-  margin-bottom:14px;
+  margin-bottom:15px;
 
 }
 
-.banner{
 
-  background:#0284c7;
+.top-header{
 
-  padding:10px 12px;
+  background:#087bb5;
+
+  padding:14px;
 
   display:flex;
 
   justify-content:space-between;
 
-  align-items:center;
+  font-size:18px;
 
-  font-size:15px;
-
-  font-weight:1000;
+  font-weight:900;
 
 }
 
-.main-target{
 
-  background:#172033;
+.target{
 
   text-align:center;
 
-  padding:14px 8px;
+  padding:16px;
 
-  border-bottom:1px solid #facc15;
+  background:#172033;
 
 }
 
-.main-target .number{
+
+.target-number{
 
   color:#ffff00;
 
-  font-size:30px;
+  font-size:36px;
 
   font-weight:1000;
 
 }
 
-.main-target .label{
 
-  color:#38bdf8;
+.target-label{
 
-  font-size:13px;
+  color:#00ffff;
 
-  font-weight:1000;
+  font-size:15px;
+
+  font-weight:900;
 
   margin-top:4px;
 
 }
 
-.summary-grid{
+
+.top-grid{
 
   display:grid;
 
@@ -140,90 +155,101 @@ body{
 
 }
 
-.summary-cell{
+
+.top-box{
 
   text-align:center;
 
-  padding:11px 4px;
+  padding:14px 5px;
+
+  border-top:1px solid #facc15;
 
   border-right:1px solid #facc15;
 
 }
 
-.summary-cell:last-child{
+
+.top-box:last-child{
 
   border-right:none;
 
 }
 
-.summary-cell .title{
+
+.top-label{
 
   color:#00ffff;
 
-  font-size:11px;
+  font-size:13px;
 
   font-weight:1000;
 
 }
 
-.summary-cell .value{
+
+.top-value{
 
   color:#ffff00;
 
-  font-size:18px;
+  font-size:23px;
 
   font-weight:1000;
 
-  margin-top:4px;
+  margin-top:5px;
 
 }
 
-.meta{
+
+.top-info{
 
   display:grid;
 
   grid-template-columns:
   1fr 1fr;
 
-  border-top:1px solid #facc15;
-
 }
 
-.meta-cell{
+
+.info-box{
 
   text-align:center;
 
-  padding:10px 4px;
+  padding:12px 5px;
 
-  color:#facc15;
-
-  font-size:13px;
-
-  font-weight:1000;
+  border-top:1px solid #facc15;
 
   border-right:1px solid #facc15;
 
+  color:#facc15;
+
+  font-size:15px;
+
+  font-weight:1000;
+
 }
 
-.meta-cell:last-child{
+
+.info-box:last-child{
 
   border-right:none;
 
 }
 
+
 .latest{
 
   text-align:center;
 
-  padding:10px 5px;
+  padding:12px;
 
-  background:#07142b;
+  border-top:1px solid #facc15;
 
-  font-size:13px;
+  font-size:15px;
 
   font-weight:1000;
 
 }
+
 
 .latest span{
 
@@ -231,15 +257,16 @@ body{
 
 }
 
-.time-footer{
+
+.time-left{
 
   text-align:center;
 
   background:#db2777;
 
-  padding:11px;
+  padding:13px;
 
-  font-size:15px;
+  font-size:18px;
 
   font-weight:1000;
 
@@ -254,25 +281,26 @@ body{
 
   background:#07142b;
 
-  border:1.5px solid #38bdf8;
+  border:2px solid #00bfff;
 
-  border-radius:11px;
+  border-radius:13px;
 
-  padding:14px;
+  padding:15px;
 
-  margin-bottom:14px;
+  margin-bottom:15px;
 
 }
 
-.card h3{
 
-  color:#38bdf8;
+.card-title{
 
-  font-size:19px;
+  color:#00ffff;
+
+  font-size:22px;
 
   font-weight:1000;
 
-  margin-bottom:14px;
+  margin-bottom:16px;
 
 }
 
@@ -285,23 +313,24 @@ body{
 
   display:flex;
 
-  gap:10px;
+  gap:12px;
 
 }
+
 
 .col{
 
   flex:1;
 
-  min-width:0;
+}
+
+
+.field{
+
+  margin-bottom:14px;
 
 }
 
-.group{
-
-  margin-bottom:12px;
-
-}
 
 label{
 
@@ -309,55 +338,61 @@ label{
 
   color:#00ffff;
 
-  font-size:13px;
+  font-size:15px;
 
   font-weight:1000;
 
-  margin-bottom:5px;
+  margin-bottom:6px;
 
 }
+
 
 input,
 select{
 
   width:100%;
 
-  min-height:47px;
+  height:52px;
 
   background:#000;
 
   color:#ffff00;
 
-  border:1.5px solid #38bdf8;
+  border:2px solid #00bfff;
 
-  border-radius:6px;
+  border-radius:7px;
 
-  padding:9px 10px;
+  padding:8px 12px;
 
-  font-size:17px;
+  font-size:19px;
 
   font-weight:900;
 
-  outline:none;
+}
+
+
+/* =====================================================
+   IMPORTANT:
+   ONLY SELECT IS HOUR.
+   ALL OTHER FIELDS ARE INPUT.
+===================================================== */
+
+select{
+
+  cursor:pointer;
 
 }
 
-input::placeholder{
 
-  color:#64748b;
+button{
 
-  font-size:13px;
+  border:0;
 
-}
+  cursor:pointer;
 
-input:focus,
-select:focus{
+  font-family:inherit;
 
-  border-color:#00ffff;
-
-  box-shadow:
-  0 0 0 2px
-  rgba(0,255,255,.12);
+  font-weight:1000;
 
 }
 
@@ -366,110 +401,59 @@ select:focus{
    BUTTONS
 ===================================================== */
 
-button{
-
-  border:none;
-
-  cursor:pointer;
-
-  font-weight:1000;
-
-  -webkit-tap-highlight-color:transparent;
-
-}
-
-button:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-
-}
-
-.primary-btn{
+.save-btn,
+.submit-btn,
+.refresh-btn{
 
   width:100%;
 
-  min-height:49px;
+  min-height:53px;
+
+  border-radius:8px;
+
+  font-size:17px;
+
+  font-weight:1000;
+
+}
+
+
+.save-btn{
 
   background:#0284c7;
 
   color:#fff;
 
-  border-radius:7px;
-
-  font-size:15px;
-
 }
 
+
 .submit-btn{
-
-  width:100%;
-
-  min-height:51px;
 
   background:#10b981;
 
   color:#fff;
 
-  border-radius:7px;
-
-  font-size:15px;
-
 }
 
-.cancel-btn{
-
-  display:none;
-
-  width:100%;
-
-  min-height:45px;
-
-  margin-top:8px;
-
-  background:#dc2626;
-
-  color:#fff;
-
-  border-radius:7px;
-
-  font-size:14px;
-
-}
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
 
 .refresh-btn{
-
-  width:100%;
-
-  min-height:47px;
-
-  margin-bottom:12px;
 
   background:#334155;
 
   color:#fff;
 
-  border:1px solid #38bdf8;
+  border:2px solid #00bfff;
 
-  border-radius:7px;
-
-  font-size:15px;
-
-  font-weight:1000;
+  margin-bottom:12px;
 
 }
 
+
+.save-btn i,
+.submit-btn i,
 .refresh-btn i{
 
-  font-size:18px;
-
-  margin-right:5px;
+  margin-left:6px;
 
 }
 
@@ -478,7 +462,7 @@ button:disabled{
    PROGRESS
 ===================================================== */
 
-.progress-area{
+.progress{
 
   display:none;
 
@@ -486,19 +470,21 @@ button:disabled{
 
 }
 
+
 .progress-text{
 
   text-align:center;
 
   color:#00ffff;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:1000;
 
-  margin-bottom:6px;
+  margin-bottom:5px;
 
 }
+
 
 .progress-bg{
 
@@ -514,6 +500,7 @@ button:disabled{
 
 }
 
+
 .progress-bar{
 
   width:0%;
@@ -522,7 +509,8 @@ button:disabled{
 
   background:#10b981;
 
-  transition:width .2s linear;
+  transition:
+  width .25s linear;
 
 }
 
@@ -533,23 +521,23 @@ button:disabled{
 
 .table-wrap{
 
-  width:100%;
-
   overflow-x:auto;
 
-  -webkit-overflow-scrolling:touch;
+  width:100%;
 
 }
+
 
 table{
 
-  width:100%;
-
-  min-width:1050px;
-
   border-collapse:collapse;
 
+  width:100%;
+
+  min-width:1150px;
+
 }
+
 
 th{
 
@@ -557,11 +545,11 @@ th{
 
   color:#000;
 
-  padding:11px 6px;
+  padding:12px 7px;
 
   border:1px solid #8b0000;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:1000;
 
@@ -569,19 +557,20 @@ th{
 
 }
 
+
 td{
 
   background:#000;
 
   color:#fff;
 
-  padding:11px 6px;
+  padding:12px 7px;
 
   border:1px solid #8b0000;
 
   text-align:center;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -589,7 +578,8 @@ td{
 
 }
 
-.hour-cell{
+
+.hour{
 
   background:#00ffff !important;
 
@@ -599,15 +589,10 @@ td{
 
 }
 
+
 .yellow{
 
   color:#ffff00;
-
-}
-
-.cyan{
-
-  color:#38bdf8;
 
 }
 
@@ -616,17 +601,15 @@ td{
    ACTION ICONS
 ===================================================== */
 
-.action{
+.icon-btn{
 
-  width:43px;
+  width:46px;
 
-  height:40px;
+  height:44px;
 
-  border-radius:7px;
+  border-radius:8px;
 
   margin:2px;
-
-  padding:0;
 
   display:inline-flex;
 
@@ -636,11 +619,13 @@ td{
 
 }
 
-.action i{
 
-  font-size:21px;
+.icon-btn i{
+
+  font-size:23px;
 
 }
+
 
 .edit{
 
@@ -650,6 +635,7 @@ td{
 
 }
 
+
 .delete{
 
   background:#dc2626;
@@ -658,6 +644,7 @@ td{
 
 }
 
+
 .whatsapp{
 
   background:#16a34a;
@@ -665,6 +652,7 @@ td{
   color:#fff;
 
 }
+
 
 .pdf{
 
@@ -676,65 +664,58 @@ td{
 
 
 /* =====================================================
-   SUMMARY CARDS
+   METRIC CARDS
 ===================================================== */
 
-.summary-box{
-
-  margin-top:12px;
+.metrics{
 
   display:grid;
 
   grid-template-columns:
   1fr 1fr;
 
-  gap:8px;
+  gap:10px;
+
+  margin-top:12px;
 
 }
 
-.stat{
+
+.metric{
 
   background:#000;
 
-  border:1.5px solid #38bdf8;
+  border:2px solid #00bfff;
 
-  border-radius:9px;
+  border-radius:10px;
 
-  padding:15px 6px;
-
-  min-height:90px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
+  padding:16px 7px;
 
   text-align:center;
 
 }
 
-.stat-title{
+
+.metric-title{
 
   color:#00ffff;
 
-  font-size:14px;
+  font-size:15px;
 
   font-weight:1000;
 
 }
 
-.stat-value{
+
+.metric-value{
 
   color:#ffff00;
 
-  font-size:25px;
+  font-size:27px;
 
   font-weight:1000;
 
-  margin-top:5px;
+  margin-top:6px;
 
 }
 
@@ -745,39 +726,41 @@ td{
 
 .gsr-card{
 
-  margin-top:9px;
+  margin-top:12px;
 
   background:#000;
 
-  border:2px solid #facc15;
+  border:3px solid #facc15;
 
-  border-radius:9px;
-
-  padding:15px 8px;
+  border-radius:11px;
 
   text-align:center;
 
+  padding:18px 8px;
+
 }
+
 
 .gsr-title{
 
   color:#00ffff;
 
-  font-size:15px;
+  font-size:18px;
 
   font-weight:1000;
 
 }
 
-.gsr-value{
+
+.gsr-total{
 
   color:#ffff00;
 
-  font-size:27px;
+  font-size:31px;
 
   font-weight:1000;
 
-  margin-top:5px;
+  margin-top:7px;
 
 }
 
@@ -786,25 +769,25 @@ td{
    TARGET ACHIEVEMENT
 ===================================================== */
 
-.status{
+.achievement{
 
-  margin-top:10px;
+  margin-top:12px;
 
   background:#111827;
 
-  border-radius:8px;
+  border:2px solid #334155;
 
-  padding:15px 7px;
+  border-radius:10px;
+
+  padding:17px 8px;
 
   text-align:center;
 
   color:#00ffff;
 
-  font-size:18px;
+  font-size:20px;
 
   font-weight:1000;
-
-  border:1px solid #1e293b;
 
 }
 
@@ -820,19 +803,18 @@ td{
   grid-template-columns:
   1fr 1fr;
 
-  gap:9px;
+  gap:10px;
 
-  margin-top:11px;
+  margin-top:12px;
 
 }
 
+
 .report-btn{
 
-  min-height:58px;
+  min-height:65px;
 
-  padding:9px 6px;
-
-  border-radius:8px;
+  border-radius:10px;
 
   display:flex;
 
@@ -840,19 +822,21 @@ td{
 
   justify-content:center;
 
-  gap:8px;
+  gap:9px;
 
-  font-size:13px;
+  font-size:15px;
 
   font-weight:1000;
 
 }
 
+
 .report-btn i{
 
-  font-size:26px;
+  font-size:31px;
 
 }
+
 
 .report-wa{
 
@@ -861,6 +845,7 @@ td{
   color:#fff;
 
 }
+
 
 .report-pdf{
 
@@ -884,10 +869,10 @@ td{
   bottom:20px;
 
   transform:
-  translateX(-50%)
-  translateY(120px);
+  translate(-50%,120px);
 
-  width:calc(100% - 30px);
+  width:
+  calc(100% - 30px);
 
   max-width:500px;
 
@@ -895,35 +880,35 @@ td{
 
   color:#fff;
 
+  text-align:center;
+
   padding:16px;
 
   border-radius:9px;
 
-  text-align:center;
-
-  font-size:15px;
+  font-size:16px;
 
   font-weight:1000;
-
-  z-index:9999;
 
   opacity:0;
 
   transition:
-  transform .25s ease,
-  opacity .25s ease;
+  all .25s ease;
+
+  z-index:99999;
 
 }
+
 
 .toast.show{
 
   transform:
-  translateX(-50%)
-  translateY(0);
+  translate(-50%,0);
 
   opacity:1;
 
 }
+
 
 .toast.error{
 
@@ -936,87 +921,61 @@ td{
    MOBILE
 ===================================================== */
 
-@media(max-width:480px){
+@media(max-width:600px){
+
+  html{
+    font-size:17px;
+  }
+
 
   body{
-
-    padding:9px 6px 30px;
-
+    padding:7px;
   }
+
+
+  .row{
+    gap:8px;
+  }
+
 
   .card{
-
     padding:12px;
-
   }
 
-  .card h3{
-
-    font-size:18px;
-
-  }
 
   input,
   select{
-
-    font-size:17px;
-
-    min-height:47px;
-
+    height:51px;
+    font-size:18px;
   }
+
 
   label{
-
-    font-size:12px;
-
+    font-size:14px;
   }
 
-  .stat-value{
 
-    font-size:22px;
-
-  }
-
-  .status{
-
-    font-size:16px;
-
-  }
-
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media(max-width:360px){
-
-  .row{
-
-    gap:6px;
-
-  }
-
-  .summary-cell .value{
-
-    font-size:15px;
-
-  }
-
-  .stat-value{
-
+  .card-title{
     font-size:20px;
-
   }
 
-  .report-btn{
 
-    font-size:11px;
+  .target-number{
+    font-size:31px;
+  }
 
+
+  .top-value{
+    font-size:20px;
+  }
+
+
+  .metric-value{
+    font-size:24px;
   }
 
 }
+
 
 </style>
 
@@ -1030,36 +989,37 @@ td{
 
 
 <!-- =====================================================
-     TOP PANEL
+     TOP DASHBOARD
 ===================================================== -->
 
-<div class="target-panel">
+<div class="top">
 
 
-  <div class="banner">
+  <div class="top-header">
 
-    <span id="bannerShift">
+    <span id="topShift">
       Shift A
     </span>
 
-    <span id="bannerDate">
+    <span id="topDate">
       -
     </span>
 
   </div>
 
 
-  <div class="main-target">
+  <div class="target">
 
     <div
-      class="number"
-      id="topReqSheets">
+      class="target-number"
+      id="requiredSheets">
 
-      SETUP REQUIRED
+      SET TARGET
 
     </div>
 
-    <div class="label">
+
+    <div class="target-label">
 
       TOTAL REQUIRED SHEETS
 
@@ -1068,17 +1028,17 @@ td{
   </div>
 
 
-  <div class="summary-grid">
+  <div class="top-grid">
 
 
-    <div class="summary-cell">
+    <div class="top-box">
 
-      <div class="title">
+      <div class="top-label">
         PRODUCED EQ. SHEETS
       </div>
 
       <div
-        class="value"
+        class="top-value"
         id="producedSheets">
 
         -
@@ -1088,14 +1048,14 @@ td{
     </div>
 
 
-    <div class="summary-cell">
+    <div class="top-box">
 
-      <div class="title">
+      <div class="top-label">
         REMAINING EQ. SHEETS
       </div>
 
       <div
-        class="value"
+        class="top-value"
         id="remainingSheets">
 
         -
@@ -1105,14 +1065,14 @@ td{
     </div>
 
 
-    <div class="summary-cell">
+    <div class="top-box">
 
-      <div class="title">
+      <div class="top-label">
         REQUIRED / HR
       </div>
 
       <div
-        class="value"
+        class="top-value"
         id="requiredPerHour">
 
         -
@@ -1121,29 +1081,42 @@ td{
 
     </div>
 
-
   </div>
 
 
-  <div class="meta">
+  <div class="top-info">
 
 
-    <div class="meta-cell">
+    <div class="info-box">
 
       Target Size:
-      <span id="targetSizeDisplay">-</span>
+
+      <span
+        id="targetSizeShow">
+
+        -
+
+      </span>
+
       m
 
     </div>
 
 
-    <div class="meta-cell">
+    <div class="info-box">
 
-      SFT:
-      <span id="sftDisplay">-</span>
+      Batch Weight:
+
+      <span
+        id="batchWeightShow">
+
+        -
+
+      </span>
+
+      kg
 
     </div>
-
 
   </div>
 
@@ -1152,20 +1125,24 @@ td{
 
     Latest Production:
 
-    <span id="latestProduction">
+    <span
+      id="latest">
+
       No entry yet
+
     </span>
 
   </div>
 
 
   <div
-    class="time-footer"
+    class="time-left"
     id="timeLeft">
 
     8 HOURS AVAILABLE
 
   </div>
+
 
 </div>
 
@@ -1177,13 +1154,13 @@ td{
 <div class="card">
 
 
-  <h3>
+  <div class="card-title">
 
     <i class="fa-solid fa-gear"></i>
 
     Master Settings
 
-  </h3>
+  </div>
 
 
   <div class="row">
@@ -1191,7 +1168,7 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           Target Production (MT)
@@ -1201,7 +1178,7 @@ td{
           type="number"
           step="0.01"
           id="targetProd"
-          placeholder="e.g. 130">
+          placeholder="Example: 130">
 
       </div>
 
@@ -1210,7 +1187,7 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           Target Size (m)
@@ -1220,7 +1197,7 @@ td{
           type="number"
           step="0.01"
           id="targetSize"
-          placeholder="e.g. 6">
+          placeholder="Example: 6">
 
       </div>
 
@@ -1229,7 +1206,7 @@ td{
   </div>
 
 
-  <div class="group">
+  <div class="field">
 
     <label>
       Batch Weight (kg)
@@ -1239,24 +1216,25 @@ td{
       type="number"
       step="0.01"
       id="batchWeight"
-      placeholder="e.g. 1250">
+      placeholder="Example: 1250">
 
   </div>
 
 
   <button
-    class="primary-btn"
+    class="save-btn"
     id="saveSettingsBtn"
     onclick="saveSettings()">
 
     SAVE SETTINGS
+
     <i class="fa-solid fa-floppy-disk"></i>
 
   </button>
 
 
   <div
-    class="progress-area"
+    class="progress"
     id="settingsProgress">
 
     <div
@@ -1272,30 +1250,32 @@ td{
       <div
         class="progress-bar"
         id="settingsProgressBar">
-
       </div>
 
     </div>
 
   </div>
 
+
 </div>
 
 
 <!-- =====================================================
-     HOURLY PRODUCTION ENTRY
+     HOURLY ENTRY
 ===================================================== -->
 
 <div class="card">
 
 
-  <h3 id="formTitle">
+  <div
+    class="card-title"
+    id="formTitle">
 
     <i class="fa-solid fa-clipboard-list"></i>
 
     Hourly Production Entry
 
-  </h3>
+  </div>
 
 
   <input
@@ -1305,7 +1285,7 @@ td{
 
   <!-- OPERATOR -->
 
-  <div class="group">
+  <div class="field">
 
     <label>
       Operator Name
@@ -1326,13 +1306,13 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           Shift
         </label>
 
-        <!-- PLAIN TEXT BOX - NO DROPDOWN -->
+        <!-- NORMAL TEXT BOX -->
 
         <input
           type="text"
@@ -1348,13 +1328,16 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           Production Hour
         </label>
 
-        <!-- ONLY DROPDOWN IN ENTIRE APP -->
+
+        <!-- =================================================
+             ONLY DROPDOWN IN THE WHOLE APP
+        ================================================== -->
 
         <select id="hour">
 
@@ -1410,17 +1393,19 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           1st Size (m)
         </label>
 
+        <!-- NORMAL INPUT -->
+
         <input
           type="number"
           step="0.01"
           id="size1"
-          placeholder="e.g. 5.85">
+          placeholder="Example: 5">
 
       </div>
 
@@ -1429,17 +1414,19 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           2nd Size (m)
         </label>
 
+        <!-- NORMAL INPUT -->
+
         <input
           type="number"
           step="0.01"
           id="size2"
-          placeholder="e.g. 6.00">
+          placeholder="Example: 6">
 
       </div>
 
@@ -1455,18 +1442,20 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           1st Size Sheets
         </label>
+
+        <!-- NORMAL INPUT -->
 
         <input
           type="number"
           step="1"
           min="0"
           id="s1Sheets"
-          placeholder="Blank if running 2nd">
+          placeholder="Enter sheets">
 
       </div>
 
@@ -1475,18 +1464,20 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           2nd Size Sheets
         </label>
+
+        <!-- NORMAL INPUT -->
 
         <input
           type="number"
           step="1"
           min="0"
           id="s2Sheets"
-          placeholder="Blank if running 1st">
+          placeholder="Enter sheets">
 
       </div>
 
@@ -1502,16 +1493,19 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
-          Moulding / ME Pickup
+          Moulding
         </label>
+
+        <!-- NORMAL INPUT -->
 
         <input
           type="number"
           step="0.01"
-          id="moulding">
+          id="moulding"
+          placeholder="Enter Moulding">
 
       </div>
 
@@ -1520,17 +1514,20 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           Beater
         </label>
 
+        <!-- NORMAL INPUT -->
+
         <input
           type="number"
           step="1"
           min="0"
-          id="beater">
+          id="beater"
+          placeholder="Enter Beater">
 
       </div>
 
@@ -1546,18 +1543,21 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
           B/D (Min)
         </label>
+
+        <!-- NORMAL INPUT -->
 
         <input
           type="number"
           step="1"
           min="0"
           max="60"
-          id="bd">
+          id="bd"
+          placeholder="Minutes">
 
       </div>
 
@@ -1566,17 +1566,20 @@ td{
 
     <div class="col">
 
-      <div class="group">
+      <div class="field">
 
         <label>
-          GSR (Rejection Sheets)
+          GSR (Sheets)
         </label>
+
+        <!-- NORMAL INPUT -->
 
         <input
           type="number"
           step="1"
           min="0"
-          id="gsr">
+          id="gsr"
+          placeholder="GSR sheets">
 
       </div>
 
@@ -1597,25 +1600,15 @@ td{
   </button>
 
 
-  <button
-    class="cancel-btn"
-    id="cancelBtn"
-    onclick="resetForm()">
-
-    CANCEL EDIT
-
-  </button>
-
-
   <div
-    class="progress-area"
+    class="progress"
     id="submitProgress">
 
     <div
       class="progress-text"
       id="submitProgressText">
 
-      SUBMITTING HOURLY DATA...
+      SUBMITTING...
 
     </div>
 
@@ -1625,12 +1618,12 @@ td{
       <div
         class="progress-bar"
         id="submitProgressBar">
-
       </div>
 
     </div>
 
   </div>
+
 
 </div>
 
@@ -1642,19 +1635,19 @@ td{
 <div class="card">
 
 
-  <h3>
+  <div class="card-title">
 
     <i class="fa-solid fa-chart-column"></i>
 
     Production Log & Metrics
 
-  </h3>
+  </div>
 
 
   <button
     class="refresh-btn"
-    id="refreshBtn"
-    onclick="refreshData()">
+    onclick="refreshData()"
+    id="refreshBtn">
 
     <i class="fa-solid fa-rotate-right"></i>
 
@@ -1675,7 +1668,7 @@ td{
 
           <th>Hour</th>
 
-          <th>Size</th>
+          <th>Size (m)</th>
 
           <th>Sheets</th>
 
@@ -1683,7 +1676,7 @@ td{
 
           <th>Beater</th>
 
-          <th>BD</th>
+          <th>B/D</th>
 
           <th>GSR</th>
 
@@ -1702,7 +1695,8 @@ td{
       </thead>
 
 
-      <tbody id="tableBody">
+      <tbody
+        id="tableBody">
 
         <tr>
 
@@ -1714,24 +1708,27 @@ td{
 
       </tbody>
 
+
     </table>
 
   </div>
 
 
-  <!-- SUMMARY -->
+  <!-- ===================================================
+       METRICS
+  ==================================================== -->
 
-  <div class="summary-box">
+  <div class="metrics">
 
 
-    <div class="stat">
+    <div class="metric">
 
-      <div class="stat-title">
+      <div class="metric-title">
         TOTAL PRODUCTION
       </div>
 
       <div
-        class="stat-value"
+        class="metric-value"
         id="totalOutput">
 
         -
@@ -1741,14 +1738,14 @@ td{
     </div>
 
 
-    <div class="stat">
+    <div class="metric">
 
-      <div class="stat-title">
+      <div class="metric-title">
         TOTAL INPUT
       </div>
 
       <div
-        class="stat-value"
+        class="metric-value"
         id="totalInput">
 
         -
@@ -1758,14 +1755,14 @@ td{
     </div>
 
 
-    <div class="stat">
+    <div class="metric">
 
-      <div class="stat-title">
+      <div class="metric-title">
         OVERALL ME%
       </div>
 
       <div
-        class="stat-value"
+        class="metric-value"
         id="overallME">
 
         -
@@ -1775,14 +1772,14 @@ td{
     </div>
 
 
-    <div class="stat">
+    <div class="metric">
 
-      <div class="stat-title">
+      <div class="metric-title">
         OVERALL ROP
       </div>
 
       <div
-        class="stat-value"
+        class="metric-value"
         id="overallROP">
 
         -
@@ -1791,16 +1788,21 @@ td{
 
     </div>
 
+
   </div>
 
 
-  <!-- GSR -->
+  <!-- ===================================================
+       GSR CARD
+       COMPLETELY SEPARATE
+  ==================================================== -->
 
   <div class="gsr-card">
 
+
     <div class="gsr-title">
 
-      <i class="fa-solid fa-circle-exclamation"></i>
+      <i class="fa-solid fa-triangle-exclamation"></i>
 
       TOTAL GSR SHEETS
 
@@ -1808,28 +1810,33 @@ td{
 
 
     <div
-      class="gsr-value"
+      class="gsr-total"
       id="totalGSR">
 
       0 SHEETS
 
     </div>
 
+
   </div>
 
 
-  <!-- TARGET -->
+  <!-- ===================================================
+       TARGET ACHIEVEMENT
+  ==================================================== -->
 
   <div
-    class="status"
-    id="targetStatus">
+    class="achievement"
+    id="achievement">
 
-    TARGET ACHIEVEMENT: -
+    TARGET ACHIEVEMENT: 0%
 
   </div>
 
 
-  <!-- REPORT BUTTONS -->
+  <!-- ===================================================
+       REPORT BUTTONS
+  ==================================================== -->
 
   <div class="report-buttons">
 
@@ -1865,6 +1872,10 @@ td{
 </div>
 
 
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
 <div
 class="toast"
 id="toast">
@@ -1878,25 +1889,27 @@ Success
 
 
 /* =====================================================
-   IMPORTANT:
-   PASTE YOUR CURRENT GOOGLE APPS SCRIPT WEB APP URL HERE
+   YOUR GOOGLE APPS SCRIPT URL
 ===================================================== */
 
 const SCRIPT_URL =
-"PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+"https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
 
 
 const PRODUCTION_CONSTANT =
 12.8;
 
+
 const SHIFT_HOURS =
 8;
 
-const REQUEST_TIMEOUT =
+
+const TIMEOUT =
 15000;
 
 
-let globalData = [];
+let allRows = [];
+
 
 let settings = {
 
@@ -1912,31 +1925,31 @@ let settings = {
    TOAST
 ===================================================== */
 
-let toastTimer = null;
+let toastTimer;
 
 
-function showToast(
+function toast(
   message,
-  isError = false
+  error=false
 ){
 
-  const toast =
+  const el =
     document.getElementById(
       "toast"
     );
 
 
-  toast.innerText =
+  el.innerText =
     message;
 
 
-  toast.classList.toggle(
+  el.classList.toggle(
     "error",
-    isError
+    error
   );
 
 
-  toast.classList.add(
+  el.classList.add(
     "show"
   );
 
@@ -1950,7 +1963,7 @@ function showToast(
     setTimeout(
       function(){
 
-        toast.classList.remove(
+        el.classList.remove(
           "show"
         );
 
@@ -1962,21 +1975,21 @@ function showToast(
 
 
 /* =====================================================
-   JSONP REQUEST
+   JSONP
 ===================================================== */
 
-function requestJSONP(
+function jsonp(
   url,
-  onSuccess,
-  onTimeout
+  success,
+  failure
 ){
 
   const callback =
-    "callback_" +
+    "cb_" +
     Date.now() +
     "_" +
     Math.floor(
-      Math.random() * 100000
+      Math.random()*100000
     );
 
 
@@ -1986,7 +1999,7 @@ function requestJSONP(
     );
 
 
-  let finished =
+  let done =
     false;
 
 
@@ -1994,16 +2007,10 @@ function requestJSONP(
     setTimeout(
       function(){
 
-        if(
-          finished
-        ){
-
-          return;
-
-        }
+        if(done) return;
 
 
-        finished =
+        done =
           true;
 
 
@@ -2015,32 +2022,21 @@ function requestJSONP(
         ];
 
 
-        if(
-          onTimeout
-        ){
-
-          onTimeout();
-
-        }
+        if(failure)
+          failure();
 
       },
-      REQUEST_TIMEOUT
+      TIMEOUT
     );
 
 
   window[callback] =
-    function(res){
+    function(data){
 
-      if(
-        finished
-      ){
-
-        return;
-
-      }
+      if(done) return;
 
 
-      finished =
+      done =
         true;
 
 
@@ -2057,8 +2053,8 @@ function requestJSONP(
       ];
 
 
-      onSuccess(
-        res
+      success(
+        data
       );
 
     };
@@ -2067,16 +2063,10 @@ function requestJSONP(
   script.onerror =
     function(){
 
-      if(
-        finished
-      ){
-
-        return;
-
-      }
+      if(done) return;
 
 
-      finished =
+      done =
         true;
 
 
@@ -2093,13 +2083,8 @@ function requestJSONP(
       ];
 
 
-      if(
-        onTimeout
-      ){
-
-        onTimeout();
-
-      }
+      if(failure)
+        failure();
 
     };
 
@@ -2122,104 +2107,26 @@ function requestJSONP(
 
 
 /* =====================================================
-   DATE
+   TODAY
 ===================================================== */
 
-function getToday(){
+function today(){
 
   const d =
     new Date();
 
 
-  const y =
-    d.getFullYear();
+  return (
 
-
-  const m =
+    d.getFullYear() +
+    "-" +
     String(
-      d.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
+      d.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
     String(
       d.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  return (
-
-    y +
-    "-" +
-    m +
-    "-" +
-    day
-
-  );
-
-}
-
-
-function formatDisplayDate(
-  dateStr
-){
-
-  if(
-    !dateStr
-  ){
-
-    return "-";
-
-  }
-
-
-  const parts =
-    String(dateStr)
-      .split("-");
-
-
-  if(
-    parts.length !== 3
-  ){
-
-    return dateStr;
-
-  }
-
-
-  const months = [
-
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-
-  ];
-
-
-  return (
-
-    parts[2] +
-    "-" +
-    months[
-      Number(parts[1]) - 1
-    ] +
-    "-" +
-    parts[0]
+    ).padStart(2,"0")
 
   );
 
@@ -2227,10 +2134,54 @@ function formatDisplayDate(
 
 
 /* =====================================================
-   HOUR NUMBER
+   DATE DISPLAY
 ===================================================== */
 
-function getHourNumber(
+function displayDate(
+  value
+){
+
+  if(!value)
+    return "-";
+
+
+  const p =
+    String(value).split("-");
+
+
+  if(p.length !== 3)
+    return value;
+
+
+  const months = [
+
+    "Jan","Feb","Mar","Apr",
+    "May","Jun","Jul","Aug",
+    "Sep","Oct","Nov","Dec"
+
+  ];
+
+
+  return (
+
+    p[2] +
+    "-" +
+    months[
+      Number(p[1])-1
+    ] +
+    "-" +
+    p[0]
+
+  );
+
+}
+
+
+/* =====================================================
+   HOUR
+===================================================== */
+
+function hourNumber(
   hour
 ){
 
@@ -2239,52 +2190,14 @@ function getHourNumber(
       .toLowerCase();
 
 
-  if(
-    h.includes("1st")
-  )
-    return 1;
-
-
-  if(
-    h.includes("2nd")
-  )
-    return 2;
-
-
-  if(
-    h.includes("3rd")
-  )
-    return 3;
-
-
-  if(
-    h.includes("4th")
-  )
-    return 4;
-
-
-  if(
-    h.includes("5th")
-  )
-    return 5;
-
-
-  if(
-    h.includes("6th")
-  )
-    return 6;
-
-
-  if(
-    h.includes("7th")
-  )
-    return 7;
-
-
-  if(
-    h.includes("8th")
-  )
-    return 8;
+  if(h === "1st hour") return 1;
+  if(h === "2nd hour") return 2;
+  if(h === "3rd hour") return 3;
+  if(h === "4th hour") return 4;
+  if(h === "5th hour") return 5;
+  if(h === "6th hour") return 6;
+  if(h === "7th hour") return 7;
+  if(h === "8th hour") return 8;
 
 
   return 0;
@@ -2293,14 +2206,12 @@ function getHourNumber(
 
 
 /* =====================================================
-   LOAD DATA
+   LOAD
 ===================================================== */
 
-function loadData(
-  showMessage = false
-){
+function loadData(){
 
-  requestJSONP(
+  jsonp(
 
     SCRIPT_URL +
     "?action=getDashboardData",
@@ -2308,25 +2219,13 @@ function loadData(
     function(res){
 
       if(
-
         !res ||
-
-        res.status !==
-        "success"
-
+        res.status !== "success"
       ){
 
-        showToast(
-
-          res &&
-          res.message
-
-            ? res.message
-
-            : "Unable to load data.",
-
+        toast(
+          "Could not load data.",
           true
-
         );
 
         return;
@@ -2334,68 +2233,40 @@ function loadData(
       }
 
 
-      globalData =
-        res.data.rows ||
-        [];
+      allRows =
+        res.data.rows || [];
 
 
       settings =
-        res.data.masterSettings ||
-        settings;
+        res.data.masterSettings || settings;
 
 
       document.getElementById(
         "targetProd"
       ).value =
-
-        settings.targetProd !== ""
-
-          ? settings.targetProd
-
-          : "";
+        settings.targetProd || "";
 
 
       document.getElementById(
         "targetSize"
       ).value =
-
-        settings.targetSize !== ""
-
-          ? settings.targetSize
-
-          : "";
+        settings.targetSize || "";
 
 
       document.getElementById(
         "batchWeight"
       ).value =
-
-        settings.batchWeight !== ""
-
-          ? settings.batchWeight
-
-          : "";
+        settings.batchWeight || "";
 
 
-      renderDashboard();
-
-
-      if(
-        showMessage
-      ){
-
-        showToast(
-          "✓ Data refreshed successfully"
-        );
-
-      }
+      render();
 
     },
 
     function(){
 
-      showToast(
-        "Refresh timed out. Please try again.",
+      toast(
+        "Connection timed out. Click Refresh Data.",
         true
       );
 
@@ -2423,14 +2294,57 @@ function refreshData(){
 
 
   btn.innerHTML =
-
     '<i class="fa-solid fa-spinner fa-spin"></i> REFRESHING...';
 
 
-  loadData();
+  jsonp(
+
+    SCRIPT_URL +
+    "?action=getDashboardData",
+
+    function(res){
+
+      btn.disabled =
+        false;
 
 
-  setTimeout(
+      btn.innerHTML =
+        '<i class="fa-solid fa-rotate-right"></i> REFRESH DATA';
+
+
+      if(
+        res &&
+        res.status === "success"
+      ){
+
+        allRows =
+          res.data.rows || [];
+
+
+        settings =
+          res.data.masterSettings || settings;
+
+
+        render();
+
+
+        toast(
+          "✓ Data Refreshed Successfully"
+        );
+
+      }
+
+      else{
+
+        toast(
+          "Refresh failed.",
+          true
+        );
+
+      }
+
+    },
+
     function(){
 
       btn.disabled =
@@ -2438,58 +2352,42 @@ function refreshData(){
 
 
       btn.innerHTML =
-
         '<i class="fa-solid fa-rotate-right"></i> REFRESH DATA';
 
-    },
-    1600
+
+      toast(
+        "Refresh timed out. Please try again.",
+        true
+      );
+
+    }
+
   );
 
 }
 
 
 /* =====================================================
-   SELECTED SHIFT
+   CURRENT SHIFT ROWS
 ===================================================== */
 
-function getSelectedShift(){
+function currentRows(){
 
-  return (
-
+  const shift =
     document.getElementById(
       "shift"
     ).value
-
-    || "A"
-
-  )
-    .trim()
-    .toUpperCase();
-
-}
+      .trim()
+      .toUpperCase();
 
 
-/* =====================================================
-   FILTER CURRENT SHIFT
-===================================================== */
-
-function getFilteredRows(){
-
-  const date =
-    getToday();
-
-
-  const shift =
-    getSelectedShift();
-
-
-  return globalData.filter(
+  return allRows.filter(
     function(r){
 
       return (
 
         String(r.date) ===
-        String(date)
+        today()
 
         &&
 
@@ -2506,12 +2404,10 @@ function getFilteredRows(){
 
 
 /* =====================================================
-   PRODUCTION CALCULATION
+   PRODUCTION
 ===================================================== */
 
-function getRowProduction(
-  r
-){
+function production(row){
 
   let sheets =
     0;
@@ -2520,48 +2416,36 @@ function getRowProduction(
     0;
 
 
-  /* 2ND SIZE HAS PRIORITY */
+  /* 2ND SIZE */
 
   if(
-
-    r.s2Sheets !== "" &&
-
-    r.s2Sheets !== null
-
+    row.s2Sheets !== "" &&
+    row.s2Sheets !== null
   ){
 
     sheets =
-      Number(
-        r.s2Sheets
-      ) || 0;
+      Number(row.s2Sheets) || 0;
 
 
     size =
-      Number(
-        r.size2
-      ) || 0;
+      Number(row.size2) || 0;
 
   }
 
 
+  /* 1ST SIZE */
+
   else if(
-
-    r.s1Sheets !== "" &&
-
-    r.s1Sheets !== null
-
+    row.s1Sheets !== "" &&
+    row.s1Sheets !== null
   ){
 
     sheets =
-      Number(
-        r.s1Sheets
-      ) || 0;
+      Number(row.s1Sheets) || 0;
 
 
     size =
-      Number(
-        r.size1
-      ) || 0;
+      Number(row.size1) || 0;
 
   }
 
@@ -2571,11 +2455,8 @@ function getRowProduction(
 
 
   if(
-
     sheets > 0 &&
-
     size > 0
-
   ){
 
     output =
@@ -2590,14 +2471,11 @@ function getRowProduction(
 
   return {
 
-    sheets:
-      sheets,
+    sheets:sheets,
 
-    size:
-      size,
+    size:size,
 
-    output:
-      output
+    output:output
 
   };
 
@@ -2605,320 +2483,331 @@ function getRowProduction(
 
 
 /* =====================================================
-   RENDER DASHBOARD
+   METRICS
 ===================================================== */
 
-function renderDashboard(){
+function metrics(row){
 
-  const rows =
-    getFilteredRows();
-
-
-  renderTable(
-    rows
-  );
+  const p =
+    production(row);
 
 
-  updateTopPanel(
-    rows
-  );
+  let input =
+    0;
+
+
+  if(
+    settings.batchWeight !== "" &&
+    row.beater !== "" &&
+    Number(row.beater) > 0
+  ){
+
+    input =
+
+      Number(row.beater) *
+      Number(settings.batchWeight) /
+      1000;
+
+  }
+
+
+  let me = "";
+
+
+  if(
+    input > 0 &&
+    p.output > 0
+  ){
+
+    me =
+
+      (
+        1 -
+        p.output / input
+      ) * 100;
+
+  }
+
+
+  let rop = "";
+
+
+  const bd =
+    Number(row.bd) || 0;
+
+
+  if(
+    p.output > 0 &&
+    bd < 60
+  ){
+
+    const running =
+      60 - bd;
+
+
+    if(running > 0){
+
+      rop =
+
+        p.output *
+        60 /
+        running;
+
+    }
+
+  }
+
+
+  return {
+
+    output:p.output,
+
+    input:input,
+
+    me:me,
+
+    rop:rop,
+
+    sheets:p.sheets,
+
+    size:p.size
+
+  };
 
 }
 
 
 /* =====================================================
-   RENDER TABLE
+   RENDER
 ===================================================== */
 
-function renderTable(
-  rows
-){
+function render(){
 
-  const tbody =
-    document.getElementById(
-      "tableBody"
-    );
-
-
-  if(
-    rows.length === 0
-  ){
-
-    tbody.innerHTML =
-
-      `<tr>
-
-        <td
-          colspan="12"
-          style="
-            padding:22px;
-            color:#94a3b8;
-            font-size:15px;
-          ">
-
-          No production entry for this shift.
-
-        </td>
-
-      </tr>`;
-
-
-    updateShiftSummary(
-      []
-    );
-
-
-    return;
-
-  }
+  const rows =
+    currentRows();
 
 
   rows.sort(
     function(a,b){
 
       return (
-
-        getHourNumber(
-          a.hour
-        )
-
-        -
-
-        getHourNumber(
-          b.hour
-        )
-
+        hourNumber(a.hour) -
+        hourNumber(b.hour)
       );
 
     }
   );
 
 
-  let html =
-    "";
+  renderTable(rows);
+
+  renderTop(rows);
+
+  renderSummary(rows);
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+function renderTable(rows){
+
+  const body =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  if(rows.length === 0){
+
+    body.innerHTML =
+
+      `<tr>
+        <td
+          colspan="12"
+          style="
+            padding:25px;
+            color:#94a3b8;
+            font-size:17px;
+          ">
+          No production entry yet.
+        </td>
+      </tr>`;
+
+    return;
+
+  }
+
+
+  let html = "";
 
 
   rows.forEach(
-    function(r){
+    function(row){
 
-      const p =
-        getRowProduction(
-          r
-        );
-
-
-      let inputVal =
-        0;
-
-
-      if(
-
-        settings.batchWeight !== "" &&
-
-        r.beater !== "" &&
-
-        Number(r.beater) > 0
-
-      ){
-
-        inputVal =
-
-          Number(r.beater) *
-          Number(
-            settings.batchWeight
-          ) /
-          1000;
-
-      }
-
-
-      let me =
-        "";
-
-
-      if(
-
-        p.output > 0 &&
-
-        inputVal > 0
-
-      ){
-
-        me =
-
-          (
-            (
-              1 -
-              p.output /
-              inputVal
-            ) *
-
-            100
-
-          ).toFixed(1) +
-          "%";
-
-      }
-
-
-      let rop =
-        "";
-
-
-      const bd =
-        Number(r.bd) || 0;
-
-
-      if(
-
-        p.output > 0 &&
-
-        bd < 60
-
-      ){
-
-        const running =
-          60 - bd;
-
-
-        if(
-          running > 0
-        ){
-
-          rop =
-
-            (
-              p.output *
-              60 /
-              running
-
-            ).toFixed(2);
-
-        }
-
-      }
+      const m =
+        metrics(row);
 
 
       html += `
 
       <tr>
 
-        <td class="hour-cell">
-          ${escapeHtml(r.hour)}
+        <td class="hour">
+          ${esc(row.hour)}
         </td>
 
         <td>
           ${
-            p.size > 0
-              ? p.size.toFixed(2)
+            m.size
+              ? Number(m.size).toFixed(2)
               : ""
           }
         </td>
 
         <td class="yellow">
           ${
-            p.sheets > 0
-              ? p.sheets
+            m.sheets || ""
+          }
+        </td>
+
+        <td>
+          ${
+            row.moulding !== ""
+              ? row.moulding
               : ""
           }
         </td>
 
         <td>
           ${
-            r.moulding !== ""
-              ? r.moulding
+            row.beater !== ""
+              ? row.beater
               : ""
           }
         </td>
 
         <td>
           ${
-            r.beater !== ""
-              ? r.beater
+            row.bd !== ""
+              ? row.bd
               : ""
           }
         </td>
 
-        <td>
+        <!-- GSR HOURLY -->
+
+        <td class="yellow">
+
           ${
-            r.bd !== ""
-              ? r.bd
+            row.gsr !== ""
+              ? Number(row.gsr)
               : ""
           }
+
         </td>
 
         <td class="yellow">
-          ${
-            r.gsr !== ""
-              ? Number(r.gsr)
-              : ""
-          }
-        </td>
 
-        <td class="yellow">
           ${
-            p.output > 0
-              ? p.output.toFixed(2)
+            m.output > 0
+              ? m.output.toFixed(2)
               : ""
           }
+
         </td>
 
         <td>
+
           ${
-            inputVal > 0
-              ? inputVal.toFixed(2)
+            m.input > 0
+              ? m.input.toFixed(2)
               : ""
           }
-        </td>
 
-        <td class="cyan">
-          ${me}
         </td>
 
         <td>
-          ${rop}
+
+          ${
+            m.me !== ""
+              ? m.me.toFixed(1) + "%"
+              : ""
+          }
+
         </td>
 
         <td>
+
+          ${
+            m.rop !== ""
+              ? m.rop.toFixed(2)
+              : ""
+          }
+
+        </td>
+
+
+        <td>
+
+
+          <!-- EDIT PEN -->
 
           <button
-            class="action edit"
-            onclick="editRow(${r.rowIndex})"
+            class="icon-btn edit"
+            onclick="editRow(${row.rowIndex})"
             title="Edit">
 
-            <i class="fa-solid fa-pen"></i>
+            <i
+              class="fa-solid fa-pen">
+            </i>
 
           </button>
 
 
+          <!-- DELETE BIN -->
+
           <button
-            class="action delete"
-            onclick="deleteRow(${r.rowIndex})"
+            class="icon-btn delete"
+            onclick="deleteRow(${row.rowIndex})"
             title="Delete">
 
-            <i class="fa-solid fa-trash-can"></i>
+            <i
+              class="fa-solid fa-trash-can">
+            </i>
 
           </button>
 
 
+          <!-- WHATSAPP -->
+
           <button
-            class="action whatsapp"
-            onclick="sendHourWhatsApp(${r.rowIndex})"
+            class="icon-btn whatsapp"
+            onclick="hourWhatsApp(${row.rowIndex})"
             title="WhatsApp">
 
-            <i class="fa-brands fa-whatsapp"></i>
+            <i
+              class="fa-brands fa-whatsapp">
+            </i>
 
           </button>
 
+
+          <!-- PDF -->
 
           <button
-            class="action pdf"
-            onclick="generateHourPDF(${r.rowIndex})"
+            class="icon-btn pdf"
+            onclick="hourPDF(${row.rowIndex})"
             title="PDF">
 
-            <i class="fa-solid fa-file-pdf"></i>
+            <i
+              class="fa-solid fa-file-pdf">
+            </i>
 
           </button>
+
 
         </td>
 
@@ -2930,24 +2819,17 @@ function renderTable(
   );
 
 
-  tbody.innerHTML =
+  body.innerHTML =
     html;
-
-
-  updateShiftSummary(
-    rows
-  );
 
 }
 
 
 /* =====================================================
-   TOP PANEL
+   TOP CALCULATION
 ===================================================== */
 
-function updateTopPanel(
-  rows
-){
+function renderTop(rows){
 
   const targetProd =
     Number(
@@ -2962,75 +2844,34 @@ function updateTopPanel(
 
 
   document.getElementById(
-    "bannerShift"
+    "topShift"
   ).innerText =
-
     "Shift " +
-    getSelectedShift();
+    (
+      document.getElementById(
+        "shift"
+      ).value || "A"
+    )
+      .toUpperCase();
 
 
   document.getElementById(
-    "bannerDate"
+    "topDate"
   ).innerText =
-
-    formatDisplayDate(
-      getToday()
+    displayDate(
+      today()
     );
 
 
   if(
-
     !targetProd ||
-
     !targetSize
-
   ){
 
     document.getElementById(
-      "topReqSheets"
+      "requiredSheets"
     ).innerText =
-      "SETUP REQUIRED";
-
-
-    document.getElementById(
-      "producedSheets"
-    ).innerText =
-      "-";
-
-
-    document.getElementById(
-      "remainingSheets"
-    ).innerText =
-      "-";
-
-
-    document.getElementById(
-      "requiredPerHour"
-    ).innerText =
-      "-";
-
-
-    document.getElementById(
-      "targetSizeDisplay"
-    ).innerText =
-      "-";
-
-
-    document.getElementById(
-      "sftDisplay"
-    ).innerText =
-      "-";
-
-
-    document.getElementById(
-      "latestProduction"
-    ).innerText =
-      "No target setup";
-
-
-    updateRemainingHours(
-      rows
-    );
+      "SET TARGET";
 
 
     return;
@@ -3038,11 +2879,9 @@ function updateTopPanel(
   }
 
 
-  /* ===================================================
-     TARGET SHEETS
-  =================================================== */
+  /* TARGET SHEETS */
 
-  const totalRequiredSheets =
+  const requiredSheets =
 
     targetProd *
     1000 /
@@ -3053,40 +2892,33 @@ function updateTopPanel(
 
 
   document.getElementById(
-    "topReqSheets"
+    "requiredSheets"
   ).innerText =
 
-    totalRequiredSheets.toFixed(2);
+    requiredSheets.toFixed(2);
 
 
-  /* ===================================================
-     TOTAL PRODUCTION
-  =================================================== */
+  /* TOTAL OUTPUT */
 
-  let totalOutput =
+  let output =
     0;
 
 
   rows.forEach(
     function(r){
 
-      totalOutput +=
-
-        getRowProduction(
-          r
-        ).output;
+      output +=
+        production(r).output;
 
     }
   );
 
 
-  /* ===================================================
-     EQUIVALENT TARGET-SIZE SHEETS
-  =================================================== */
+  /* EQUIVALENT TARGET SIZE SHEETS */
 
-  const producedEquivalentSheets =
+  const producedSheets =
 
-    totalOutput *
+    output *
     1000 /
     (
       targetSize *
@@ -3094,61 +2926,49 @@ function updateTopPanel(
     );
 
 
-  document.getElementById(
-    "producedSheets"
-  ).innerText =
-
-    producedEquivalentSheets.toFixed(2);
-
-
-  /* ===================================================
-     REMAINING SHEETS
-  =================================================== */
-
   const remaining =
 
     Math.max(
-
       0,
-
-      totalRequiredSheets -
-      producedEquivalentSheets
-
+      requiredSheets -
+      producedSheets
     );
+
+
+  document.getElementById(
+    "producedSheets"
+  ).innerText =
+    producedSheets.toFixed(2);
 
 
   document.getElementById(
     "remainingSheets"
   ).innerText =
-
     remaining.toFixed(2);
 
 
   /* ===================================================
      REMAINING HOURS
+     
+     Example:
+     1st hour completed
+     = 7 hours remaining
+     
+     NOT 13 HOURS
   =================================================== */
 
-  let latestHour =
+  let lastHour =
     0;
 
 
   rows.forEach(
     function(r){
 
-      const n =
-        getHourNumber(
-          r.hour
+      lastHour =
+        Math.max(
+          lastHour,
+          hourNumber(r.hour)
         );
-
-
-      if(
-        n > latestHour
-      ){
-
-        latestHour =
-          n;
-
-      }
 
     }
   );
@@ -3157,29 +2977,22 @@ function updateTopPanel(
   const remainingHours =
 
     Math.max(
-
       0,
-
       SHIFT_HOURS -
-      latestHour
-
+      lastHour
     );
 
 
-  let requiredPerHour =
+  let perHour =
     0;
 
 
   if(
-
-    remaining > 0 &&
-
-    remainingHours > 0
-
+    remainingHours > 0 &&
+    remaining > 0
   ){
 
-    requiredPerHour =
-
+    perHour =
       remaining /
       remainingHours;
 
@@ -3191,250 +3004,47 @@ function updateTopPanel(
   ).innerText =
 
     remainingHours > 0
-
-      ? requiredPerHour.toFixed(2)
-
-      : remaining <= 0
-
-        ? "0.00"
-
-        : "SHIFT OVER";
+      ? perHour.toFixed(2)
+      : "0.00";
 
 
-  /* ===================================================
-     SIZE + SFT
-  =================================================== */
+  /* SIZE */
 
   document.getElementById(
-    "targetSizeDisplay"
+    "targetSizeShow"
   ).innerText =
+    targetSize;
 
-    targetSize.toFixed(2);
 
-
-  const sft =
-
-    targetSize *
-    (
-      Number(
-        settings.sftConversion
-      ) || 2.54
-    );
-
+  /* BATCH */
 
   document.getElementById(
-    "sftDisplay"
+    "batchWeightShow"
   ).innerText =
-
-    sft.toFixed(1);
-
-
-  showLatestProduction(
-    rows
-  );
+    settings.batchWeight || "-";
 
 
-  updateRemainingHours(
-    rows
-  );
+  /* LATEST */
+
+  if(rows.length){
+
+    const last =
+      rows[rows.length-1];
 
 
-  /* ===================================================
-     TARGET ACHIEVEMENT
-  =================================================== */
-
-  const achievement =
-
-    targetProd > 0
-
-      ? (
-          totalOutput /
-          targetProd
-        ) * 100
-
-      : 0;
+    const p =
+      production(last);
 
 
-  document.getElementById(
-    "targetStatus"
-  ).innerText =
-
-    achievement >= 100
-
-      ? "TARGET ACHIEVED: " +
-        achievement.toFixed(1) +
-        "%"
-
-      : "TARGET ACHIEVEMENT: " +
-        achievement.toFixed(1) +
-        "%";
-
-}
-
-
-/* =====================================================
-   REMAINING HOURS
-===================================================== */
-
-function updateRemainingHours(
-  rows
-){
-
-  let latestHour =
-    0;
-
-
-  rows.forEach(
-    function(r){
-
-      const n =
-        getHourNumber(
-          r.hour
-        );
-
-
-      if(
-        n > latestHour
-      ){
-
-        latestHour =
-          n;
-
-      }
-
-    }
-  );
-
-
-  const remaining =
-
-    Math.max(
-
-      0,
-
-      SHIFT_HOURS -
-      latestHour
-
-    );
-
-
-  const footer =
     document.getElementById(
-      "timeLeft"
-    );
+      "latest"
+    ).innerText =
 
-
-  if(
-    latestHour === 0
-  ){
-
-    footer.innerText =
-      "8 HOURS AVAILABLE";
-
-  }
-
-  else if(
-    remaining === 0
-  ){
-
-    footer.innerText =
-      "SHIFT COMPLETED";
-
-  }
-
-  else if(
-    remaining === 1
-  ){
-
-    footer.innerText =
-      "ONLY 1 HOUR LEFT";
-
-  }
-
-  else{
-
-    footer.innerText =
-
-      "ONLY " +
-      remaining +
-      " HOURS LEFT";
-
-  }
-
-}
-
-
-/* =====================================================
-   LATEST PRODUCTION
-===================================================== */
-
-function showLatestProduction(
-  rows
-){
-
-  const el =
-    document.getElementById(
-      "latestProduction"
-    );
-
-
-  if(
-    rows.length === 0
-  ){
-
-    el.innerText =
-      "No entry yet";
-
-    return;
-
-  }
-
-
-  let latest =
-    null;
-
-
-  rows.forEach(
-    function(r){
-
-      if(
-
-        !latest ||
-
-        getHourNumber(
-          r.hour
-        ) >
-
-        getHourNumber(
-          latest.hour
-        )
-
-      ){
-
-        latest =
-          r;
-
-      }
-
-    }
-  );
-
-
-  const p =
-    getRowProduction(
-      latest
-    );
-
-
-  if(
-    p.sheets > 0
-  ){
-
-    el.innerText =
-
-      latest.hour +
-      ": " +
-      p.sheets +
+      last.hour +
+      " : " +
+      (
+        p.sheets || 0
+      ) +
       " sheets / " +
       p.output.toFixed(2) +
       " MT";
@@ -3443,154 +3053,165 @@ function showLatestProduction(
 
   else{
 
-    el.innerText =
-
-      latest.hour +
-      ": No sheet production";
+    document.getElementById(
+      "latest"
+    ).innerText =
+      "No entry yet";
 
   }
+
+
+  /* TIME */
+
+  const timeEl =
+    document.getElementById(
+      "timeLeft"
+    );
+
+
+  if(
+    lastHour === 0
+  ){
+
+    timeEl.innerText =
+      "8 HOURS AVAILABLE";
+
+  }
+
+  else if(
+    remainingHours === 1
+  ){
+
+    timeEl.innerText =
+      "ONLY 1 HOUR LEFT";
+
+  }
+
+  else if(
+    remainingHours > 1
+  ){
+
+    timeEl.innerText =
+
+      "ONLY " +
+      remainingHours +
+      " HOURS LEFT";
+
+  }
+
+  else{
+
+    timeEl.innerText =
+      "SHIFT COMPLETED";
+
+  }
+
+
+  /* TARGET ACHIEVEMENT */
+
+  const achievement =
+
+    targetProd > 0
+      ? output /
+        targetProd *
+        100
+      : 0;
+
+
+  document.getElementById(
+    "achievement"
+  ).innerText =
+
+    "TARGET ACHIEVEMENT: " +
+    achievement.toFixed(1) +
+    "%";
 
 }
 
 
 /* =====================================================
-   SHIFT SUMMARY
+   SUMMARY
 ===================================================== */
 
-function updateShiftSummary(
-  rows
-){
+function renderSummary(rows){
 
-  let totalOutput =
+  let output =
     0;
 
-  let totalInput =
+  let input =
     0;
 
-  let totalBD =
+  let bd =
     0;
 
-  let totalGSR =
+  let gsr =
     0;
 
 
   rows.forEach(
-    function(r){
+    function(row){
 
-      const p =
-        getRowProduction(
-          r
-        );
+      const m =
+        metrics(row);
 
 
-      totalOutput +=
-        p.output;
+      output +=
+        m.output;
 
 
-      /* INPUT = BEATER × BATCH WEIGHT */
-
-      if(
-
-        settings.batchWeight !== "" &&
-
-        r.beater !== "" &&
-
-        Number(r.beater) > 0
-
-      ){
-
-        totalInput +=
-
-          Number(r.beater) *
-          Number(
-            settings.batchWeight
-          ) /
-          1000;
-
-      }
+      input +=
+        m.input;
 
 
-      if(
-        r.bd !== ""
-      ){
-
-        totalBD +=
-          Number(r.bd) || 0;
-
-      }
+      bd +=
+        Number(row.bd) || 0;
 
 
       /* =================================================
-         GSR IS COMPLETELY SEPARATE
-         NO PRODUCTION CALCULATION
+         GSR ONLY ADDS GSR
+         NO PRODUCTION CONNECTION
       ================================================= */
 
-      if(
-        r.gsr !== ""
-      ){
-
-        totalGSR +=
-          Number(r.gsr) || 0;
-
-      }
+      gsr +=
+        Number(row.gsr) || 0;
 
     }
   );
 
 
-  /* TOTAL OUTPUT */
-
   document.getElementById(
     "totalOutput"
   ).innerText =
 
-    totalOutput > 0
-
-      ? totalOutput.toFixed(2) +
-        " MT"
-
+    output > 0
+      ? output.toFixed(2) + " MT"
       : "-";
 
-
-  /* TOTAL INPUT */
 
   document.getElementById(
     "totalInput"
   ).innerText =
 
-    totalInput > 0
-
-      ? totalInput.toFixed(2) +
-        " MT"
-
+    input > 0
+      ? input.toFixed(2) + " MT"
       : "-";
 
 
-  /* OVERALL ME */
-
   if(
-
-    totalOutput > 0 &&
-
-    totalInput > 0
-
+    output > 0 &&
+    input > 0
   ){
-
-    const me =
-
-      (
-        1 -
-        totalOutput /
-        totalInput
-
-      ) * 100;
-
 
     document.getElementById(
       "overallME"
     ).innerText =
 
-      me.toFixed(1) +
+      (
+        (
+          1 -
+          output / input
+        ) * 100
+      ).toFixed(1) +
       "%";
 
   }
@@ -3605,47 +3226,26 @@ function updateShiftSummary(
   }
 
 
-  /* OVERALL ROP */
+  if(output > 0){
 
-  if(
-    totalOutput > 0
-  ){
+    const running =
 
-    const scheduledMinutes =
-      SHIFT_HOURS * 60;
+      SHIFT_HOURS * 60 -
+      bd;
 
 
-    const runningMinutes =
-
-      scheduledMinutes -
-      totalBD;
-
-
-    if(
-      runningMinutes > 0
-    ){
-
-      const overallROP =
-
-        totalOutput *
-        scheduledMinutes /
-        runningMinutes;
-
+    if(running > 0){
 
       document.getElementById(
         "overallROP"
       ).innerText =
 
-        overallROP.toFixed(2);
-
-    }
-
-    else{
-
-      document.getElementById(
-        "overallROP"
-      ).innerText =
-        "-";
+        (
+          output *
+          SHIFT_HOURS *
+          60 /
+          running
+        ).toFixed(2);
 
     }
 
@@ -3661,15 +3261,15 @@ function updateShiftSummary(
   }
 
 
-  /* ===================================================
+  /* =====================================================
      TOTAL GSR CARD
-  =================================================== */
+  ===================================================== */
 
   document.getElementById(
     "totalGSR"
   ).innerText =
 
-    totalGSR +
+    gsr +
     " SHEETS";
 
 }
@@ -3700,14 +3300,12 @@ function saveSettings(){
 
 
   if(
-
-    targetProd === "" ||
+    !targetProd ||
     Number(targetProd) <= 0
-
   ){
 
-    showToast(
-      "Please enter Target Production.",
+    toast(
+      "Enter Target Production.",
       true
     );
 
@@ -3717,14 +3315,12 @@ function saveSettings(){
 
 
   if(
-
-    targetSize === "" ||
+    !targetSize ||
     Number(targetSize) <= 0
-
   ){
 
-    showToast(
-      "Please enter Target Size in meter (m).",
+    toast(
+      "Enter Target Size in meter (m).",
       true
     );
 
@@ -3734,14 +3330,12 @@ function saveSettings(){
 
 
   if(
-
-    batchWeight === "" ||
+    !batchWeight ||
     Number(batchWeight) <= 0
-
   ){
 
-    showToast(
-      "Please enter Batch Weight.",
+    toast(
+      "Enter Batch Weight.",
       true
     );
 
@@ -3765,7 +3359,7 @@ function saveSettings(){
 
 
   const finish =
-    startProgress(
+    progressStart(
       "settingsProgress",
       "settingsProgressBar",
       "settingsProgressText",
@@ -3773,7 +3367,7 @@ function saveSettings(){
     );
 
 
-  requestJSONP(
+  jsonp(
 
     SCRIPT_URL +
     "?action=saveSettings" +
@@ -3803,20 +3397,16 @@ function saveSettings(){
 
 
       btn.innerHTML =
-
         'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
 
 
       if(
-
         res &&
-        res.status ===
-        "success"
-
+        res.status === "success"
       ){
 
-        showToast(
-          "✓ Settings Saved Successfully"
+        toast(
+          "✓ Save Successful"
         );
 
 
@@ -3826,16 +3416,10 @@ function saveSettings(){
 
       else{
 
-        showToast(
-
-          res && res.message
-
-            ? res.message
-
-            : "Failed to save settings.",
-
+        toast(
+          res.message ||
+          "Save failed.",
           true
-
         );
 
       }
@@ -3852,16 +3436,12 @@ function saveSettings(){
 
 
       btn.innerHTML =
-
         'SAVE SETTINGS <i class="fa-solid fa-floppy-disk"></i>';
 
 
-      showToast(
-
-        "Response delayed. Click Refresh Data to check whether settings were saved.",
-
+      toast(
+        "Response delayed. Refresh to check saved data.",
         true
-
       );
 
     }
@@ -3875,11 +3455,11 @@ function saveSettings(){
    PROGRESS
 ===================================================== */
 
-function startProgress(
+function progressStart(
   areaId,
   barId,
   textId,
-  text
+  message
 ){
 
   const area =
@@ -3894,7 +3474,7 @@ function startProgress(
     );
 
 
-  const textEl =
+  const text =
     document.getElementById(
       textId
     );
@@ -3904,45 +3484,39 @@ function startProgress(
     "block";
 
 
-  textEl.innerText =
-    text;
+  text.innerText =
+    message;
+
+
+  let value =
+    5;
 
 
   bar.style.width =
-    "5%";
-
-
-  let progress =
-    5;
+    value + "%";
 
 
   const timer =
     setInterval(
       function(){
 
-        progress +=
-          Math.random() * 8;
+        value +=
+          Math.random()*7;
 
 
-        if(
-          progress >= 85
-        ){
-
-          progress =
-            85;
-
-        }
+        if(value > 88)
+          value = 88;
 
 
         bar.style.width =
-          progress + "%";
+          value + "%";
 
       },
       250
     );
 
 
-  return function finish(){
+  return function(){
 
     clearInterval(
       timer
@@ -3953,7 +3527,7 @@ function startProgress(
       "100%";
 
 
-    textEl.innerText =
+    text.innerText =
       "COMPLETED ✓";
 
 
@@ -4055,12 +3629,10 @@ function submitEntry(){
     ).value;
 
 
-  if(
-    !operator
-  ){
+  if(!operator){
 
-    showToast(
-      "Please enter Operator Name.",
+    toast(
+      "Enter Operator Name.",
       true
     );
 
@@ -4070,12 +3642,10 @@ function submitEntry(){
 
 
   if(
-    !["A","B","C"].includes(
-      shift
-    )
+    !["A","B","C"].includes(shift)
   ){
 
-    showToast(
+    toast(
       "Shift must be A, B or C.",
       true
     );
@@ -4086,11 +3656,11 @@ function submitEntry(){
 
 
   if(
-    getHourNumber(hour) === 0
+    hourNumber(hour) === 0
   ){
 
-    showToast(
-      "Please select Production Hour.",
+    toast(
+      "Select Production Hour.",
       true
     );
 
@@ -4100,15 +3670,12 @@ function submitEntry(){
 
 
   if(
-
     s1Sheets !== "" &&
-
     s2Sheets !== ""
-
   ){
 
-    showToast(
-      "Enter either 1st Size Sheets OR 2nd Size Sheets.",
+    toast(
+      "Enter only one size sheet entry for an hour.",
       true
     );
 
@@ -4118,18 +3685,15 @@ function submitEntry(){
 
 
   if(
-
     s1Sheets !== "" &&
-
     (
       size1 === "" ||
       Number(size1) <= 0
     )
-
   ){
 
-    showToast(
-      "Please enter valid 1st Size in meter (m).",
+    toast(
+      "Enter valid 1st Size in meter.",
       true
     );
 
@@ -4139,18 +3703,15 @@ function submitEntry(){
 
 
   if(
-
     s2Sheets !== "" &&
-
     (
       size2 === "" ||
       Number(size2) <= 0
     )
-
   ){
 
-    showToast(
-      "Please enter valid 2nd Size in meter (m).",
+    toast(
+      "Enter valid 2nd Size in meter.",
       true
     );
 
@@ -4160,36 +3721,15 @@ function submitEntry(){
 
 
   if(
-
     bd !== "" &&
-
     (
       Number(bd) < 0 ||
       Number(bd) > 60
     )
-
   ){
 
-    showToast(
-      "B/D must be between 0 and 60 minutes.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if(
-
-    gsr !== "" &&
-
-    Number(gsr) < 0
-
-  ){
-
-    showToast(
-      "GSR cannot be negative.",
+    toast(
+      "B/D must be 0-60 minutes.",
       true
     );
 
@@ -4209,29 +3749,19 @@ function submitEntry(){
 
 
   btn.innerHTML =
-
     rowIndex
-
       ? "UPDATING..."
-
       : "SUBMITTING...";
 
 
   const finish =
-    startProgress(
-
+    progressStart(
       "submitProgress",
-
       "submitProgressBar",
-
       "submitProgressText",
-
       rowIndex
-
         ? "UPDATING HOURLY DATA..."
-
         : "SUBMITTING HOURLY DATA..."
-
     );
 
 
@@ -4243,7 +3773,7 @@ function submitEntry(){
 
     "&date=" +
     encodeURIComponent(
-      getToday()
+      today()
     ) +
 
     "&shift=" +
@@ -4302,9 +3832,7 @@ function submitEntry(){
     );
 
 
-  if(
-    rowIndex
-  ){
+  if(rowIndex){
 
     url +=
 
@@ -4316,7 +3844,7 @@ function submitEntry(){
   }
 
 
-  requestJSONP(
+  jsonp(
 
     url,
 
@@ -4330,26 +3858,18 @@ function submitEntry(){
 
 
       btn.innerHTML =
-
         'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
       if(
-
         res &&
-        res.status ===
-        "success"
-
+        res.status === "success"
       ){
 
-        showToast(
-
+        toast(
           rowIndex
-
-            ? "✓ Hourly Data Updated Successfully"
-
-            : "✓ Hourly Data Submitted Successfully"
-
+            ? "✓ Update Successful"
+            : "✓ Submit Successful"
         );
 
 
@@ -4362,16 +3882,10 @@ function submitEntry(){
 
       else{
 
-        showToast(
-
-          res && res.message
-
-            ? res.message
-
-            : "Unable to save production.",
-
+        toast(
+          res.message ||
+          "Submit failed.",
           true
-
         );
 
       }
@@ -4388,16 +3902,12 @@ function submitEntry(){
 
 
       btn.innerHTML =
-
         'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
-      showToast(
-
-        "Response delayed. DO NOT submit again. Click REFRESH DATA and check Production Log.",
-
+      toast(
+        "Response delayed. DO NOT submit again. Click Refresh Data.",
         true
-
       );
 
     }
@@ -4411,19 +3921,14 @@ function submitEntry(){
    EDIT
 ===================================================== */
 
-function editRow(
-  rowIndex
-){
+function editRow(rowIndex){
 
   const row =
-    globalData.find(
+    allRows.find(
       function(r){
 
-        return Number(
-          r.rowIndex
-        ) === Number(
-          rowIndex
-        );
+        return Number(r.rowIndex) ===
+          Number(rowIndex);
 
       }
     );
@@ -4431,8 +3936,8 @@ function editRow(
 
   if(!row){
 
-    showToast(
-      "Row not found.",
+    toast(
+      "Entry not found.",
       true
     );
 
@@ -4468,85 +3973,61 @@ function editRow(
   document.getElementById(
     "size1"
   ).value =
-    row.size1 !== ""
-      ? row.size1
-      : "";
+    row.size1 || "";
 
 
   document.getElementById(
     "size2"
   ).value =
-    row.size2 !== ""
-      ? row.size2
-      : "";
+    row.size2 || "";
 
 
   document.getElementById(
     "s1Sheets"
   ).value =
-    row.s1Sheets !== ""
-      ? row.s1Sheets
-      : "";
+    row.s1Sheets || "";
 
 
   document.getElementById(
     "s2Sheets"
   ).value =
-    row.s2Sheets !== ""
-      ? row.s2Sheets
-      : "";
+    row.s2Sheets || "";
 
 
   document.getElementById(
     "moulding"
   ).value =
-    row.moulding !== ""
-      ? row.moulding
-      : "";
+    row.moulding || "";
 
 
   document.getElementById(
     "beater"
   ).value =
-    row.beater !== ""
-      ? row.beater
-      : "";
+    row.beater || "";
 
 
   document.getElementById(
     "bd"
   ).value =
-    row.bd !== ""
-      ? row.bd
-      : "";
+    row.bd || "";
 
 
   document.getElementById(
     "gsr"
   ).value =
-    row.gsr !== ""
-      ? row.gsr
-      : "";
+    row.gsr || "";
 
 
   document.getElementById(
     "formTitle"
   ).innerHTML =
-
     '<i class="fa-solid fa-pen"></i> Edit Hourly Production';
 
 
   document.getElementById(
     "submitBtn"
   ).innerHTML =
-
     'UPDATE HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
-
-
-  document.getElementById(
-    "cancelBtn"
-  ).style.display =
-    "block";
 
 
   window.scrollTo({
@@ -4561,77 +4042,71 @@ function editRow(
 
 
 /* =====================================================
-   RESET FORM
+   RESET
 ===================================================== */
 
 function resetForm(){
 
   document.getElementById(
     "editRowIndex"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "formTitle"
   ).innerHTML =
-
     '<i class="fa-solid fa-clipboard-list"></i> Hourly Production Entry';
 
 
   document.getElementById(
     "submitBtn"
   ).innerHTML =
-
     'SUBMIT HOURLY DATA <i class="fa-solid fa-arrow-right"></i>';
 
 
   document.getElementById(
-    "cancelBtn"
-  ).style.display =
-    "none";
+    "hour"
+  ).value = "";
 
 
   document.getElementById(
-    "hour"
-  ).value =
-    "";
+    "size1"
+  ).value = "";
+
+
+  document.getElementById(
+    "size2"
+  ).value = "";
 
 
   document.getElementById(
     "s1Sheets"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "s2Sheets"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "moulding"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "beater"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "bd"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "gsr"
-  ).value =
-    "";
+  ).value = "";
 
 }
 
@@ -4640,13 +4115,11 @@ function resetForm(){
    DELETE
 ===================================================== */
 
-function deleteRow(
-  rowIndex
-){
+function deleteRow(rowIndex){
 
   if(
     !confirm(
-      "Delete this hourly production entry?"
+      "Delete this hourly entry?"
     )
   ){
 
@@ -4655,12 +4128,10 @@ function deleteRow(
   }
 
 
-  requestJSONP(
+  jsonp(
 
     SCRIPT_URL +
-
     "?action=deleteHourly" +
-
     "&rowIndex=" +
     encodeURIComponent(
       rowIndex
@@ -4669,14 +4140,11 @@ function deleteRow(
     function(res){
 
       if(
-
         res &&
-        res.status ===
-        "success"
-
+        res.status === "success"
       ){
 
-        showToast(
+        toast(
           "✓ Entry Deleted Successfully"
         );
 
@@ -4687,16 +4155,10 @@ function deleteRow(
 
       else{
 
-        showToast(
-
-          res && res.message
-
-            ? res.message
-
-            : "Delete failed.",
-
+        toast(
+          res.message ||
+          "Delete failed.",
           true
-
         );
 
       }
@@ -4705,12 +4167,9 @@ function deleteRow(
 
     function(){
 
-      showToast(
-
-        "Delete response timed out. Refresh and check the log.",
-
+      toast(
+        "Delete response delayed. Refresh Data.",
         true
-
       );
 
     }
@@ -4721,154 +4180,19 @@ function deleteRow(
 
 
 /* =====================================================
-   GET ROW
+   FIND ROW
 ===================================================== */
 
-function getRowByIndex(
-  rowIndex
-){
+function findRow(rowIndex){
 
-  return globalData.find(
+  return allRows.find(
     function(r){
 
-      return Number(
-        r.rowIndex
-      ) === Number(
-        rowIndex
-      );
+      return Number(r.rowIndex) ===
+        Number(rowIndex);
 
     }
   );
-
-}
-
-
-/* =====================================================
-   METRICS
-===================================================== */
-
-function getReportMetrics(
-  row
-){
-
-  const p =
-    getRowProduction(
-      row
-    );
-
-
-  let input =
-    0;
-
-
-  if(
-
-    settings.batchWeight !== "" &&
-
-    row.beater !== "" &&
-
-    Number(row.beater) > 0
-
-  ){
-
-    input =
-
-      Number(row.beater) *
-      Number(
-        settings.batchWeight
-      ) /
-      1000;
-
-  }
-
-
-  let me =
-    "";
-
-
-  if(
-
-    input > 0 &&
-
-    p.output > 0
-
-  ){
-
-    me =
-
-      (
-        (
-          1 -
-          p.output /
-          input
-        ) *
-
-        100
-
-      );
-
-  }
-
-
-  let rop =
-    "";
-
-
-  const bd =
-    Number(row.bd) || 0;
-
-
-  if(
-
-    p.output > 0 &&
-
-    bd < 60
-
-  ){
-
-    const running =
-      60 - bd;
-
-
-    if(
-      running > 0
-    ){
-
-      rop =
-
-        p.output *
-        60 /
-        running;
-
-    }
-
-  }
-
-
-  return {
-
-    output:
-      p.output,
-
-    input:
-      input,
-
-    me:
-      me,
-
-    rop:
-      rop,
-
-    size:
-      p.size,
-
-    sheets:
-      p.sheets,
-
-    gsr:
-      Number(row.gsr) || 0
-
-  };
 
 }
 
@@ -4877,19 +4201,15 @@ function getReportMetrics(
    HOURLY WHATSAPP
 ===================================================== */
 
-function sendHourWhatsApp(
-  rowIndex
-){
+function hourWhatsApp(rowIndex){
 
   const row =
-    getRowByIndex(
-      rowIndex
-    );
+    findRow(rowIndex);
 
 
   if(!row){
 
-    showToast(
+    toast(
       "Entry not found.",
       true
     );
@@ -4900,50 +4220,39 @@ function sendHourWhatsApp(
 
 
   const m =
-    getReportMetrics(
-      row
-    );
+    metrics(row);
 
 
-  let message =
+  let text =
 
     "📊 HOURLY PRODUCTION REPORT\n\n";
 
 
-  message +=
-
+  text +=
     "Date: " +
-    formatDisplayDate(
-      row.date
-    ) +
+    displayDate(row.date) +
     "\n";
 
 
-  message +=
-
+  text +=
     "Shift: " +
     row.shift +
     "\n";
 
 
-  message +=
-
+  text +=
     "Hour: " +
     row.hour +
     "\n";
 
 
-  message +=
-
+  text +=
     "Operator: " +
-    (
-      row.name || "-"
-    ) +
+    (row.name || "-") +
     "\n\n";
 
 
-  message +=
-
+  text +=
     "Size: " +
     (
       m.size
@@ -4953,17 +4262,15 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "Sheets: " +
     (
-      m.sheets || "-"
+      m.sheets || 0
     ) +
     "\n";
 
 
-  message +=
-
+  text +=
     "Moulding: " +
     (
       row.moulding !== ""
@@ -4973,8 +4280,7 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "Beater: " +
     (
       row.beater !== ""
@@ -4984,11 +4290,10 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "Batch Weight: " +
     (
-      settings.batchWeight !== ""
+      settings.batchWeight
         ? settings.batchWeight +
           " kg"
         : "-"
@@ -4996,8 +4301,7 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "Input: " +
     (
       m.input > 0
@@ -5008,32 +4312,27 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "B/D: " +
     (
       row.bd !== ""
-        ? row.bd +
-          " min"
+        ? row.bd + " min"
         : "-"
     ) +
     "\n";
 
 
-  message +=
+  /* GSR */
 
+  text +=
     "GSR: " +
     (
-      row.gsr !== ""
-        ? row.gsr +
-          " sheets"
-        : "0 sheets"
+      Number(row.gsr) || 0
     ) +
-    "\n";
+    " sheets\n";
 
 
-  message +=
-
+  text +=
     "Output: " +
     (
       m.output > 0
@@ -5044,8 +4343,7 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "ME: " +
     (
       m.me !== ""
@@ -5056,8 +4354,7 @@ function sendHourWhatsApp(
     "\n";
 
 
-  message +=
-
+  text +=
     "ROP: " +
     (
       m.rop !== ""
@@ -5067,18 +4364,13 @@ function sendHourWhatsApp(
     );
 
 
-  const url =
+  window.open(
 
     "https://wa.me/?text=" +
+    encodeURIComponent(text),
 
-    encodeURIComponent(
-      message
-    );
-
-
-  window.open(
-    url,
     "_blank"
+
   );
 
 }
@@ -5091,15 +4383,13 @@ function sendHourWhatsApp(
 function sendShiftWhatsApp(){
 
   const rows =
-    getFilteredRows();
+    currentRows();
 
 
-  if(
-    rows.length === 0
-  ){
+  if(!rows.length){
 
-    showToast(
-      "No production data for this shift.",
+    toast(
+      "No data for this shift.",
       true
     );
 
@@ -5108,318 +4398,229 @@ function sendShiftWhatsApp(){
   }
 
 
-  rows.sort(
-    function(a,b){
-
-      return (
-
-        getHourNumber(
-          a.hour
-        )
-
-        -
-
-        getHourNumber(
-          b.hour
-        )
-
-      );
-
-    }
-  );
-
-
-  let totalOutput =
+  let output =
     0;
 
-  let totalInput =
+  let input =
     0;
 
-  let totalBD =
+  let bd =
     0;
 
-  let totalGSR =
+  let gsr =
     0;
 
 
-  let message =
-
+  let text =
     "📊 SHIFT PRODUCTION REPORT\n\n";
 
 
-  message +=
-
+  text +=
     "Date: " +
-    formatDisplayDate(
-      getToday()
-    ) +
+    displayDate(today()) +
     "\n";
 
 
-  message +=
-
+  text +=
     "Shift: " +
-    getSelectedShift() +
+    document.getElementById(
+      "shift"
+    ).value.toUpperCase() +
     "\n\n";
 
 
-  rows.forEach(
-    function(row){
+  rows
+    .sort(
+      function(a,b){
 
-      const m =
-        getReportMetrics(
-          row
-        );
+        return hourNumber(a.hour) -
+          hourNumber(b.hour);
 
+      }
+    )
+    .forEach(
+      function(row){
 
-      totalOutput +=
-        m.output;
-
-
-      totalInput +=
-        m.input;
-
-
-      totalBD +=
-        Number(row.bd) || 0;
+        const m =
+          metrics(row);
 
 
-      totalGSR +=
-        Number(row.gsr) || 0;
+        output +=
+          m.output;
 
 
-      message +=
-        "━━━━━━━━━━━━━━\n";
+        input +=
+          m.input;
 
 
-      message +=
-        row.hour +
-        "\n";
+        bd +=
+          Number(row.bd) || 0;
 
 
-      message +=
-        "Size: " +
-        (
-          m.size
-            ? m.size + " m"
-            : "-"
-        ) +
-        "\n";
+        gsr +=
+          Number(row.gsr) || 0;
 
 
-      message +=
-        "Sheets: " +
-        (
-          m.sheets || "-"
-        ) +
-        "\n";
+        text +=
+          "━━━━━━━━━━━━━━\n";
 
 
-      message +=
-        "Moulding: " +
-        (
-          row.moulding !== ""
-            ? row.moulding
-            : "-"
-        ) +
-        "\n";
+        text +=
+          row.hour +
+          "\n";
 
 
-      message +=
-        "Beater: " +
-        (
-          row.beater !== ""
-            ? row.beater
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "Size: " +
+          (
+            m.size
+              ? m.size + " m"
+              : "-"
+          ) +
+          "\n";
 
 
-      message +=
-        "BD: " +
-        (
-          row.bd !== ""
-            ? row.bd + " min"
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "Sheets: " +
+          (
+            m.sheets || 0
+          ) +
+          "\n";
 
 
-      message +=
-        "GSR: " +
-        (
-          row.gsr !== ""
-            ? row.gsr + " sheets"
-            : "0 sheets"
-        ) +
-        "\n";
+        text +=
+          "Moulding: " +
+          (
+            row.moulding || "-"
+          ) +
+          "\n";
 
 
-      message +=
-        "Output: " +
-        (
-          m.output > 0
-            ? m.output.toFixed(2) +
-              " MT"
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "Beater: " +
+          (
+            row.beater || "-"
+          ) +
+          "\n";
 
 
-      message +=
-        "Input: " +
-        (
-          m.input > 0
-            ? m.input.toFixed(2) +
-              " MT"
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "B/D: " +
+          (
+            row.bd !== ""
+              ? row.bd + " min"
+              : "-"
+          ) +
+          "\n";
 
 
-      message +=
-        "ME: " +
-        (
-          m.me !== ""
-            ? m.me.toFixed(2) +
-              "%"
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "GSR: " +
+          (
+            Number(row.gsr) || 0
+          ) +
+          " sheets\n";
 
 
-      message +=
-        "ROP: " +
-        (
-          m.rop !== ""
-            ? m.rop.toFixed(2) +
-              " MT/hr"
-            : "-"
-        ) +
-        "\n";
+        text +=
+          "Output: " +
+          (
+            m.output > 0
+              ? m.output.toFixed(2) +
+                " MT"
+              : "-"
+          ) +
+          "\n";
 
-    }
-  );
+      }
+    );
 
 
-  const overallME =
+  const me =
 
-    totalOutput > 0 &&
-    totalInput > 0
+    output > 0 &&
+    input > 0
 
       ? (
           1 -
-          totalOutput /
-          totalInput
+          output / input
         ) * 100
 
       : null;
 
 
-  const runningMinutes =
+  const running =
 
     SHIFT_HOURS * 60 -
-    totalBD;
+    bd;
 
 
-  const overallROP =
+  const rop =
 
-    totalOutput > 0 &&
-    runningMinutes > 0
+    output > 0 &&
+    running > 0
 
-      ? totalOutput *
+      ? output *
         SHIFT_HOURS *
         60 /
-        runningMinutes
+        running
 
       : null;
 
 
-  message +=
+  text +=
     "━━━━━━━━━━━━━━\n";
 
 
-  message +=
+  text +=
     "SHIFT SUMMARY\n\n";
 
 
-  message +=
-
+  text +=
     "Total Production: " +
-
-    (
-      totalOutput > 0
-        ? totalOutput.toFixed(2) +
-          " MT"
-        : "-"
-    ) +
-
-    "\n";
+    output.toFixed(2) +
+    " MT\n";
 
 
-  message +=
-
+  text +=
     "Total Input: " +
-
-    (
-      totalInput > 0
-        ? totalInput.toFixed(2) +
-          " MT"
-        : "-"
-    ) +
-
-    "\n";
+    input.toFixed(2) +
+    " MT\n";
 
 
-  message +=
-
+  text +=
     "Overall ME: " +
-
     (
-      overallME !== null
-        ? overallME.toFixed(2) +
-          "%"
+      me !== null
+        ? me.toFixed(2) + "%"
         : "-"
     ) +
-
     "\n";
 
 
-  message +=
-
+  text +=
     "Overall ROP: " +
-
     (
-      overallROP !== null
-        ? overallROP.toFixed(2) +
-          " MT/hr"
+      rop !== null
+        ? rop.toFixed(2) + " MT/hr"
         : "-"
     ) +
-
     "\n";
 
 
-  message +=
-
-    "Total GSR: " +
-
-    totalGSR +
-
-    " sheets";
-
-
-  const url =
-
-    "https://wa.me/?text=" +
-
-    encodeURIComponent(
-      message
-    );
+  text +=
+    "TOTAL GSR: " +
+    gsr +
+    " SHEETS";
 
 
   window.open(
-    url,
+
+    "https://wa.me/?text=" +
+    encodeURIComponent(text),
+
     "_blank"
+
   );
 
 }
@@ -5429,19 +4630,15 @@ function sendShiftWhatsApp(){
    HOURLY PDF
 ===================================================== */
 
-function generateHourPDF(
-  rowIndex
-){
+function hourPDF(rowIndex){
 
   const row =
-    getRowByIndex(
-      rowIndex
-    );
+    findRow(rowIndex);
 
 
   if(!row){
 
-    showToast(
+    toast(
       "Entry not found.",
       true
     );
@@ -5462,18 +4659,14 @@ function generateHourPDF(
 
 
   const m =
-    getReportMetrics(
-      row
-    );
+    metrics(row);
 
 
   let y =
     18;
 
 
-  doc.setFontSize(
-    16
-  );
+  doc.setFontSize(16);
 
 
   doc.text(
@@ -5489,121 +4682,71 @@ function generateHourPDF(
   y += 12;
 
 
-  doc.setFontSize(
-    10
-  );
+  doc.setFontSize(10);
 
 
-  const lines = [
+  const data = [
 
-    [
-      "Date",
-      formatDisplayDate(
-        row.date
-      )
-    ],
+    ["Date",displayDate(row.date)],
 
-    [
-      "Shift",
-      row.shift
-    ],
+    ["Shift",row.shift],
 
-    [
-      "Hour",
-      row.hour
-    ],
+    ["Hour",row.hour],
 
-    [
-      "Operator",
-      row.name || "-"
-    ],
+    ["Operator",row.name || "-"],
 
-    [
-      "Size",
-      m.size
-        ? m.size + " m"
+    ["Size",m.size ? m.size+" m":"-"],
+
+    ["Sheets",m.sheets || 0],
+
+    ["Moulding",row.moulding || "-"],
+
+    ["Beater",row.beater || "-"],
+
+    ["Batch Weight",
+      settings.batchWeight
+        ? settings.batchWeight+" kg"
         : "-"
     ],
 
-    [
-      "Sheets",
-      m.sheets || "-"
-    ],
-
-    [
-      "Moulding",
-      row.moulding !== ""
-        ? row.moulding
-        : "-"
-    ],
-
-    [
-      "Beater",
-      row.beater !== ""
-        ? row.beater
-        : "-"
-    ],
-
-    [
-      "Batch Weight",
-      settings.batchWeight !== ""
-        ? settings.batchWeight +
-          " kg"
-        : "-"
-    ],
-
-    [
-      "Input",
+    ["Input",
       m.input > 0
-        ? m.input.toFixed(2) +
-          " MT"
+        ? m.input.toFixed(2)+" MT"
         : "-"
     ],
 
-    [
-      "Breakdown",
+    ["B/D",
       row.bd !== ""
-        ? row.bd +
-          " min"
+        ? row.bd+" min"
         : "-"
     ],
 
-    [
-      "GSR",
-      (
-        Number(row.gsr) || 0
-      ) +
-      " sheets"
+    ["GSR",
+      (Number(row.gsr)||0)+" sheets"
     ],
 
-    [
-      "Output",
+    ["Output",
       m.output > 0
-        ? m.output.toFixed(2) +
-          " MT"
+        ? m.output.toFixed(2)+" MT"
         : "-"
     ],
 
-    [
-      "ME%",
+    ["ME%",
       m.me !== ""
-        ? m.me.toFixed(2) +
-          "%"
+        ? m.me.toFixed(2)+"%"
         : "-"
     ],
 
-    [
-      "ROP",
+    ["ROP",
       m.rop !== ""
-        ? m.rop.toFixed(2) +
-          " MT/hr"
+        ? m.rop.toFixed(2)+" MT/hr"
         : "-"
     ]
 
   ];
 
 
-  lines.forEach(
+  data.forEach(
     function(item){
 
       doc.text(
@@ -5629,13 +4772,11 @@ function generateHourPDF(
   y += 8;
 
 
-  doc.setFontSize(
-    8
-  );
+  doc.setFontSize(8);
 
 
   doc.text(
-    "GSR is a separate rejection-sheet count and is not included in production calculations.",
+    "GSR is a separate rejection sheet count and is not used in production calculations.",
     105,
     y,
     {
@@ -5648,20 +4789,18 @@ function generateHourPDF(
 
     "Hourly_" +
     row.hour.replace(
-      /\s+/g,
+      /\s/g,
       "_"
     ) +
     "_" +
     row.date +
-    "_Shift_" +
-    row.shift +
     ".pdf"
 
   );
 
 
-  showToast(
-    "✓ Hourly PDF Generated Successfully"
+  toast(
+    "✓ PDF Generated Successfully"
   );
 
 }
@@ -5674,15 +4813,13 @@ function generateHourPDF(
 function generateShiftPDF(){
 
   const rows =
-    getFilteredRows();
+    currentRows();
 
 
-  if(
-    rows.length === 0
-  ){
+  if(!rows.length){
 
-    showToast(
-      "No production data for this shift.",
+    toast(
+      "No data for this shift.",
       true
     );
 
@@ -5704,19 +4841,8 @@ function generateShiftPDF(){
   rows.sort(
     function(a,b){
 
-      return (
-
-        getHourNumber(
-          a.hour
-        )
-
-        -
-
-        getHourNumber(
-          b.hour
-        )
-
-      );
+      return hourNumber(a.hour) -
+        hourNumber(b.hour);
 
     }
   );
@@ -5726,9 +4852,7 @@ function generateShiftPDF(){
     15;
 
 
-  doc.setFontSize(
-    16
-  );
+  doc.setFontSize(16);
 
 
   doc.text(
@@ -5741,19 +4865,15 @@ function generateShiftPDF(){
   );
 
 
-  y += 8;
+  y += 9;
 
 
-  doc.setFontSize(
-    9
-  );
+  doc.setFontSize(9);
 
 
   doc.text(
     "Date: " +
-    formatDisplayDate(
-      getToday()
-    ),
+    displayDate(today()),
     15,
     y
   );
@@ -5764,13 +4884,22 @@ function generateShiftPDF(){
 
   doc.text(
     "Shift: " +
-    getSelectedShift(),
+    document.getElementById(
+      "shift"
+    ).value.toUpperCase(),
     15,
     y
   );
 
 
-  y += 9;
+  y += 10;
+
+
+  const x = [
+    7,27,42,57,72,
+    86,99,113,132,
+    151,173
+  ];
 
 
   const headers = [
@@ -5790,26 +4919,7 @@ function generateShiftPDF(){
   ];
 
 
-  const x = [
-
-    8,
-    27,
-    43,
-    58,
-    73,
-    88,
-    101,
-    116,
-    135,
-    153,
-    174
-
-  ];
-
-
-  doc.setFontSize(
-    7
-  );
+  doc.setFontSize(7);
 
 
   headers.forEach(
@@ -5828,53 +4938,40 @@ function generateShiftPDF(){
   y += 6;
 
 
-  let totalOutput =
+  let output =
     0;
 
-  let totalInput =
+  let input =
     0;
 
-  let totalBD =
+  let bd =
     0;
 
-  let totalGSR =
+  let gsr =
     0;
 
 
   rows.forEach(
     function(row){
 
-      if(
-        y > 270
-      ){
-
-        doc.addPage();
-
-        y = 15;
-
-      }
-
-
       const m =
-        getReportMetrics(
-          row
-        );
+        metrics(row);
 
 
-      totalOutput +=
+      output +=
         m.output;
 
 
-      totalInput +=
+      input +=
         m.input;
 
 
-      totalBD +=
-        Number(row.bd) || 0;
+      bd +=
+        Number(row.bd)||0;
 
 
-      totalGSR +=
-        Number(row.gsr) || 0;
+      gsr +=
+        Number(row.gsr)||0;
 
 
       const values = [
@@ -5887,19 +4984,15 @@ function generateShiftPDF(){
 
         m.sheets || "-",
 
-        row.moulding !== ""
-          ? String(row.moulding)
-          : "-",
+        row.moulding || "-",
 
-        row.beater !== ""
-          ? String(row.beater)
-          : "-",
+        row.beater || "-",
 
         row.bd !== ""
-          ? String(row.bd)
+          ? row.bd
           : "-",
 
-        Number(row.gsr) || 0,
+        Number(row.gsr)||0,
 
         m.output > 0
           ? m.output.toFixed(2)
@@ -5910,8 +5003,7 @@ function generateShiftPDF(){
           : "-",
 
         m.me !== ""
-          ? m.me.toFixed(1) +
-            "%"
+          ? m.me.toFixed(1)+"%"
           : "-",
 
         m.rop !== ""
@@ -5943,53 +5035,36 @@ function generateShiftPDF(){
   y += 8;
 
 
-  if(
-    y > 260
-  ){
+  const me =
 
-    doc.addPage();
-
-    y = 15;
-
-  }
-
-
-  const overallME =
-
-    totalOutput > 0 &&
-    totalInput > 0
+    output > 0 &&
+    input > 0
 
       ? (
           1 -
-          totalOutput /
-          totalInput
-        ) * 100
+          output/input
+        )*100
 
       : null;
 
 
-  const runningMinutes =
-
-    SHIFT_HOURS * 60 -
-    totalBD;
+  const running =
+    SHIFT_HOURS*60-bd;
 
 
-  const overallROP =
+  const rop =
 
-    totalOutput > 0 &&
-    runningMinutes > 0
+    output > 0 &&
+    running > 0
 
-      ? totalOutput *
-        SHIFT_HOURS *
-        60 /
-        runningMinutes
+      ? output*
+        SHIFT_HOURS*
+        60/running
 
       : null;
 
 
-  doc.setFontSize(
-    11
-  );
+  doc.setFontSize(11);
 
 
   doc.text(
@@ -6002,19 +5077,13 @@ function generateShiftPDF(){
   y += 7;
 
 
-  doc.setFontSize(
-    9
-  );
+  doc.setFontSize(9);
 
 
   doc.text(
     "Total Production: " +
-    (
-      totalOutput > 0
-        ? totalOutput.toFixed(2) +
-          " MT"
-        : "-"
-    ),
+    output.toFixed(2) +
+    " MT",
     20,
     y
   );
@@ -6025,12 +5094,8 @@ function generateShiftPDF(){
 
   doc.text(
     "Total Input: " +
-    (
-      totalInput > 0
-        ? totalInput.toFixed(2) +
-          " MT"
-        : "-"
-    ),
+    input.toFixed(2) +
+    " MT",
     20,
     y
   );
@@ -6042,9 +5107,8 @@ function generateShiftPDF(){
   doc.text(
     "Overall ME: " +
     (
-      overallME !== null
-        ? overallME.toFixed(2) +
-          "%"
+      me !== null
+        ? me.toFixed(2)+"%"
         : "-"
     ),
     20,
@@ -6058,9 +5122,8 @@ function generateShiftPDF(){
   doc.text(
     "Overall ROP: " +
     (
-      overallROP !== null
-        ? overallROP.toFixed(2) +
-          " MT/hr"
+      rop !== null
+        ? rop.toFixed(2)+" MT/hr"
         : "-"
     ),
     20,
@@ -6072,9 +5135,9 @@ function generateShiftPDF(){
 
 
   doc.text(
-    "Total GSR: " +
-    totalGSR +
-    " sheets",
+    "TOTAL GSR: " +
+    gsr +
+    " SHEETS",
     20,
     y
   );
@@ -6083,13 +5146,11 @@ function generateShiftPDF(){
   y += 8;
 
 
-  doc.setFontSize(
-    8
-  );
+  doc.setFontSize(8);
 
 
   doc.text(
-    "GSR is a separate rejection-sheet count and is not included in production calculations.",
+    "GSR is separate from production calculation.",
     105,
     y,
     {
@@ -6101,15 +5162,17 @@ function generateShiftPDF(){
   doc.save(
 
     "Shift_" +
-    getSelectedShift() +
+    document.getElementById(
+      "shift"
+    ).value.toUpperCase() +
     "_" +
-    getToday() +
-    "_Production_Report.pdf"
+    today() +
+    ".pdf"
 
   );
 
 
-  showToast(
+  toast(
     "✓ Shift PDF Generated Successfully"
   );
 
@@ -6117,12 +5180,10 @@ function generateShiftPDF(){
 
 
 /* =====================================================
-   ESCAPE HTML
+   ESCAPE
 ===================================================== */
 
-function escapeHtml(
-  value
-){
+function esc(value){
 
   if(
     value === null ||
@@ -6136,64 +5197,46 @@ function escapeHtml(
 
   return String(value)
 
-    .replace(
-      /&/g,
-      "&amp;"
-    )
+    .replace(/&/g,"&amp;")
 
-    .replace(
-      /</g,
-      "&lt;"
-    )
+    .replace(/</g,"&lt;")
 
-    .replace(
-      />/g,
-      "&gt;"
-    )
+    .replace(/>/g,"&gt;")
 
-    .replace(
-      /"/g,
-      "&quot;"
-    )
+    .replace(/"/g,"&quot;")
 
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/'/g,"&#039;");
 
 }
 
 
 /* =====================================================
-   SHIFT INPUT
+   SHIFT CHANGE
 ===================================================== */
 
 document
-  .getElementById(
-    "shift"
-  )
-  .addEventListener(
-    "input",
-    function(){
+.getElementById("shift")
+.addEventListener(
+  "input",
+  function(){
 
-      this.value =
-
-        this.value
-          .toUpperCase()
-          .replace(
-            /[^ABC]/g,
-            ""
-          )
-          .slice(
-            0,
-            1
-          );
+    this.value =
+      this.value
+        .toUpperCase()
+        .replace(
+          /[^ABC]/g,
+          ""
+        )
+        .substring(
+          0,
+          1
+        );
 
 
-      renderDashboard();
+    render();
 
-    }
-  );
+  }
+);
 
 
 /* =====================================================
@@ -6202,12 +5245,6 @@ document
 
 window.onload =
 function(){
-
-  document.getElementById(
-    "shift"
-  ).value =
-    "A";
-
 
   loadData();
 
