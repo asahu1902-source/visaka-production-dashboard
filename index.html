@@ -1422,24 +1422,6 @@ input[type="number"]::-webkit-outer-spin-button {
   >
 
 
-  <!-- OPERATOR -->
-
-  <div class="form-group">
-
-    <label>
-      Operator Name
-    </label>
-
-    <input
-      type="text"
-      id="opName"
-      placeholder="Enter operator name"
-      autocomplete="off"
-    >
-
-  </div>
-
-
   <!-- SHIFT + HOUR -->
 
   <div class="form-row">
@@ -2677,6 +2659,17 @@ function renderDashboard() {
    TABLE
 ===================================================== */
 
+function display3(value) {
+
+  const n = Number(value);
+
+  if (!Number.isFinite(n)) return "";
+
+  return (Math.trunc(n * 1000) / 1000).toFixed(3);
+
+}
+
+
 function renderTable(rows) {
 
   const tbody =
@@ -2789,17 +2782,13 @@ function renderTable(rows) {
 
             (
 
-              1 -
-
-              p.sheetOutput /
+              (p.sheetOutput - input) /
 
               input
 
             ) * 100
 
-          ).toFixed(1) +
-
-          "%";
+          );
 
       }
 
@@ -2898,7 +2887,7 @@ function renderTable(rows) {
           <td class="yellow">
             ${
               p.output > 0
-                ? p.output.toFixed(2)
+                ? display3(p.output)
                 : ""
             }
           </td>
@@ -2914,7 +2903,7 @@ function renderTable(rows) {
 
 
           <td class="cyan">
-            ${me}
+            ${me !== "" ? display3(me) + "%" : ""}
           </td>
 
 
@@ -3131,9 +3120,7 @@ function updateMetrics(rows) {
 
       (
 
-        1 -
-
-        totalMESheetOutput /
+        (totalMESheetOutput - totalMEInput) /
 
         totalMEInput
 
@@ -3157,7 +3144,7 @@ function updateMetrics(rows) {
 
         1,
 
-        rows.length * 60 -
+        SHIFT_HOURS * 60 -
 
         totalBD
 
@@ -3183,7 +3170,7 @@ function updateMetrics(rows) {
     "totalProduction"
   ).innerText =
 
-    totalOutput.toFixed(2) +
+    display3(totalOutput) +
 
     " MT";
 
@@ -3201,7 +3188,7 @@ function updateMetrics(rows) {
     "overallME"
   ).innerText =
 
-    overallME.toFixed(1) +
+    display3(overallME) +
 
     "%";
 
@@ -3758,30 +3745,6 @@ function submitProductionEntry() {
     return;
 
 
-  const name =
-    document
-
-      .getElementById(
-        "opName"
-      )
-
-      .value
-
-      .trim();
-
-
-  if (!name) {
-
-    showToast(
-      "⚠️ Enter operator name."
-    );
-
-
-    return;
-
-  }
-
-
   const rowIndex =
     document.getElementById(
       "editRowIndex"
@@ -3980,11 +3943,6 @@ function submitProductionEntry() {
 
     "?action=submitHourly" +
 
-    "&operator=" +
-    encodeURIComponent(
-      name
-    ) +
-
     "&shift=" +
     encodeURIComponent(
       shift
@@ -4098,12 +4056,6 @@ function editRow(idx) {
     "editRowIndex"
   ).value =
     row.rowIndex;
-
-
-  document.getElementById(
-    "opName"
-  ).value =
-    row.name || "";
 
 
   document.getElementById(
@@ -4625,13 +4577,12 @@ Sheet Production: ${p.sheetOutput.toFixed(2)} MT
 Moulding: ${row.moulding || 0}
 Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
 
-Total Production: ${p.output.toFixed(2)} MT
+Total Production: ${display3(p.output)} MT
 
 Beater: ${row.beater || 0}
 B/D: ${row.bd || 0} min
 GSR: ${row.gsr || 0} sheets
-
-Operator: ${row.name || "-"}`;
+`;
 
 
   window.open(
@@ -4735,7 +4686,7 @@ B/D: ${r.bd || 0}
 GSR: ${r.gsr || 0}
 Moulding: ${r.moulding || 0}
 Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
-Total Production: ${p.output.toFixed(2)} MT
+Total Production: ${display3(p.output)} MT
 
 `;
 
@@ -4747,7 +4698,7 @@ Total Production: ${p.output.toFixed(2)} MT
 
 `TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT
 
-TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT
+TOTAL PRODUCTION: ${display3(totalOutput)} MT
 
 TOTAL GSR: ${totalGSR} SHEETS`;
 
@@ -4855,9 +4806,8 @@ function generateRowPDF(
 
     `Moulding Production: ${p.mouldingOutput.toFixed(2)} MT`,
 
-    `Total Production: ${p.output.toFixed(2)} MT`,
+    `Total Production: ${display3(p.output)} MT`,
 
-    `Operator: ${row.name || "-"}`
 
   ];
 
@@ -5049,7 +4999,7 @@ function generateShiftPDF() {
 
         String(r.gsr || ""),
 
-        p.output.toFixed(2),
+        display3(p.output),
 
         "",
 
@@ -5116,7 +5066,7 @@ function generateShiftPDF() {
 
   doc.text(
 
-    `TOTAL PRODUCTION: ${totalOutput.toFixed(2)} MT`,
+    `TOTAL PRODUCTION: ${display3(totalOutput)} MT`,
 
     10,
     y
