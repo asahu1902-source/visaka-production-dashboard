@@ -2669,6 +2669,43 @@ function display3(value) {
 
 }
 
+/* =====================================================
+   ROW METRICS
+   Exact values are calculated first; display formatting is
+   applied only when showing/exporting the values.
+===================================================== */
+function getRowMetrics(r) {
+
+  const p = getRowProduction(r);
+
+  let input = 0;
+
+  if (
+    masterSettings.batchWeight !== "" &&
+    r.beater !== "" &&
+    !isNaN(Number(r.beater))
+  ) {
+    input = (Number(r.beater) * Number(masterSettings.batchWeight)) / 1000;
+  }
+
+  let me = "";
+
+  if (p.sheetOutput > 0 && input > 0) {
+    me = ((p.sheetOutput - input) / input) * 100;
+  }
+
+  let rop = "";
+
+  if (p.output > 0) {
+    const bd = Number(r.bd) || 0;
+    if (bd < 60) {
+      rop = (p.output * 60) / Math.max(1, 60 - bd);
+    }
+  }
+
+  return { p, input, me, rop };
+}
+
 
 function renderTable(rows) {
 
@@ -2727,107 +2764,11 @@ function renderTable(rows) {
   rows.forEach(
     function(r) {
 
-      const p =
-        getRowProduction(r);
-
-
-      /* INPUT */
-
-      let input = 0;
-
-
-      if (
-
-        masterSettings.batchWeight !== "" &&
-
-        r.beater !== "" &&
-
-        !isNaN(
-          Number(r.beater)
-        )
-
-      ) {
-
-        input =
-
-          (
-
-            Number(r.beater) *
-
-            Number(
-              masterSettings.batchWeight
-            )
-
-          ) / 1000;
-
-      }
-
-
-      /* ME% */
-
-      let me = "";
-
-
-      if (
-
-        p.sheetOutput > 0 &&
-
-        input > 0
-
-      ) {
-
-        me =
-
-          (
-
-            (
-
-              (p.sheetOutput - input) /
-
-              input
-
-            ) * 100
-
-          );
-
-      }
-
-
-      /* ROP */
-
-      let rop = "";
-
-
-      if (
-        p.output > 0
-      ) {
-
-        const bd =
-          Number(r.bd) || 0;
-
-
-        if (
-          bd < 60
-        ) {
-
-          rop =
-
-            (
-
-              p.output *
-
-              60 /
-
-              Math.max(
-                1,
-                60 - bd
-              )
-
-            ).toFixed(2);
-
-        }
-
-      }
+      const metrics = getRowMetrics(r);
+      const p = metrics.p;
+      const input = metrics.input;
+      const me = metrics.me;
+      const rop = metrics.rop;
 
 
       html += `
@@ -2896,7 +2837,7 @@ function renderTable(rows) {
           <td>
             ${
               input > 0
-                ? input.toFixed(2)
+                ? display3(input)
                 : ""
             }
           </td>
@@ -2924,7 +2865,7 @@ function renderTable(rows) {
           <td class="yellow">
             ${
               p.mouldingOutput > 0
-                ? p.mouldingOutput.toFixed(2)
+                ? display3(p.mouldingOutput)
                 : ""
             }
           </td>
@@ -3473,6 +3414,8 @@ function updateBanner(rows) {
      DISPLAY
   ========================================== */
 
+  const targetAchieved = remainingSheets <= 0.000001;
+
   document.getElementById(
     "topReqSheetsVal"
   ).innerText =
@@ -3526,7 +3469,14 @@ function updateBanner(rows) {
      REMAINING HOURS
   ========================================== */
 
-  if (
+  if (targetAchieved) {
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      "CONGRATULATIONS! YOU HAVE ACHIEVED YOUR TARGET.";
+
+  } else if (
     remainingHours === 0
   ) {
 
@@ -4563,7 +4513,7 @@ function sendRowWhatsApp(
 
   const message =
 
-`VISAKA PRODUCTION
+`VISAKA MID PLANT PRODUCTION REPORT
 
 Date: ${row.date}
 Shift: ${row.shift}
@@ -4572,10 +4522,10 @@ Hour: ${row.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
 
-Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+Sheet Production: ${display3(p.sheetOutput)} MT
 
 Moulding: ${row.moulding || 0}
-Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+Moulding Production: ${display3(p.mouldingOutput)} MT
 
 Total Production: ${display3(p.output)} MT
 
@@ -4680,12 +4630,12 @@ Shift: ${shift}
 `${r.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
-Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+Sheet Production: ${display3(p.sheetOutput)} MT
 Beater: ${r.beater || 0}
 B/D: ${r.bd || 0}
 GSR: ${r.gsr || 0}
 Moulding: ${r.moulding || 0}
-Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+Moulding Production: ${display3(p.mouldingOutput)} MT
 Total Production: ${display3(p.output)} MT
 
 `;
@@ -4726,116 +4676,47 @@ function generateRowPDF(
   idx
 ) {
 
-  const row =
-    globalData.find(
-      function(r) {
+  const row = globalData.find(function(r) {
+    return Number(r.rowIndex) === Number(idx);
+  });
 
-        return (
+  if (!row) return;
 
-          Number(r.rowIndex) ===
+  const metrics = getRowMetrics(row);
+  const p = metrics.p;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-          Number(idx)
-
-        );
-
-      }
-    );
-
-
-  if (!row)
-    return;
-
-
-  const p =
-    getRowProduction(
-      row
-    );
-
-
-  const {
-    jsPDF
-  } =
-    window.jspdf;
-
-
-  const doc =
-    new jsPDF();
-
-
-  doc.setFontSize(
-    18
-  );
-
-
-  doc.text(
-    "VISAKA PRODUCTION",
-    20,
-    20
-  );
-
-
-  doc.setFontSize(
-    11
-  );
-
+  doc.setFontSize(18);
+  doc.text("VISAKA MID PLANT PRODUCTION REPORT", 20, 20);
+  doc.setFontSize(11);
 
   let y = 35;
-
-
   const lines = [
-
     `Date: ${row.date}`,
-
     `Shift: ${row.shift}`,
-
     `Hour: ${row.hour}`,
-
     `Size: ${p.size} m`,
-
     `Sheets: ${p.sheets}`,
-
-    `Sheet Production: ${p.sheetOutput.toFixed(2)} MT`,
-
+    `Sheet Production: ${display3(p.sheetOutput)} MT`,
     `Beater: ${row.beater || 0}`,
-
+    `Input: ${metrics.input > 0 ? display3(metrics.input) : ""} MT`,
     `B/D: ${row.bd || 0} min`,
-
+    `ME%: ${metrics.me !== "" ? display3(metrics.me) : ""}%`,
+    `ROP: ${metrics.rop !== "" ? display3(metrics.rop) : ""} MT/hr`,
     `GSR: ${row.gsr || 0} sheets`,
-
     `Moulding: ${row.moulding || 0}`,
-
-    `Moulding Production: ${p.mouldingOutput.toFixed(2)} MT`,
-
-    `Total Production: ${display3(p.output)} MT`,
-
-
+    `Moulding Production: ${display3(p.mouldingOutput)} MT`,
+    `Total Production: ${display3(p.output)} MT`
   ];
 
+  lines.forEach(function(line) {
+    doc.text(line, 20, y);
+    y += 9;
+  });
 
-  lines.forEach(
-    function(line) {
-
-      doc.text(
-        line,
-        20,
-        y
-      );
-
-
-      y += 9;
-
-    }
-  );
-
-
-  doc.save(
-
-    `Visaka_${row.shift}_${row.hour}.pdf`
-
-  );
-
+  doc.save(`Visaka_Mid_Plant_${row.date}_Shift_${row.shift}.pdf`);
 }
-
 
 /* =====================================================
    SHIFT PDF
@@ -4843,258 +4724,82 @@ function generateRowPDF(
 
 function generateShiftPDF() {
 
-  const shift =
-    getSelectedShift();
-
-
-  const rows =
-    getCurrentShiftRows();
-
+  const shift = getSelectedShift();
+  const rows = getCurrentShiftRows();
 
   if (!rows.length) {
-
-    showToast(
-      "ℹ️ No production data."
-    );
-
-
+    showToast("ℹ️ No production data.");
     return;
-
   }
 
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "landscape" });
 
-  const {
-    jsPDF
-  } =
-    window.jspdf;
-
-
-  const doc =
-    new jsPDF({
-
-      orientation:
-        "landscape"
-
-    });
-
-
-  doc.setFontSize(
-    18
-  );
-
-
-  doc.text(
-    "VISAKA PRODUCTION REPORT",
-    15,
-    18
-  );
-
-
-  doc.setFontSize(
-    11
-  );
-
-
-  doc.text(
-
-    `Date: ${todayDateString()}   Shift: ${shift}`,
-
-    15,
-    27
-
-  );
-
+  doc.setFontSize(18);
+  doc.text("VISAKA MID PLANT PRODUCTION REPORT", 15, 18);
+  doc.setFontSize(11);
+  doc.text(`Date: ${todayDateString()}   Shift: ${shift}`, 15, 27);
 
   let y = 38;
-
-
-  const headers = [
-
-    "Hour",
-    "Size",
-    "Sheets",
-    "Beater",
-    "B/D",
-    "GSR",
-    "Output MT",
-    "Input",
-    "ME%",
-    "ROP",
-    "Moulding",
-    "Moulding MT"
-
-  ];
-
-
-  headers.forEach(
-    function(h,i) {
-
-      doc.text(
-
-        h,
-
-        7 + i * 23,
-
-        y
-
-      );
-
-    }
-  );
-
-
+  const headers = ["Hour","Size","Sheets","Beater","B/D","GSR","Output MT","Input MT","ME%","ROP","Moulding","Moulding MT"];
+  headers.forEach(function(h,i) { doc.text(h, 7 + i * 23, y); });
   y += 8;
-
 
   let totalOutput = 0;
-
   let totalMoulding = 0;
-
   let totalGSR = 0;
+  let totalInput = 0;
+  let totalMESheetOutput = 0;
+  let totalBD = 0;
 
+  rows.sort((a,b) => hourNumber(a.hour) - hourNumber(b.hour));
 
-  rows.sort(
+  rows.forEach(function(r) {
+    const metrics = getRowMetrics(r);
+    const p = metrics.p;
 
-    (a,b) =>
+    totalOutput += p.output;
+    totalMoulding += p.mouldingOutput;
+    totalGSR += Number(r.gsr) || 0;
+    totalInput += metrics.input;
+    totalMESheetOutput += p.sheetOutput;
+    totalBD += Number(r.bd) || 0;
 
-      hourNumber(a.hour) -
+    const vals = [
+      r.hour, String(p.size), String(p.sheets), String(r.beater || ""), String(r.bd || ""), String(r.gsr || ""),
+      display3(p.output),
+      metrics.input > 0 ? display3(metrics.input) : "",
+      metrics.me !== "" ? display3(metrics.me) + "%" : "",
+      metrics.rop !== "" ? display3(metrics.rop) : "",
+      String(r.moulding || ""),
+      display3(p.mouldingOutput)
+    ];
 
-      hourNumber(b.hour)
+    vals.forEach(function(v,i) { doc.text(String(v), 7 + i * 23, y); });
+    y += 8;
 
-  );
+    if (y > 185) { doc.addPage(); y = 20; }
+  });
 
-
-  rows.forEach(
-    function(r) {
-
-      const p =
-        getRowProduction(
-          r
-        );
-
-
-      totalOutput +=
-        p.output;
-
-
-      totalMoulding +=
-        p.mouldingOutput;
-
-
-      totalGSR +=
-        Number(r.gsr) || 0;
-
-
-      const vals = [
-
-        r.hour,
-
-        String(p.size),
-
-        String(p.sheets),
-
-        String(r.beater || ""),
-
-        String(r.bd || ""),
-
-        String(r.gsr || ""),
-
-        display3(p.output),
-
-        "",
-
-        "",
-
-        "",
-
-        String(r.moulding || ""),
-
-        p.mouldingOutput.toFixed(2)
-
-      ];
-
-
-      vals.forEach(
-        function(v,i) {
-
-          doc.text(
-
-            v,
-
-            7 + i * 23,
-
-            y
-
-          );
-
-        }
-      );
-
-
-      y += 8;
-
-
-      if (
-        y > 185
-      ) {
-
-        doc.addPage();
-
-        y = 20;
-
-      }
-
-    }
-  );
-
+  const overallME = totalInput > 0 ? ((totalMESheetOutput - totalInput) / totalInput) * 100 : 0;
+  const runMinutes = Math.max(1, SHIFT_HOURS * 60 - totalBD);
+  const overallROP = totalOutput > 0 ? (totalOutput * 60) / runMinutes : 0;
 
   y += 8;
-
-
-  doc.text(
-
-    `TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT`,
-
-    10,
-    y
-
-  );
-
-
+  doc.text(`TOTAL INPUT: ${display3(totalInput)} MT`, 10, y);
   y += 8;
-
-
-  doc.text(
-
-    `TOTAL PRODUCTION: ${display3(totalOutput)} MT`,
-
-    10,
-    y
-
-  );
-
-
+  doc.text(`OVERALL ME%: ${display3(overallME)}%`, 10, y);
   y += 8;
+  doc.text(`OVERALL ROP: ${display3(overallROP)} MT/hr`, 10, y);
+  y += 8;
+  doc.text(`TOTAL MOULDING PRODUCTION: ${display3(totalMoulding)} MT`, 10, y);
+  y += 8;
+  doc.text(`TOTAL PRODUCTION: ${display3(totalOutput)} MT`, 10, y);
+  y += 8;
+  doc.text(`TOTAL GSR: ${totalGSR} SHEETS`, 10, y);
 
-
-  doc.text(
-
-    `TOTAL GSR: ${totalGSR} SHEETS`,
-
-    10,
-    y
-
-  );
-
-
-  doc.save(
-
-    `Visaka_${todayDateString()}_Shift_${shift}.pdf`
-
-  );
-
+  doc.save(`Visaka_Mid_Plant_${todayDateString()}_Shift_${shift}.pdf`);
 }
-
 
 /* =====================================================
    TOAST
