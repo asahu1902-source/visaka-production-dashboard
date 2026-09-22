@@ -1,0 +1,5818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
+
+<title>Visaka Production Dashboard</title>
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#05070d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Visaka Dashboard">
+<link rel="apple-touch-icon" href="./icon-192.png">
+
+
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+</script>
+
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+* {
+
+  box-sizing:
+    border-box;
+
+  margin:0;
+
+  padding:0;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+}
+
+
+body {
+
+  background:#000;
+
+  color:#fff;
+
+  padding:
+    10px 6px 40px;
+
+  font-size:15px;
+
+}
+
+
+.app {
+
+  display:none;
+
+  width:100%;
+
+  max-width:850px;
+
+  margin:auto;
+
+}
+
+
+/* =====================================================
+   MAIN HOME DASHBOARD
+===================================================== */
+
+.home-screen {
+  width:100%;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.home-header {
+  background:linear-gradient(135deg,#07142b,#0b2448);
+  border:2px solid #00bfff;
+  border-radius:16px;
+  padding:20px 16px;
+  margin-bottom:12px;
+  text-align:center;
+  box-shadow:0 0 22px rgba(0,191,255,.14);
+}
+
+.home-title {
+  color:#00ffff;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.home-subtitle {
+  color:#94a3b8;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.home-menu-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.home-menu-card {
+  border:2px solid #00bfff;
+  border-radius:16px;
+  background:#07142b;
+  padding:18px 14px;
+  cursor:pointer;
+  transition:.18s ease;
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.home-menu-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 24px rgba(0,191,255,.2);
+}
+
+.home-menu-icon {
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#062b4d;
+  color:#00ffff;
+  font-size:24px;
+}
+
+.home-menu-title {
+  margin-top:14px;
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.home-menu-text {
+  margin-top:5px;
+  color:#94a3b8;
+  font-size:11px;
+  line-height:1.4;
+}
+
+.page-back-btn {
+  border:1px solid #00bfff;
+  background:#06172e;
+  color:#00ffff;
+  border-radius:9px;
+  padding:8px 12px;
+  font-weight:900;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   ME / ROP CALCULATOR
+===================================================== */
+
+.calculator-page {
+  display:none;
+  width:100%;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.calc-live {
+  border:2px solid #00bfff;
+  border-radius:14px;
+  background:#07142b;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.calc-live-title {
+  color:#00ffff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+.calc-results {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+
+.calc-result {
+  background:#020b18;
+  border:1px solid #164b70;
+  border-radius:10px;
+  padding:12px 8px;
+  text-align:center;
+}
+
+.calc-result-label {
+  color:#94a3b8;
+  font-size:10px;
+  font-weight:800;
+}
+
+.calc-result-value {
+  display:block;
+  margin-top:5px;
+  color:#00ffff;
+  font-size:20px;
+  font-weight:900;
+}
+
+@media(max-width:600px){
+  .home-menu-grid{grid-template-columns:1fr;}
+  .calc-results{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+  }
+  .calc-result{
+    padding:16px 4px;
+    min-height:105px;
+  }
+  .calc-result-label{
+    font-size:10px;
+  }
+  .calc-result-value{
+    font-size:18px;
+  }
+}
+
+
+.card {
+
+  background:#07142b;
+
+  border:
+    2px solid #00bfff;
+
+  border-radius:10px;
+
+  padding:12px;
+
+  margin-bottom:10px;
+
+}
+
+
+.section-title {
+
+  color:#00ffff;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  margin-bottom:10px;
+
+}
+
+
+/* =====================================================
+   TARGET PANEL
+===================================================== */
+
+.target-panel {
+
+  background:#07142b;
+
+  border:
+    2px solid #00bfff;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  margin-bottom:10px;
+
+}
+
+
+.top-bar {
+
+  background:#0284c7;
+
+  color:#000;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  padding:8px 10px;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+.req-box {
+
+  text-align:center;
+
+  padding:12px;
+
+  border-bottom:
+    1px solid #facc15;
+
+}
+
+
+.req-value {
+
+  color:#ffff00;
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+
+.req-label {
+
+  color:#00ffff;
+
+  font-size:11px;
+
+  font-weight:900;
+
+}
+
+
+.kpi-grid {
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+}
+
+
+.kpi {
+
+  text-align:center;
+
+  padding:9px 3px;
+
+  border-right:
+    1px solid #facc15;
+
+  color:#00ffff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+}
+
+
+.kpi:last-child {
+
+  border-right:none;
+
+}
+
+
+.kpi-value {
+
+  display:block;
+
+  color:#ffff00;
+
+  font-size:16px;
+
+  margin-top:3px;
+
+}
+
+
+.meta-row {
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  text-align:center;
+
+  padding:8px;
+
+  color:#facc15;
+
+  font-size:12px;
+
+  border-top:
+    1px solid #facc15;
+
+}
+
+
+.meta-row strong {
+
+  color:#fff;
+
+}
+
+
+.hours-banner {
+
+  background:#db2777;
+
+  color:#fff;
+
+  text-align:center;
+
+  padding:9px;
+
+  font-size:14px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-row {
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:8px;
+
+  margin-bottom:8px;
+
+}
+
+
+.form-group {
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:4px;
+
+  margin-bottom:8px;
+
+}
+
+
+label {
+
+  color:#00ffff;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+input,
+select {
+
+  width:100%;
+
+  height:43px;
+
+  background:#000;
+
+  color:#ffff00;
+
+  border:
+    1.5px solid #00bfff;
+
+  border-radius:6px;
+
+  padding:
+    8px 10px;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  outline:none;
+
+}
+
+
+/*
+=====================================================
+NO NUMBER SPINNER
+=====================================================
+*/
+
+input[type="number"] {
+
+  appearance:none;
+
+  -webkit-appearance:none;
+
+  -moz-appearance:
+    textfield;
+
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+
+  -webkit-appearance:none;
+
+  margin:0;
+
+}
+
+
+/* SHIFT NORMAL TEXT */
+
+#opShift {
+
+  text-align:center;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+
+  width:100%;
+
+  border:none;
+
+  border-radius:7px;
+
+  padding:12px;
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  margin-top:5px;
+
+}
+
+
+.btn-settings {
+
+  background:#0284c7;
+
+}
+
+
+.btn-save {
+
+  background:#10b981;
+
+}
+
+
+.btn-refresh {
+
+  background:#334155;
+
+  border:
+    1px solid #00bfff;
+
+}
+
+
+.btn-cancel {
+
+  display:none;
+
+  background:#dc2626;
+
+}
+
+
+/* =====================================================
+   REFRESH SPINNER
+===================================================== */
+
+#refreshIcon {
+
+  display:inline-block;
+
+}
+
+
+#refreshIcon.spinning {
+
+  animation:
+    refreshSpin .8s linear infinite;
+
+}
+
+
+@keyframes refreshSpin {
+
+  from {
+
+    transform:
+      rotate(0deg);
+
+  }
+
+  to {
+
+    transform:
+      rotate(360deg);
+
+  }
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-wrap {
+
+  display:none;
+
+  height:7px;
+
+  background:#020617;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  margin:6px 0;
+
+}
+
+
+.progress-bar {
+
+  height:100%;
+
+  width:0%;
+
+  background:#00ffff;
+
+  transition:.3s;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrap {
+
+  width:100%;
+
+  overflow-x:auto;
+
+}
+
+
+.production-table {
+
+  width:100%;
+
+  min-width:1200px;
+
+  border-collapse:collapse;
+
+}
+
+
+.production-table th {
+
+  background:#a95f00;
+
+  color:#000;
+
+  padding:
+    8px 5px;
+
+  border:
+    1px solid #401900;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+
+}
+
+
+.production-table td {
+
+  background:#000;
+
+  color:#fff;
+
+  border:
+    1px solid #541010;
+
+  padding:
+    8px 5px;
+
+  text-align:center;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  white-space:nowrap;
+
+}
+
+
+.production-table .hour {
+
+  background:#00bfff;
+
+  color:#000;
+
+}
+
+
+.production-table .yellow {
+
+  color:#ffff00;
+
+}
+
+
+.production-table .cyan {
+
+  color:#00ffff;
+
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.action-buttons {
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:4px;
+
+}
+
+
+.action-btn {
+
+  width:32px;
+
+  height:31px;
+
+  border:none;
+
+  border-radius:5px;
+
+  color:#fff;
+
+  font-size:14px;
+
+}
+
+
+.edit-btn {
+
+  background:#0284c7;
+
+}
+
+
+.delete-btn {
+
+  background:#dc2626;
+
+}
+
+
+.whatsapp-btn {
+
+  background:#16a34a;
+
+}
+
+
+.pdf-btn {
+
+  background:#dc2626;
+
+}
+
+
+/* =====================================================
+   METRICS
+===================================================== */
+
+.metrics-grid {
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:7px;
+
+  margin-top:8px;
+
+}
+
+
+.metric-box {
+
+  background:#020617;
+
+  border:
+    1.5px solid #00bfff;
+
+  border-radius:6px;
+
+  padding:9px;
+
+  text-align:center;
+
+}
+
+
+.metric-label {
+
+  display:block;
+
+  color:#00ffff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+}
+
+
+.metric-value {
+
+  display:block;
+
+  color:#ffff00;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  margin-top:3px;
+
+}
+
+
+/* =====================================================
+   GSR
+===================================================== */
+
+.gsr-card {
+
+  background:#020617;
+
+  border:
+    2px solid #facc15;
+
+  border-radius:7px;
+
+  padding:10px;
+
+  text-align:center;
+
+  margin-top:8px;
+
+}
+
+
+.gsr-title {
+
+  color:#00ffff;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.gsr-value {
+
+  color:#ffff00;
+
+  font-size:21px;
+
+  font-weight:900;
+
+  margin-top:3px;
+
+}
+
+
+/* =====================================================
+   DELETE ALL
+===================================================== */
+
+.delete-all {
+
+  width:100%;
+
+  background:#dc2626;
+
+  color:#fff;
+
+  border:none;
+
+  border-radius:7px;
+
+  padding:13px;
+
+  margin-top:8px;
+
+  font-size:15px;
+
+  font-weight:900;
+
+}
+
+
+.delete-all:disabled {
+
+  opacity:.6;
+
+}
+
+
+/* =====================================================
+   REPORT
+===================================================== */
+
+.report-grid {
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:7px;
+
+  margin-top:8px;
+
+}
+
+
+.report-btn {
+
+  border:none;
+
+  border-radius:7px;
+
+  padding:12px 5px;
+
+  color:#fff;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.whatsapp-report {
+
+  background:#16a34a;
+
+}
+
+
+.pdf-report {
+
+  background:#dc2626;
+
+}
+
+
+/* =====================================================
+   CUSTOM DELETE MODAL
+===================================================== */
+
+.modal-overlay {
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(0,0,0,.85);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:99999;
+
+  padding:20px;
+
+}
+
+
+.modal-box {
+
+  width:100%;
+
+  max-width:390px;
+
+  background:#07142b;
+
+  border:
+    2px solid #00bfff;
+
+  border-radius:12px;
+
+  padding:20px;
+
+  text-align:center;
+
+}
+
+
+.modal-icon {
+
+  color:#facc15;
+
+  font-size:35px;
+
+  margin-bottom:8px;
+
+}
+
+
+.modal-title {
+
+  color:#ffff00;
+
+  font-size:19px;
+
+  font-weight:900;
+
+}
+
+
+.modal-message {
+
+  color:#fff;
+
+  font-size:14px;
+
+  margin:10px 0 18px;
+
+  line-height:1.5;
+
+}
+
+
+.modal-buttons {
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:8px;
+
+}
+
+
+.modal-buttons button {
+
+  border:none;
+
+  border-radius:7px;
+
+  padding:12px;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+.modal-cancel {
+
+  background:#475569;
+
+  color:#fff;
+
+}
+
+
+.modal-delete {
+
+  background:#dc2626;
+
+  color:#fff;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+#toast {
+
+  position:fixed;
+
+  left:50%;
+
+  bottom:20px;
+
+  transform:
+    translate(-50%,100px);
+
+  opacity:0;
+
+  transition:.3s;
+
+  z-index:100001;
+
+  background:#07142b;
+
+  border:
+    2px solid #00bfff;
+
+  color:#fff;
+
+  border-radius:8px;
+
+  padding:
+    11px 15px;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  text-align:center;
+
+  max-width:90%;
+
+}
+
+
+#toast.show {
+
+  transform:
+    translate(-50%,0);
+
+  opacity:1;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px) {
+
+  body {
+
+    padding:
+      7px 4px 30px;
+
+  }
+
+
+  .card {
+
+    padding:10px;
+
+  }
+
+
+  .section-title {
+
+    font-size:16px;
+
+  }
+
+
+  input,
+  select {
+
+    height:42px;
+
+    font-size:14px;
+
+  }
+
+
+  label {
+
+    font-size:12px;
+
+  }
+
+
+  .req-value {
+
+    font-size:23px;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   PWA APP SPLASH + INSTALL UI
+===================================================== */
+#appSplash{position:fixed;inset:0;z-index:999999;background:#05070d;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .45s ease,visibility .45s ease}
+#appSplash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.splash-logo{width:125px;height:125px;border-radius:28px;box-shadow:0 0 25px rgba(0,255,255,.35),0 0 60px rgba(0,191,255,.15);animation:splashPulse 1.5s ease-in-out infinite}
+.splash-title{margin-top:20px;color:#00ffff;font-size:24px;font-weight:900;text-align:center}
+.splash-subtitle{margin-top:7px;color:#facc15;font-size:13px;font-weight:800;letter-spacing:1px}
+.splash-loader{width:220px;height:6px;margin-top:28px;background:#172033;border-radius:10px;overflow:hidden}
+.splash-loader-bar{width:0%;height:100%;background:#00ffff;border-radius:10px;animation:splashLoading 1.8s ease forwards}
+.splash-status{margin-top:12px;color:#94a3b8;font-size:12px;font-weight:700}
+@keyframes splashPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes splashLoading{0%{width:0%}35%{width:35%}70%{width:70%}100%{width:100%}}
+#installScreen{position:fixed;inset:0;z-index:999998;background:#05070d;display:none;align-items:center;justify-content:center;padding:20px}
+.install-box{width:100%;max-width:390px;background:#07142b;border:2px solid #00bfff;border-radius:18px;padding:25px 20px;text-align:center;box-shadow:0 0 30px rgba(0,191,255,.18)}
+.install-logo{width:100px;height:100px;border-radius:22px;margin-bottom:15px}
+.install-title{color:#00ffff;font-size:24px;font-weight:900}
+.install-text{color:#cbd5e1;font-size:14px;line-height:1.6;margin:12px 0 18px}
+.install-btn{width:100%;padding:14px;border:none;border-radius:9px;background:#10b981;color:#fff;font-size:16px;font-weight:900;cursor:pointer}
+.install-btn i{margin-right:7px}
+.install-later{width:100%;margin-top:8px;padding:11px;border:1px solid #475569;border-radius:8px;background:#172033;color:#cbd5e1;font-size:13px;font-weight:800}
+.ios-help{display:none;margin-top:15px;padding:12px;border-radius:8px;background:#020617;color:#fff;font-size:13px;line-height:1.6}
+.ios-help strong{color:#facc15}
+.install-progress{display:none;margin-top:15px}
+.install-progress-track{height:6px;background:#172033;border-radius:10px;overflow:hidden}
+.install-progress-bar{height:100%;width:0%;background:#00ffff;transition:width .25s ease}
+.install-progress-text{margin-top:8px;color:#00ffff;font-size:12px;font-weight:800}
+@media(max-width:600px){.splash-logo{width:105px;height:105px}.splash-title{font-size:21px}}
+
+</style>
+
+</head>
+
+
+<body>
+<script>
+(function(){
+  try {
+    if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); });
+    if (window.caches) caches.keys().then(function(keys){ Promise.all(keys.map(function(k){ return caches.delete(k); })); });
+  } catch(e) {}
+})();
+</script>
+
+<!-- FORCE NEW MAIN DASHBOARD ON FRESH LOAD -->
+<script>
+(function(){
+  function forceMainDashboard(){
+    var home=document.getElementById('homeScreen');
+    var app=document.querySelector('.app');
+    var calc=document.getElementById('calculatorPage');
+    if(home) home.style.display='block';
+    if(app) app.style.display='none';
+    if(calc) calc.style.display='none';
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceMainDashboard);
+  else forceMainDashboard();
+})();
+</script>
+
+<!-- =====================================================
+     PWA APP SPLASH
+===================================================== -->
+<div id="appSplash">
+  <img src="./icon-512.png" class="splash-logo" alt="Visaka Production Dashboard">
+  <div class="splash-title">VISAKA PRODUCTION</div>
+  <div class="splash-subtitle">PRODUCTION DASHBOARD</div>
+  <div class="splash-loader"><div class="splash-loader-bar"></div></div>
+  <div class="splash-status" id="splashStatus">Starting Dashboard...</div>
+</div>
+
+<!-- =====================================================
+     PWA INSTALL SCREEN
+===================================================== -->
+<div id="installScreen">
+  <div class="install-box">
+    <img src="./icon-512.png" class="install-logo" alt="Visaka Dashboard">
+    <div class="install-title">Visaka Production Dashboard</div>
+    <div class="install-text" id="installText">Install this dashboard as an app for faster and easier access.</div>
+    <button class="install-btn" id="installBtn" type="button"><i class="fa-solid fa-download"></i> INSTALL APP</button>
+    <button class="install-later" id="installLaterBtn" type="button">Continue in Browser</button>
+    <div class="ios-help" id="iosHelp">
+      <strong>iPhone / iPad:</strong><br>
+      Tap the <b>Share</b> button <i class="fa-solid fa-arrow-up-from-bracket"></i>
+      and select <strong>Add to Home Screen</strong>.
+    </div>
+    <div class="install-progress" id="installProgress">
+      <div class="install-progress-track"><div class="install-progress-bar" id="installProgressBar"></div></div>
+      <div class="install-progress-text" id="installProgressText">Preparing app...</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- =====================================================
+     MAIN DASHBOARD
+===================================================== -->
+<div class="home-screen" id="homeScreen">
+  <div class="home-header">
+    <div class="home-title">VISAKA PRODUCTION</div>
+    <div class="home-subtitle">PRODUCTION MANAGEMENT DASHBOARD</div>
+  </div>
+
+  <div class="home-menu-grid">
+    <div class="home-menu-card" onclick="openProductionModule()">
+      <div class="home-menu-icon"><i class="fa-solid fa-industry"></i></div>
+      <div>
+        <div class="home-menu-title">Enter Hourly Sheets</div>
+        <div class="home-menu-text">Hourly production entry, ME%, ROP, target and shift dashboard.</div>
+      </div>
+    </div>
+
+    <div class="home-menu-card" onclick="openCalculatorModule()">
+      <div class="home-menu-icon"><i class="fa-solid fa-calculator"></i></div>
+      <div>
+        <div class="home-menu-title">ME% and ROP Calculate</div>
+        <div class="home-menu-text">Quick live calculation for production, ME% and ROP.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     ME / ROP CALCULATOR MODULE
+===================================================== -->
+<div class="calculator-page" id="calculatorPage">
+  <button class="page-back-btn" type="button" onclick="showHomeDashboard()">
+    <i class="fa-solid fa-arrow-left"></i> MAIN DASHBOARD
+  </button>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-sliders"></i> Calculator Setup</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Size (m)</label>
+        <input type="text" id="calcSize" inputmode="decimal" value="6" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Batch Weight (kg)</label>
+        <input type="text" id="calcBatch" inputmode="decimal" value="1250" oninput="updateCalculator()">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Thickness Type</label>
+      <select id="calcThickness" onchange="updateCalculator()">
+        <option value="Standard">Standard — 6 mm</option>
+        <option value="Non-Standard">Non-Standard — 5 mm</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-bolt"></i> INPUT</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Sheets</label>
+        <input type="text" id="calcSheets" inputmode="numeric" placeholder="Enter sheets" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Hour</label>
+        <select id="calcHour" onchange="updateCalculator()">
+          <option value="1">1 Hour</option><option value="2">2 Hours</option><option value="3">3 Hours</option><option value="4">4 Hours</option>
+          <option value="5">5 Hours</option><option value="6">6 Hours</option><option value="7">7 Hours</option><option value="8" selected>8 Hours</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Beater</label>
+        <input type="text" id="calcBeater" inputmode="decimal" placeholder="Enter beater" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Breakdown (min)</label>
+        <input type="text" id="calcBD" inputmode="decimal" placeholder="Enter B/D" oninput="updateCalculator()">
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-live">
+    <div class="calc-live-title">LIVE CALCULATION → RESULT</div>
+    <div class="calc-results">
+      <div class="calc-result"><span class="calc-result-label">PRODUCTION</span><span class="calc-result-value" id="calcProduction">0.000 MT</span></div>
+      <div class="calc-result"><span class="calc-result-label">ME%</span><span class="calc-result-value" id="calcME">0.000%</span></div>
+      <div class="calc-result"><span class="calc-result-label">ROP</span><span class="calc-result-value" id="calcROP">0.000 MT/hr</span></div>
+    </div>
+  </div>
+
+  <button class="btn btn-settings" type="button" onclick="clearCalculator()">
+    <i class="fa-solid fa-rotate-left"></i> CLEAR / RESET
+  </button>
+</div>
+
+<div class="app">
+
+<button class="page-back-btn" type="button" onclick="showHomeDashboard()">
+  <i class="fa-solid fa-arrow-left"></i> MAIN DASHBOARD
+</button>
+
+<!-- =================================================
+     TARGET PANEL
+================================================= -->
+
+<div class="target-panel">
+
+
+  <div class="top-bar">
+
+    <span id="bannerShift">
+      Shift A
+    </span>
+
+    <span id="bannerDate">
+      -
+    </span>
+
+  </div>
+
+
+  <div class="req-box">
+
+    <div
+      class="req-value"
+      id="topReqSheetsVal"
+    >
+      SETUP REQUIRED
+    </div>
+
+    <span class="req-label">
+      TOTAL REQUIRED SHEETS
+    </span>
+
+  </div>
+
+
+  <div class="kpi-grid">
+
+
+    <div class="kpi">
+
+      PRODUCED EQ. SHEETS
+
+      <span
+        class="kpi-value"
+        id="bannerProduced"
+      >
+        -
+      </span>
+
+    </div>
+
+
+    <div class="kpi">
+
+      REMAINING SHEETS
+
+      <span
+        class="kpi-value"
+        id="bannerReqSheet"
+      >
+        -
+      </span>
+
+    </div>
+
+
+    <div class="kpi">
+
+      REQUIRED / HR
+
+      <span
+        class="kpi-value"
+        id="bannerReqHr"
+      >
+        -
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="meta-row">
+
+    <span>
+
+      Target Size:
+
+      <strong
+        id="bannerTargetSize"
+      >
+        -
+      </strong>
+
+      m
+
+    </span>
+
+
+    <span>
+
+      SFT:
+
+      <strong
+        id="bannerSft"
+      >
+        -
+      </strong>
+
+    </span>
+
+  </div>
+
+
+  <div
+    class="hours-banner"
+    id="bannerTimeLeft"
+  >
+    8 HOURS AVAILABLE
+  </div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     MASTER SETTINGS
+================================================= -->
+
+<div class="card">
+
+
+  <div class="section-title">
+
+    <i class="fa-solid fa-gears"></i>
+
+    Master Settings
+
+  </div>
+
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        Target Production (MT)
+      </label>
+
+      <input
+        type="text"
+        id="setConfigTarget"
+        inputmode="decimal"
+        placeholder="Enter Target MT"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Target Size (m)
+      </label>
+
+      <input
+        type="text"
+        id="setConfigTargetSize"
+        inputmode="decimal"
+        placeholder="Enter Target Size"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>
+      Batch Weight (kg)
+    </label>
+
+    <input
+      type="text"
+      id="setConfigBatch"
+      inputmode="decimal"
+      placeholder="Enter Batch Weight"
+      autocomplete="off"
+    >
+
+  </div>
+
+
+  <div
+    class="progress-wrap"
+    id="settingsProgressWrap"
+  >
+
+    <div
+      class="progress-bar"
+      id="settingsProgress"
+    ></div>
+
+  </div>
+
+
+  <button
+    class="btn btn-settings"
+    id="settingsBtn"
+    onclick="saveSettingsData()"
+  >
+
+    <i class="fa-solid fa-floppy-disk"></i>
+
+    SAVE SETTINGS
+
+  </button>
+
+
+</div>
+
+
+
+<!-- =================================================
+     HOURLY PRODUCTION ENTRY
+================================================= -->
+
+<div class="card">
+
+
+  <div
+    class="section-title"
+    id="formTitle"
+  >
+
+    <i class="fa-solid fa-pen-to-square"></i>
+
+    Hourly Production Entry
+
+  </div>
+
+
+  <input
+    type="hidden"
+    id="editRowIndex"
+  >
+
+
+  <!-- SHIFT + HOUR -->
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        Shift
+      </label>
+
+      <input
+        type="text"
+        id="opShift"
+        value="A"
+        maxlength="1"
+        placeholder="A / B / C"
+        autocomplete="off"
+        oninput="
+          this.value =
+          this.value.toUpperCase();
+          handleShiftChange();
+        "
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Production Hour
+      </label>
+
+      <!-- ONLY DROPDOWN IN ENTIRE APP -->
+
+      <select id="opHour">
+
+        <option value="1st Hour">
+          1st Hour
+        </option>
+
+        <option value="2nd Hour">
+          2nd Hour
+        </option>
+
+        <option value="3rd Hour">
+          3rd Hour
+        </option>
+
+        <option value="4th Hour">
+          4th Hour
+        </option>
+
+        <option value="5th Hour">
+          5th Hour
+        </option>
+
+        <option value="6th Hour">
+          6th Hour
+        </option>
+
+        <option value="7th Hour">
+          7th Hour
+        </option>
+
+        <option value="8th Hour">
+          8th Hour
+        </option>
+
+      </select>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- THICKNESS MODE - COMMON SHIFT CONTROL -->
+  <div class="form-group" style="margin-top:4px;">
+    <label>Thickness / Running Type</label>
+    <select id="thicknessMode" onchange="changeThicknessMode()">
+      <option value="Standard">Standard — 6 mm (12.8 kg/m)</option>
+      <option value="Non-Standard">Non-Standard — 5 mm (10.6667 kg/m)</option>
+    </select>
+    <div style="font-size:10px;color:#94a3b8;margin-top:4px;">This single selection applies to the hour being entered and remains active until changed.</div>
+  </div>
+
+  <!-- SIZE -->
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        1st Size (m)
+      </label>
+
+      <input
+        type="text"
+        id="opSize1"
+        inputmode="decimal"
+        value="6"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        2nd Size (m)
+      </label>
+
+      <input
+        type="text"
+        id="opSize2"
+        inputmode="decimal"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <!-- SHEETS -->
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        1st Size Sheets
+      </label>
+
+      <input
+        type="text"
+        id="opS1"
+        inputmode="numeric"
+        placeholder="Enter sheets"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        2nd Size Sheets
+      </label>
+
+      <input
+        type="text"
+        id="opS2"
+        inputmode="numeric"
+        placeholder="Enter sheets"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <!-- BEATER + MOULDING -->
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        Beater
+      </label>
+
+      <input
+        type="text"
+        id="opBeater"
+        inputmode="decimal"
+        placeholder="Enter Beater"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Moulding
+      </label>
+
+      <input
+        type="text"
+        id="opMoulding"
+        inputmode="decimal"
+        placeholder="Enter Moulding"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <!-- BD + GSR -->
+
+  <div class="form-row">
+
+
+    <div class="form-group">
+
+      <label>
+        B/D
+      </label>
+
+      <input
+        type="text"
+        id="opBD"
+        inputmode="decimal"
+        placeholder="Minutes"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        GSR
+      </label>
+
+      <input
+        type="text"
+        id="opGSR"
+        inputmode="numeric"
+        placeholder="GSR sheets"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <div
+    class="progress-wrap"
+    id="submitProgressWrap"
+  >
+
+    <div
+      class="progress-bar"
+      id="submitProgress"
+    ></div>
+
+  </div>
+
+
+  <button
+    class="btn btn-save"
+    id="submitBtn"
+    onclick="submitProductionEntry()"
+  >
+
+    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+    SUBMIT HOURLY DATA
+
+  </button>
+
+
+  <button
+    class="btn btn-cancel"
+    id="cancelBtn"
+    onclick="resetForm()"
+  >
+
+    <i class="fa-solid fa-xmark"></i>
+
+    CANCEL EDIT
+
+  </button>
+
+
+</div>
+
+
+
+<!-- =================================================
+     PRODUCTION LOG
+================================================= -->
+
+<div class="card">
+
+
+  <div class="section-title">
+
+    <i class="fa-solid fa-chart-line"></i>
+
+    Production Log & Metrics
+
+  </div>
+
+
+  <button
+    class="btn btn-refresh"
+    id="refreshBtn"
+    onclick="loadDashboardData()"
+  >
+
+    <i
+      class="fa-solid fa-rotate"
+      id="refreshIcon"
+    ></i>
+
+    REFRESH DATA
+
+  </button>
+
+
+  <div class="table-wrap">
+
+
+    <table
+      class="production-table"
+    >
+
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Hour
+          </th>
+
+          <th>
+            Size (m)
+          </th>
+
+          <th>
+            Thickness
+          </th>
+
+          <th>
+            Sheets
+          </th>
+
+          <th>
+            Beater
+          </th>
+
+          <th>
+            B/D
+          </th>
+
+          <th>
+            GSR
+          </th>
+
+          <th>
+            Output
+          </th>
+
+          <th>
+            Input
+          </th>
+
+          <th>
+            ME%
+          </th>
+
+          <th>
+            ROP
+          </th>
+
+          <th>
+            Moulding
+          </th>
+
+          <th>
+            Moulding MT
+          </th>
+
+          <th>
+            Action
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody
+        id="productionTableBody"
+      >
+
+        <tr>
+
+          <td
+            colspan="14"
+            style="
+              padding:20px;
+              color:#00ffff;
+            "
+          >
+
+            Loading data...
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+
+    </table>
+
+
+  </div>
+
+
+  <!-- METRICS -->
+
+  <div class="metrics-grid">
+
+
+    <div class="metric-box">
+
+      <span class="metric-label">
+        TOTAL PRODUCTION
+      </span>
+
+      <span
+        class="metric-value"
+        id="totalProduction"
+      >
+        0.00 MT
+      </span>
+
+    </div>
+
+
+    <div class="metric-box">
+
+      <span class="metric-label">
+        TOTAL INPUT
+      </span>
+
+      <span
+        class="metric-value"
+        id="totalInput"
+      >
+        0.00 MT
+      </span>
+
+    </div>
+
+
+    <div class="metric-box">
+
+      <span class="metric-label">
+        OVERALL ME%
+      </span>
+
+      <span
+        class="metric-value"
+        id="overallME"
+      >
+        0.0%
+      </span>
+
+    </div>
+
+
+    <div class="metric-box">
+
+      <span class="metric-label">
+        OVERALL ROP
+      </span>
+
+      <span
+        class="metric-value"
+        id="overallROP"
+      >
+        0.00 MT/hr
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- GSR -->
+
+  <div class="gsr-card">
+
+
+    <div class="gsr-title">
+
+      <i
+        class="fa-solid fa-triangle-exclamation"
+      ></i>
+
+      TOTAL GSR SHEETS
+
+    </div>
+
+
+    <div
+      class="gsr-value"
+      id="totalGSR"
+    >
+      0 SHEETS
+    </div>
+
+
+  </div>
+
+
+  <!-- DELETE ALL -->
+
+  <button
+    class="delete-all"
+    id="deleteAllBtn"
+    onclick="openDeleteAllModal()"
+  >
+
+    <i
+      class="fa-solid fa-trash-can"
+    ></i>
+
+    DELETE ALL HOURS
+
+  </button>
+
+
+  <!-- REPORT -->
+
+  <div class="report-grid">
+
+
+    <button
+      class="report-btn whatsapp-report"
+      onclick="sendShiftWhatsApp()"
+    >
+
+      <i
+        class="fa-brands fa-whatsapp"
+      ></i>
+
+      WHATSAPP SHIFT REPORT
+
+    </button>
+
+
+    <button
+      class="report-btn pdf-report"
+      onclick="generateShiftPDF()"
+    >
+
+      <i
+        class="fa-solid fa-file-pdf"
+      ></i>
+
+      PDF SHIFT REPORT
+
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     CUSTOM DELETE MODAL
+================================================= -->
+
+<div
+  class="modal-overlay"
+  id="confirmModal"
+>
+
+
+  <div class="modal-box">
+
+
+    <div class="modal-icon">
+
+      <i
+        class="fa-solid fa-triangle-exclamation"
+      ></i>
+
+    </div>
+
+
+    <div
+      class="modal-title"
+      id="confirmTitle"
+    >
+      Are you sure?
+    </div>
+
+
+    <div
+      class="modal-message"
+      id="confirmMessage"
+    >
+      Please confirm.
+    </div>
+
+
+    <div class="modal-buttons">
+
+
+      <button
+        class="modal-cancel"
+        onclick="closeConfirmModal()"
+      >
+        CANCEL
+      </button>
+
+
+      <button
+        class="modal-delete"
+        id="confirmActionBtn"
+      >
+        DELETE
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<div id="toast"></div>
+
+
+
+<script>
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbxybGks2744Wmc3go7qwd7BJ_kEi_i577zQbaKyHX0Er3M7xssKxVmNpdep9ClMr3tHmw/exec";
+
+
+const OUTPUT_CONSTANT = 12.8;
+const NON_STANDARD_WEIGHT_PER_METER = OUTPUT_CONSTANT * (5 / 6);
+
+const MOULDING_CONSTANT = 7.7;
+
+const SHIFT_HOURS = 8;
+
+
+let globalData = [];
+
+
+let masterSettings = {
+
+  targetProd:"",
+  targetSize:"",
+  batchWeight:""
+
+};
+
+
+let pendingDeleteRow =
+  null;
+
+
+function showHomeDashboard() {
+  document.getElementById("homeScreen").style.display = "block";
+  document.getElementById("calculatorPage").style.display = "none";
+  document.querySelector(".app").style.display = "none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openProductionModule() {
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("calculatorPage").style.display = "none";
+  document.querySelector(".app").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+  loadDashboardData();
+}
+
+function openCalculatorModule() {
+  document.getElementById("homeScreen").style.display = "none";
+  document.querySelector(".app").style.display = "none";
+  document.getElementById("calculatorPage").style.display = "block";
+  updateCalculator();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateCalculator() {
+  const size = Number(document.getElementById("calcSize").value) || 0;
+  const batch = Number(document.getElementById("calcBatch").value) || 0;
+  const sheets = Number(document.getElementById("calcSheets").value) || 0;
+  const hours = Number(document.getElementById("calcHour").value) || 0;
+  const beater = Number(document.getElementById("calcBeater").value) || 0;
+  const bd = Number(document.getElementById("calcBD").value) || 0;
+  const type = document.getElementById("calcThickness").value;
+  const weight = getWeightPerMeter(type);
+  const production = sheets > 0 && size > 0 ? (sheets * size * weight) / 1000 : 0;
+  const input = beater > 0 && batch > 0 ? (beater * batch) / 1000 : 0;
+  const me = input > 0 ? ((production - input) / input) * 100 : 0;
+  const runMinutes = Math.max(1, (hours * 60) - Math.max(0, bd));
+  const rop = production > 0 && hours > 0 ? production * 60 / runMinutes : 0;
+  document.getElementById("calcProduction").innerText = display3(production) + " MT";
+  document.getElementById("calcME").innerText = display3(me) + "%";
+  document.getElementById("calcROP").innerText = display3(rop) + " MT/hr";
+}
+
+function clearCalculator() {
+  document.getElementById("calcSheets").value = "";
+  document.getElementById("calcBeater").value = "";
+  document.getElementById("calcBD").value = "";
+  document.getElementById("calcSize").value = "6";
+  document.getElementById("calcBatch").value = "1250";
+  document.getElementById("calcHour").value = "8";
+  document.getElementById("calcThickness").value = "Standard";
+  updateCalculator();
+}
+
+/* =====================================================
+   JSONP
+===================================================== */
+
+function jsonp(
+  url,
+  callbackName
+) {
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.src =
+    url +
+    "&callback=" +
+    callbackName +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror =
+    function() {
+
+      showToast(
+        "❌ Server connection failed."
+      );
+
+
+      finishProgress();
+
+      stopRefresh();
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadDashboardData() {
+
+  const refreshBtn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  const refreshIcon =
+    document.getElementById(
+      "refreshIcon"
+    );
+
+
+  if (refreshBtn) {
+
+    refreshBtn.disabled =
+      true;
+
+  }
+
+
+  if (refreshIcon) {
+
+    refreshIcon.classList.add(
+      "spinning"
+    );
+
+  }
+
+
+  showLoadingState();
+
+
+  jsonp(
+
+    SCRIPT_URL +
+    "?action=getDashboardData",
+
+    "handleDashboardResponse"
+
+  );
+
+}
+
+
+/* =====================================================
+   STOP REFRESH
+===================================================== */
+
+function stopRefresh() {
+
+  const refreshBtn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  const refreshIcon =
+    document.getElementById(
+      "refreshIcon"
+    );
+
+
+  if (refreshBtn) {
+
+    refreshBtn.disabled =
+      false;
+
+  }
+
+
+  if (refreshIcon) {
+
+    refreshIcon.classList.remove(
+      "spinning"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DASHBOARD RESPONSE
+===================================================== */
+
+window.handleDashboardResponse =
+function(res) {
+
+  stopRefresh();
+
+
+  if (
+    !res ||
+    res.status !== "success"
+  ) {
+
+    showToast(
+      "❌ Failed to load data."
+    );
+
+    return;
+
+  }
+
+
+  globalData =
+    res.data.rows || [];
+
+
+  masterSettings =
+    res.data.masterSettings ||
+    masterSettings;
+
+
+  document.getElementById(
+    "setConfigTarget"
+  ).value =
+
+    masterSettings.targetProd !== ""
+      ? masterSettings.targetProd
+      : "";
+
+
+  document.getElementById(
+    "setConfigTargetSize"
+  ).value =
+
+    masterSettings.targetSize !== ""
+      ? masterSettings.targetSize
+      : "";
+
+
+  document.getElementById(
+    "setConfigBatch"
+  ).value =
+
+    masterSettings.batchWeight !== ""
+      ? masterSettings.batchWeight
+      : "";
+
+
+  syncThicknessModeFromRows();
+
+  renderDashboard();
+
+};
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+function todayDateString() {
+
+  const d =
+    new Date();
+
+
+  const months = [
+
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+
+  ];
+
+
+  return (
+
+    String(
+      d.getDate()
+    ).padStart(2,"0") +
+
+    "-" +
+
+    months[
+      d.getMonth()
+    ] +
+
+    "-" +
+
+    d.getFullYear()
+
+  );
+
+}
+
+
+/* =====================================================
+   SHIFT
+===================================================== */
+
+function getSelectedShift() {
+
+  return document
+
+    .getElementById(
+      "opShift"
+    )
+
+    .value
+
+    .trim()
+
+    .toUpperCase();
+
+}
+
+
+function validShift() {
+
+  const shift =
+    getSelectedShift();
+
+
+  if (
+    !["A","B","C"]
+      .includes(shift)
+  ) {
+
+    showToast(
+      "⚠️ Shift must be A, B or C."
+    );
+
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
+   HOUR NUMBER
+===================================================== */
+
+function hourNumber(hour) {
+
+  const n =
+    parseInt(
+      String(hour || "")
+    );
+
+
+  return isNaN(n)
+    ? 0
+    : n;
+
+}
+
+
+/* =====================================================
+   CURRENT SHIFT ROWS
+===================================================== */
+
+function getWeightPerMeter(type) {
+  return String(type || "Standard") === "Non-Standard"
+    ? NON_STANDARD_WEIGHT_PER_METER
+    : OUTPUT_CONSTANT;
+}
+
+function getThicknessTypeLabel(type) {
+  return String(type || "Standard") === "Non-Standard" ? "Non-Standard" : "Standard";
+}
+
+function syncThicknessModeFromRows() {
+  const rows = getCurrentShiftRows().slice().sort((a,b) => hourNumber(a.hour) - hourNumber(b.hour));
+  const select = document.getElementById("thicknessMode");
+  if (!select) return;
+  if (rows.length) select.value = getThicknessTypeLabel(rows[rows.length - 1].thicknessType);
+  else if (!select.value) select.value = "Standard";
+}
+
+function handleShiftChange() {
+  syncThicknessModeFromRows();
+  renderDashboard();
+}
+
+function changeThicknessMode() {
+  renderDashboard();
+}
+
+function getCurrentShiftRows() {
+
+  const shift =
+    getSelectedShift();
+
+
+  const today =
+    todayDateString();
+
+
+  return globalData.filter(
+    function(r) {
+
+      return (
+
+        String(r.shift)
+          .trim()
+          .toUpperCase()
+          === shift
+
+        &&
+
+        String(r.date)
+          .trim()
+          === today
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ROW PRODUCTION
+===================================================== */
+
+function getRowProduction(r) {
+
+  let sheets = 0;
+
+  let size = 0;
+
+
+  /* SECOND SIZE RUNNING */
+
+  if (
+
+    r.s2Sheets !== "" &&
+
+    r.s2Sheets !== null &&
+
+    r.s2Sheets !== undefined &&
+
+    !isNaN(
+      Number(r.s2Sheets)
+    ) &&
+
+    Number(r.s2Sheets) > 0
+
+  ) {
+
+    sheets =
+      Number(r.s2Sheets);
+
+
+    size =
+      Number(r.size2) || 0;
+
+  }
+
+
+  /* FIRST SIZE RUNNING */
+
+  else if (
+
+    r.s1Sheets !== "" &&
+
+    r.s1Sheets !== null &&
+
+    r.s1Sheets !== undefined &&
+
+    !isNaN(
+      Number(r.s1Sheets)
+    ) &&
+
+    Number(r.s1Sheets) > 0
+
+  ) {
+
+    sheets =
+      Number(r.s1Sheets);
+
+
+    size =
+      Number(r.size1) || 0;
+
+  }
+
+
+  /* SHEET PRODUCTION */
+
+  let sheetOutput = 0;
+
+
+  if (
+
+    sheets > 0 &&
+
+    size > 0
+
+  ) {
+
+    const weightPerMeter = getWeightPerMeter(r.thicknessType);
+
+    sheetOutput =
+
+      (
+
+        sheets *
+
+        size *
+
+        weightPerMeter
+
+      ) / 1000;
+
+  }
+
+
+  /* MOULDING PRODUCTION */
+
+  let mouldingOutput = 0;
+
+
+  const moulding =
+    Number(r.moulding) || 0;
+
+
+  if (
+    moulding > 0
+  ) {
+
+    mouldingOutput =
+
+      (
+
+        moulding *
+
+        MOULDING_CONSTANT
+
+      ) / 1000;
+
+  }
+
+
+  /* TOTAL PRODUCTION */
+
+  const totalOutput =
+
+    sheetOutput +
+
+    mouldingOutput;
+
+
+  return {
+
+    sheets:
+      sheets,
+
+    size:
+      size,
+
+    sheetOutput:
+      sheetOutput,
+
+    mouldingOutput:
+      mouldingOutput,
+
+    output:
+      totalOutput
+
+  };
+
+}
+
+
+/* =====================================================
+   RENDER DASHBOARD
+===================================================== */
+
+function renderDashboard() {
+
+  const shift =
+    getSelectedShift();
+
+
+  document.getElementById(
+    "bannerShift"
+  ).innerText =
+
+    "Shift " +
+    (shift || "-");
+
+
+  document.getElementById(
+    "bannerDate"
+  ).innerText =
+
+    todayDateString();
+
+
+  const rows =
+    getCurrentShiftRows();
+
+
+  renderTable(
+    rows
+  );
+
+
+  updateMetrics(
+    rows
+  );
+
+
+  updateGSR(
+    rows
+  );
+
+
+  updateBanner(
+    rows
+  );
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+function display3(value) {
+
+  const n = Number(value);
+
+  if (!Number.isFinite(n)) return "";
+
+  return (Math.trunc(n * 1000) / 1000).toFixed(3);
+
+}
+
+
+function renderTable(rows) {
+
+  const tbody =
+    document.getElementById(
+      "productionTableBody"
+    );
+
+
+  if (!rows.length) {
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="14"
+          style="
+            padding:20px;
+            color:#94a3b8;
+          "
+        >
+
+          No production entries found.
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  rows.sort(
+    function(a,b) {
+
+      return (
+
+        hourNumber(a.hour) -
+
+        hourNumber(b.hour)
+
+      );
+
+    }
+  );
+
+
+  let html = "";
+
+
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(r);
+
+
+      /* INPUT */
+
+      let input = 0;
+
+
+      if (
+
+        masterSettings.batchWeight !== "" &&
+
+        r.beater !== "" &&
+
+        !isNaN(
+          Number(r.beater)
+        )
+
+      ) {
+
+        input =
+
+          (
+
+            Number(r.beater) *
+
+            Number(
+              masterSettings.batchWeight
+            )
+
+          ) / 1000;
+
+      }
+
+
+      /* ME% */
+
+      let me = "";
+
+
+      if (
+
+        p.sheetOutput > 0 &&
+
+        input > 0
+
+      ) {
+
+        me =
+
+          (
+
+            (
+
+              (p.sheetOutput - input) /
+
+              input
+
+            ) * 100
+
+          );
+
+      }
+
+
+      /* ROP */
+
+      let rop = "";
+
+
+      if (
+        p.output > 0
+      ) {
+
+        const bd =
+          Number(r.bd) || 0;
+
+
+        if (
+          bd < 60
+        ) {
+
+          rop =
+
+            (
+
+              p.output *
+
+              60 /
+
+              Math.max(
+                1,
+                60 - bd
+              )
+
+            ).toFixed(2);
+
+        }
+
+      }
+
+
+      html += `
+
+        <tr>
+
+          <td class="hour">
+            ${escapeHTML(r.hour)}
+          </td>
+
+
+          <td>
+            ${
+              p.size
+                ? p.size
+                : ""
+            }
+          </td>
+
+
+          <td>
+            ${escapeHTML(getThicknessTypeLabel(r.thicknessType))}
+          </td>
+
+
+          <td class="yellow">
+            ${
+              p.sheets
+                ? p.sheets
+                : ""
+            }
+          </td>
+
+
+          <td>
+            ${
+              r.beater !== ""
+                ? r.beater
+                : ""
+            }
+          </td>
+
+
+          <td>
+            ${
+              r.bd !== ""
+                ? r.bd
+                : ""
+            }
+          </td>
+
+
+          <td class="yellow">
+            ${
+              r.gsr !== ""
+                ? r.gsr
+                : ""
+            }
+          </td>
+
+
+          <td class="yellow">
+            ${
+              p.output > 0
+                ? display3(p.output)
+                : ""
+            }
+          </td>
+
+
+          <td>
+            ${
+              input > 0
+                ? input.toFixed(2)
+                : ""
+            }
+          </td>
+
+
+          <td class="cyan">
+            ${me !== "" ? display3(me) + "%" : ""}
+          </td>
+
+
+          <td>
+            ${rop}
+          </td>
+
+
+          <td>
+            ${
+              r.moulding !== ""
+                ? r.moulding
+                : ""
+            }
+          </td>
+
+
+          <td class="yellow">
+            ${
+              p.mouldingOutput > 0
+                ? p.mouldingOutput.toFixed(2)
+                : ""
+            }
+          </td>
+
+
+          <td>
+
+            <div class="action-buttons">
+
+
+              <button
+                class="action-btn edit-btn"
+                title="Edit"
+                onclick="
+                  editRow(
+                    ${r.rowIndex}
+                  )
+                "
+              >
+
+                <i
+                  class="fa-solid fa-pen"
+                ></i>
+
+              </button>
+
+
+              <button
+                class="action-btn delete-btn"
+                title="Delete"
+                onclick="
+                  deleteRow(
+                    ${r.rowIndex}
+                  )
+                "
+              >
+
+                <i
+                  class="fa-solid fa-trash-can"
+                ></i>
+
+              </button>
+
+
+              <button
+                class="action-btn whatsapp-btn"
+                title="WhatsApp"
+                onclick="
+                  sendRowWhatsApp(
+                    ${r.rowIndex}
+                  )
+                "
+              >
+
+                <i
+                  class="fa-brands fa-whatsapp"
+                ></i>
+
+              </button>
+
+
+              <button
+                class="action-btn pdf-btn"
+                title="PDF"
+                onclick="
+                  generateRowPDF(
+                    ${r.rowIndex}
+                  )
+                "
+              >
+
+                <i
+                  class="fa-solid fa-file-pdf"
+                ></i>
+
+              </button>
+
+
+            </div>
+
+          </td>
+
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  tbody.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   METRICS
+===================================================== */
+
+function updateMetrics(rows) {
+
+  let totalOutput = 0;
+
+  let totalInput = 0;
+
+  let totalBD = 0;
+
+  let totalMEInput = 0;
+
+  let totalMESheetOutput = 0;
+
+
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(r);
+
+
+      /*
+       TOTAL PRODUCTION
+       = SHEET + MOULDING
+      */
+
+      totalOutput +=
+        p.output;
+
+
+      /* INPUT */
+
+      if (
+
+        masterSettings.batchWeight !== "" &&
+
+        r.beater !== "" &&
+
+        !isNaN(
+          Number(r.beater)
+        )
+
+      ) {
+
+        const inp =
+
+          (
+
+            Number(r.beater) *
+
+            Number(
+              masterSettings.batchWeight
+            )
+
+          ) / 1000;
+
+
+        totalInput +=
+          inp;
+
+
+        totalMEInput +=
+          inp;
+
+
+        /*
+         ME% uses SHEET OUTPUT
+        */
+
+        totalMESheetOutput +=
+          p.sheetOutput;
+
+      }
+
+
+      totalBD +=
+        Number(r.bd) || 0;
+
+    }
+  );
+
+
+  /* OVERALL ME */
+
+  let overallME = 0;
+
+
+  if (
+    totalMEInput > 0
+  ) {
+
+    overallME =
+
+      (
+
+        (totalMESheetOutput - totalMEInput) /
+
+        totalMEInput
+
+      ) * 100;
+
+  }
+
+
+  /* OVERALL ROP */
+
+  let overallROP = 0;
+
+
+  if (
+    totalOutput > 0
+  ) {
+
+    const runMinutes =
+
+      Math.max(
+
+        1,
+
+        SHIFT_HOURS * 60 -
+
+        totalBD
+
+      );
+
+
+    overallROP =
+
+      (
+
+        totalOutput *
+
+        60 /
+
+        runMinutes
+
+      );
+
+  }
+
+
+  document.getElementById(
+    "totalProduction"
+  ).innerText =
+
+    display3(totalOutput) +
+
+    " MT";
+
+
+  document.getElementById(
+    "totalInput"
+  ).innerText =
+
+    totalInput.toFixed(2) +
+
+    " MT";
+
+
+  document.getElementById(
+    "overallME"
+  ).innerText =
+
+    display3(overallME) +
+
+    "%";
+
+
+  document.getElementById(
+    "overallROP"
+  ).innerText =
+
+    overallROP.toFixed(2) +
+
+    " MT/hr";
+
+}
+
+
+/* =====================================================
+   GSR
+===================================================== */
+
+function updateGSR(rows) {
+
+  let total = 0;
+
+
+  rows.forEach(
+    function(r) {
+
+      total +=
+        Number(r.gsr) || 0;
+
+    }
+  );
+
+
+  document.getElementById(
+    "totalGSR"
+  ).innerText =
+
+    total +
+
+    " SHEETS";
+
+}
+
+
+/* =====================================================
+   TARGET BANNER
+===================================================== */
+
+function updateBanner(rows) {
+
+  const targetProd =
+    Number(
+      masterSettings.targetProd
+    );
+
+
+  const targetSize =
+    Number(
+      masterSettings.targetSize
+    );
+
+
+  if (
+
+    !targetProd ||
+
+    !targetSize ||
+
+    targetSize <= 0
+
+  ) {
+
+    document.getElementById(
+      "topReqSheetsVal"
+    ).innerText =
+      "SETUP REQUIRED";
+
+
+    document.getElementById(
+      "bannerProduced"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "bannerReqSheet"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "bannerReqHr"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "bannerTargetSize"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "bannerSft"
+    ).innerText =
+      "-";
+
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      "8 HOURS AVAILABLE";
+
+
+    return;
+
+  }
+
+
+  /* ==========================================
+     TOTAL REQUIRED SHEETS
+  ========================================== */
+
+  const totalRequiredSheets =
+
+    (
+
+      targetProd *
+
+      1000
+
+    ) /
+
+    (
+
+      targetSize *
+
+      OUTPUT_CONSTANT
+
+    );
+
+
+  /* ==========================================
+     TOTAL OUTPUT
+     SHEET + MOULDING
+  ========================================== */
+
+  let totalOutput = 0;
+
+
+  rows.forEach(
+    function(r) {
+
+      totalOutput +=
+
+        getRowProduction(
+          r
+        ).output;
+
+    }
+  );
+
+
+  /* ==========================================
+     PRODUCED EQUIVALENT SHEETS
+  ========================================== */
+
+  const producedEquivalentSheets =
+
+    (
+
+      totalOutput *
+
+      1000
+
+    ) /
+
+    (
+
+      targetSize *
+
+      OUTPUT_CONSTANT
+
+    );
+
+
+  /* ==========================================
+     REMAINING SHEETS
+  ========================================== */
+
+  const remainingSheets =
+
+    Math.max(
+
+      0,
+
+      totalRequiredSheets -
+
+      producedEquivalentSheets
+
+    );
+
+
+  /* ==========================================
+     LATEST COMPLETED HOUR
+  ========================================== */
+
+  let latestHour = 0;
+
+
+  rows.forEach(
+    function(r) {
+
+      const n =
+        hourNumber(
+          r.hour
+        );
+
+
+      if (
+        n > latestHour
+      ) {
+
+        latestHour =
+          n;
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================
+     REMAINING HOURS
+  ========================================== */
+
+  const remainingHours =
+
+    Math.max(
+
+      0,
+
+      SHIFT_HOURS -
+
+      latestHour
+
+    );
+
+
+  /* ==========================================
+     REQUIRED PER HOUR
+  ========================================== */
+
+  const requiredPerHour =
+
+    remainingHours > 0
+
+      ? remainingSheets /
+        remainingHours
+
+      : 0;
+
+
+  /* ==========================================
+     SFT
+
+     3600 SECONDS / REQUIRED SHEETS PER HOUR
+  ========================================== */
+
+  const sft =
+
+    requiredPerHour > 0
+
+      ? 3600 /
+        requiredPerHour
+
+      : 0;
+
+
+  /* ==========================================
+     DISPLAY
+  ========================================== */
+
+  document.getElementById(
+    "topReqSheetsVal"
+  ).innerText =
+
+    totalRequiredSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerProduced"
+  ).innerText =
+
+    producedEquivalentSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerReqSheet"
+  ).innerText =
+
+    remainingSheets.toFixed(2);
+
+
+  document.getElementById(
+    "bannerReqHr"
+  ).innerText =
+
+    requiredPerHour.toFixed(2);
+
+
+  document.getElementById(
+    "bannerTargetSize"
+  ).innerText =
+
+    targetSize;
+
+
+  /* SFT IN SECONDS */
+
+  document.getElementById(
+    "bannerSft"
+  ).innerText =
+
+    sft > 0
+
+      ? sft.toFixed(2) +
+        " SEC"
+
+      : "-";
+
+
+  /* ==========================================
+     REMAINING HOURS
+  ========================================== */
+
+  if (
+    remainingHours === 0
+  ) {
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+      "NO HOURS LEFT";
+
+  } else {
+
+    document.getElementById(
+      "bannerTimeLeft"
+    ).innerText =
+
+      remainingHours +
+
+      " HOURS AVAILABLE";
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE SETTINGS
+===================================================== */
+
+function saveSettingsData() {
+
+  const target =
+    document
+
+      .getElementById(
+        "setConfigTarget"
+      )
+
+      .value
+
+      .trim();
+
+
+  const targetSize =
+    document
+
+      .getElementById(
+        "setConfigTargetSize"
+      )
+
+      .value
+
+      .trim();
+
+
+  const batch =
+    document
+
+      .getElementById(
+        "setConfigBatch"
+      )
+
+      .value
+
+      .trim();
+
+
+  if (
+
+    !target ||
+
+    !targetSize ||
+
+    !batch
+
+  ) {
+
+    showToast(
+      "⚠️ Please fill all settings."
+    );
+
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "settingsBtn"
+    );
+
+
+  const wrap =
+    document.getElementById(
+      "settingsProgressWrap"
+    );
+
+
+  const progress =
+    document.getElementById(
+      "settingsProgress"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.innerHTML =
+    '<i class="fa-solid fa-spinner fa-spin"></i> SAVING...';
+
+
+  wrap.style.display =
+    "block";
+
+
+  progress.style.width =
+    "40%";
+
+
+  window.handleSettingsResponse =
+    function(res) {
+
+      progress.style.width =
+        "100%";
+
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+        '<i class="fa-solid fa-floppy-disk"></i> SAVE SETTINGS';
+
+
+      setTimeout(
+        function() {
+
+          wrap.style.display =
+            "none";
+
+          progress.style.width =
+            "0%";
+
+        },
+        400
+      );
+
+
+      if (
+
+        res &&
+
+        res.status ===
+          "success"
+
+      ) {
+
+        showToast(
+          "✅ Settings saved."
+        );
+
+
+        loadDashboardData();
+
+      } else {
+
+        showToast(
+          "❌ Failed to save settings."
+        );
+
+      }
+
+    };
+
+
+  jsonp(
+
+    SCRIPT_URL +
+
+    "?action=saveSettings" +
+
+    "&targetProd=" +
+
+    encodeURIComponent(
+      target
+    ) +
+
+    "&targetSize=" +
+
+    encodeURIComponent(
+      targetSize
+    ) +
+
+    "&batchWeight=" +
+
+    encodeURIComponent(
+      batch
+    ),
+
+    "handleSettingsResponse"
+
+  );
+
+}
+
+
+/* =====================================================
+   SUBMIT PRODUCTION
+===================================================== */
+
+function submitProductionEntry() {
+
+  if (
+    !validShift()
+  )
+    return;
+
+
+  const rowIndex =
+    document.getElementById(
+      "editRowIndex"
+    ).value;
+
+
+  const shift =
+    getSelectedShift();
+
+
+  const hour =
+    document.getElementById(
+      "opHour"
+    ).value;
+
+
+  const size1 =
+    document.getElementById(
+      "opSize1"
+    ).value;
+
+
+  const size2 =
+    document.getElementById(
+      "opSize2"
+    ).value;
+
+
+  const s1 =
+    document.getElementById(
+      "opS1"
+    ).value;
+
+
+  const s2 =
+    document.getElementById(
+      "opS2"
+    ).value;
+
+
+  const moulding =
+    document.getElementById(
+      "opMoulding"
+    ).value;
+
+
+  const beater =
+    document.getElementById(
+      "opBeater"
+    ).value;
+
+
+  const bd =
+    document.getElementById(
+      "opBD"
+    ).value;
+
+
+  const gsr =
+    document.getElementById(
+      "opGSR"
+    ).value;
+
+
+  if (
+
+    s1 &&
+
+    Number(s1) > 0 &&
+
+    s2 &&
+
+    Number(s2) > 0
+
+  ) {
+
+    showToast(
+      "⚠️ Only one size can run per hour."
+    );
+
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+
+  const wrap =
+    document.getElementById(
+      "submitProgressWrap"
+    );
+
+
+  const progress =
+    document.getElementById(
+      "submitProgress"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.innerHTML =
+    '<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...';
+
+
+  wrap.style.display =
+    "block";
+
+
+  progress.style.width =
+    "30%";
+
+
+  window.handleSubmitResponse =
+    function(res) {
+
+      progress.style.width =
+        "100%";
+
+
+      setTimeout(
+        function() {
+
+          wrap.style.display =
+            "none";
+
+          progress.style.width =
+            "0%";
+
+        },
+        400
+      );
+
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+        '<i class="fa-solid fa-cloud-arrow-up"></i> SUBMIT HOURLY DATA';
+
+
+      if (
+
+        res &&
+
+        res.status ===
+          "success"
+
+      ) {
+
+        showToast(
+          "✅ Production data saved."
+        );
+
+
+        resetForm();
+
+
+        loadDashboardData();
+
+      } else {
+
+        showToast(
+
+          "❌ " +
+
+          (
+
+            res &&
+            res.message
+
+              ? res.message
+
+              : "Save failed."
+
+          )
+
+        );
+
+      }
+
+    };
+
+
+  let url =
+
+    SCRIPT_URL +
+
+    "?action=submitHourly" +
+
+    "&shift=" +
+    encodeURIComponent(
+      shift
+    ) +
+
+    "&hour=" +
+    encodeURIComponent(
+      hour
+    ) +
+
+    "&size1=" +
+    encodeURIComponent(
+      size1
+    ) +
+
+    "&size2=" +
+    encodeURIComponent(
+      size2
+    ) +
+
+    "&s1Sheets=" +
+    encodeURIComponent(
+      s1
+    ) +
+
+    "&s2Sheets=" +
+    encodeURIComponent(
+      s2
+    ) +
+
+    "&moulding=" +
+    encodeURIComponent(
+      moulding
+    ) +
+
+    "&beater=" +
+    encodeURIComponent(
+      beater
+    ) +
+
+    "&bd=" +
+    encodeURIComponent(
+      bd
+    ) +
+
+    "&gsr=" +
+    encodeURIComponent(
+      gsr
+    ) +
+
+    "&thicknessType=" +
+    encodeURIComponent(
+      document.getElementById("thicknessMode").value
+    );
+
+
+  if (rowIndex) {
+
+    url +=
+
+      "&rowIndex=" +
+
+      encodeURIComponent(
+        rowIndex
+      );
+
+  }
+
+
+  jsonp(
+
+    url,
+
+    "handleSubmitResponse"
+
+  );
+
+}
+
+
+/* =====================================================
+   EDIT ROW
+===================================================== */
+
+function editRow(idx) {
+
+  const row =
+    globalData.find(
+      function(r) {
+
+        return (
+
+          Number(r.rowIndex) ===
+
+          Number(idx)
+
+        );
+
+      }
+    );
+
+
+  if (!row) {
+
+    showToast(
+      "❌ Entry not found."
+    );
+
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "editRowIndex"
+  ).value =
+    row.rowIndex;
+
+
+  document.getElementById(
+    "opShift"
+  ).value =
+    row.shift || "A";
+
+
+  document.getElementById(
+    "opHour"
+  ).value =
+    row.hour || "1st Hour";
+
+
+  document.getElementById(
+    "opSize1"
+  ).value =
+    row.size1 || "";
+
+
+  document.getElementById(
+    "opSize2"
+  ).value =
+    row.size2 || "";
+
+
+  document.getElementById(
+    "opS1"
+  ).value =
+    row.s1Sheets || "";
+
+
+  document.getElementById(
+    "opS2"
+  ).value =
+    row.s2Sheets || "";
+
+
+  document.getElementById(
+    "opBeater"
+  ).value =
+    row.beater || "";
+
+
+  document.getElementById(
+    "opMoulding"
+  ).value =
+    row.moulding || "";
+
+
+  document.getElementById(
+    "opBD"
+  ).value =
+    row.bd || "";
+
+
+  document.getElementById(
+    "opGSR"
+  ).value =
+    row.gsr || "";
+
+
+  document.getElementById(
+    "thicknessMode"
+  ).value =
+    getThicknessTypeLabel(row.thicknessType);
+
+
+  document.getElementById(
+    "formTitle"
+  ).innerHTML =
+
+    '<i class="fa-solid fa-pen"></i> EDIT HOURLY ENTRY';
+
+
+  document.getElementById(
+    "submitBtn"
+  ).innerHTML =
+
+    '<i class="fa-solid fa-arrows-rotate"></i> UPDATE ENTRY';
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "block";
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+
+  showToast(
+    "✏️ Entry ready for editing."
+  );
+
+}
+
+
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm() {
+
+  document.getElementById(
+    "editRowIndex"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formTitle"
+  ).innerHTML =
+
+    '<i class="fa-solid fa-pen-to-square"></i> Hourly Production Entry';
+
+
+  document.getElementById(
+    "submitBtn"
+  ).innerHTML =
+
+    '<i class="fa-solid fa-cloud-arrow-up"></i> SUBMIT HOURLY DATA';
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "opS1"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "opS2"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "opBeater"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "opMoulding"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "opBD"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "opGSR"
+  ).value =
+    "";
+
+}
+
+
+/* =====================================================
+   DELETE ONE
+===================================================== */
+
+function deleteRow(idx) {
+
+  pendingDeleteRow =
+    idx;
+
+
+  document.getElementById(
+    "confirmTitle"
+  ).innerText =
+
+    "DELETE HOURLY ENTRY?";
+
+
+  document.getElementById(
+    "confirmMessage"
+  ).innerText =
+
+    "This hourly entry will be permanently deleted.";
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).innerText =
+
+    "DELETE";
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).onclick =
+
+    function() {
+
+      const row =
+        pendingDeleteRow;
+
+
+      closeConfirmModal();
+
+
+      performDeleteRow(
+        row
+      );
+
+    };
+
+
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "flex";
+
+}
+
+
+/* =====================================================
+   PERFORM DELETE
+===================================================== */
+
+function performDeleteRow(
+  idx
+) {
+
+  showToast(
+    "⏳ Deleting..."
+  );
+
+
+  window.handleDeleteResponse =
+    function(res) {
+
+      if (
+
+        res &&
+
+        res.status ===
+          "success"
+
+      ) {
+
+        showToast(
+          "✅ Hour deleted."
+        );
+
+
+        loadDashboardData();
+
+      } else {
+
+        showToast(
+          "❌ Delete failed."
+        );
+
+      }
+
+    };
+
+
+  jsonp(
+
+    SCRIPT_URL +
+
+    "?action=deleteHourly" +
+
+    "&rowIndex=" +
+
+    encodeURIComponent(
+      idx
+    ),
+
+    "handleDeleteResponse"
+
+  );
+
+}
+
+
+/* =====================================================
+   DELETE ALL MODAL
+===================================================== */
+
+function openDeleteAllModal() {
+
+  if (
+    !validShift()
+  )
+    return;
+
+
+  const shift =
+    getSelectedShift();
+
+
+  const rows =
+    getCurrentShiftRows();
+
+
+  if (!rows.length) {
+
+    showToast(
+
+      `ℹ️ No hours found for Shift ${shift}.`
+
+    );
+
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "confirmTitle"
+  ).innerText =
+
+    "DELETE ALL HOURS?";
+
+
+  document.getElementById(
+    "confirmMessage"
+  ).innerText =
+
+    `All ${rows.length} saved hour(s) of Shift ${shift} will be permanently deleted.`;
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).innerText =
+
+    "DELETE ALL";
+
+
+  document.getElementById(
+    "confirmActionBtn"
+  ).onclick =
+
+    function() {
+
+      closeConfirmModal();
+
+
+      performDeleteAll();
+
+    };
+
+
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "flex";
+
+}
+
+
+/* =====================================================
+   DELETE ALL
+===================================================== */
+
+function performDeleteAll() {
+
+  const shift =
+    getSelectedShift();
+
+
+  const btn =
+    document.getElementById(
+      "deleteAllBtn"
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.innerHTML =
+
+    '<i class="fa-solid fa-spinner fa-spin"></i> DELETING...';
+
+
+  window.handleDeleteAllResponse =
+    function(res) {
+
+      btn.disabled =
+        false;
+
+
+      btn.innerHTML =
+
+        '<i class="fa-solid fa-trash-can"></i> DELETE ALL HOURS';
+
+
+      if (
+
+        res &&
+
+        res.status ===
+          "success"
+
+      ) {
+
+        showToast(
+
+          `✅ ${
+            res.deleted || 0
+          } hour(s) deleted.`
+
+        );
+
+
+        loadDashboardData();
+
+      } else {
+
+        showToast(
+          "❌ Delete All failed."
+        );
+
+      }
+
+    };
+
+
+  jsonp(
+
+    SCRIPT_URL +
+
+    "?action=deleteAllHours" +
+
+    "&shift=" +
+
+    encodeURIComponent(
+      shift
+    ),
+
+    "handleDeleteAllResponse"
+
+  );
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeConfirmModal() {
+
+  document.getElementById(
+    "confirmModal"
+  ).style.display =
+    "none";
+
+
+  pendingDeleteRow =
+    null;
+
+}
+
+
+/* =====================================================
+   ROW WHATSAPP
+===================================================== */
+
+function sendRowWhatsApp(
+  idx
+) {
+
+  const row =
+    globalData.find(
+      function(r) {
+
+        return (
+
+          Number(r.rowIndex) ===
+
+          Number(idx)
+
+        );
+
+      }
+    );
+
+
+  if (!row)
+    return;
+
+
+  const p =
+    getRowProduction(
+      row
+    );
+
+
+  const message =
+
+`VISAKA PRODUCTION
+
+Date: ${row.date}
+Shift: ${row.shift}
+Hour: ${row.hour}
+
+Size: ${p.size} m
+Sheets: ${p.sheets}
+
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+
+Moulding: ${row.moulding || 0}
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+
+Total Production: ${display3(p.output)} MT
+
+Beater: ${row.beater || 0}
+B/D: ${row.bd || 0} min
+GSR: ${row.gsr || 0} sheets
+`;
+
+
+  window.open(
+
+    "https://wa.me/?text=" +
+
+    encodeURIComponent(
+      message
+    ),
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =====================================================
+   SHIFT WHATSAPP
+===================================================== */
+
+function sendShiftWhatsApp() {
+
+  const shift =
+    getSelectedShift();
+
+
+  const rows =
+    getCurrentShiftRows();
+
+
+  if (!rows.length) {
+
+    showToast(
+      "ℹ️ No production data."
+    );
+
+
+    return;
+
+  }
+
+
+  let totalOutput = 0;
+
+  let totalMoulding = 0;
+
+  let totalGSR = 0;
+
+
+  let message =
+
+`VISAKA PRODUCTION REPORT
+
+Date: ${todayDateString()}
+Shift: ${shift}
+
+`;
+
+
+  rows.sort(
+
+    (a,b) =>
+
+      hourNumber(a.hour) -
+
+      hourNumber(b.hour)
+
+  );
+
+
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(
+          r
+        );
+
+
+      totalOutput +=
+        p.output;
+
+
+      totalMoulding +=
+        p.mouldingOutput;
+
+
+      totalGSR +=
+        Number(r.gsr) || 0;
+
+
+      message +=
+
+`${r.hour}
+Size: ${p.size} m
+Sheets: ${p.sheets}
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
+Beater: ${r.beater || 0}
+B/D: ${r.bd || 0}
+GSR: ${r.gsr || 0}
+Moulding: ${r.moulding || 0}
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
+Total Production: ${display3(p.output)} MT
+
+`;
+
+    }
+  );
+
+
+  message +=
+
+`TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT
+
+TOTAL PRODUCTION: ${display3(totalOutput)} MT
+
+TOTAL GSR: ${totalGSR} SHEETS`;
+
+
+  window.open(
+
+    "https://wa.me/?text=" +
+
+    encodeURIComponent(
+      message
+    ),
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =====================================================
+   PDF ROW
+===================================================== */
+
+function generateRowPDF(
+  idx
+) {
+
+  const row =
+    globalData.find(
+      function(r) {
+
+        return (
+
+          Number(r.rowIndex) ===
+
+          Number(idx)
+
+        );
+
+      }
+    );
+
+
+  if (!row)
+    return;
+
+
+  const p =
+    getRowProduction(
+      row
+    );
+
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF();
+
+
+  doc.setFontSize(
+    18
+  );
+
+
+  doc.text(
+    "VISAKA PRODUCTION",
+    20,
+    20
+  );
+
+
+  doc.setFontSize(
+    11
+  );
+
+
+  let y = 35;
+
+
+  const lines = [
+
+    `Date: ${row.date}`,
+
+    `Shift: ${row.shift}`,
+
+    `Hour: ${row.hour}`,
+
+    `Size: ${p.size} m`,
+
+    `Sheets: ${p.sheets}`,
+
+    `Sheet Production: ${p.sheetOutput.toFixed(2)} MT`,
+
+    `Beater: ${row.beater || 0}`,
+
+    `B/D: ${row.bd || 0} min`,
+
+    `GSR: ${row.gsr || 0} sheets`,
+
+    `Moulding: ${row.moulding || 0}`,
+
+    `Moulding Production: ${p.mouldingOutput.toFixed(2)} MT`,
+
+    `Total Production: ${display3(p.output)} MT`,
+
+
+  ];
+
+
+  lines.forEach(
+    function(line) {
+
+      doc.text(
+        line,
+        20,
+        y
+      );
+
+
+      y += 9;
+
+    }
+  );
+
+
+  doc.save(
+
+    `Visaka_${row.shift}_${row.hour}.pdf`
+
+  );
+
+}
+
+
+/* =====================================================
+   SHIFT PDF
+===================================================== */
+
+function generateShiftPDF() {
+
+  const shift =
+    getSelectedShift();
+
+
+  const rows =
+    getCurrentShiftRows();
+
+
+  if (!rows.length) {
+
+    showToast(
+      "ℹ️ No production data."
+    );
+
+
+    return;
+
+  }
+
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF({
+
+      orientation:
+        "landscape"
+
+    });
+
+
+  doc.setFontSize(
+    18
+  );
+
+
+  doc.text(
+    "VISAKA PRODUCTION REPORT",
+    15,
+    18
+  );
+
+
+  doc.setFontSize(
+    11
+  );
+
+
+  doc.text(
+
+    `Date: ${todayDateString()}   Shift: ${shift}`,
+
+    15,
+    27
+
+  );
+
+
+  let y = 38;
+
+
+  const headers = [
+
+    "Hour",
+    "Size",
+    "Sheets",
+    "Beater",
+    "B/D",
+    "GSR",
+    "Output MT",
+    "Input",
+    "ME%",
+    "ROP",
+    "Moulding",
+    "Moulding MT"
+
+  ];
+
+
+  headers.forEach(
+    function(h,i) {
+
+      doc.text(
+
+        h,
+
+        7 + i * 23,
+
+        y
+
+      );
+
+    }
+  );
+
+
+  y += 8;
+
+
+  let totalOutput = 0;
+
+  let totalMoulding = 0;
+
+  let totalGSR = 0;
+
+
+  rows.sort(
+
+    (a,b) =>
+
+      hourNumber(a.hour) -
+
+      hourNumber(b.hour)
+
+  );
+
+
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(
+          r
+        );
+
+
+      totalOutput +=
+        p.output;
+
+
+      totalMoulding +=
+        p.mouldingOutput;
+
+
+      totalGSR +=
+        Number(r.gsr) || 0;
+
+
+      const vals = [
+
+        r.hour,
+
+        String(p.size),
+
+        String(p.sheets),
+
+        String(r.beater || ""),
+
+        String(r.bd || ""),
+
+        String(r.gsr || ""),
+
+        display3(p.output),
+
+        "",
+
+        "",
+
+        "",
+
+        String(r.moulding || ""),
+
+        p.mouldingOutput.toFixed(2)
+
+      ];
+
+
+      vals.forEach(
+        function(v,i) {
+
+          doc.text(
+
+            v,
+
+            7 + i * 23,
+
+            y
+
+          );
+
+        }
+      );
+
+
+      y += 8;
+
+
+      if (
+        y > 185
+      ) {
+
+        doc.addPage();
+
+        y = 20;
+
+      }
+
+    }
+  );
+
+
+  y += 8;
+
+
+  doc.text(
+
+    `TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT`,
+
+    10,
+    y
+
+  );
+
+
+  y += 8;
+
+
+  doc.text(
+
+    `TOTAL PRODUCTION: ${display3(totalOutput)} MT`,
+
+    10,
+    y
+
+  );
+
+
+  y += 8;
+
+
+  doc.text(
+
+    `TOTAL GSR: ${totalGSR} SHEETS`,
+
+    10,
+    y
+
+  );
+
+
+  doc.save(
+
+    `Visaka_${todayDateString()}_Shift_${shift}.pdf`
+
+  );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+  message
+) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.innerText =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+
+    setTimeout(
+
+      function() {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+
+      2800
+
+    );
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+function showLoadingState() {
+
+  document.getElementById(
+    "productionTableBody"
+  ).innerHTML = `
+
+    <tr>
+
+      <td
+        colspan="14"
+        style="
+          padding:20px;
+          color:#00ffff;
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-spinner
+            fa-spin
+          "
+        ></i>
+
+        Loading data...
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =====================================================
+   FINISH PROGRESS
+===================================================== */
+
+function finishProgress() {
+
+  const a =
+    document.getElementById(
+      "settingsProgressWrap"
+    );
+
+
+  const b =
+    document.getElementById(
+      "submitProgressWrap"
+    );
+
+
+  if (a) {
+
+    a.style.display =
+      "none";
+
+  }
+
+
+  if (b) {
+
+    b.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+  value
+) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+
+/* =====================================================
+   VISAKA PWA SYSTEM
+===================================================== */
+let deferredInstallPrompt = null;
+
+function isAppInstalled(){
+  return window.matchMedia("(display-mode: standalone)").matches ||
+         window.navigator.standalone === true;
+}
+function hideSplash(){
+  const el=document.getElementById("appSplash");
+  if(el) el.classList.add("hide");
+}
+function showInstallScreen(){
+  const el=document.getElementById("installScreen");
+  if(el) el.style.display="flex";
+}
+function hideInstallScreen(){
+  const el=document.getElementById("installScreen");
+  if(el) el.style.display="none";
+}
+
+window.addEventListener("beforeinstallprompt",function(event){
+  event.preventDefault();
+  deferredInstallPrompt=event;
+  const btn=document.getElementById("installBtn");
+  if(btn) btn.style.display="block";
+  if(!isAppInstalled()) showInstallScreen();
+});
+
+document.addEventListener("click",async function(event){
+  const btn=event.target.closest("#installBtn");
+  if(!btn) return;
+
+  if(!deferredInstallPrompt){
+    if(typeof showToast==="function") showToast("Use browser menu → Install App");
+    return;
+  }
+
+  const progress=document.getElementById("installProgress");
+  const bar=document.getElementById("installProgressBar");
+  const text=document.getElementById("installProgressText");
+  if(progress) progress.style.display="block";
+  if(text) text.innerText="Preparing installation...";
+  if(bar) bar.style.width="25%";
+
+  const promptEvent=deferredInstallPrompt;
+  deferredInstallPrompt=null;
+
+  try{
+    await promptEvent.prompt();
+    if(bar) bar.style.width="70%";
+    const result=await promptEvent.userChoice;
+    if(result && result.outcome==="accepted"){
+      if(text) text.innerText="Installation started...";
+      if(bar) bar.style.width="100%";
+    }else{
+      if(progress) progress.style.display="none";
+      if(bar) bar.style.width="0%";
+    }
+  }catch(error){
+    console.error("Install error:",error);
+    if(progress) progress.style.display="none";
+  }
+});
+
+window.addEventListener("appinstalled",function(){
+  hideInstallScreen();
+  const status=document.getElementById("splashStatus");
+  if(status) status.innerText="Installation Complete";
+  setTimeout(hideSplash,700);
+});
+
+document.addEventListener("click",function(event){
+  const btn=event.target.closest("#installLaterBtn");
+  if(!btn) return;
+  hideInstallScreen();
+  hideSplash();
+});
+
+function setupIOSInstall(){
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone=window.navigator.standalone===true;
+  if(isIOS && !isStandalone){
+    const btn=document.getElementById("installBtn");
+    const help=document.getElementById("iosHelp");
+    const text=document.getElementById("installText");
+    if(btn) btn.style.display="none";
+    if(help) help.style.display="block";
+    if(text) text.innerText="Install Visaka Production Dashboard on your iPhone.";
+  }
+}
+
+function registerVisakaServiceWorker(){
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("./sw.js")
+      .then(reg=>console.log("Visaka Service Worker registered:",reg.scope))
+      .catch(err=>console.error("Service Worker registration failed:",err));
+  }
+}
+
+function startVisakaPWA(){
+  registerVisakaServiceWorker();
+  setupIOSInstall();
+
+  if(isAppInstalled()){
+    const status=document.getElementById("splashStatus");
+    if(status) status.innerText="Opening Dashboard...";
+    setTimeout(hideSplash,1800);
+    return;
+  }
+
+  setTimeout(function(){
+    hideSplash();
+    const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+    if(isIOS){ showInstallScreen(); return; }
+    if(deferredInstallPrompt) showInstallScreen();
+  },2000);
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  startVisakaPWA();
+});
+
+window.onload =
+function() {
+  showHomeDashboard();
+};
+
+</script>
+
+
+</body>
+
+</html>
