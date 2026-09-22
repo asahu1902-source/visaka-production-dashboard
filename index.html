@@ -72,12 +72,169 @@ body {
 
 .app {
 
+  display:none;
+
   width:100%;
 
   max-width:850px;
 
   margin:auto;
 
+}
+
+
+/* =====================================================
+   MAIN HOME DASHBOARD
+===================================================== */
+
+.home-screen {
+  width:100%;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.home-header {
+  background:linear-gradient(135deg,#07142b,#0b2448);
+  border:2px solid #00bfff;
+  border-radius:16px;
+  padding:20px 16px;
+  margin-bottom:12px;
+  text-align:center;
+  box-shadow:0 0 22px rgba(0,191,255,.14);
+}
+
+.home-title {
+  color:#00ffff;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.home-subtitle {
+  color:#94a3b8;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.home-menu-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.home-menu-card {
+  border:2px solid #00bfff;
+  border-radius:16px;
+  background:#07142b;
+  padding:18px 14px;
+  cursor:pointer;
+  transition:.18s ease;
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.home-menu-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 24px rgba(0,191,255,.2);
+}
+
+.home-menu-icon {
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#062b4d;
+  color:#00ffff;
+  font-size:24px;
+}
+
+.home-menu-title {
+  margin-top:14px;
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+}
+
+.home-menu-text {
+  margin-top:5px;
+  color:#94a3b8;
+  font-size:11px;
+  line-height:1.4;
+}
+
+.page-back-btn {
+  border:1px solid #00bfff;
+  background:#06172e;
+  color:#00ffff;
+  border-radius:9px;
+  padding:8px 12px;
+  font-weight:900;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   ME / ROP CALCULATOR
+===================================================== */
+
+.calculator-page {
+  display:none;
+  width:100%;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.calc-live {
+  border:2px solid #00bfff;
+  border-radius:14px;
+  background:#07142b;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.calc-live-title {
+  color:#00ffff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+.calc-results {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+
+.calc-result {
+  background:#020b18;
+  border:1px solid #164b70;
+  border-radius:10px;
+  padding:12px 8px;
+  text-align:center;
+}
+
+.calc-result-label {
+  color:#94a3b8;
+  font-size:10px;
+  font-weight:800;
+}
+
+.calc-result-value {
+  display:block;
+  margin-top:5px;
+  color:#00ffff;
+  font-size:20px;
+  font-weight:900;
+}
+
+@media(max-width:600px){
+  .home-menu-grid{grid-template-columns:1fr;}
+  .calc-results{grid-template-columns:1fr;}
 }
 
 
@@ -1127,6 +1284,30 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 <body>
+<script>
+(function(){
+  try {
+    if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); });
+    if (window.caches) caches.keys().then(function(keys){ Promise.all(keys.map(function(k){ return caches.delete(k); })); });
+  } catch(e) {}
+})();
+</script>
+
+<!-- FORCE NEW MAIN DASHBOARD ON FRESH LOAD -->
+<script>
+(function(){
+  function forceMainDashboard(){
+    var home=document.getElementById('homeScreen');
+    var app=document.querySelector('.app');
+    var calc=document.getElementById('calculatorPage');
+    if(home) home.style.display='block';
+    if(app) app.style.display='none';
+    if(calc) calc.style.display='none';
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceMainDashboard);
+  else forceMainDashboard();
+})();
+</script>
 
 <!-- =====================================================
      PWA APP SPLASH
@@ -1163,8 +1344,109 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 
+<!-- =====================================================
+     MAIN DASHBOARD
+===================================================== -->
+<div class="home-screen" id="homeScreen">
+  <div class="home-header">
+    <div class="home-title">VISAKA PRODUCTION</div>
+    <div class="home-subtitle">PRODUCTION MANAGEMENT DASHBOARD</div>
+  </div>
+
+  <div class="home-menu-grid">
+    <div class="home-menu-card" onclick="openProductionModule()">
+      <div class="home-menu-icon"><i class="fa-solid fa-industry"></i></div>
+      <div>
+        <div class="home-menu-title">Enter Hourly Sheets</div>
+        <div class="home-menu-text">Hourly production entry, ME%, ROP, target and shift dashboard.</div>
+      </div>
+    </div>
+
+    <div class="home-menu-card" onclick="openCalculatorModule()">
+      <div class="home-menu-icon"><i class="fa-solid fa-calculator"></i></div>
+      <div>
+        <div class="home-menu-title">ME% and ROP Calculate</div>
+        <div class="home-menu-text">Quick live calculation for production, ME% and ROP.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     ME / ROP CALCULATOR MODULE
+===================================================== -->
+<div class="calculator-page" id="calculatorPage">
+  <button class="page-back-btn" type="button" onclick="showHomeDashboard()">
+    <i class="fa-solid fa-arrow-left"></i> MAIN DASHBOARD
+  </button>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-sliders"></i> Calculator Setup</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Size (m)</label>
+        <input type="text" id="calcSize" inputmode="decimal" value="6" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Batch Weight (kg)</label>
+        <input type="text" id="calcBatch" inputmode="decimal" value="1250" oninput="updateCalculator()">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Thickness Type</label>
+      <select id="calcThickness" onchange="updateCalculator()">
+        <option value="Standard">Standard — 6 mm</option>
+        <option value="Non-Standard">Non-Standard — 5 mm</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><i class="fa-solid fa-bolt"></i> INPUT</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Sheets</label>
+        <input type="text" id="calcSheets" inputmode="numeric" placeholder="Enter sheets" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Hour</label>
+        <select id="calcHour" onchange="updateCalculator()">
+          <option value="1">1 Hour</option><option value="2">2 Hours</option><option value="3">3 Hours</option><option value="4">4 Hours</option>
+          <option value="5">5 Hours</option><option value="6">6 Hours</option><option value="7">7 Hours</option><option value="8" selected>8 Hours</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Beater</label>
+        <input type="text" id="calcBeater" inputmode="decimal" placeholder="Enter beater" oninput="updateCalculator()">
+      </div>
+      <div class="form-group">
+        <label>Breakdown (min)</label>
+        <input type="text" id="calcBD" inputmode="decimal" placeholder="Enter B/D" oninput="updateCalculator()">
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-live">
+    <div class="calc-live-title">LIVE CALCULATION → RESULT</div>
+    <div class="calc-results">
+      <div class="calc-result"><span class="calc-result-label">PRODUCTION</span><span class="calc-result-value" id="calcProduction">0.000 MT</span></div>
+      <div class="calc-result"><span class="calc-result-label">ME%</span><span class="calc-result-value" id="calcME">0.000%</span></div>
+      <div class="calc-result"><span class="calc-result-label">ROP</span><span class="calc-result-value" id="calcROP">0.000 MT/hr</span></div>
+    </div>
+  </div>
+
+  <button class="btn btn-settings" type="button" onclick="clearCalculator()">
+    <i class="fa-solid fa-rotate-left"></i> CLEAR / RESET
+  </button>
+</div>
+
 <div class="app">
 
+<button class="page-back-btn" type="button" onclick="showHomeDashboard()">
+  <i class="fa-solid fa-arrow-left"></i> MAIN DASHBOARD
+</button>
 
 <!-- =================================================
      TARGET PANEL
@@ -1443,7 +1725,7 @@ input[type="number"]::-webkit-outer-spin-button {
         oninput="
           this.value =
           this.value.toUpperCase();
-          renderDashboard();
+          handleShiftChange();
         "
       >
 
@@ -1499,6 +1781,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
   </div>
 
+
+  <!-- THICKNESS MODE - COMMON SHIFT CONTROL -->
+  <div class="form-group" style="margin-top:4px;">
+    <label>Thickness / Running Type</label>
+    <select id="thicknessMode" onchange="changeThicknessMode()">
+      <option value="Standard">Standard — 6 mm (12.8 kg/m)</option>
+      <option value="Non-Standard">Non-Standard — 5 mm (10.6667 kg/m)</option>
+    </select>
+    <div style="font-size:10px;color:#94a3b8;margin-top:4px;">This single selection applies to the hour being entered and remains active until changed.</div>
+  </div>
 
   <!-- SIZE -->
 
@@ -1763,6 +2055,10 @@ input[type="number"]::-webkit-outer-spin-button {
           </th>
 
           <th>
+            Thickness
+          </th>
+
+          <th>
             Sheets
           </th>
 
@@ -1818,7 +2114,7 @@ input[type="number"]::-webkit-outer-spin-button {
         <tr>
 
           <td
-            colspan="13"
+            colspan="14"
             style="
               padding:20px;
               color:#00ffff;
@@ -2080,6 +2376,7 @@ const SCRIPT_URL =
 
 
 const OUTPUT_CONSTANT = 12.8;
+const NON_STANDARD_WEIGHT_PER_METER = OUTPUT_CONSTANT * (5 / 6);
 
 const MOULDING_CONSTANT = 7.7;
 
@@ -2101,6 +2398,59 @@ let masterSettings = {
 let pendingDeleteRow =
   null;
 
+
+function showHomeDashboard() {
+  document.getElementById("homeScreen").style.display = "block";
+  document.getElementById("calculatorPage").style.display = "none";
+  document.querySelector(".app").style.display = "none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openProductionModule() {
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("calculatorPage").style.display = "none";
+  document.querySelector(".app").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+  loadDashboardData();
+}
+
+function openCalculatorModule() {
+  document.getElementById("homeScreen").style.display = "none";
+  document.querySelector(".app").style.display = "none";
+  document.getElementById("calculatorPage").style.display = "block";
+  updateCalculator();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateCalculator() {
+  const size = Number(document.getElementById("calcSize").value) || 0;
+  const batch = Number(document.getElementById("calcBatch").value) || 0;
+  const sheets = Number(document.getElementById("calcSheets").value) || 0;
+  const hours = Number(document.getElementById("calcHour").value) || 0;
+  const beater = Number(document.getElementById("calcBeater").value) || 0;
+  const bd = Number(document.getElementById("calcBD").value) || 0;
+  const type = document.getElementById("calcThickness").value;
+  const weight = getWeightPerMeter(type);
+  const production = sheets > 0 && size > 0 ? (sheets * size * weight) / 1000 : 0;
+  const input = beater > 0 && batch > 0 ? (beater * batch) / 1000 : 0;
+  const me = input > 0 ? ((production - input) / input) * 100 : 0;
+  const runMinutes = Math.max(1, (hours * 60) - Math.max(0, bd));
+  const rop = production > 0 && hours > 0 ? production * 60 / runMinutes : 0;
+  document.getElementById("calcProduction").innerText = display3(production) + " MT";
+  document.getElementById("calcME").innerText = display3(me) + "%";
+  document.getElementById("calcROP").innerText = display3(rop) + " MT/hr";
+}
+
+function clearCalculator() {
+  document.getElementById("calcSheets").value = "";
+  document.getElementById("calcBeater").value = "";
+  document.getElementById("calcBD").value = "";
+  document.getElementById("calcSize").value = "6";
+  document.getElementById("calcBatch").value = "1250";
+  document.getElementById("calcHour").value = "8";
+  document.getElementById("calcThickness").value = "Standard";
+  updateCalculator();
+}
 
 /* =====================================================
    JSONP
@@ -2294,6 +2644,8 @@ function(res) {
       : "";
 
 
+  syncThicknessModeFromRows();
+
   renderDashboard();
 
 };
@@ -2418,6 +2770,33 @@ function hourNumber(hour) {
    CURRENT SHIFT ROWS
 ===================================================== */
 
+function getWeightPerMeter(type) {
+  return String(type || "Standard") === "Non-Standard"
+    ? NON_STANDARD_WEIGHT_PER_METER
+    : OUTPUT_CONSTANT;
+}
+
+function getThicknessTypeLabel(type) {
+  return String(type || "Standard") === "Non-Standard" ? "Non-Standard" : "Standard";
+}
+
+function syncThicknessModeFromRows() {
+  const rows = getCurrentShiftRows().slice().sort((a,b) => hourNumber(a.hour) - hourNumber(b.hour));
+  const select = document.getElementById("thicknessMode");
+  if (!select) return;
+  if (rows.length) select.value = getThicknessTypeLabel(rows[rows.length - 1].thicknessType);
+  else if (!select.value) select.value = "Standard";
+}
+
+function handleShiftChange() {
+  syncThicknessModeFromRows();
+  renderDashboard();
+}
+
+function changeThicknessMode() {
+  renderDashboard();
+}
+
 function getCurrentShiftRows() {
 
   const shift =
@@ -2532,6 +2911,8 @@ function getRowProduction(r) {
 
   ) {
 
+    const weightPerMeter = getWeightPerMeter(r.thicknessType);
+
     sheetOutput =
 
       (
@@ -2540,7 +2921,7 @@ function getRowProduction(r) {
 
         size *
 
-        OUTPUT_CONSTANT
+        weightPerMeter
 
       ) / 1000;
 
@@ -2669,43 +3050,6 @@ function display3(value) {
 
 }
 
-/* =====================================================
-   ROW METRICS
-   Exact values are calculated first; display formatting is
-   applied only when showing/exporting the values.
-===================================================== */
-function getRowMetrics(r) {
-
-  const p = getRowProduction(r);
-
-  let input = 0;
-
-  if (
-    masterSettings.batchWeight !== "" &&
-    r.beater !== "" &&
-    !isNaN(Number(r.beater))
-  ) {
-    input = (Number(r.beater) * Number(masterSettings.batchWeight)) / 1000;
-  }
-
-  let me = "";
-
-  if (p.sheetOutput > 0 && input > 0) {
-    me = ((p.sheetOutput - input) / input) * 100;
-  }
-
-  let rop = "";
-
-  if (p.output > 0) {
-    const bd = Number(r.bd) || 0;
-    if (bd < 60) {
-      rop = (p.output * 60) / Math.max(1, 60 - bd);
-    }
-  }
-
-  return { p, input, me, rop };
-}
-
 
 function renderTable(rows) {
 
@@ -2722,7 +3066,7 @@ function renderTable(rows) {
       <tr>
 
         <td
-          colspan="13"
+          colspan="14"
           style="
             padding:20px;
             color:#94a3b8;
@@ -2764,11 +3108,107 @@ function renderTable(rows) {
   rows.forEach(
     function(r) {
 
-      const metrics = getRowMetrics(r);
-      const p = metrics.p;
-      const input = metrics.input;
-      const me = metrics.me;
-      const rop = metrics.rop;
+      const p =
+        getRowProduction(r);
+
+
+      /* INPUT */
+
+      let input = 0;
+
+
+      if (
+
+        masterSettings.batchWeight !== "" &&
+
+        r.beater !== "" &&
+
+        !isNaN(
+          Number(r.beater)
+        )
+
+      ) {
+
+        input =
+
+          (
+
+            Number(r.beater) *
+
+            Number(
+              masterSettings.batchWeight
+            )
+
+          ) / 1000;
+
+      }
+
+
+      /* ME% */
+
+      let me = "";
+
+
+      if (
+
+        p.sheetOutput > 0 &&
+
+        input > 0
+
+      ) {
+
+        me =
+
+          (
+
+            (
+
+              (p.sheetOutput - input) /
+
+              input
+
+            ) * 100
+
+          );
+
+      }
+
+
+      /* ROP */
+
+      let rop = "";
+
+
+      if (
+        p.output > 0
+      ) {
+
+        const bd =
+          Number(r.bd) || 0;
+
+
+        if (
+          bd < 60
+        ) {
+
+          rop =
+
+            (
+
+              p.output *
+
+              60 /
+
+              Math.max(
+                1,
+                60 - bd
+              )
+
+            ).toFixed(2);
+
+        }
+
+      }
 
 
       html += `
@@ -2795,6 +3235,10 @@ function renderTable(rows) {
                 ? p.sheets
                 : ""
             }
+          </td>
+
+          <td>
+            ${escapeHTML(getThicknessTypeLabel(r.thicknessType))}
           </td>
 
 
@@ -2837,7 +3281,7 @@ function renderTable(rows) {
           <td>
             ${
               input > 0
-                ? display3(input)
+                ? input.toFixed(2)
                 : ""
             }
           </td>
@@ -2865,7 +3309,7 @@ function renderTable(rows) {
           <td class="yellow">
             ${
               p.mouldingOutput > 0
-                ? display3(p.mouldingOutput)
+                ? p.mouldingOutput.toFixed(2)
                 : ""
             }
           </td>
@@ -3414,8 +3858,6 @@ function updateBanner(rows) {
      DISPLAY
   ========================================== */
 
-  const targetAchieved = remainingSheets <= 0.000001;
-
   document.getElementById(
     "topReqSheetsVal"
   ).innerText =
@@ -3469,14 +3911,7 @@ function updateBanner(rows) {
      REMAINING HOURS
   ========================================== */
 
-  if (targetAchieved) {
-
-    document.getElementById(
-      "bannerTimeLeft"
-    ).innerText =
-      "CONGRATULATIONS! YOU HAVE ACHIEVED YOUR TARGET.";
-
-  } else if (
+  if (
     remainingHours === 0
   ) {
 
@@ -3941,6 +4376,11 @@ function submitProductionEntry() {
     "&gsr=" +
     encodeURIComponent(
       gsr
+    ) +
+
+    "&thicknessType=" +
+    encodeURIComponent(
+      document.getElementById("thicknessMode").value
     );
 
 
@@ -4066,6 +4506,12 @@ function editRow(idx) {
     "opGSR"
   ).value =
     row.gsr || "";
+
+
+  document.getElementById(
+    "thicknessMode"
+  ).value =
+    getThicknessTypeLabel(row.thicknessType);
 
 
   document.getElementById(
@@ -4513,7 +4959,7 @@ function sendRowWhatsApp(
 
   const message =
 
-`VISAKA MID PLANT PRODUCTION REPORT
+`VISAKA PRODUCTION
 
 Date: ${row.date}
 Shift: ${row.shift}
@@ -4522,10 +4968,10 @@ Hour: ${row.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
 
-Sheet Production: ${display3(p.sheetOutput)} MT
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
 
 Moulding: ${row.moulding || 0}
-Moulding Production: ${display3(p.mouldingOutput)} MT
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
 
 Total Production: ${display3(p.output)} MT
 
@@ -4630,12 +5076,12 @@ Shift: ${shift}
 `${r.hour}
 Size: ${p.size} m
 Sheets: ${p.sheets}
-Sheet Production: ${display3(p.sheetOutput)} MT
+Sheet Production: ${p.sheetOutput.toFixed(2)} MT
 Beater: ${r.beater || 0}
 B/D: ${r.bd || 0}
 GSR: ${r.gsr || 0}
 Moulding: ${r.moulding || 0}
-Moulding Production: ${display3(p.mouldingOutput)} MT
+Moulding Production: ${p.mouldingOutput.toFixed(2)} MT
 Total Production: ${display3(p.output)} MT
 
 `;
@@ -4676,47 +5122,116 @@ function generateRowPDF(
   idx
 ) {
 
-  const row = globalData.find(function(r) {
-    return Number(r.rowIndex) === Number(idx);
-  });
+  const row =
+    globalData.find(
+      function(r) {
 
-  if (!row) return;
+        return (
 
-  const metrics = getRowMetrics(row);
-  const p = metrics.p;
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+          Number(r.rowIndex) ===
 
-  doc.setFontSize(18);
-  doc.text("VISAKA MID PLANT PRODUCTION REPORT", 20, 20);
-  doc.setFontSize(11);
+          Number(idx)
+
+        );
+
+      }
+    );
+
+
+  if (!row)
+    return;
+
+
+  const p =
+    getRowProduction(
+      row
+    );
+
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF();
+
+
+  doc.setFontSize(
+    18
+  );
+
+
+  doc.text(
+    "VISAKA PRODUCTION",
+    20,
+    20
+  );
+
+
+  doc.setFontSize(
+    11
+  );
+
 
   let y = 35;
+
+
   const lines = [
+
     `Date: ${row.date}`,
+
     `Shift: ${row.shift}`,
+
     `Hour: ${row.hour}`,
+
     `Size: ${p.size} m`,
+
     `Sheets: ${p.sheets}`,
-    `Sheet Production: ${display3(p.sheetOutput)} MT`,
+
+    `Sheet Production: ${p.sheetOutput.toFixed(2)} MT`,
+
     `Beater: ${row.beater || 0}`,
-    `Input: ${metrics.input > 0 ? display3(metrics.input) : ""} MT`,
+
     `B/D: ${row.bd || 0} min`,
-    `ME%: ${metrics.me !== "" ? display3(metrics.me) : ""}%`,
-    `ROP: ${metrics.rop !== "" ? display3(metrics.rop) : ""} MT/hr`,
+
     `GSR: ${row.gsr || 0} sheets`,
+
     `Moulding: ${row.moulding || 0}`,
-    `Moulding Production: ${display3(p.mouldingOutput)} MT`,
-    `Total Production: ${display3(p.output)} MT`
+
+    `Moulding Production: ${p.mouldingOutput.toFixed(2)} MT`,
+
+    `Total Production: ${display3(p.output)} MT`,
+
+
   ];
 
-  lines.forEach(function(line) {
-    doc.text(line, 20, y);
-    y += 9;
-  });
 
-  doc.save(`Visaka_Mid_Plant_${row.date}_Shift_${row.shift}.pdf`);
+  lines.forEach(
+    function(line) {
+
+      doc.text(
+        line,
+        20,
+        y
+      );
+
+
+      y += 9;
+
+    }
+  );
+
+
+  doc.save(
+
+    `Visaka_${row.shift}_${row.hour}.pdf`
+
+  );
+
 }
+
 
 /* =====================================================
    SHIFT PDF
@@ -4724,82 +5239,258 @@ function generateRowPDF(
 
 function generateShiftPDF() {
 
-  const shift = getSelectedShift();
-  const rows = getCurrentShiftRows();
+  const shift =
+    getSelectedShift();
+
+
+  const rows =
+    getCurrentShiftRows();
+
 
   if (!rows.length) {
-    showToast("ℹ️ No production data.");
+
+    showToast(
+      "ℹ️ No production data."
+    );
+
+
     return;
+
   }
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation: "landscape" });
 
-  doc.setFontSize(18);
-  doc.text("VISAKA MID PLANT PRODUCTION REPORT", 15, 18);
-  doc.setFontSize(11);
-  doc.text(`Date: ${todayDateString()}   Shift: ${shift}`, 15, 27);
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+
+  const doc =
+    new jsPDF({
+
+      orientation:
+        "landscape"
+
+    });
+
+
+  doc.setFontSize(
+    18
+  );
+
+
+  doc.text(
+    "VISAKA PRODUCTION REPORT",
+    15,
+    18
+  );
+
+
+  doc.setFontSize(
+    11
+  );
+
+
+  doc.text(
+
+    `Date: ${todayDateString()}   Shift: ${shift}`,
+
+    15,
+    27
+
+  );
+
 
   let y = 38;
-  const headers = ["Hour","Size","Sheets","Beater","B/D","GSR","Output MT","Input MT","ME%","ROP","Moulding","Moulding MT"];
-  headers.forEach(function(h,i) { doc.text(h, 7 + i * 23, y); });
+
+
+  const headers = [
+
+    "Hour",
+    "Size",
+    "Sheets",
+    "Beater",
+    "B/D",
+    "GSR",
+    "Output MT",
+    "Input",
+    "ME%",
+    "ROP",
+    "Moulding",
+    "Moulding MT"
+
+  ];
+
+
+  headers.forEach(
+    function(h,i) {
+
+      doc.text(
+
+        h,
+
+        7 + i * 23,
+
+        y
+
+      );
+
+    }
+  );
+
+
   y += 8;
+
 
   let totalOutput = 0;
+
   let totalMoulding = 0;
+
   let totalGSR = 0;
-  let totalInput = 0;
-  let totalMESheetOutput = 0;
-  let totalBD = 0;
 
-  rows.sort((a,b) => hourNumber(a.hour) - hourNumber(b.hour));
 
-  rows.forEach(function(r) {
-    const metrics = getRowMetrics(r);
-    const p = metrics.p;
+  rows.sort(
 
-    totalOutput += p.output;
-    totalMoulding += p.mouldingOutput;
-    totalGSR += Number(r.gsr) || 0;
-    totalInput += metrics.input;
-    totalMESheetOutput += p.sheetOutput;
-    totalBD += Number(r.bd) || 0;
+    (a,b) =>
 
-    const vals = [
-      r.hour, String(p.size), String(p.sheets), String(r.beater || ""), String(r.bd || ""), String(r.gsr || ""),
-      display3(p.output),
-      metrics.input > 0 ? display3(metrics.input) : "",
-      metrics.me !== "" ? display3(metrics.me) + "%" : "",
-      metrics.rop !== "" ? display3(metrics.rop) : "",
-      String(r.moulding || ""),
-      display3(p.mouldingOutput)
-    ];
+      hourNumber(a.hour) -
 
-    vals.forEach(function(v,i) { doc.text(String(v), 7 + i * 23, y); });
-    y += 8;
+      hourNumber(b.hour)
 
-    if (y > 185) { doc.addPage(); y = 20; }
-  });
+  );
 
-  const overallME = totalInput > 0 ? ((totalMESheetOutput - totalInput) / totalInput) * 100 : 0;
-  const runMinutes = Math.max(1, SHIFT_HOURS * 60 - totalBD);
-  const overallROP = totalOutput > 0 ? (totalOutput * 60) / runMinutes : 0;
+
+  rows.forEach(
+    function(r) {
+
+      const p =
+        getRowProduction(
+          r
+        );
+
+
+      totalOutput +=
+        p.output;
+
+
+      totalMoulding +=
+        p.mouldingOutput;
+
+
+      totalGSR +=
+        Number(r.gsr) || 0;
+
+
+      const vals = [
+
+        r.hour,
+
+        String(p.size),
+
+        String(p.sheets),
+
+        String(r.beater || ""),
+
+        String(r.bd || ""),
+
+        String(r.gsr || ""),
+
+        display3(p.output),
+
+        "",
+
+        "",
+
+        "",
+
+        String(r.moulding || ""),
+
+        p.mouldingOutput.toFixed(2)
+
+      ];
+
+
+      vals.forEach(
+        function(v,i) {
+
+          doc.text(
+
+            v,
+
+            7 + i * 23,
+
+            y
+
+          );
+
+        }
+      );
+
+
+      y += 8;
+
+
+      if (
+        y > 185
+      ) {
+
+        doc.addPage();
+
+        y = 20;
+
+      }
+
+    }
+  );
+
 
   y += 8;
-  doc.text(`TOTAL INPUT: ${display3(totalInput)} MT`, 10, y);
-  y += 8;
-  doc.text(`OVERALL ME%: ${display3(overallME)}%`, 10, y);
-  y += 8;
-  doc.text(`OVERALL ROP: ${display3(overallROP)} MT/hr`, 10, y);
-  y += 8;
-  doc.text(`TOTAL MOULDING PRODUCTION: ${display3(totalMoulding)} MT`, 10, y);
-  y += 8;
-  doc.text(`TOTAL PRODUCTION: ${display3(totalOutput)} MT`, 10, y);
-  y += 8;
-  doc.text(`TOTAL GSR: ${totalGSR} SHEETS`, 10, y);
 
-  doc.save(`Visaka_Mid_Plant_${todayDateString()}_Shift_${shift}.pdf`);
+
+  doc.text(
+
+    `TOTAL MOULDING PRODUCTION: ${totalMoulding.toFixed(2)} MT`,
+
+    10,
+    y
+
+  );
+
+
+  y += 8;
+
+
+  doc.text(
+
+    `TOTAL PRODUCTION: ${display3(totalOutput)} MT`,
+
+    10,
+    y
+
+  );
+
+
+  y += 8;
+
+
+  doc.text(
+
+    `TOTAL GSR: ${totalGSR} SHEETS`,
+
+    10,
+    y
+
+  );
+
+
+  doc.save(
+
+    `Visaka_${todayDateString()}_Shift_${shift}.pdf`
+
+  );
+
 }
+
 
 /* =====================================================
    TOAST
@@ -4861,7 +5552,7 @@ function showLoadingState() {
     <tr>
 
       <td
-        colspan="13"
+        colspan="14"
         style="
           padding:20px;
           color:#00ffff;
@@ -5102,9 +5793,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 window.onload =
 function() {
-
-  loadDashboardData();
-
+  showHomeDashboard();
 };
 
 </script>
