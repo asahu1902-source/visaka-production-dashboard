@@ -3229,16 +3229,17 @@ function renderTable(rows) {
           </td>
 
 
+          <td>
+            ${escapeHTML(getThicknessTypeLabel(r.thicknessType))}
+          </td>
+
+
           <td class="yellow">
             ${
               p.sheets
                 ? p.sheets
                 : ""
             }
-          </td>
-
-          <td>
-            ${escapeHTML(getThicknessTypeLabel(r.thicknessType))}
           </td>
 
 
