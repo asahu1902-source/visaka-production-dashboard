@@ -234,7 +234,20 @@ body {
 
 @media(max-width:600px){
   .home-menu-grid{grid-template-columns:1fr;}
-  .calc-results{grid-template-columns:1fr;}
+  .calc-results{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+  }
+  .calc-result{
+    padding:16px 4px;
+    min-height:105px;
+  }
+  .calc-result-label{
+    font-size:10px;
+  }
+  .calc-result-value{
+    font-size:18px;
+  }
 }
 
 
